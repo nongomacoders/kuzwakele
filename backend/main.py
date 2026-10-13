@@ -125,6 +125,18 @@ Rules for Language & Script Purity:
 - NEVER output non-Latin or Indic scripts (such as Bengali 'আমরা', Devanagari, Arabic, or Cyrillic).
 - All English translations and notes must use standard English words (e.g. use 'We', never Bengali 'আমরা').
 
+GROUNDING & NAMING GUARDRAILS:
+- Strictly forbid inventing patient, child, or family names. NEVER fabricate proper names (e.g. do not invent names like 'Sipho', 'Thabo', 'Lindiwe', 'Bandile', 'Nandi', etc.) unless explicitly specified in the intake prompt.
+- Mandate standard generic kinship terms ('umntwana', 'ingane', 'umfana', 'intombazane', 'mama', 'gogo', 'baba') when no name is provided in the case description:
+  * For infant/child: 'umntwana' or 'ingane'
+  * For male child/boy: 'umfana' or 'umntwana womfana'
+  * For female child/girl: 'intombazane' or 'umntwana wentombazane'
+  * For mother/caregiver: 'mama'
+- Enforce strict gender alignment with the clinical intake:
+  * Maintain exact consistency with the biological sex and gender specified in the clinical case (e.g. if the intake specifies a 'boy', refer to him strictly as 'umfana' / 'boy' / 'he', NEVER mismatch or flip to a female child / 'intombazane' / 'she').
+- Require 1:1 translation fidelity between isiZulu and English:
+  * Ensure exact semantic alignment between the spoken isiZulu sentence and its English translation. Never invent details, names, or symptoms in one language that are absent in the other.
+
 4. Mode 'translate': Given an English phrase or instruction, return natural spoken isiZulu with an explanation of any idioms or concords used."""
 
 

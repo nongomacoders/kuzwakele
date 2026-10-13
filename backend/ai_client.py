@@ -63,6 +63,7 @@ async def _call_vertex_ai(prompt: str, system_instruction: str = "") -> Dict[str
     config = types.GenerateContentConfig(
         system_instruction=system_instruction if system_instruction else None,
         thinking_config=types.ThinkingConfig(thinking_level=thinking_level),
+        temperature=0.1,
     )
 
     response = await client.aio.models.generate_content(
@@ -98,6 +99,7 @@ async def _call_openrouter(prompt: str, system_instruction: str = "") -> Dict[st
     payload = {
         "model": OPENROUTER_FALLBACK_MODEL,
         "messages": messages,
+        "temperature": 0.1,
     }
 
     async with httpx.AsyncClient(timeout=30.0) as client:

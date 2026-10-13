@@ -26,13 +26,16 @@
   - `DEFAULT_MODEL` (configured with fallback provider resolution)
 
 ## AI Pipeline
-- **Status**: Active & Verified
+- **Status**: Active & Verified (Hardened against hallucinations)
 - **Client Module**: `backend/ai_client.py`
 - **Function**: `generate_response(prompt: str, system_instruction: str = "") -> dict`
-- **Primary Provider**: Vertex AI (`gemini-3.5-flash-lite`, location: `global`, thinking effort: `low`) authenticated via service account.
-- **Failover / Fallback Provider**: OpenRouter (`openrouter/free`) via async HTTP POST using `httpx`.
+- **Primary Provider**: Vertex AI (`gemini-3.5-flash-lite`, location: `global`, thinking effort: `low`, `temperature=0.1`) authenticated via service account.
+- **Failover / Fallback Provider**: OpenRouter (`openrouter/free`, `temperature=0.1`) via async HTTP POST using `httpx`.
+- **Hallucination Hardening**:
+  - Clamped `temperature=0.1` on both Vertex AI `GenerateContentConfig` and OpenRouter fallback payload to maximize deterministic grounding.
+  - Injected Grounding & Naming Guardrails in `KZN_CLINICAL_SYSTEM_PROMPT` forbidding invented proper names, enforcing standard generic kinship terms (`umntwana`, `ingane`, `umfana`, `intombazane`, `mama`), mandating biological sex alignment, and requiring 1:1 translation fidelity.
 - **Resilience**: Catches quota exhaustion (429/ResourceExhausted), billing errors (402), client/not-found errors, connection issues, or bypassed credentials, seamlessly routing to OpenRouter.
-- **Validation**: Verified end-to-end via `backend/test_server.py` and `backend/test_ai.py` with native Vertex AI response and fallback mechanisms passing.
+- **Validation**: Verified end-to-end via `backend/test_server.py` (200 OK across all endpoints) and targeted paediatric skin rash intake test verifying zero invented proper names.
 
 ## FastAPI Server & Live Co-Pilot API
 - **Status**: Active & Verified
