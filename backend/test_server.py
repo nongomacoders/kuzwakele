@@ -45,7 +45,6 @@ def test_consult_questions_endpoint():
 
     result = data.get("result")
     if isinstance(result, dict):
-        print(f"Structured result summary: {result.get('summary')}")
         print(f"Questions count: {len(result.get('questions', []))}")
         if result.get("questions"):
             first_q = result["questions"][0]
@@ -80,7 +79,7 @@ def test_consult_loop_with_steering():
                 "subtext": "Started day before yesterday, running frequently."
             }
         ],
-        "steer_instruction": "Inquire about wet nappies and signs of severe dehydration."
+        "steer_instruction": "Inquire about wet nappies and hydration."
     }
     response = client.post("/api/consult", json=payload)
     print(f"Status Code: {response.status_code}")
@@ -99,7 +98,7 @@ def test_consult_loop_with_steering():
         print(f"Anticipated replies count: {len(first_q.get('anticipated_patient_replies', []))}")
         assert len(first_q.get("anticipated_patient_replies", [])) >= 2
         first_rep = first_q["anticipated_patient_replies"][0]
-        print(f"Sample reply: {first_rep.get('isizulu')} -> {first_rep.get('english')} ({first_rep.get('clinical_meaning')})")
+        print(f"Sample reply: {first_rep.get('isizulu')} -> {first_rep.get('english')}")
     print("[PASS] Consult loop with steering verified.")
 
 

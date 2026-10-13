@@ -13,18 +13,14 @@ import {
   Stethoscope,
   Lightbulb,
   ArrowRight,
-  ClipboardCopy,
-  Info,
   Send,
   Compass,
   History,
   User,
-  Activity,
   Zap,
   Clock,
   Timer,
-  Trash2,
-  CheckCircle2
+  Trash2
 } from 'lucide-react';
 
 const PRESET_EXAMPLES = [
@@ -126,7 +122,6 @@ export default function LiveConsult() {
   const [lastLatencyMs, setLastLatencyMs] = useState(null);
   const [response, setResponse] = useState(null);
   const [currentQuestions, setCurrentQuestions] = useState([]);
-  const [consultSummary, setConsultSummary] = useState('');
   const [history, setHistory] = useState([]);
   const [steerInput, setSteerInput] = useState('');
   const [error, setError] = useState(null);
@@ -197,7 +192,6 @@ export default function LiveConsult() {
         const structured = tryParseStructuredQuestions(data.result);
         if (structured) {
           setCurrentQuestions(structured.questions || []);
-          setConsultSummary(structured.summary || '');
         }
       }
     } catch (err) {
@@ -225,7 +219,6 @@ export default function LiveConsult() {
         doctorSubtext: doctorTurn.english,
         patientText: patientTurn.isizulu,
         patientSubtext: patientTurn.english,
-        clinicalMeaning: patientTurn.clinical_meaning,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         latencyMs: lastLatencyMs || 1050,
         latencyFormatted: formatLatency(lastLatencyMs || 1050)
@@ -238,7 +231,6 @@ export default function LiveConsult() {
         doctorSubtext: 'Clinician directed consultation inquiry',
         patientText: 'Pending response',
         patientSubtext: '',
-        clinicalMeaning: 'Doctor Steering Note',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         latencyMs: lastLatencyMs || 1050,
         latencyFormatted: formatLatency(lastLatencyMs || 1050)
@@ -247,10 +239,10 @@ export default function LiveConsult() {
     }
 
     try {
-      // Map history for backend payload
+      // Map history for backend payload without clinical meaning
       const historyPayload = updatedHistory.map((turn) => [
         { role: 'doctor', text: turn.doctorText, subtext: turn.doctorSubtext },
-        { role: 'patient', text: turn.patientText, subtext: `${turn.patientSubtext} (${turn.clinicalMeaning})` }
+        { role: 'patient', text: turn.patientText, subtext: turn.patientSubtext }
       ]).flat();
 
       const res = await fetch('/api/consult', {
@@ -288,7 +280,6 @@ export default function LiveConsult() {
       const structured = tryParseStructuredQuestions(data.result);
       if (structured) {
         setCurrentQuestions(structured.questions || []);
-        setConsultSummary(structured.summary || '');
       }
       setSteerInput('');
     } catch (err) {
@@ -303,7 +294,6 @@ export default function LiveConsult() {
     setCaseSummary('');
     setResponse(null);
     setCurrentQuestions([]);
-    setConsultSummary('');
     setHistory([]);
     setSteerInput('');
     setError(null);
@@ -314,22 +304,6 @@ export default function LiveConsult() {
     setMode(preset.mode);
     setInputText(preset.text);
     setError(null);
-  };
-
-  const handleCopyAll = () => {
-    if (!response) return;
-    let fullText = '';
-    if (currentQuestions.length > 0) {
-      fullText = (consultSummary ? `${consultSummary}\n\n` : '') +
-        currentQuestions
-          .map((q, i) => `Question #${i + 1}\nisiZulu: ${q.isizulu}\nEnglish: ${q.english}\nCultural Note: ${q.cultural_note}`)
-          .join('\n\n');
-    } else {
-      fullText = typeof response.result === 'object'
-        ? JSON.stringify(response.result, null, 2)
-        : String(response.result);
-    }
-    copyToClipboard(fullText, 'all');
   };
 
   return (
@@ -527,172 +501,108 @@ export default function LiveConsult() {
           {/* Output Display / Active Question Cards Area */}
           {response && (
             <div className="space-y-4 animate-in fade-in duration-200">
-              {/* Header Bar */}
-              <div className="flex items-center justify-between bg-slate-900 border border-slate-800 px-5 py-3 rounded-2xl shadow-xl flex-wrap gap-2">
-                <div className="flex items-center gap-2.5 flex-wrap">
-                  <span className="text-xs uppercase tracking-wider font-extrabold text-slate-300 flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-emerald-400" />
-                    Active Recommendations
-                  </span>
-                  <span
-                    className={`text-xs px-2.5 py-0.5 rounded-full font-mono font-medium flex items-center gap-1.5 ${
-                      response.provider_used === 'vertex'
-                        ? 'bg-purple-950/80 text-purple-300 border border-purple-800/70'
-                        : 'bg-amber-950/80 text-amber-300 border border-amber-800/70'
-                    }`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full ${response.provider_used === 'vertex' ? 'bg-purple-400' : 'bg-amber-400'}`} />
-                    {response.provider_used === 'vertex' ? 'Vertex AI' : 'OpenRouter'} ({response.model})
-                  </span>
-
-                  {lastLatencyMs && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-800/60 font-mono font-bold flex items-center gap-1">
-                      <Zap className="w-3 h-3 text-emerald-400" />
-                      {formatLatency(lastLatencyMs)}
-                    </span>
-                  )}
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleCopyAll}
-                  className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border transition-all ${
-                    copiedId === 'all'
-                      ? 'bg-emerald-950 border-emerald-700 text-emerald-300'
-                      : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200'
-                  }`}
-                >
-                  {copiedId === 'all' ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>All Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <ClipboardCopy className="w-3.5 h-3.5" />
-                      <span>Copy Questions</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
               {/* Structured Clinical Question Cards View */}
               {currentQuestions.length > 0 ? (
-                <div className="space-y-4">
-                  {consultSummary && (
-                    <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 flex items-start gap-3 text-slate-300 text-sm">
-                      <Info className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <div>
-                        <span className="font-bold text-slate-200">Clinical Focus: </span>
-                        <span>{consultSummary}</span>
+                <div className="grid gap-4">
+                  {currentQuestions.map((q, qIdx) => (
+                    <div
+                      key={qIdx}
+                      className="bg-slate-900 border-2 border-slate-800/90 hover:border-emerald-500/50 rounded-2xl p-5 shadow-2xl transition-all space-y-4"
+                    >
+                      {/* Card Header */}
+                      <div className="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
+                        <span className="text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-lg bg-emerald-950/80 text-emerald-400 border border-emerald-800/60">
+                          Option #{qIdx + 1}
+                        </span>
+
+                        <button
+                          type="button"
+                          onClick={() => copyToClipboard(q.isizulu, qIdx)}
+                          className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg border transition-all ${
+                            copiedId === qIdx
+                              ? 'bg-emerald-950 border-emerald-700 text-emerald-300'
+                              : 'bg-slate-950 border-slate-800 hover:border-slate-700 text-slate-300'
+                          }`}
+                        >
+                          {copiedId === qIdx ? (
+                            <>
+                              <Check className="w-3 h-3 text-emerald-400" />
+                              <span>Copied</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3 h-3 text-slate-400" />
+                              <span>Copy isiZulu</span>
+                            </>
+                          )}
+                        </button>
                       </div>
-                    </div>
-                  )}
 
-                  <div className="grid gap-4">
-                    {currentQuestions.map((q, qIdx) => (
-                      <div
-                        key={qIdx}
-                        className="bg-slate-900 border-2 border-slate-800/90 hover:border-emerald-500/50 rounded-2xl p-5 shadow-2xl transition-all space-y-4"
-                      >
-                        {/* Card Header */}
-                        <div className="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
-                          <span className="text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-lg bg-emerald-950/80 text-emerald-400 border border-emerald-800/60">
-                            Option #{qIdx + 1}
-                          </span>
+                      {/* isiZulu Primary Question - Equalized font size */}
+                      <div className="space-y-1">
+                        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                          Ask Patient / Caregiver:
+                        </p>
+                        <p className="text-base font-semibold text-emerald-300 leading-relaxed">
+                          "{cleanForeignScripts(q.isizulu)}"
+                        </p>
+                      </div>
 
-                          <button
-                            type="button"
-                            onClick={() => copyToClipboard(q.isizulu, qIdx)}
-                            className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg border transition-all ${
-                              copiedId === qIdx
-                                ? 'bg-emerald-950 border-emerald-700 text-emerald-300'
-                                : 'bg-slate-950 border-slate-800 hover:border-slate-700 text-slate-300'
-                            }`}
-                          >
-                            {copiedId === qIdx ? (
-                              <>
-                                <Check className="w-3 h-3 text-emerald-400" />
-                                <span>Copied</span>
-                              </>
-                            ) : (
-                              <>
-                                <Copy className="w-3 h-3 text-slate-400" />
-                                <span>Copy isiZulu</span>
-                              </>
-                            )}
-                          </button>
+                      {/* English Meaning - Equalized font size */}
+                      <div className="flex items-start gap-2 pt-1 border-t border-slate-800/50">
+                        <ArrowRight className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                        <div className="text-base text-slate-300 leading-relaxed">
+                          <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2">English:</span>
+                          <span className="font-normal">{cleanForeignScripts(q.english)}</span>
                         </div>
+                      </div>
 
-                        {/* isiZulu Primary Question */}
-                        <div>
-                          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                            Ask Patient / Caregiver:
-                          </p>
-                          <p className="text-xl sm:text-2xl font-bold tracking-tight text-emerald-300 leading-snug">
-                            "{cleanForeignScripts(q.isizulu)}"
-                          </p>
-                        </div>
-
-                        {/* English Meaning */}
-                        <div className="flex items-start gap-2 pt-1 border-t border-slate-800/50">
-                          <ArrowRight className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                      {/* Cultural & Linguistic Note */}
+                      {q.cultural_note && (
+                        <div className="bg-slate-950/70 border border-amber-900/30 rounded-xl p-3 flex items-start gap-2.5 text-amber-200/90 text-xs sm:text-sm">
+                          <Lightbulb className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                           <div>
-                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2">English:</span>
-                            <span className="text-sm sm:text-base text-slate-200 font-medium">{cleanForeignScripts(q.english)}</span>
+                            <span className="font-bold text-amber-300">Bedside Rationale: </span>
+                            <span>{cleanForeignScripts(q.cultural_note)}</span>
                           </div>
                         </div>
+                      )}
 
-                        {/* Cultural & Linguistic Note */}
-                        {q.cultural_note && (
-                          <div className="bg-slate-950/70 border border-amber-900/30 rounded-xl p-3 flex items-start gap-2.5 text-amber-200/90 text-xs sm:text-sm">
-                            <Lightbulb className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                            <div>
-                              <span className="font-bold text-amber-300">Bedside Rationale: </span>
-                              <span>{cleanForeignScripts(q.cultural_note)}</span>
-                            </div>
-                          </div>
-                        )}
+                      {/* Anticipated Patient Responses (Interactive Steering Loop without diagnostic tags) */}
+                      {q.anticipated_patient_replies && q.anticipated_patient_replies.length > 0 && (
+                        <div className="pt-2 border-t border-slate-800/80 space-y-2">
+                          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <User className="w-3.5 h-3.5 text-blue-400" />
+                            Anticipated Patient / Caregiver Responses (Tap to advance turn):
+                          </p>
 
-                        {/* Anticipated Patient Responses (Interactive Steering Loop) */}
-                        {q.anticipated_patient_replies && q.anticipated_patient_replies.length > 0 && (
-                          <div className="pt-2 border-t border-slate-800/80 space-y-2">
-                            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                              <User className="w-3.5 h-3.5 text-blue-400" />
-                              Anticipated Patient / Caregiver Responses (Tap to advance turn):
-                            </p>
-
-                            <div className="grid gap-2 sm:grid-cols-2">
-                              {q.anticipated_patient_replies.map((reply, rIdx) => (
-                                <button
-                                  key={rIdx}
-                                  type="button"
-                                  disabled={isSteering}
-                                  onClick={() => handleSteerLoop({ doctorTurn: q, patientTurn: reply })}
-                                  className="text-left bg-slate-950/80 hover:bg-blue-950/40 border border-slate-800 hover:border-blue-600/80 rounded-xl p-3 transition-all duration-150 flex flex-col justify-between group active:scale-[0.99] disabled:opacity-50 shadow-md"
-                                >
-                                  <div className="space-y-1">
-                                    <div className="flex items-center justify-between gap-1 mb-1">
-                                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 group-hover:bg-blue-900/60 text-slate-300 group-hover:text-blue-200 border border-slate-700/60 font-semibold truncate">
-                                        {cleanForeignScripts(reply.clinical_meaning)}
-                                      </span>
-                                      <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
-                                    </div>
-                                    <p className="text-sm font-bold text-slate-100 group-hover:text-blue-200 leading-snug">
+                          <div className="grid gap-2 sm:grid-cols-2">
+                            {q.anticipated_patient_replies.map((reply, rIdx) => (
+                              <button
+                                key={rIdx}
+                                type="button"
+                                disabled={isSteering}
+                                onClick={() => handleSteerLoop({ doctorTurn: q, patientTurn: reply })}
+                                className="text-left bg-slate-950/80 hover:bg-blue-950/40 border border-slate-800 hover:border-blue-600/80 rounded-xl p-3 transition-all duration-150 flex flex-col justify-between group active:scale-[0.99] disabled:opacity-50 shadow-md"
+                              >
+                                <div className="space-y-1">
+                                  <div className="flex items-start justify-between gap-2">
+                                    <p className="text-sm font-semibold text-slate-100 group-hover:text-blue-200 leading-snug">
                                       "{cleanForeignScripts(reply.isizulu)}"
                                     </p>
-                                    <p className="text-xs text-slate-400 group-hover:text-slate-300">
-                                      {cleanForeignScripts(reply.english)}
-                                    </p>
+                                    <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-transform shrink-0 mt-0.5" />
                                   </div>
-                                </button>
-                              ))}
-                            </div>
+                                  <p className="text-xs text-slate-400 group-hover:text-slate-300 leading-relaxed">
+                                    {cleanForeignScripts(reply.english)}
+                                  </p>
+                                </div>
+                              </button>
+                            ))}
                           </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               ) : (
                 /* Unstructured / Markdown Output View (Express Translate or Fallback) */
@@ -793,20 +703,15 @@ export default function LiveConsult() {
                       </div>
                     </div>
 
-                    {/* Patient Turn */}
+                    {/* Patient Turn - Stripped of diagnostic tags */}
                     <div className="flex items-start gap-2.5 text-xs bg-blue-950/20 rounded-xl p-2.5 border border-blue-900/30">
                       <span className="px-1.5 py-0.5 rounded bg-blue-950 text-blue-400 font-bold uppercase text-[9px] shrink-0 mt-0.5">
                         Patient
                       </span>
-                      <div className="space-y-1">
+                      <div className="space-y-0.5">
                         <p className="font-semibold text-blue-200 leading-snug">"{turn.patientText}"</p>
                         {turn.patientSubtext && (
                           <p className="text-slate-400 text-[11px]">→ {turn.patientSubtext}</p>
-                        )}
-                        {turn.clinicalMeaning && (
-                          <span className="inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-800/50">
-                            Clinical Sign: {turn.clinicalMeaning}
-                          </span>
                         )}
                       </div>
                     </div>

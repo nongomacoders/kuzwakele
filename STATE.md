@@ -38,16 +38,16 @@
 - **Validation**: Verified end-to-end via `backend/test_server.py` (200 OK across all endpoints) and targeted paediatric skin rash intake test verifying zero invented proper names.
 
 ## FastAPI Server & Live Co-Pilot API
-- **Status**: Active & Verified
+- **Status**: Active & Verified (Pure Linguistic & Cultural Scoping)
 - **Server Module**: `backend/main.py`
 - **App**: `Kuzwakele API` v1.0.0
 - **CORS Configuration**: Wildcard CORS enabled (`allow_origins=["*"]`, `allow_methods=["*"]`, `allow_headers=["*"]`) for desktop (`localhost`) and mobile access across local Wi-Fi subnet.
-- **Consultation Loop Schemas**: `PatientResponseOption`, `LoopQuestionItem`, `ConsultLoopResponse`, and `ConsultRequest` (with `history` and `steer_instruction`).
-- **Clinical System Prompt**: Enhanced with rules for natural question openings, caring bedside tone, and 2-3 realistic colloquial patient/caregiver anticipated replies per question.
-- **Robust Parser**: `parse_questions_response()` ensures `anticipated_patient_replies` are always structured, with table/row fallbacks.
+- **Consultation Loop Schemas**: `PatientResponseOption` (strictly `isizulu` and `english`), `LoopQuestionItem`, `ConsultLoopResponse`, and `ConsultRequest`.
+- **Linguistic Scoping & Prompt Policy**: The model is explicitly scoped to linguistic and cultural assistance for experienced doctors. All clinical advice, diagnostic labels, severity grading, and summary framing are strictly prohibited.
+- **Robust Parser**: `parse_questions_response()` strips any hallucinated diagnostic meaning or summaries and returns clean linguistic questions and anticipated patient replies.
 - **Endpoints**:
   - `GET /api/health`: Health status and active AI provider (`vertex`).
-  - `POST /api/consult`: Interactive consultation co-pilot accepting intake notes, ongoing conversation history, and custom steering instructions.
+  - `POST /api/consult`: Interactive consultation co-pilot delivering conversational questions and realistic patient replies without medical advice or diagnostic tags.
   - `POST /api/scenario/turn`: "Beyond the Prescription" dialogue simulator advancing KZN persona interaction (Gogo MaMthethwa) and delivering coaching feedback with Widex hearing aid phonetic listening cues.
 - **Validation**: Fully verified via `backend/test_server.py` (200 OK across health, consult questions, loop steering, translation, and scenario turn endpoints).
 
@@ -56,11 +56,12 @@
 - **Directory**: `frontend/`
 - **Stack**: Vite + React + Tailwind CSS + Lucide React + VitePWA + ReactMarkdown + RemarkGfm
 - **Desktop Split-Screen Architecture**:
-  - **Left Pane (`lg:col-span-8`)**: Active Consultation Console with editable intake box, quick KZN presets, and high-contrast clinical question cards.
+  - **Left Pane (`lg:col-span-8`)**: Active Consultation Console with editable intake box, quick KZN presets, and equalized question cards.
+  - **Typography Equalization**: Primary isiZulu phrase styling is equalized to match the English text size (`text-base font-semibold text-emerald-300` and `text-base text-slate-300`).
+  - **UI Simplification**: Removed the "Clinical Focus" advice card and the "ACTIVE RECOMMENDATIONS" header wrapper.
+  - **Clean Patient Response Chips**: Stripped all "Clinical Sign: ..." badges; displays solely the patient's spoken isiZulu and English translation in clean, balanced text.
   - **Animated Waiting State Card**: Glowing pulse card with live second-counter ticking (`⏱️ {elapsedWaitSec}s`), typing animation, and `"Waiting for Gemini (gemini-3.5-flash-lite)..."` status.
-  - **Right Pane (`lg:col-span-4`)**: Sticky Consultation History Log (`lg:sticky lg:top-6 max-h-[calc(100vh-7rem)] overflow-y-auto`) featuring clear count badge and "Clear / New Case" action.
-  - **Per-Turn Latency Badges**: History turn headers prominently display request execution metrics (`⚡ 1.2s` / `⏱️ 850ms`) alongside timestamp and turn index.
-  - **Empty State Illustration**: Elegant placeholder graphic when no turns have occurred yet.
+  - **Right Pane (`lg:col-span-4`)**: Sticky Consultation History Log (`lg:sticky lg:top-6 max-h-[calc(100vh-7rem)] overflow-y-auto`) with request latency badges (`⚡ 1.2s`), free of diagnostic tags.
   - **Interactive Steering Loop**: Clickable anticipated patient reply chips and fixed bottom steering bar with rapid prompt chips.
 
 ## Scenario Dialogue Simulator (TASK-006)

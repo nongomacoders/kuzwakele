@@ -33,7 +33,6 @@ app.add_middleware(
 class PatientResponseOption(BaseModel):
     isizulu: str
     english: str
-    clinical_meaning: str
 
 
 class LoopQuestionItem(BaseModel):
@@ -44,7 +43,6 @@ class LoopQuestionItem(BaseModel):
 
 
 class ConsultLoopResponse(BaseModel):
-    summary: str
     questions: List[LoopQuestionItem]
 
 
@@ -86,23 +84,27 @@ class ScenarioTurnResponse(BaseModel):
     suggested_steer_chips: List[str]  # 2-3 quick conversational prompts doctor could say next
 
 
-KZN_CLINICAL_SYSTEM_PROMPT = """You are an expert isiZulu clinical communication assistant for doctors working in rural KwaZulu-Natal.
+KZN_CLINICAL_SYSTEM_PROMPT = """You are an expert isiZulu linguistic and bedside cultural communication assistant for medical doctors working in rural KwaZulu-Natal.
+
+ROLE & SCOPE LIMITATION:
+- The user is an experienced doctor. NEVER provide medical advice, diagnostic evaluations, triage recommendations, or clinical signs.
+- Your SOLE role is linguistic and cultural: provide natural, conversational isiZulu phrases for the doctor to speak, realistic colloquial patient replies, and cultural/communication etiquette notes.
+- Do NOT provide medical summaries, case framing evaluations, or clinical meaning tags.
+
 Principles:
 1. Prioritize natural, culturally respectful, colloquial spoken isiZulu (e.g. polite openers like 'Ake ungitshele...', collective framing like 'asinamali', and euphemisms like 'ukushintsha isisu' for diarrhoea).
 2. Never produce rigid or archaic dictionary Zulu. Keep phrasing clear and accessible.
 3. Mode 'questions' or 'loop': You MUST respond with pure JSON conforming exactly to this schema:
 {
-  "summary": "Brief clinical framing of the patient presentation and current focus",
   "questions": [
     {
-      "isizulu": "Natural isiZulu phrase to ask patient or caregiver",
+      "isizulu": "Natural conversational isiZulu phrase to ask patient or caregiver",
       "english": "Clear English translation",
-      "cultural_note": "Why this phrasing works in rural KZN and linguistic nuance",
+      "cultural_note": "Linguistic nuance, communication etiquette, and bedside cultural context",
       "anticipated_patient_replies": [
         {
           "isizulu": "Realistic colloquial patient or caregiver reply in isiZulu",
-          "english": "English translation",
-          "clinical_meaning": "Clinical sign / meaning (e.g., severe sign, mild, timeline, traditional medicine used)"
+          "english": "English translation"
         }
       ]
     }
@@ -119,8 +121,9 @@ Rules for Question Generation:
 - Keep the dialogue sounding like a caring bedside clinician in rural KZN, not an official survey form.
 
 Rules for Anticipated Patient Replies:
-- Each question MUST include 2 to 3 realistic anticipated replies representing common rural KZN clinical responses (e.g., affirmative with timeline, negative reassurance, or traditional medicine usage like 'intelezi' or 'imbiza').
+- Each question MUST include 2 to 3 realistic anticipated replies representing common rural KZN conversational responses (e.g., affirmative with timeline, negative reassurance, or traditional medicine usage like 'intelezi' or 'imbiza').
 - Keep patient replies conversational and true to how patients/caregivers speak (e.g., 'Ewe dokotela, uqale kuthangi...', 'Cha, akakaze abenomkhuhlane...', 'Nginikeze umuthi wesintu omncane...').
+- Do NOT output diagnostic interpretations or clinical meaning tags for patient replies.
 
 Rules for Language & Script Purity:
 - Both isiZulu and English MUST be written strictly using the standard Latin alphabet.
@@ -237,7 +240,7 @@ def parse_questions_response(raw_text: str) -> Dict[str, Any]:
                 pass
 
     if isinstance(data, dict) and "questions" in data and isinstance(data["questions"], list):
-        # Normalize each question to ensure anticipated_patient_replies exists
+        # Normalize each question to ensure anticipated_patient_replies exists (strictly without clinical_meaning)
         for q in data["questions"]:
             if not isinstance(q, dict):
                 continue
@@ -245,20 +248,27 @@ def parse_questions_response(raw_text: str) -> Dict[str, Any]:
                 q["anticipated_patient_replies"] = [
                     {
                         "isizulu": "Yebo dokotela, kunjalo.",
-                        "english": "Yes doctor, that is so.",
-                        "clinical_meaning": "Positive / confirmed symptom"
+                        "english": "Yes doctor, that is so."
                     },
                     {
                         "isizulu": "Cha dokotela, akwenzeki lokho.",
-                        "english": "No doctor, that has not occurred.",
-                        "clinical_meaning": "Negative / denied symptom"
+                        "english": "No doctor, that has not occurred."
                     },
                     {
                         "isizulu": "Kancane nje, kodwa asiqiniseki.",
-                        "english": "Just a little, but we are not sure.",
-                        "clinical_meaning": "Mild or uncertain symptom"
+                        "english": "Just a little, but we are not sure."
                     }
                 ]
+            else:
+                cleaned_replies = []
+                for rep in q["anticipated_patient_replies"]:
+                    if isinstance(rep, dict):
+                        cleaned_replies.append({
+                            "isizulu": rep.get("isizulu", ""),
+                            "english": rep.get("english", "")
+                        })
+                q["anticipated_patient_replies"] = cleaned_replies
+        data.pop("summary", None)
         return sanitize_data_tree(data)
 
     # Fallback: extract questions from markdown tables or rows
@@ -278,26 +288,22 @@ def parse_questions_response(raw_text: str) -> Dict[str, Any]:
                     "anticipated_patient_replies": [
                         {
                             "isizulu": "Yebo dokotela.",
-                            "english": "Yes doctor.",
-                            "clinical_meaning": "Affirmative confirmation"
+                            "english": "Yes doctor."
                         },
                         {
                             "isizulu": "Cha dokotela.",
-                            "english": "No doctor.",
-                            "clinical_meaning": "Negative report"
+                            "english": "No doctor."
                         }
                     ]
                 })
 
     if extracted_questions:
         return sanitize_data_tree({
-            "summary": "Clinical consultation questions",
             "questions": extracted_questions,
         })
 
     # If parsing completely fails, wrap safely so the frontend never crashes
     return {
-        "summary": "Consultation Summary",
         "questions": [],
         "raw_text": sanitize_hallucinated_scripts(raw_text),
     }
@@ -400,8 +406,8 @@ async def consult(request: ConsultRequest):
             prompt_parts.append(f"\nDoctor's Current Steering Focus:\n{request.steer_instruction.strip()}")
             prompt_parts.append("Prioritize questions addressing this specific clinical steering direction.")
 
-        prompt_parts.append("\nRespond with a valid JSON object containing 'summary' and 'questions' array only.")
-        prompt_parts.append("Each question MUST have 'isizulu', 'english', 'cultural_note', and 2 to 3 'anticipated_patient_replies'.")
+        prompt_parts.append("\nRespond with a valid JSON object containing 'questions' array only.")
+        prompt_parts.append("Each question MUST have 'isizulu', 'english', 'cultural_note', and 2 to 3 'anticipated_patient_replies' (each with 'isizulu' and 'english'). Do NOT include clinical advice, diagnosis, or summary.")
         prompt = "\n".join(prompt_parts)
 
     t_start = time.perf_counter()
