@@ -19,7 +19,8 @@
 - **Exported Settings**:
   - `OPENROUTER_API_KEY` (loaded from external secrets)
   - `GOOGLE_APPLICATION_CREDENTIALS` (resolved and explicitly populated in `os.environ` for Google Cloud SDK)
-  - `VERTEX_MODEL = "gemini-3.8-flash"`
+  - `VERTEX_MODEL = "gemini-3.5-flash-lite"`
+  - `VERTEX_LOCATION = "global"`
   - `THINKING_BUDGET = "low"`
   - `OPENROUTER_FALLBACK_MODEL = "openrouter/free"`
   - `DEFAULT_MODEL` (configured with fallback provider resolution)
@@ -28,10 +29,10 @@
 - **Status**: Active & Verified
 - **Client Module**: `backend/ai_client.py`
 - **Function**: `generate_response(prompt: str, system_instruction: str = "") -> dict`
-- **Primary Provider**: Vertex AI (`gemini-3.8-flash`, thinking effort: `low`) authenticated via service account.
+- **Primary Provider**: Vertex AI (`gemini-3.5-flash-lite`, location: `global`, thinking effort: `low`) authenticated via service account.
 - **Failover / Fallback Provider**: OpenRouter (`openrouter/free`) via async HTTP POST using `httpx`.
 - **Resilience**: Catches quota exhaustion (429/ResourceExhausted), billing errors (402), client/not-found errors, connection issues, or bypassed credentials, seamlessly routing to OpenRouter.
-- **Validation**: Verified end-to-end via `backend/test_ai.py` (Vertex ping, bypassed credentials fallback, live failover, and mocked Vertex contract all passing).
+- **Validation**: Verified end-to-end via `backend/test_server.py` and `backend/test_ai.py` with native Vertex AI response and fallback mechanisms passing.
 
 ## FastAPI Server & Live Co-Pilot API
 - **Status**: Active & Verified
@@ -39,6 +40,7 @@
 - **App**: `Kuzwakele API` v1.0.0
 - **CORS Configuration**: Wildcard CORS enabled (`allow_origins=["*"]`, `allow_methods=["*"]`, `allow_headers=["*"]`) for desktop (`localhost`) and mobile access across local Wi-Fi subnet.
 - **Structured JSON Schema**: Prompts model to return structured JSON (`summary`, `questions` with `isizulu`, `english`, `cultural_note`) in `questions` mode.
+- **Clinical System Prompt**: Enhanced with rules for natural question openings (no repetitive 'Ingabe'), enclitics, polite softeners ('Ake ungitshele...'), and caring bedside clinician tone.
 - **Robust Parser**: Includes `parse_questions_response()` handling code fences, raw JSON, markdown table row extraction, and safe fallback wrapping to guarantee resilience.
 - **Endpoints**:
   - `GET /api/health`: Health status and active AI provider.

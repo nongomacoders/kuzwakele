@@ -1,6 +1,6 @@
 """Resilient dual-provider AI client for Kuzwakele.
 
-Tries primary generation with Vertex AI (gemini-3.8-flash, thinking: low)
+Tries primary generation with Vertex AI (gemini-3.5-flash-lite, thinking: low)
 and automatically falls back to OpenRouter (openrouter/free) upon failure.
 """
 
@@ -17,6 +17,7 @@ from backend.config import (
     OPENROUTER_API_KEY,
     OPENROUTER_FALLBACK_MODEL,
     THINKING_BUDGET,
+    VERTEX_LOCATION,
     VERTEX_MODEL,
 )
 
@@ -40,7 +41,7 @@ def _get_gcp_project_id() -> Optional[str]:
 
 
 async def _call_vertex_ai(prompt: str, system_instruction: str = "") -> Dict[str, Any]:
-    """Attempt generation via Vertex AI gemini-3.8-flash with low thinking effort."""
+    """Attempt generation via Vertex AI gemini-3.5-flash-lite with low thinking effort."""
     if not GOOGLE_APPLICATION_CREDENTIALS or not Path(GOOGLE_APPLICATION_CREDENTIALS).exists():
         raise RuntimeError("Valid GOOGLE_APPLICATION_CREDENTIALS file not configured")
 
@@ -51,7 +52,7 @@ async def _call_vertex_ai(prompt: str, system_instruction: str = "") -> Dict[str
     from google import genai
     from google.genai import types
 
-    location = os.getenv("VERTEX_LOCATION", "us-central1")
+    location = os.getenv("VERTEX_LOCATION", VERTEX_LOCATION)
     client = genai.Client(vertexai=True, project=project_id, location=location)
 
     # Configure thinking budget / reasoning effort (low)
@@ -119,7 +120,7 @@ async def _call_openrouter(prompt: str, system_instruction: str = "") -> Dict[st
 async def generate_response(prompt: str, system_instruction: str = "") -> Dict[str, Any]:
     """Generate a response using Vertex AI with automatic failover to OpenRouter.
 
-    Primary attempt: Vertex AI (gemini-3.8-flash, thinking: low).
+    Primary attempt: Vertex AI (gemini-3.5-flash-lite, location: global, thinking: low).
     Failover triggers: Quota limits (429/ResourceExhausted), billing/credit errors (402),
     client errors (404/403), connection errors, or missing credentials.
     Fallback: OpenRouter (openrouter/free) via async HTTP POST.
@@ -128,7 +129,7 @@ async def generate_response(prompt: str, system_instruction: str = "") -> Dict[s
         dict: {"text": str, "provider_used": "vertex" | "openrouter", "model": str}
     """
     try:
-        logger.info("Attempting primary generation via Vertex AI (%s)...", VERTEX_MODEL)
+        logger.info("Attempting primary generation via Vertex AI (%s, %s)...", VERTEX_MODEL, VERTEX_LOCATION)
         return await _call_vertex_ai(prompt, system_instruction=system_instruction)
     except Exception as exc:
         logger.warning(

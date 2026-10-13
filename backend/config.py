@@ -42,8 +42,9 @@ if _raw_google_creds:
     # Ensure Google Cloud SDK picks it up automatically via os.environ
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_APPLICATION_CREDENTIALS
 
-# Model and thinking constants
-VERTEX_MODEL: str = os.getenv("VERTEX_MODEL", "gemini-3.8-flash")
+# Model and region configuration
+VERTEX_MODEL: str = os.getenv("VERTEX_MODEL", "gemini-3.5-flash-lite")
+VERTEX_LOCATION: str = os.getenv("VERTEX_LOCATION", "global")
 THINKING_BUDGET: str = os.getenv("THINKING_BUDGET", "low")
 OPENROUTER_FALLBACK_MODEL: str = os.getenv("OPENROUTER_FALLBACK_MODEL", "openrouter/free")
 

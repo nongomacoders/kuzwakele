@@ -67,6 +67,15 @@ Principles:
   ]
 }
 Do not wrap your JSON in conversational filler.
+
+Rules for Question Generation:
+- Vary sentence openings naturally. NEVER start multiple consecutive questions with 'Ingabe'.
+- Mix conversational structures:
+  * Direct questions using natural intonation and enclitics (e.g., 'Siqale nini...?', 'Kukhona...?')
+  * Polite imperative softeners (e.g., 'Ake ungitshele...', 'Ngicela ukubuza...')
+  * Trailing polarity tags (e.g., '...yini?')
+- Keep the dialogue sounding like a caring bedside clinician in rural KZN, not an official survey form.
+
 4. Mode 'translate': Given an English phrase or instruction, return natural spoken isiZulu with an explanation of any idioms or concords used."""
 
 
