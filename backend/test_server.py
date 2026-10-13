@@ -2,8 +2,9 @@
 
 Tests:
 1. GET /api/health -> 200 OK
-2. POST /api/consult with mode='questions' -> 200 OK (structured JSON cards)
-3. POST /api/consult with mode='translate' -> 200 OK (translated text)
+2. POST /api/consult with mode='questions' -> 200 OK (structured JSON cards with anticipated replies)
+3. POST /api/consult with mode='loop' (history + steering instruction) -> 200 OK
+4. POST /api/consult with mode='translate' -> 200 OK (translated text)
 """
 
 import sys
@@ -50,7 +51,8 @@ def test_consult_questions_endpoint():
             first_q = result["questions"][0]
             print(f"Sample isiZulu: {first_q.get('isizulu')}")
             print(f"Sample English: {first_q.get('english')}")
-            print(f"Sample Note: {first_q.get('cultural_note')}")
+            print(f"Anticipated replies count: {len(first_q.get('anticipated_patient_replies', []))}")
+            assert len(first_q.get("anticipated_patient_replies", [])) >= 2, "Expected at least 2 anticipated replies"
     else:
         print(f"Result preview:\n{str(result)[:200]}...")
 
@@ -59,6 +61,46 @@ def test_consult_questions_endpoint():
     assert data.get("provider_used") in ("vertex", "openrouter")
     assert data.get("model")
     print("[PASS] Consult questions endpoint verified.")
+
+
+def test_consult_loop_with_steering():
+    print("\n--- Testing POST /api/consult (mode='loop' with history and steering) ---")
+    payload = {
+        "text": "3-year-old child presenting with acute diarrhoea and mild dehydration.",
+        "mode": "loop",
+        "history": [
+            {
+                "role": "doctor",
+                "text": "Ake ungitshele, usuke washintsha isisu esingakanani umntwana?",
+                "subtext": "Please tell me, how much has the child had runny tummy?"
+            },
+            {
+                "role": "patient",
+                "text": "Uqale kuthangi dokotela, uhuda kakhulu.",
+                "subtext": "Started day before yesterday, running frequently."
+            }
+        ],
+        "steer_instruction": "Inquire about wet nappies and signs of severe dehydration."
+    }
+    response = client.post("/api/consult", json=payload)
+    print(f"Status Code: {response.status_code}")
+    data = response.json()
+    print(f"Provider used: {data.get('provider_used')}")
+    print(f"Model used: {data.get('model')}")
+
+    result = data.get("result")
+    assert response.status_code == 200, f"Expected 200, got {response.status_code}"
+    assert isinstance(result, dict), "Expected structured dict result"
+    assert "questions" in result, "Expected questions in result"
+    print(f"Generated loop questions count: {len(result['questions'])}")
+    if result["questions"]:
+        first_q = result["questions"][0]
+        print(f"First steered question: {first_q.get('isizulu')}")
+        print(f"Anticipated replies count: {len(first_q.get('anticipated_patient_replies', []))}")
+        assert len(first_q.get("anticipated_patient_replies", [])) >= 2
+        first_rep = first_q["anticipated_patient_replies"][0]
+        print(f"Sample reply: {first_rep.get('isizulu')} -> {first_rep.get('english')} ({first_rep.get('clinical_meaning')})")
+    print("[PASS] Consult loop with steering verified.")
 
 
 def test_consult_translate_endpoint():
@@ -87,6 +129,7 @@ if __name__ == "__main__":
 
     test_health_endpoint()
     test_consult_questions_endpoint()
+    test_consult_loop_with_steering()
     test_consult_translate_endpoint()
 
     print("\n==================================================")

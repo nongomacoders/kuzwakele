@@ -1,16 +1,17 @@
 """FastAPI backend application for Kuzwakele Live Clinical Co-Pilot.
 
 Exposes health check and consultation endpoints with CORS enabled for desktop
-and local Wi-Fi mobile clients. Supports structured JSON clinical question cards.
+and local Wi-Fi mobile clients. Supports an interactive consultation steering loop
+with clickable anticipated patient replies and dynamic steering.
 """
 
 import json
 import logging
 import re
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from backend import ai_client, config
 
@@ -28,21 +29,29 @@ app.add_middleware(
 )
 
 
-class ConsultRequest(BaseModel):
-    text: str
-    mode: str = "questions"  # "questions" | "translate"
+class PatientResponseOption(BaseModel):
+    isizulu: str
+    english: str
+    clinical_meaning: str
 
 
-class QuestionCard(BaseModel):
+class LoopQuestionItem(BaseModel):
     isizulu: str
     english: str
     cultural_note: str
+    anticipated_patient_replies: List[PatientResponseOption] = Field(default_factory=list)
 
 
-class StructuredQuestions(BaseModel):
+class ConsultLoopResponse(BaseModel):
     summary: str
-    questions: List[QuestionCard]
-    raw_text: Optional[str] = None
+    questions: List[LoopQuestionItem]
+
+
+class ConsultRequest(BaseModel):
+    text: str
+    mode: str = "questions"  # "questions" | "translate" | "loop"
+    history: Optional[List[Dict[str, Any]]] = None
+    steer_instruction: Optional[str] = None
 
 
 class ConsultResponse(BaseModel):
@@ -53,16 +62,23 @@ class ConsultResponse(BaseModel):
 
 KZN_CLINICAL_SYSTEM_PROMPT = """You are an expert isiZulu clinical communication assistant for doctors working in rural KwaZulu-Natal.
 Principles:
-1. Prioritize natural, culturally respectful, colloquial spoken isiZulu (e.g. polite openers like 'Ingabe...', collective framing like 'asinamali', and euphemisms like 'ukushintsha isisu' for diarrhoea).
+1. Prioritize natural, culturally respectful, colloquial spoken isiZulu (e.g. polite openers like 'Ake ungitshele...', collective framing like 'asinamali', and euphemisms like 'ukushintsha isisu' for diarrhoea).
 2. Never produce rigid or archaic dictionary Zulu. Keep phrasing clear and accessible.
-3. Mode 'questions': You MUST respond with pure JSON conforming exactly to this schema:
+3. Mode 'questions' or 'loop': You MUST respond with pure JSON conforming exactly to this schema:
 {
-  "summary": "Brief clinical framing",
+  "summary": "Brief clinical framing of the patient presentation and current focus",
   "questions": [
     {
-      "isizulu": "Natural isiZulu phrase",
+      "isizulu": "Natural isiZulu phrase to ask patient or caregiver",
       "english": "Clear English translation",
-      "cultural_note": "Why this phrasing works in rural KZN"
+      "cultural_note": "Why this phrasing works in rural KZN and linguistic nuance",
+      "anticipated_patient_replies": [
+        {
+          "isizulu": "Realistic colloquial patient or caregiver reply in isiZulu",
+          "english": "English translation",
+          "clinical_meaning": "Clinical sign / meaning (e.g., severe sign, mild, timeline, traditional medicine used)"
+        }
+      ]
     }
   ]
 }
@@ -72,37 +88,60 @@ Rules for Question Generation:
 - Vary sentence openings naturally. NEVER start multiple consecutive questions with 'Ingabe'.
 - Mix conversational structures:
   * Direct questions using natural intonation and enclitics (e.g., 'Siqale nini...?', 'Kukhona...?')
-  * Polite imperative softeners (e.g., 'Ake ungitshele...', 'Ngicela ukubuza...')
+  * Polite imperative softeners (e.g., 'Ake ungitshele...', 'Ngicela ukubuza...', 'Ngisize lapha...')
   * Trailing polarity tags (e.g., '...yini?')
 - Keep the dialogue sounding like a caring bedside clinician in rural KZN, not an official survey form.
+
+Rules for Anticipated Patient Replies:
+- Each question MUST include 2 to 3 realistic anticipated replies representing common rural KZN clinical responses (e.g., affirmative with timeline, negative reassurance, or traditional medicine usage like 'intelezi' or 'imbiza').
+- Keep patient replies conversational and true to how patients/caregivers speak (e.g., 'Ewe dokotela, uqale kuthangi...', 'Cha, akakaze abenomkhuhlane...', 'Nginikeze umuthi wesintu omncane...').
 
 4. Mode 'translate': Given an English phrase or instruction, return natural spoken isiZulu with an explanation of any idioms or concords used."""
 
 
 def parse_questions_response(raw_text: str) -> Dict[str, Any]:
-    """Parse AI response into structured JSON questions, with robust fallbacks."""
+    """Parse AI response into structured JSON questions with anticipated patient replies."""
     text = raw_text.strip()
 
     # Strip code block fences if present
     cleaned = re.sub(r"^```(?:json)?\s*", "", text, flags=re.IGNORECASE)
     cleaned = re.sub(r"\s*```$", "", cleaned)
 
+    data = None
     try:
         data = json.loads(cleaned.strip())
-        if isinstance(data, dict) and "questions" in data and isinstance(data["questions"], list):
-            return data
     except Exception:
-        pass
+        match = re.search(r"\{.*\}", text, re.DOTALL)
+        if match:
+            try:
+                data = json.loads(match.group(0))
+            except Exception:
+                pass
 
-    # Extract JSON object substring if model included leading/trailing commentary
-    match = re.search(r"\{.*\}", text, re.DOTALL)
-    if match:
-        try:
-            data = json.loads(match.group(0))
-            if isinstance(data, dict) and "questions" in data and isinstance(data["questions"], list):
-                return data
-        except Exception:
-            pass
+    if isinstance(data, dict) and "questions" in data and isinstance(data["questions"], list):
+        # Normalize each question to ensure anticipated_patient_replies exists
+        for q in data["questions"]:
+            if not isinstance(q, dict):
+                continue
+            if "anticipated_patient_replies" not in q or not isinstance(q["anticipated_patient_replies"], list) or len(q["anticipated_patient_replies"]) == 0:
+                q["anticipated_patient_replies"] = [
+                    {
+                        "isizulu": "Yebo dokotela, kunjalo.",
+                        "english": "Yes doctor, that is so.",
+                        "clinical_meaning": "Positive / confirmed symptom"
+                    },
+                    {
+                        "isizulu": "Cha dokotela, akwenzeki lokho.",
+                        "english": "No doctor, that has not occurred.",
+                        "clinical_meaning": "Negative / denied symptom"
+                    },
+                    {
+                        "isizulu": "Kancane nje, kodwa asiqiniseki.",
+                        "english": "Just a little, but we are not sure.",
+                        "clinical_meaning": "Mild or uncertain symptom"
+                    }
+                ]
+        return data
 
     # Fallback: extract questions from markdown tables or rows
     extracted_questions = []
@@ -118,6 +157,18 @@ def parse_questions_response(raw_text: str) -> Dict[str, Any]:
                     "isizulu": cols[isizulu_idx],
                     "english": cols[english_idx] if len(cols) > english_idx else "",
                     "cultural_note": cols[note_idx] if len(cols) > note_idx else "",
+                    "anticipated_patient_replies": [
+                        {
+                            "isizulu": "Yebo dokotela.",
+                            "english": "Yes doctor.",
+                            "clinical_meaning": "Affirmative confirmation"
+                        },
+                        {
+                            "isizulu": "Cha dokotela.",
+                            "english": "No doctor.",
+                            "clinical_meaning": "Negative report"
+                        }
+                    ]
                 })
 
     if extracted_questions:
@@ -144,11 +195,11 @@ async def health_check():
 async def consult(request: ConsultRequest):
     """Clinical Co-Pilot consultation endpoint.
 
-    Generates culturally appropriate isiZulu clinical questions (as structured JSON cards)
-    or instructions translations based on requested mode.
+    Generates culturally appropriate isiZulu clinical questions with anticipated
+    patient responses (for the interactive steering loop) or translation instructions.
     """
-    if not request.text.strip():
-        raise HTTPException(status_code=400, detail="Text prompt cannot be empty.")
+    if not request.text.strip() and not request.steer_instruction:
+        raise HTTPException(status_code=400, detail="Text prompt or steering instruction cannot be empty.")
 
     if request.mode == "translate":
         prompt = (
@@ -157,12 +208,32 @@ async def consult(request: ConsultRequest):
             f"{request.text}"
         )
     else:
-        prompt = (
-            f"Mode: questions\n"
-            f"Clinical intake summary:\n"
-            f"{request.text}\n\n"
-            f"Respond with a valid JSON object containing 'summary' and 'questions' array only."
-        )
+        # Build contextual prompt for questions or steering loop
+        prompt_parts = []
+        prompt_parts.append("Mode: questions\n")
+        prompt_parts.append(f"Clinical Intake / Case Summary:\n{request.text.strip()}\n")
+
+        # Include prior turns if present
+        if request.history and len(request.history) > 0:
+            prompt_parts.append("Consultation History so far:")
+            for turn in request.history:
+                role = turn.get("role", "Clinician").capitalize()
+                text = turn.get("text", "")
+                subtext = turn.get("subtext", "")
+                turn_desc = f"- {role}: {text}"
+                if subtext:
+                    turn_desc += f" (Meaning/English: {subtext})"
+                prompt_parts.append(turn_desc)
+            prompt_parts.append("\nBased on this history, advance the clinical consultation logically.")
+
+        # Include steering instruction if present
+        if request.steer_instruction and request.steer_instruction.strip():
+            prompt_parts.append(f"\nDoctor's Current Steering Focus:\n{request.steer_instruction.strip()}")
+            prompt_parts.append("Prioritize questions addressing this specific clinical steering direction.")
+
+        prompt_parts.append("\nRespond with a valid JSON object containing 'summary' and 'questions' array only.")
+        prompt_parts.append("Each question MUST have 'isizulu', 'english', 'cultural_note', and 2 to 3 'anticipated_patient_replies'.")
+        prompt = "\n".join(prompt_parts)
 
     try:
         resp = await ai_client.generate_response(
@@ -172,7 +243,7 @@ async def consult(request: ConsultRequest):
 
         raw_output = resp["text"]
 
-        if request.mode == "questions":
+        if request.mode in ("questions", "loop"):
             parsed_result = parse_questions_response(raw_output)
             return ConsultResponse(
                 result=parsed_result,

@@ -22,7 +22,7 @@
 ## AI Pipeline
 - [x] Configure dual-provider AI pipeline with Vertex AI and OpenRouter fallback
   - [x] Add `httpx>=0.27.0` to `requirements.txt` and install in venv
-  - [x] Configure `VERTEX_MODEL = "gemini-3.8-flash"`, `THINKING_BUDGET = "low"`, and `OPENROUTER_FALLBACK_MODEL = "openrouter/free"` in `backend/config.py`
+  - [x] Configure `VERTEX_MODEL = "gemini-3.5-flash-lite"` with `VERTEX_LOCATION = "global"` in `backend/config.py`
   - [x] Create `backend/ai_client.py` with resilient `generate_response()`
   - [x] Create test script `backend/test_ai.py` and verify all tests pass
   - [x] Update `STATE.md` and `TASKS.md`
@@ -55,4 +55,18 @@
   - [x] Redesign `frontend/src/components/LiveConsult.jsx` with Clinical Question Cards and Markdown rendering
   - [x] Clean up input area with prominent KZN presets and comfortable padding
   - [x] Verify production build compiles cleanly (`npm run build`)
+  - [x] Update `STATE.md` and `TASKS.md`
+
+## Interactive Consultation Steering Loop
+- [x] Upgrade Live Tab into an Interactive Steering Loop with Clickable Responses & Steering Bar
+  - [x] Enhance `backend/main.py` with `PatientResponseOption`, `LoopQuestionItem`, and `ConsultLoopResponse`
+  - [x] Update `KZN_CLINICAL_SYSTEM_PROMPT` with anticipated patient replies rules and bedside tone
+  - [x] Support conversation history and `steer_instruction` in `/api/consult`
+  - [x] Redesign `frontend/src/components/LiveConsult.jsx`:
+    - [x] Clickable anticipated patient response chips under each card
+    - [x] Collapsible turn-by-turn consultation history log
+    - [x] Sticky bottom steering bar with quick chips and custom input
+    - [x] Top utility bar with "New Consult" reset and KZN presets
+  - [x] Verify endpoints via `backend/test_server.py`
+  - [x] Verify frontend build via `npm run build`
   - [x] Update `STATE.md` and `TASKS.md`

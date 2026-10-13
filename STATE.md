@@ -39,19 +39,21 @@
 - **Server Module**: `backend/main.py`
 - **App**: `Kuzwakele API` v1.0.0
 - **CORS Configuration**: Wildcard CORS enabled (`allow_origins=["*"]`, `allow_methods=["*"]`, `allow_headers=["*"]`) for desktop (`localhost`) and mobile access across local Wi-Fi subnet.
-- **Structured JSON Schema**: Prompts model to return structured JSON (`summary`, `questions` with `isizulu`, `english`, `cultural_note`) in `questions` mode.
-- **Clinical System Prompt**: Enhanced with rules for natural question openings (no repetitive 'Ingabe'), enclitics, polite softeners ('Ake ungitshele...'), and caring bedside clinician tone.
-- **Robust Parser**: Includes `parse_questions_response()` handling code fences, raw JSON, markdown table row extraction, and safe fallback wrapping to guarantee resilience.
+- **Consultation Loop Schemas**: `PatientResponseOption`, `LoopQuestionItem`, `ConsultLoopResponse`, and `ConsultRequest` (with `history` and `steer_instruction`).
+- **Clinical System Prompt**: Enhanced with rules for natural question openings, caring bedside tone, and 2-3 realistic colloquial patient/caregiver anticipated replies per question.
+- **Robust Parser**: `parse_questions_response()` ensures `anticipated_patient_replies` are always structured, with table/row fallbacks.
 - **Endpoints**:
-  - `GET /api/health`: Health status and active AI provider.
-  - `POST /api/consult`: Clinical Co-Pilot consultation endpoint accepting `ConsultRequest` and returning `ConsultResponse`.
-- **Validation**: Fully verified via `backend/test_server.py` with 200 OK responses on all endpoints.
+  - `GET /api/health`: Health status and active AI provider (`vertex`).
+  - `POST /api/consult`: Interactive consultation co-pilot accepting intake notes, ongoing conversation history, and custom steering instructions.
+- **Validation**: Fully verified via `backend/test_server.py` (200 OK across health, questions, loop with steering, and translate endpoints).
 
-## Frontend PWA & Live Interface
+## Frontend PWA & Interactive Steering Loop
 - **Status**: Active & Verified
 - **Directory**: `frontend/`
 - **Stack**: Vite + React + Tailwind CSS + Lucide React + VitePWA + ReactMarkdown + RemarkGfm
-- **Navigation Shell**: 3 tabs (`Live Co-Pilot`, `Scenarios`, `Drills Gym`) with header health indicator pinging `/api/health`.
-- **Clinical Question Cards**: High-contrast, arm's length legible cards with "Question #X" badge, single-click "Copy isiZulu" button, prominent emerald typography, English translation, and cultural rationale callouts.
-- **Unstructured / Markdown Mode**: Supported via `<ReactMarkdown remarkPlugins={[remarkGfm]}>` with Tailwind typography prose styling for `translate` mode.
+- **Interactive Steering Loop**:
+  - **Clickable Patient Response Chips**: Under each clinical card, 2-3 anticipated replies (with colloquial isiZulu, English translation, and clinical meaning tags) allow the clinician to advance turns with a single tap.
+  - **Consultation History Log**: Collapsible turn-by-turn history log tracking completed doctor/patient exchanges and clinical findings.
+  - **Sticky Bottom Steering Bar**: Fixed high-contrast input at the viewport bottom with quick steering chips (e.g. wet nappies, fever duration, traditional medicine) and direct prompt input.
+  - **Utility Controls**: Reset / "New Consult" button to clear history and start fresh, alongside quick KZN Presets.
 - **Build Verification**: `npm run build` compiled cleanly (2,164 modules, service worker precache generated).
