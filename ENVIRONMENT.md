@@ -6,6 +6,14 @@
 - **Pip binary**: `.\venv\Scripts\pip.exe`
 - **External Credentials File**: `C:\Users\diond\Desktop\Projects\EXTERNAL_TO_REPOS\credentials\secrets.env`
 
+## Running the Backend Server
+To run the development server locally:
+```powershell
+.\venv\Scripts\python.exe -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```
+> [!NOTE]
+> Binding to `--host 0.0.0.0` allows both desktop browsers (`http://localhost:8000`) and mobile devices on the same Wi-Fi subnet to access the API via the PC's local IP address (e.g. `http://<LAN-IP>:8000`).
+
 ## Security & Secrets Management Rules
 1. **External Credentials Storage**: Credentials and API keys live externally at `C:\Users\diond\Desktop\Projects\EXTERNAL_TO_REPOS\credentials\secrets.env` and must be loaded via `backend/config.py`.
 2. **No Repository Secrets**: NEVER copy API keys, secrets, or service account JSON files into the repository root or codebase.

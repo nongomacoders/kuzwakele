@@ -26,3 +26,13 @@
   - [x] Create `backend/ai_client.py` with resilient `generate_response()`
   - [x] Create test script `backend/test_ai.py` and verify all tests pass
   - [x] Update `STATE.md` and `TASKS.md`
+
+## FastAPI Backend Server
+- [x] Implement FastAPI server with /api/consult endpoint and CORS
+  - [x] Initialize FastAPI app and configure CORS for desktop and mobile devices (`--host 0.0.0.0`)
+  - [x] Define `ConsultRequest` and `ConsultResponse` schemas
+  - [x] Define `KZN_CLINICAL_SYSTEM_PROMPT` for rural KZN clinical consultations
+  - [x] Implement `GET /api/health` and `POST /api/consult` endpoints
+  - [x] Create `backend/test_server.py` and verify 200 OK responses
+  - [x] Document server launch instructions in `ENVIRONMENT.md`
+  - [x] Update `STATE.md` and `TASKS.md`
