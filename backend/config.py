@@ -1,7 +1,7 @@
 """Configuration module for Kuzwakele backend.
 
 Loads secrets from an external credentials repository outside the codebase
-and configures primary and fallback AI providers.
+and configures primary (Vertex AI) and fallback (OpenRouter) AI providers.
 """
 
 import os
@@ -42,13 +42,17 @@ if _raw_google_creds:
     # Ensure Google Cloud SDK picks it up automatically via os.environ
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_APPLICATION_CREDENTIALS
 
-# Fallback AI Model & Provider settings
-# DEFAULT_MODEL serves as the primary fallback model identifier
-DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "gemini-1.5-flash")
-OPENROUTER_DEFAULT_MODEL: str = os.getenv("OPENROUTER_DEFAULT_MODEL", "google/gemini-flash-1.5")
+# Model and thinking constants
+VERTEX_MODEL: str = os.getenv("VERTEX_MODEL", "gemini-3.8-flash")
+THINKING_BUDGET: str = os.getenv("THINKING_BUDGET", "low")
+OPENROUTER_FALLBACK_MODEL: str = os.getenv("OPENROUTER_FALLBACK_MODEL", "openrouter/free")
+
+# General fallback defaults for backward compatibility
+DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", VERTEX_MODEL)
+OPENROUTER_DEFAULT_MODEL: str = os.getenv("OPENROUTER_DEFAULT_MODEL", OPENROUTER_FALLBACK_MODEL)
 
 # Provider priority and fallback definitions
-PRIMARY_AI_PROVIDER: str = os.getenv("PRIMARY_AI_PROVIDER", "google")
+PRIMARY_AI_PROVIDER: str = os.getenv("PRIMARY_AI_PROVIDER", "vertex")
 FALLBACK_AI_PROVIDER: str = os.getenv("FALLBACK_AI_PROVIDER", "openrouter")
 
 
@@ -56,24 +60,23 @@ def get_active_provider(preferred: Optional[str] = None) -> str:
     """Return the active AI provider based on preference and available credentials."""
     target = preferred or PRIMARY_AI_PROVIDER
 
-    if target == "google":
+    if target in ("vertex", "google"):
         if GOOGLE_APPLICATION_CREDENTIALS and Path(GOOGLE_APPLICATION_CREDENTIALS).exists():
-            return "google"
+            return "vertex"
         if OPENROUTER_API_KEY:
-            return FALLBACK_AI_PROVIDER
+            return "openrouter"
 
     if target == "openrouter":
         if OPENROUTER_API_KEY:
             return "openrouter"
         if GOOGLE_APPLICATION_CREDENTIALS and Path(GOOGLE_APPLICATION_CREDENTIALS).exists():
-            return "google"
+            return "vertex"
 
-    # Default fallback
     return target
 
 
 def get_model_for_provider(provider: str) -> str:
     """Get the appropriate default model identifier for the given provider."""
     if provider == "openrouter":
-        return OPENROUTER_DEFAULT_MODEL
-    return DEFAULT_MODEL
+        return OPENROUTER_FALLBACK_MODEL
+    return VERTEX_MODEL
