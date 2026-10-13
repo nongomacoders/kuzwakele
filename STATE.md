@@ -81,8 +81,8 @@
   - **Interactive Controls**: One-tap suggested steer chips, sticky bottom response input bar, and scenario restart reset.
 - **Build Verification**: `npm run build` compiled cleanly (2,164 modules, service worker precache generated).
 
-## SQLite Seed Harvester & Timeline Bookmarking
-- **Status**: Active & Verified (Firebase / Firestore Compatible)
+## SQLite Seed Harvester & Zero-Click Auto-Harvesting
+- **Status**: Active & Verified (Silent Fire-and-Forget Auto-Persist)
 - **Database Module**: `backend/database.py` using standard library `sqlite3`
 - **Database File**: `backend/kuzwakele.db` (git-ignored)
 - **Table Schema**: `interaction_seeds` (`id`, `session_id`, `created_at`, `intake_summary`, `turn_number`, `doctor_isizulu`, `doctor_english`, `patient_isizulu`, `patient_english`, `cultural_note`, `steer_context`, `tags`, `distill_target`, `sync_status`, `firebase_id`, `raw_turn_payload`)
@@ -91,8 +91,9 @@
   - `GET /api/seeds`: Lists saved seeds sorted by `created_at DESC` with optional `sync_status` filter.
   - `DELETE /api/seeds/{seed_id}`: Deletes a seed record.
   - `GET /api/seeds/export`: Formats seeds into Firestore batch collection document format (`collection: "interaction_seeds"`, `data: {...}`).
-- **Frontend Integration**:
-  - `sessionId`: Session UUID generated when starting or resetting a case.
-  - 1-tap `[ Save Seed ]` bookmarking button on each history turn card with intent selector (`both`, `scenario`, `drill`).
-  - Instant transition to `[ ✓ Saved Seed ]` on save completion.
-  - Live session harvested count badge in Timeline Header.
+- **Zero-Click Silent Auto-Harvesting**:
+  - `autoSaveTurn(turnData)`: Non-blocking fire-and-forget helper silently persisting consultation turns directly to `POST /api/seeds`.
+  - Automatically triggered whenever a turn is committed to history (upon selecting an anticipated patient reply) and after steering responses resolve.
+  - Silent error handling ensures consultation flow is never interrupted or blocked by network or database issues.
+  - Removed all manual bookmarking UI: stripped `[ Save Seed ]` / `[ Saved Seed ]` buttons, intent dropdowns, and associated component state.
+  - Minimal History Cards: each card now displays solely the Turn header (Turn #N, latency badge, timestamp), Doctor turn (isiZulu & English subtitle), and Patient turn (isiZulu & English subtitle).

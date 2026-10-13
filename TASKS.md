@@ -94,13 +94,18 @@
   - [x] Verify production bundle compiles cleanly (`npm run build`)
   - [x] Update `STATE.md` and `TASKS.md`
 
-## SQLite Seed Harvester & Timeline Bookmarking
-- [x] Implement SQLite Seed Harvester with Firebase-compatible schema and 1-tap timeline bookmarking
+## SQLite Seed Harvester & Zero-Click Auto-Harvesting
+- [x] Implement SQLite Seed Harvester with Firebase-compatible schema and silent zero-click auto-harvesting
   - [x] Create `backend/database.py` with `init_db`, `save_seed`, `get_seeds`, `delete_seed`, and `export_seeds_for_firebase`
   - [x] Add `backend/kuzwakele.db` to `.gitignore`
   - [x] Connect FastAPI lifespan to auto-initialize SQLite database on startup
   - [x] Define `SaveSeedRequest` and endpoints: `POST /api/seeds`, `GET /api/seeds`, `DELETE /api/seeds/{id}`, `GET /api/seeds/export`
   - [x] Add automated test cases in `backend/test_server.py` verifying seed save, retrieval, Firestore export, and deletion
-  - [x] Integrate 1-tap bookmarking in `LiveConsult.jsx` timeline cards with target selector (`both`, `scenario`, `drill`) and state transitions (`Save Seed` -> `Saved Seed`)
-  - [x] Add session harvested seeds counter badge in Timeline Header
-  - [x] Verify frontend build (`npm run build`) and backend tests (`python backend/test_server.py`) pass cleanly
+  - [x] Refactor `LiveConsult.jsx` for silent zero-click auto-harvesting:
+    - [x] Remove manual `[ Save Seed ]` / `[ Saved Seed ]` buttons and target intent dropdown
+    - [x] Remove unused state (`savingSeedId`, `savedSeedIds`, `turnTargetIntent`)
+    - [x] Implement non-blocking fire-and-forget `autoSaveTurn(turnData)` helper
+    - [x] Automatically trigger `autoSaveTurn()` on turn commitment and steering resolution
+    - [x] Minimize history cards to Turn Header, Doctor turn, and Patient turn
+  - [x] Verify clean frontend compilation (`npm run build`) and backend tests (`python backend/test_server.py`)
+
