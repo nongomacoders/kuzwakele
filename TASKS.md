@@ -70,3 +70,19 @@
   - [x] Verify endpoints via `backend/test_server.py`
   - [x] Verify frontend build via `npm run build`
   - [x] Update `STATE.md` and `TASKS.md`
+
+## Scenario Dialogue Simulator (TASK-006)
+- [x] Implement the "Beyond the Prescription" Scenario Dialogue Simulator in backend and frontend
+  - [x] Define Pydantic models: `ChatMessage`, `ScenarioFeedback`, `ScenarioTurnRequest`, `ScenarioTurnResponse`
+  - [x] Define `KZN_SCENARIO_SYSTEM_PROMPT` with Gogo MaMthethwa persona, "ukubonisana" context, and dual patient/coach output
+  - [x] Implement `POST /api/scenario/turn` with markdown stripping and robust parsing
+  - [x] Add automated test for `/api/scenario/turn` in `backend/test_server.py` and verify all tests pass
+  - [x] Redesign `frontend/src/components/ScenariosView.jsx`:
+    - [x] Scenario Selection & Dossier with Gogo MaMthethwa flagship scenario
+    - [x] Collapsible Scenario Brief card displaying clinical context, social context, and conversational objective
+    - [x] Interactive Dialogue Thread with high-contrast patient bubble (`text-xl font-bold text-emerald-300`) and English toggle
+    - [x] Conversational Coach Card with Natural Phrasing Alternative, Cultural & Tone Nuance, and Widex hearing aid phonetic listening cues
+    - [x] Suggested Steer Chips, bottom text input bar, and Restart Scenario reset
+  - [x] Verify frontend build via `npm run build`
+  - [x] Update `STATE.md` and `TASKS.md`
+

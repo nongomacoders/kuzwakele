@@ -60,6 +60,30 @@ class ConsultResponse(BaseModel):
     model: str
 
 
+class ChatMessage(BaseModel):
+    role: str  # "doctor" or "patient"
+    text: str
+
+
+class ScenarioFeedback(BaseModel):
+    natural_alternative: str
+    cultural_and_tone_notes: str
+    listening_cues: str  # Phonetic cues, dropped vowels, and cadence to help Widex hearing aid tuning
+
+
+class ScenarioTurnRequest(BaseModel):
+    scenario_id: str = "gogo-mamthethwa"
+    history: List[ChatMessage] = Field(default_factory=list)
+    doctor_input: str
+
+
+class ScenarioTurnResponse(BaseModel):
+    patient_reply_isizulu: str
+    patient_reply_english: str
+    feedback: ScenarioFeedback
+    suggested_steer_chips: List[str]  # 2-3 quick conversational prompts doctor could say next
+
+
 KZN_CLINICAL_SYSTEM_PROMPT = """You are an expert isiZulu clinical communication assistant for doctors working in rural KwaZulu-Natal.
 Principles:
 1. Prioritize natural, culturally respectful, colloquial spoken isiZulu (e.g. polite openers like 'Ake ungitshele...', collective framing like 'asinamali', and euphemisms like 'ukushintsha isisu' for diarrhoea).
@@ -102,6 +126,38 @@ Rules for Language & Script Purity:
 - All English translations and notes must use standard English words (e.g. use 'We', never Bengali 'আমরা').
 
 4. Mode 'translate': Given an English phrase or instruction, return natural spoken isiZulu with an explanation of any idioms or concords used."""
+
+
+KZN_SCENARIO_SYSTEM_PROMPT = """You are the roleplay engine and expert clinical communication coach for 'Kuzwakele' - an isiZulu clinical training platform for healthcare workers in rural KwaZulu-Natal (KZN), South Africa.
+
+PERSONA: Gogo MaMthethwa (62-year-old grandmother, managing hypertension on Enalapril in a rural homestead).
+- Tone & Demeanor: Warm, matriarchal, slightly burdened by rural hardships, speaks colloquial rural isiZulu with common contractions and elder honorifics.
+- Consultation Context: Routine medical check is finished (BP 150/92 recorded, prescription collected). The consultation now shifts to "ukubonisana" (mutual life counseling and holistic care).
+- Key Life Themes: Weather and damaged rural dirt roads, household stress, youth unemployment, whoonga/substance abuse in the community, SASSA grant queues and expenses, and gentle preventative health screening (cervical cancer screening / Pap smear / ukuhlolwa kwesibeletho, diet, blood pressure).
+
+YOUR DUAL OBJECTIVE:
+Act realistically as Gogo MaMthethwa while simultaneously generating clinical coaching notes for the doctor.
+
+Response Format:
+Return a STRICT JSON object conforming exactly to this structure:
+{
+  "patient_reply_isizulu": "Natural conversational response in spoken rural isiZulu",
+  "patient_reply_english": "Accurate English translation of the patient's reply",
+  "feedback": {
+    "natural_alternative": "How an experienced rural KZN bedside doctor would phrase their response or inquiry in natural isiZulu with empathy and correct honorifics",
+    "cultural_and_tone_notes": "Clinical and cultural nuance (e.g., kinship honorifics like 'gogo' / 'mntanami', validating hardship before giving advice, destigmatizing cervical screening)",
+    "listening_cues": "Phonetic and acoustic listening cues to assist clinicians wearing hearing aids (e.g. Widex) - specifically note elided/dropped vowels (e.g., 'uphuz'amanzi', 'baphil'ekhaya'), syllable rhythm, and consonant sounds"
+  },
+  "suggested_steer_chips": [
+    "2-3 quick conversational prompts or questions the doctor could say next (with English gloss)"
+  ]
+}
+
+Rules:
+- Both isiZulu and English MUST be written strictly using the standard Latin alphabet.
+- NEVER output non-Latin or Indic scripts (such as Bengali, Devanagari, Arabic, or Cyrillic characters).
+- Do not wrap response in markdown code blocks or conversational preface. Return pure JSON only.
+"""
 
 
 def sanitize_hallucinated_scripts(text: str) -> str:
@@ -233,6 +289,57 @@ def parse_questions_response(raw_text: str) -> Dict[str, Any]:
     }
 
 
+def parse_scenario_response(raw_text: str) -> Dict[str, Any]:
+    """Parse scenario turn AI response into structured JSON matching ScenarioTurnResponse."""
+    text = raw_text.strip()
+    cleaned = re.sub(r"^```(?:json)?\s*", "", text, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\s*```$", "", cleaned)
+
+    data = None
+    try:
+        data = json.loads(cleaned.strip())
+    except Exception:
+        match = re.search(r"\{.*\}", text, re.DOTALL)
+        if match:
+            try:
+                data = json.loads(match.group(0))
+            except Exception:
+                pass
+
+    if isinstance(data, dict) and "patient_reply_isizulu" in data:
+        feedback = data.get("feedback", {})
+        if not isinstance(feedback, dict):
+            feedback = {}
+        data["feedback"] = {
+            "natural_alternative": feedback.get("natural_alternative", "Yebo dokotela, ngiyabonga kakhulu."),
+            "cultural_and_tone_notes": feedback.get("cultural_and_tone_notes", "Maintain warm bedside presence and respect elder kinship honorifics."),
+            "listening_cues": feedback.get("listening_cues", "Notice contracted vowels and penultimate syllable lengthening.")
+        }
+        if "suggested_steer_chips" not in data or not isinstance(data["suggested_steer_chips"], list) or len(data["suggested_steer_chips"]) == 0:
+            data["suggested_steer_chips"] = [
+                "Baphila kanjani ekhaya gogo?",
+                "Kukhona okunye okukukhathazayo emoyeni?",
+                "Ake sikhulume ngalokho kuhlolwa kwabesifazane."
+            ]
+        return sanitize_data_tree(data)
+
+    # Safe fallback if parsing fails
+    return sanitize_data_tree({
+        "patient_reply_isizulu": "Yebo dokotela, ngiyabonga kakhulu ngokungilalela. Ekhaya kunzima kodwa siyazama.",
+        "patient_reply_english": "Yes doctor, thank you so much for listening to me. At home things are tough but we are trying.",
+        "feedback": {
+            "natural_alternative": "Ngiyabonga ukuthi ubekezele gogo, sonke silwa nalesi simo.",
+            "cultural_and_tone_notes": "Acknowledge the elder's daily resilience and family burdens before offering clinical directions.",
+            "listening_cues": "Notice vowel elision: 'kodwa siyazama' pronounced rapidly as 'kodw'siyazama'."
+        },
+        "suggested_steer_chips": [
+            "Baphila kanjani ekhaya gogo? (How is the family doing at home?)",
+            "Kukhona okunye okukukhathazayo? (Is there anything else on your mind?)",
+            "Sikhulume ngokuvikela impilo yakho. (Let us talk about protecting your health.)"
+        ]
+    })
+
+
 @app.get("/api/health")
 async def health_check():
     """Health check endpoint exposing system readiness and active AI provider."""
@@ -310,3 +417,47 @@ async def consult(request: ConsultRequest):
             status_code=500,
             detail=f"AI generation failed: {str(exc)}",
         ) from exc
+
+
+@app.post("/api/scenario/turn", response_model=ScenarioTurnResponse)
+async def scenario_turn(request: ScenarioTurnRequest):
+    """Beyond the Prescription Scenario Dialogue Simulator turn endpoint.
+
+    Advances the interactive dialogue with a rural KZN persona (e.g. Gogo MaMthethwa)
+    and returns nuanced clinical coaching, Widex hearing aid phonetic listening cues,
+    and suggested steer prompts.
+    """
+    if not request.doctor_input.strip() and not request.history:
+        raise HTTPException(status_code=400, detail="Doctor input or dialogue history cannot be empty.")
+
+    prompt_parts = [
+        f"Active Scenario: {request.scenario_id or 'gogo-mamthethwa'}",
+        "Context: Routine medical check is completed; the consultation now shifts to 'ukubonisana' (mutual life counseling), discussing weather/roads, household stress, youth unemployment, whoonga/crime, SASSA grants, and gentle preventative screening (cervical screening, diet, blood pressure).",
+        "\nDialogue History so far:"
+    ]
+
+    for msg in request.history:
+        speaker = "Doctor" if msg.role == "doctor" else "Patient (Gogo MaMthethwa)"
+        prompt_parts.append(f"- {speaker}: {msg.text}")
+
+    prompt_parts.append(f"\nDoctor's latest statement: {request.doctor_input}")
+    prompt_parts.append("\nGenerate the patient's realistic reply, clinical coaching feedback, and 2-3 steering chips.")
+    prompt_parts.append("Return pure JSON matching the ScenarioTurnResponse schema.")
+
+    prompt = "\n".join(prompt_parts)
+
+    try:
+        resp = await ai_client.generate_response(
+            prompt=prompt,
+            system_instruction=KZN_SCENARIO_SYSTEM_PROMPT,
+        )
+
+        parsed_result = parse_scenario_response(resp["text"])
+        return ScenarioTurnResponse(**parsed_result)
+    except Exception as exc:
+        logger.exception("Scenario turn generation error: %s", exc)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Scenario generation failed: {str(exc)}",
+        ) from exc
+

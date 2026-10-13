@@ -122,6 +122,45 @@ def test_consult_translate_endpoint():
     print("[PASS] Consult translate endpoint verified.")
 
 
+def test_scenario_turn_endpoint():
+    print("\n--- Testing POST /api/scenario/turn (Gogo MaMthethwa simulator) ---")
+    payload = {
+        "scenario_id": "gogo-mamthethwa",
+        "history": [
+            {
+                "role": "doctor",
+                "text": "Sawubona Gogo MaMthethwa, umfutho wegazi usuhleli kahle ku-150/92, siwabhale phansi amaphilisi."
+            },
+            {
+                "role": "patient",
+                "text": "Yebo dokotela mntanami, ngiyabonga. Kodwa umgwaqo unzima kakhulu ngenxa yemvula."
+            }
+        ],
+        "doctor_input": "Kunzima ngempela gogo. Baphila kanjani ekhaya, ikakhulukazi abantwana?"
+    }
+    response = client.post("/api/scenario/turn", json=payload)
+    print(f"Status Code: {response.status_code}")
+    data = response.json()
+    assert response.status_code == 200, f"Expected 200, got {response.status_code}"
+    assert "patient_reply_isizulu" in data and data["patient_reply_isizulu"], "Expected patient_reply_isizulu"
+    assert "patient_reply_english" in data and data["patient_reply_english"], "Expected patient_reply_english"
+    assert "feedback" in data and isinstance(data["feedback"], dict), "Expected feedback dict"
+
+    fb = data["feedback"]
+    assert "natural_alternative" in fb, "Expected natural_alternative in feedback"
+    assert "cultural_and_tone_notes" in fb, "Expected cultural_and_tone_notes in feedback"
+    assert "listening_cues" in fb, "Expected listening_cues in feedback"
+    assert "suggested_steer_chips" in data and isinstance(data["suggested_steer_chips"], list), "Expected steer chips"
+
+    print(f"Patient Reply (isiZulu): {data['patient_reply_isizulu']}")
+    print(f"Patient Reply (English): {data['patient_reply_english']}")
+    print(f"Feedback Alternative: {fb['natural_alternative']}")
+    print(f"Cultural/Tone Note: {fb['cultural_and_tone_notes']}")
+    print(f"Listening Cues: {fb['listening_cues']}")
+    print(f"Suggested Steer Chips: {data['suggested_steer_chips']}")
+    print("[PASS] Scenario turn endpoint verified.")
+
+
 if __name__ == "__main__":
     print("==================================================")
     print("Running Kuzwakele FastAPI Server Verification Tests")
@@ -131,6 +170,7 @@ if __name__ == "__main__":
     test_consult_questions_endpoint()
     test_consult_loop_with_steering()
     test_consult_translate_endpoint()
+    test_scenario_turn_endpoint()
 
     print("\n==================================================")
     print("All server endpoint tests passed successfully!")

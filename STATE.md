@@ -45,7 +45,8 @@
 - **Endpoints**:
   - `GET /api/health`: Health status and active AI provider (`vertex`).
   - `POST /api/consult`: Interactive consultation co-pilot accepting intake notes, ongoing conversation history, and custom steering instructions.
-- **Validation**: Fully verified via `backend/test_server.py` (200 OK across health, questions, loop with steering, and translate endpoints).
+  - `POST /api/scenario/turn`: "Beyond the Prescription" dialogue simulator advancing KZN persona interaction (Gogo MaMthethwa) and delivering coaching feedback with Widex hearing aid phonetic listening cues.
+- **Validation**: Fully verified via `backend/test_server.py` (200 OK across health, consult questions, loop steering, translation, and scenario turn endpoints).
 
 ## Frontend PWA & Interactive Steering Loop
 - **Status**: Active & Verified
@@ -56,4 +57,18 @@
   - **Consultation History Log**: Collapsible turn-by-turn history log tracking completed doctor/patient exchanges and clinical findings.
   - **Sticky Bottom Steering Bar**: Fixed high-contrast input at the viewport bottom with quick steering chips (e.g. wet nappies, fever duration, traditional medicine) and direct prompt input.
   - **Utility Controls**: Reset / "New Consult" button to clear history and start fresh, alongside quick KZN Presets.
+
+## Scenario Dialogue Simulator (TASK-006)
+- **Status**: Active & Verified
+- **Component**: `frontend/src/components/ScenariosView.jsx`
+- **Features**:
+  - **Flagship Scenario**: "Gogo MaMthethwa: Beyond the Prescription" (62yo elder, routine hypertension follow-up, shifting into "ukubonisana" mutual life counseling).
+  - **Collapsible Scenario Dossier**: Displays clinical context, social context (gravel roads, SASSA queue, whoonga youth crisis), and conversational coaching objective.
+  - **High-Contrast Dialogue Bubble**: Spoken isiZulu rendered in prominent typography (`text-xl sm:text-2xl font-bold text-emerald-300`) with English translation toggle.
+  - **Bedside Coaching & Listening Card**:
+    - **Natural Phrasing Alternative**: Warm bedside phrasing in natural isiZulu with copy action.
+    - **Cultural & Tone Nuance**: Explains kinship respect (*gogo*, *mntanami*), validating hardship, and destigmatizing screening.
+    - **Hearing Aid & Phonetic Listening Cue (Widex Tuning)**: Explains elided/dropped vowels (e.g. *uphuz'amanzi*, *baphil'ekhaya*), cadence, and pitch changes for auditory comprehension.
+  - **Interactive Controls**: One-tap suggested steer chips, sticky bottom response input bar, and scenario restart reset.
 - **Build Verification**: `npm run build` compiled cleanly (2,164 modules, service worker precache generated).
+
