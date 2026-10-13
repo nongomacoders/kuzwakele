@@ -71,19 +71,24 @@
   - [x] Verify frontend build via `npm run build`
   - [x] Update `STATE.md` and `TASKS.md`
 
-## Scenario Dialogue Simulator (TASK-006)
-- [x] Implement the "Beyond the Prescription" Scenario Dialogue Simulator in backend and frontend
-  - [x] Define Pydantic models: `ChatMessage`, `ScenarioFeedback`, `ScenarioTurnRequest`, `ScenarioTurnResponse`
-  - [x] Define `KZN_SCENARIO_SYSTEM_PROMPT` with Gogo MaMthethwa persona, "ukubonisana" context, and dual patient/coach output
-  - [x] Implement `POST /api/scenario/turn` with markdown stripping and robust parsing
-  - [x] Add automated test for `/api/scenario/turn` in `backend/test_server.py` and verify all tests pass
-  - [x] Redesign `frontend/src/components/ScenariosView.jsx`:
-    - [x] Scenario Selection & Dossier with Gogo MaMthethwa flagship scenario
-    - [x] Collapsible Scenario Brief card displaying clinical context, social context, and conversational objective
-    - [x] Interactive Dialogue Thread with high-contrast patient bubble (`text-xl font-bold text-emerald-300`) and English toggle
-    - [x] Conversational Coach Card with Natural Phrasing Alternative, Cultural & Tone Nuance, and Widex hearing aid phonetic listening cues
-    - [x] Suggested Steer Chips, bottom text input bar, and Restart Scenario reset
-  - [x] Verify frontend build via `npm run build`
+## Mobile Scenario Stepper & Offline Practice
+- [x] Implement text-only mobile scenario stepper with grammar breakdown and 1-tap drill flagging
+  - [x] Create `frontend/src/utils/drillsStorage.js` with `localStorage` persistence and `drills-updated` reactive event dispatching
+  - [x] Create `frontend/src/data/scenariosData.js` with pre-filled community scenarios:
+    - [x] Scenario 1: Gogo MaMthethwa — Ukubonisana (Life Counseling)
+    - [x] Scenario 2: The Roadside Greeting — Ukubingelela & News
+    - [x] Detailed phonetic text cues and multi-morpheme grammatical breakdowns on all patient turns and doctor options
+  - [x] Redesign `frontend/src/components/ScenariosView.jsx` as a mobile-first offline stepper:
+    - [x] Scenario selector and step progress indicator (`Step X of Y`)
+    - [x] Dual independent toggles: `[ 🌐 English ]` and `[ 🔬 Detailed Grammar ]`
+    - [x] High-contrast patient speech bubble with phonetic cue and 1-tap `[ Flag for Drills ]` bookmark button
+    - [x] Collapsible/expandable morpheme grammar breakdown cards
+    - [x] Selectable clinician phrasing options with bedside nuance and dedicated `[ 🔖 Drill ]` flagging
+    - [x] Fixed bottom navigation bar with thumb-accessible `[ ‹ Back ]` and `[ Next Step › ]` / `[ Restart Scenario ]`
+  - [x] Connect `frontend/src/components/DrillsGym.jsx`:
+    - [x] Primary "Review List" section reactively displaying flagged scenario sentences from `localStorage`
+    - [x] Speaker filters (`All`, `Patient`, `Doctor`), translation reveal toggle, complete grammar panel, and remove button
+  - [x] Verify clean compilation (`npm run build`) and cross-tab reactive persistence
 ## Desktop Split-Screen & Latency Tracking Optimization
 - [x] Optimize the Live tab for desktop with a split-screen layout, animated waiting state, and per-turn request latency badges
   - [x] Measure latency using `time.perf_counter()` on backend (`execution_time_ms`) and `performance.now()` in frontend

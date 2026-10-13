@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Activity, Radio, BookOpen, Dumbbell, Stethoscope, RefreshCw } from 'lucide-react';
 import LiveConsult from './components/LiveConsult';
 import ScenariosView from './components/ScenariosView';
-import DrillsView from './components/DrillsView';
+import DrillsGym from './components/DrillsGym';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('live'); // 'live' | 'scenarios' | 'drills'
@@ -135,7 +135,7 @@ export default function App() {
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 pb-20">
         {activeTab === 'live' && <LiveConsult />}
         {activeTab === 'scenarios' && <ScenariosView />}
-        {activeTab === 'drills' && <DrillsView />}
+        {activeTab === 'drills' && <DrillsGym />}
       </main>
 
       {/* Footer */}

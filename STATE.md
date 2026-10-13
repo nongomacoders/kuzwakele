@@ -67,19 +67,23 @@
   - **Right Pane (`lg:col-span-4`) - Reverse History Aligned with Option 1**: Renders turns in reverse chronological order (`[...history].reverse()`) with the latest turn at the very top (bearing a `Latest` badge and `Turn #N`), aligned with Option 1 across the desktop split grid (`items-start`).
   - **Interactive Steering Loop**: Clickable anticipated patient reply chips and fixed bottom steering bar with rapid prompt chips.
 
-## Scenario Dialogue Simulator (TASK-006)
-- **Status**: Active & Verified
-- **Component**: `frontend/src/components/ScenariosView.jsx`
-- **Features**:
-  - **Flagship Scenario**: "Gogo MaMthethwa: Beyond the Prescription" (62yo elder, routine hypertension follow-up, shifting into "ukubonisana" mutual life counseling).
-  - **Collapsible Scenario Dossier**: Displays clinical context, social context (gravel roads, SASSA queue, whoonga youth crisis), and conversational coaching objective.
-  - **High-Contrast Dialogue Bubble**: Spoken isiZulu rendered in prominent typography (`text-xl sm:text-2xl font-bold text-emerald-300`) with English translation toggle.
-  - **Bedside Coaching & Listening Card**:
-    - **Natural Phrasing Alternative**: Warm bedside phrasing in natural isiZulu with copy action.
-    - **Cultural & Tone Nuance**: Explains kinship respect (*gogo*, *mntanami*), validating hardship, and destigmatizing screening.
-    - **Hearing Aid & Phonetic Listening Cue (Widex Tuning)**: Explains elided/dropped vowels (e.g. *uphuz'amanzi*, *baphil'ekhaya*), cadence, and pitch changes for auditory comprehension.
-  - **Interactive Controls**: One-tap suggested steer chips, sticky bottom response input bar, and scenario restart reset.
-- **Build Verification**: `npm run build` compiled cleanly (2,164 modules, service worker precache generated).
+## Mobile Scenario Stepper & Offline Practice
+- **Status**: Active & Verified (Text-Only, Zero Mic/Audio Dependencies)
+- **Components**:
+  - `frontend/src/components/ScenariosView.jsx`: Mobile-first dialogue stepper with Back/Next navigation.
+  - `frontend/src/data/scenariosData.js`: Pre-filled community dialogue scenarios.
+  - `frontend/src/utils/drillsStorage.js`: LocalStorage manager (`kuzwakele_flagged_drills`) with reactive window events.
+  - `frontend/src/components/DrillsGym.jsx`: Spaced repetition drill deck with Review List for flagged phrases.
+- **Scenarios Included**:
+  - **Scenario 1**: "Gogo MaMthethwa — Ukubonisana (Life Counseling)" (washed-out roads, caregiver burden, whoonga crisis, swollen feet, medication side-effects, dignity).
+  - **Scenario 2**: "The Roadside Greeting — Ukubingelela & News" (respectful plural greeting, homestead well-being, drought/water crisis, non-condescending water purification).
+- **Core Capabilities**:
+  - **Text-Only Design**: Completely eliminated audio players, recording permissions, and live generation latency for fluid mobile reading.
+  - **Dual Independent Toggles**: `[ 🌐 English ]` and `[ 🔬 Detailed Grammar ]` switches for focused immersion or grammatical deep-dives.
+  - **Phonetic & Cadence Cues**: Plain-text acoustic guidance on vowel coalescence (*yemvula*), contractions (*kukhon'okuhambayo*), click pronunciations (*q*, *c*, *x*), and penultimate lengthening.
+  - **Morphological Analysis**: Granular breakdown cards detailing subject concords, noun classes, stative suffixes (*-ile*), negative participials, applicatives, and causatives.
+  - **1-Tap Sentence Bookmarking**: Instant flagging for both patient colloquialisms and doctor response choices with live badge counter synchronization.
+  - **Drills Gym Review List**: Dedicated review deck displaying flagged sentences, complete grammar breakdowns, speaker filters (`Patient`, `Doctor`, `All`), and remove actions.
 
 ## SQLite Seed Harvester & Zero-Click Auto-Harvesting
 - **Status**: Active & Verified (Silent Fire-and-Forget Auto-Persist)
