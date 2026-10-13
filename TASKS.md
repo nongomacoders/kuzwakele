@@ -46,3 +46,13 @@
   - [x] Implement operational `LiveConsult.jsx` co-pilot with modes, presets, provider badge, and copy button
   - [x] Verify production build compiles cleanly (`npm run build`)
   - [x] Update `ENVIRONMENT.md`, `STATE.md`, and `TASKS.md`
+
+## Clinical Cards & GFM Presentation
+- [x] Transform Live Co-Pilot output into structured high-contrast Clinical Cards
+  - [x] Install `react-markdown` and `remark-gfm` in `frontend/`
+  - [x] Update `backend/main.py` with structured JSON schema and resilient `parse_questions_response` fallback parser
+  - [x] Update `backend/test_server.py` and verify endpoint tests
+  - [x] Redesign `frontend/src/components/LiveConsult.jsx` with Clinical Question Cards and Markdown rendering
+  - [x] Clean up input area with prominent KZN presets and comfortable padding
+  - [x] Verify production build compiles cleanly (`npm run build`)
+  - [x] Update `STATE.md` and `TASKS.md`

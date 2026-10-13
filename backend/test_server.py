@@ -2,8 +2,8 @@
 
 Tests:
 1. GET /api/health -> 200 OK
-2. POST /api/consult with mode='questions' -> 200 OK
-3. POST /api/consult with mode='translate' -> 200 OK
+2. POST /api/consult with mode='questions' -> 200 OK (structured JSON cards)
+3. POST /api/consult with mode='translate' -> 200 OK (translated text)
 """
 
 import sys
@@ -41,7 +41,19 @@ def test_consult_questions_endpoint():
     data = response.json()
     print(f"Provider used: {data.get('provider_used')}")
     print(f"Model used: {data.get('model')}")
-    print(f"Result preview:\n{data.get('result', '')[:200]}...")
+
+    result = data.get("result")
+    if isinstance(result, dict):
+        print(f"Structured result summary: {result.get('summary')}")
+        print(f"Questions count: {len(result.get('questions', []))}")
+        if result.get("questions"):
+            first_q = result["questions"][0]
+            print(f"Sample isiZulu: {first_q.get('isizulu')}")
+            print(f"Sample English: {first_q.get('english')}")
+            print(f"Sample Note: {first_q.get('cultural_note')}")
+    else:
+        print(f"Result preview:\n{str(result)[:200]}...")
+
     assert response.status_code == 200, f"Expected 200, got {response.status_code}"
     assert data.get("result"), "Expected non-empty result"
     assert data.get("provider_used") in ("vertex", "openrouter")
@@ -60,7 +72,7 @@ def test_consult_translate_endpoint():
     data = response.json()
     print(f"Provider used: {data.get('provider_used')}")
     print(f"Model used: {data.get('model')}")
-    print(f"Result preview:\n{data.get('result', '')[:200]}...")
+    print(f"Result preview:\n{str(data.get('result', ''))[:200]}...")
     assert response.status_code == 200, f"Expected 200, got {response.status_code}"
     assert data.get("result"), "Expected non-empty result"
     assert data.get("provider_used") in ("vertex", "openrouter")
