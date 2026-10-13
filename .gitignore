@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*.pyc
+.env
+*.json
+!data/firestore-export.json
+node_modules/
+dist/
