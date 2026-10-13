@@ -55,13 +55,16 @@
 - **Status**: Active & Verified
 - **Directory**: `frontend/`
 - **Stack**: Vite + React + Tailwind CSS + Lucide React + VitePWA + ReactMarkdown + RemarkGfm
-- **Desktop Split-Screen Architecture**:
-  - **Left Pane (`lg:col-span-8`)**: Active Consultation Console with editable intake box, quick KZN presets, and equalized question cards.
+- **Desktop Split-Screen Architecture & Streamlining**:
+  - **Streamlined Workspace**: Removed the mode toggle bar; defaults directly to the Interactive Consultation Loop co-pilot.
+  - **Top-Level Intake Banner**: Placed active case intake above the split grid for clean top alignment across desktop columns.
+  - **Left Pane (`lg:col-span-8`)**: Active Consultation Console with quick KZN presets and equalized question cards.
   - **Typography Equalization**: Primary isiZulu phrase styling is equalized to match the English text size (`text-base font-semibold text-emerald-300` and `text-base text-slate-300`).
-  - **UI Simplification**: Removed the "Clinical Focus" advice card and the "ACTIVE RECOMMENDATIONS" header wrapper.
+  - **UI Simplification**: Removed the "Clinical Focus" advice card, the "ACTIVE RECOMMENDATIONS" header wrapper, and all diagnostic labels.
+  - **Entrance Fade-In Animation**: Fast, smooth 200ms ease-out fade-in animation (`animate-fadeIn`) triggers on the question cards container and Option 1 when new responses arrive.
   - **Clean Patient Response Chips**: Stripped all "Clinical Sign: ..." badges; displays solely the patient's spoken isiZulu and English translation in clean, balanced text.
   - **Animated Waiting State Card**: Glowing pulse card with live second-counter ticking (`⏱️ {elapsedWaitSec}s`), typing animation, and `"Waiting for Gemini (gemini-3.5-flash-lite)..."` status.
-  - **Right Pane (`lg:col-span-4`)**: Sticky Consultation History Log (`lg:sticky lg:top-6 max-h-[calc(100vh-7rem)] overflow-y-auto`) with request latency badges (`⚡ 1.2s`), free of diagnostic tags.
+  - **Right Pane (`lg:col-span-4`) - Reverse History Aligned with Option 1**: Renders turns in reverse chronological order (`[...history].reverse()`) with the latest turn at the very top (bearing a `Latest` badge and `Turn #N`), aligned with Option 1 across the desktop split grid (`items-start`).
   - **Interactive Steering Loop**: Clickable anticipated patient reply chips and fixed bottom steering bar with rapid prompt chips.
 
 ## Scenario Dialogue Simulator (TASK-006)

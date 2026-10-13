@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import {
-  MessageSquareQuote,
-  Languages,
   Sparkles,
   Copy,
   Check,
@@ -26,33 +24,23 @@ import {
 const PRESET_EXAMPLES = [
   {
     label: 'TB Screen',
-    mode: 'questions',
     text: '45yo male, cough 3 weeks, lives in homestead with extended family. Screen for night sweats, weight loss, and household contacts.'
   },
   {
     label: 'Diarrhoea (Child)',
-    mode: 'questions',
     text: '2yo child presenting with acute watery diarrhea for 2 days, lethargic. Check rehydration status, breastfeeding, and traditional enemas.'
   },
   {
     label: 'Hypertension (Gogo)',
-    mode: 'questions',
     text: '62yo gogo with BP 168/104. Inquire politely about pill adherence, traditional herbal mixtures (intelezi), and dizziness.'
   },
   {
-    label: 'Meds Instructions',
-    mode: 'translate',
-    text: 'Take 2 white tablets every morning with clean water after eating porridge. Do not chew them.'
+    label: 'Childhood Cough & Fever',
+    text: '4yo girl brought by mother with cough, fast breathing, and fever for 3 days. Check fluid intake and chest indrawing.'
   },
   {
-    label: 'Hospital Referral',
-    mode: 'translate',
-    text: 'We must refer you to the district hospital in town tomorrow for a chest X-ray and further investigation.'
-  },
-  {
-    label: 'Economic Empathy',
-    mode: 'translate',
-    text: 'We understand transport and money are difficult right now; all tests and medications here at the clinic are free.'
+    label: 'Diabetes Checkup',
+    text: '55yo woman with type 2 diabetes, presenting for routine refill. Inquire about foot sores, blurry vision, and diet.'
   }
 ];
 
@@ -113,7 +101,6 @@ const formatLatency = (ms) => {
 };
 
 export default function LiveConsult() {
-  const [mode, setMode] = useState('questions'); // 'questions' | 'translate'
   const [inputText, setInputText] = useState('');
   const [caseSummary, setCaseSummary] = useState('');
   const [loading, setLoading] = useState(false);
@@ -172,7 +159,7 @@ export default function LiveConsult() {
         },
         body: JSON.stringify({
           text: inputText.trim(),
-          mode
+          mode: 'questions'
         })
       });
 
@@ -188,11 +175,9 @@ export default function LiveConsult() {
       setLastLatencyMs(recordedLatency);
       setResponse(data);
 
-      if (mode === 'questions') {
-        const structured = tryParseStructuredQuestions(data.result);
-        if (structured) {
-          setCurrentQuestions(structured.questions || []);
-        }
+      const structured = tryParseStructuredQuestions(data.result);
+      if (structured) {
+        setCurrentQuestions(structured.questions || []);
       }
     } catch (err) {
       setError(err.message || 'Failed to start consultation.');
@@ -212,9 +197,11 @@ export default function LiveConsult() {
 
     // Prepare history item with prior turn latency as baseline
     const updatedHistory = [...history];
+    const turnNumber = updatedHistory.length + 1;
     if (doctorTurn && patientTurn) {
       updatedHistory.push({
         id: Date.now(),
+        turnNumber,
         doctorText: doctorTurn.isizulu,
         doctorSubtext: doctorTurn.english,
         patientText: patientTurn.isizulu,
@@ -227,6 +214,7 @@ export default function LiveConsult() {
     } else if (customInstruction) {
       updatedHistory.push({
         id: Date.now(),
+        turnNumber,
         doctorText: `[Steering Focus] ${customInstruction}`,
         doctorSubtext: 'Clinician directed consultation inquiry',
         patientText: 'Pending response',
@@ -301,61 +289,47 @@ export default function LiveConsult() {
   };
 
   const handlePresetClick = (preset) => {
-    setMode(preset.mode);
     setInputText(preset.text);
     setError(null);
   };
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 pb-36">
-      {/* Top Mode Selector Toggle */}
-      <div className="bg-slate-900/90 border border-slate-800 p-1.5 rounded-2xl flex gap-1.5 backdrop-blur-md shadow-xl">
-        <button
-          type="button"
-          onClick={() => {
-            setMode('questions');
-            setError(null);
-          }}
-          className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-150 ${
-            mode === 'questions'
-              ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-950/60'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-          }`}
-        >
-          <MessageSquareQuote className="w-4 h-4" />
-          <span>Interactive Consultation Loop</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => {
-            setMode('translate');
-            setError(null);
-          }}
-          className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-150 ${
-            mode === 'translate'
-              ? 'bg-blue-600 text-white shadow-lg shadow-blue-950/60'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-          }`}
-        >
-          <Languages className="w-4 h-4" />
-          <span>Express Clinical Translate</span>
-        </button>
-      </div>
+      {/* Active Case Intake Banner (Top-Level) */}
+      {caseSummary && (
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-start justify-between gap-3 shadow-lg">
+          <div className="flex items-start gap-3">
+            <div className="p-2 bg-emerald-950/80 border border-emerald-800 rounded-xl text-emerald-400 mt-0.5">
+              <Stethoscope className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Active Case Intake</p>
+              <p className="text-sm text-slate-200 mt-0.5 font-medium">{caseSummary}</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={handleResetConsult}
+            className="text-xs text-slate-400 hover:text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800/80 shrink-0 font-medium hover:bg-slate-800 transition-colors"
+          >
+            Edit Intake
+          </button>
+        </div>
+      )}
 
       {/* Desktop Split-Screen Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* ============================================================== */}
         {/* LEFT PANE (lg:col-span-7 xl:col-span-8): Active Workstation     */}
         {/* ============================================================== */}
-        <div className="lg:col-span-7 xl:col-span-8 space-y-5">
+        <div className="lg:col-span-7 xl:col-span-8 space-y-4">
           {/* Case Intake Input Box (when intake is not yet locked) */}
-          {!caseSummary ? (
+          {!caseSummary && (
             <form onSubmit={handleInitialSubmit} className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl space-y-4">
               <div className="flex items-center justify-between">
                 <label htmlFor="clinical-input" className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                   <Stethoscope className="w-4 h-4 text-emerald-400" />
-                  {mode === 'questions' ? 'Clinical Intake & Presentation' : 'English Instruction / Phrase'}
+                  Clinical Intake & Presentation
                 </label>
                 <span className="text-[11px] font-mono text-slate-500">KZN Bedside Context</span>
               </div>
@@ -365,11 +339,7 @@ export default function LiveConsult() {
                 rows={3}
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder={
-                  mode === 'questions'
-                    ? "Enter patient age, chief complaints, and history (e.g. '3yo boy with acute diarrhoea and vomiting for 24h')..."
-                    : "Enter doctor's instruction to translate (e.g. 'Take 2 white tablets with porridge in the morning')..."
-                }
+                placeholder="Enter patient age, chief complaints, and history (e.g. '3yo boy with acute diarrhoea and vomiting for 24h')..."
                 className="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-xl p-4 text-slate-100 placeholder-slate-500 text-sm leading-relaxed transition-all outline-none resize-none"
               />
 
@@ -400,9 +370,7 @@ export default function LiveConsult() {
               {/* Submit Button */}
               <div className="pt-2 flex items-center justify-between border-t border-slate-800/80">
                 <p className="text-xs text-slate-400 hidden sm:block">
-                  {mode === 'questions'
-                    ? 'Generates culturally respectful questions with clickable patient responses.'
-                    : 'Translates to colloquial spoken isiZulu with concord and idiom notes.'}
+                  Generates natural conversational isiZulu phrases with clickable patient responses.
                 </p>
 
                 <button
@@ -428,26 +396,6 @@ export default function LiveConsult() {
                 </button>
               </div>
             </form>
-          ) : (
-            /* Active Intake Banner */
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-start justify-between gap-3 shadow-lg">
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-emerald-950/80 border border-emerald-800 rounded-xl text-emerald-400 mt-0.5">
-                  <Stethoscope className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Active Case Intake</p>
-                  <p className="text-sm text-slate-200 mt-0.5 font-medium">{caseSummary}</p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={handleResetConsult}
-                className="text-xs text-slate-400 hover:text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800/80 shrink-0 font-medium hover:bg-slate-800 transition-colors"
-              >
-                Edit Intake
-              </button>
-            </div>
           )}
 
           {/* Animated Waiting State Card */}
@@ -500,14 +448,19 @@ export default function LiveConsult() {
 
           {/* Output Display / Active Question Cards Area */}
           {response && (
-            <div className="space-y-4 animate-in fade-in duration-200">
+            <div
+              key={`questions-turn-${history.length}-${currentQuestions[0]?.isizulu || ''}`}
+              className="space-y-4 animate-fadeIn"
+            >
               {/* Structured Clinical Question Cards View */}
               {currentQuestions.length > 0 ? (
                 <div className="grid gap-4">
                   {currentQuestions.map((q, qIdx) => (
                     <div
                       key={qIdx}
-                      className="bg-slate-900 border-2 border-slate-800/90 hover:border-emerald-500/50 rounded-2xl p-5 shadow-2xl transition-all space-y-4"
+                      className={`bg-slate-900 border-2 border-slate-800/90 hover:border-emerald-500/50 rounded-2xl p-5 shadow-2xl transition-all space-y-4 ${
+                        qIdx === 0 ? 'animate-fadeIn' : ''
+                      }`}
                     >
                       {/* Card Header */}
                       <div className="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
@@ -667,28 +620,36 @@ export default function LiveConsult() {
               </div>
             ) : (
               <div className="space-y-3">
-                {history.map((turn, idx) => (
-                  <div
-                    key={turn.id || idx}
-                    className="bg-slate-900/90 border border-slate-800 hover:border-slate-700/80 rounded-2xl p-4 space-y-3 shadow-lg transition-all"
-                  >
-                    {/* Card Header with Turn #, Latency Pill, and Timestamp */}
-                    <div className="flex items-center justify-between text-xs border-b border-slate-800/60 pb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="font-extrabold px-2 py-0.5 rounded bg-slate-800 text-slate-200 text-[11px]">
-                          Turn #{idx + 1}
-                        </span>
-
-                        {turn.latencyFormatted && (
-                          <span className="px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-800/60 font-mono text-[10px] font-bold flex items-center gap-1 shadow-sm">
-                            <Zap className="w-3 h-3 text-emerald-400" />
-                            {turn.latencyFormatted}
+                {[...history].reverse().map((turn, rIdx) => {
+                  const displayTurnNum = turn.turnNumber || (history.length - rIdx);
+                  return (
+                    <div
+                      key={turn.id || rIdx}
+                      className="bg-slate-900/90 border border-slate-800 hover:border-slate-700/80 rounded-2xl p-4 space-y-3 shadow-lg transition-all animate-fadeIn"
+                    >
+                      {/* Card Header with Turn #, Latest Pill, Latency Pill, and Timestamp */}
+                      <div className="flex items-center justify-between text-xs border-b border-slate-800/60 pb-2">
+                        <div className="flex items-center gap-2">
+                          <span className="font-extrabold px-2 py-0.5 rounded bg-slate-800 text-slate-200 text-[11px]">
+                            Turn #{displayTurnNum}
                           </span>
-                        )}
-                      </div>
 
-                      <span className="text-slate-500 text-[11px] font-mono">{turn.timestamp}</span>
-                    </div>
+                          {rIdx === 0 && (
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/80 border border-emerald-800/60 px-1.5 py-0.5 rounded">
+                              Latest
+                            </span>
+                          )}
+
+                          {turn.latencyFormatted && (
+                            <span className="px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-800/60 font-mono text-[10px] font-bold flex items-center gap-1 shadow-sm">
+                              <Zap className="w-3 h-3 text-emerald-400" />
+                              {turn.latencyFormatted}
+                            </span>
+                          )}
+                        </div>
+
+                        <span className="text-slate-500 text-[11px] font-mono">{turn.timestamp}</span>
+                      </div>
 
                     {/* Clinician Turn */}
                     <div className="flex items-start gap-2.5 text-xs bg-slate-950/70 rounded-xl p-2.5 border border-slate-800/80">
@@ -716,7 +677,8 @@ export default function LiveConsult() {
                       </div>
                     </div>
                   </div>
-                ))}
+                );
+              })}
               </div>
             )}
           </div>

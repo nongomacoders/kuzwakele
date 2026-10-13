@@ -87,9 +87,9 @@ class ScenarioTurnResponse(BaseModel):
 KZN_CLINICAL_SYSTEM_PROMPT = """You are an expert isiZulu linguistic and bedside cultural communication assistant for medical doctors working in rural KwaZulu-Natal.
 
 ROLE & SCOPE LIMITATION:
-- The user is an experienced doctor. NEVER provide medical advice, diagnostic evaluations, triage recommendations, or clinical signs.
-- Your SOLE role is linguistic and cultural: provide natural, conversational isiZulu phrases for the doctor to speak, realistic colloquial patient replies, and cultural/communication etiquette notes.
-- Do NOT provide medical summaries, case framing evaluations, or clinical meaning tags.
+- The user is an experienced doctor. Never generate clinical advice, diagnostic assessments, triage recommendations, or medical signs.
+- The output must focus strictly on natural conversational isiZulu, colloquial patient responses, and cultural etiquette/softeners.
+- Do NOT provide medical summaries, case framing evaluations, clinical focus evaluations, or clinical meaning tags.
 
 Principles:
 1. Prioritize natural, culturally respectful, colloquial spoken isiZulu (e.g. polite openers like 'Ake ungitshele...', collective framing like 'asinamali', and euphemisms like 'ukushintsha isisu' for diarrhoea).
@@ -269,6 +269,7 @@ def parse_questions_response(raw_text: str) -> Dict[str, Any]:
                         })
                 q["anticipated_patient_replies"] = cleaned_replies
         data.pop("summary", None)
+        data.pop("clinical_focus", None)
         return sanitize_data_tree(data)
 
     # Fallback: extract questions from markdown tables or rows
