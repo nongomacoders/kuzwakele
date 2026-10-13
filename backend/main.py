@@ -96,7 +96,55 @@ Rules for Anticipated Patient Replies:
 - Each question MUST include 2 to 3 realistic anticipated replies representing common rural KZN clinical responses (e.g., affirmative with timeline, negative reassurance, or traditional medicine usage like 'intelezi' or 'imbiza').
 - Keep patient replies conversational and true to how patients/caregivers speak (e.g., 'Ewe dokotela, uqale kuthangi...', 'Cha, akakaze abenomkhuhlane...', 'Nginikeze umuthi wesintu omncane...').
 
+Rules for Language & Script Purity:
+- Both isiZulu and English MUST be written strictly using the standard Latin alphabet.
+- NEVER output non-Latin or Indic scripts (such as Bengali 'আমরা', Devanagari, Arabic, or Cyrillic).
+- All English translations and notes must use standard English words (e.g. use 'We', never Bengali 'আমরা').
+
 4. Mode 'translate': Given an English phrase or instruction, return natural spoken isiZulu with an explanation of any idioms or concords used."""
+
+
+def sanitize_hallucinated_scripts(text: str) -> str:
+    """Sanitize foreign script token bleeding (e.g., Bengali/Indic characters) from generated text.
+
+    LLMs can occasionally bleed multilingual pronouns (e.g. Bengali 'আমরা' for 'We')
+    when translating low-resource languages into English.
+    """
+    if not isinstance(text, str):
+        return text
+
+    # Common multilingual token bleeding replacements
+    replacements = {
+        "\u0986\u09ae\u09b0\u09be": "We",      # Bengali 'amra' -> We
+        "\u0986\u09ae\u09bf": "I",        # Bengali 'ami' -> I
+        "\u09a4\u09be\u09b0\u09be": "They",    # Bengali 'tara' -> They
+        "\u09b8\u09c7": "He/She",         # Bengali 'se' -> He/She
+        "\u09b9\u09cd\u09af\u09be\u0981": "Yes", # Bengali 'hyan' -> Yes
+        "\u09a8\u09be": "No",             # Bengali 'na' -> No
+        "\u0986\u09ae\u09be\u09a6\u09c7\u09b0": "Our", # Bengali 'amader' -> Our
+        "আমরা": "We",
+        "আমি": "I",
+        "তারা": "They",
+    }
+    for foreign, english_sub in replacements.items():
+        text = text.replace(foreign, english_sub)
+
+    # Strip any remaining stray Indic / Arabic / Cyrillic / CJK scripts
+    text = re.sub(r'[\u0900-\u0DFF\u0600-\u06FF\u0400-\u04FF\u4E00-\u9FFF]+', '', text)
+    # Clean redundant spaces
+    text = re.sub(r'\s{2,}', ' ', text).strip()
+    return text
+
+
+def sanitize_data_tree(obj: Any) -> Any:
+    """Recursively sanitize text in dictionaries, lists, and strings."""
+    if isinstance(obj, str):
+        return sanitize_hallucinated_scripts(obj)
+    elif isinstance(obj, dict):
+        return {k: sanitize_data_tree(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [sanitize_data_tree(item) for item in obj]
+    return obj
 
 
 def parse_questions_response(raw_text: str) -> Dict[str, Any]:
@@ -141,7 +189,7 @@ def parse_questions_response(raw_text: str) -> Dict[str, Any]:
                         "clinical_meaning": "Mild or uncertain symptom"
                     }
                 ]
-        return data
+        return sanitize_data_tree(data)
 
     # Fallback: extract questions from markdown tables or rows
     extracted_questions = []
@@ -172,16 +220,16 @@ def parse_questions_response(raw_text: str) -> Dict[str, Any]:
                 })
 
     if extracted_questions:
-        return {
+        return sanitize_data_tree({
             "summary": "Clinical consultation questions",
             "questions": extracted_questions,
-        }
+        })
 
     # If parsing completely fails, wrap safely so the frontend never crashes
     return {
         "summary": "Consultation Summary",
         "questions": [],
-        "raw_text": raw_text,
+        "raw_text": sanitize_hallucinated_scripts(raw_text),
     }
 
 
@@ -252,7 +300,7 @@ async def consult(request: ConsultRequest):
             )
 
         return ConsultResponse(
-            result=raw_output,
+            result=sanitize_hallucinated_scripts(raw_output),
             provider_used=resp["provider_used"],
             model=resp["model"],
         )

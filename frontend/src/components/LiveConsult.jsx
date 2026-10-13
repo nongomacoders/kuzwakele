@@ -66,16 +66,41 @@ const STEERING_HINTS = [
   'Ask about fever duration and chills'
 ];
 
+// Sanitizer to eliminate foreign script hallucinations (such as Bengali pronoun bleed)
+function cleanForeignScripts(str) {
+  if (!str || typeof str !== 'string') return str;
+  return str
+    .replace(/\u0986\u09ae\u09b0\u09be|আমরা/g, 'We')
+    .replace(/\u0986\u09ae\u09bf|আমি/g, 'I')
+    .replace(/\u09a4\u09be\u09b0\u09be|তারা/g, 'They')
+    .replace(/[\u0900-\u0DFF\u0600-\u06FF\u0400-\u04FF\u4E00-\u9FFF]+/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+function cleanStructuredTree(obj) {
+  if (typeof obj === 'string') return cleanForeignScripts(obj);
+  if (Array.isArray(obj)) return obj.map(cleanStructuredTree);
+  if (obj && typeof obj === 'object') {
+    const res = {};
+    for (const [k, v] of Object.entries(obj)) {
+      res[k] = cleanStructuredTree(v);
+    }
+    return res;
+  }
+  return obj;
+}
+
 function tryParseStructuredQuestions(result) {
   if (!result) return null;
   if (typeof result === 'object' && Array.isArray(result.questions) && result.questions.length > 0) {
-    return result;
+    return cleanStructuredTree(result);
   }
   if (typeof result === 'string') {
     try {
       const parsed = JSON.parse(result);
       if (typeof parsed === 'object' && Array.isArray(parsed.questions) && parsed.questions.length > 0) {
-        return parsed;
+        return cleanStructuredTree(parsed);
       }
     } catch {
       // Not raw JSON string
@@ -612,7 +637,7 @@ export default function LiveConsult() {
                       <ArrowRight className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
                       <div>
                         <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2">English:</span>
-                        <span className="text-sm sm:text-base text-slate-200 font-medium">{q.english}</span>
+                        <span className="text-sm sm:text-base text-slate-200 font-medium">{cleanForeignScripts(q.english)}</span>
                       </div>
                     </div>
 
@@ -622,7 +647,7 @@ export default function LiveConsult() {
                         <Lightbulb className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                         <div>
                           <span className="font-bold text-amber-300">Bedside Rationale: </span>
-                          <span>{q.cultural_note}</span>
+                          <span>{cleanForeignScripts(q.cultural_note)}</span>
                         </div>
                       </div>
                     )}
@@ -647,15 +672,15 @@ export default function LiveConsult() {
                               <div className="space-y-1">
                                 <div className="flex items-center justify-between gap-1 mb-1">
                                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 group-hover:bg-blue-900/60 text-slate-300 group-hover:text-blue-200 border border-slate-700/60 font-semibold truncate">
-                                    {reply.clinical_meaning}
+                                    {cleanForeignScripts(reply.clinical_meaning)}
                                   </span>
                                   <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
                                 </div>
                                 <p className="text-sm font-bold text-slate-100 group-hover:text-blue-200 leading-snug">
-                                  "{reply.isizulu}"
+                                  "{cleanForeignScripts(reply.isizulu)}"
                                 </p>
                                 <p className="text-xs text-slate-400 group-hover:text-slate-300">
-                                  {reply.english}
+                                  {cleanForeignScripts(reply.english)}
                                 </p>
                               </div>
                             </button>
