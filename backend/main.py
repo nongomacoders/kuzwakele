@@ -5,6 +5,7 @@ and local Wi-Fi mobile clients. Supports an interactive consultation steering lo
 with clickable anticipated patient replies and dynamic steering.
 """
 
+from contextlib import asynccontextmanager
 import json
 import logging
 import re
@@ -14,11 +15,18 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from backend import ai_client, config
+from backend import ai_client, config, database
 
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Kuzwakele API", version="1.0.0")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    database.init_db()
+    yield
+
+
+app = FastAPI(title="Kuzwakele API", version="1.0.0", lifespan=lifespan)
 
 # Enable CORS for desktop (localhost) and mobile devices on local network
 app.add_middleware(
@@ -82,6 +90,21 @@ class ScenarioTurnResponse(BaseModel):
     patient_reply_english: str
     feedback: ScenarioFeedback
     suggested_steer_chips: List[str]  # 2-3 quick conversational prompts doctor could say next
+
+
+class SaveSeedRequest(BaseModel):
+    session_id: Optional[str] = None
+    intake_summary: Optional[str] = None
+    turn_number: int = 1
+    doctor_isizulu: str
+    doctor_english: Optional[str] = None
+    patient_isizulu: Optional[str] = None
+    patient_english: Optional[str] = None
+    cultural_note: Optional[str] = None
+    steer_context: Optional[str] = None
+    tags: List[str] = Field(default_factory=list)
+    distill_target: str = "both"
+    raw_turn_payload: Optional[Dict[str, Any]] = None
 
 
 KZN_CLINICAL_SYSTEM_PROMPT = """You are an expert isiZulu linguistic and bedside cultural communication assistant for medical doctors working in rural KwaZulu-Natal.
@@ -484,5 +507,69 @@ async def scenario_turn(request: ScenarioTurnRequest):
         raise HTTPException(
             status_code=500,
             detail=f"Scenario generation failed: {str(exc)}",
+        ) from exc
+
+
+# ==============================================================================
+# Interaction Seeds Harvester Endpoints (Firebase-Compatible SQLite Store)
+# ==============================================================================
+
+@app.post("/api/seeds")
+async def create_seed(request: SaveSeedRequest):
+    """Save an interaction seed to local SQLite storage."""
+    try:
+        seed_id = database.save_seed(request.model_dump())
+        return {"status": "saved", "id": seed_id}
+    except Exception as exc:
+        logger.exception("Failed to save seed: %s", exc)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to save seed: {str(exc)}",
+        ) from exc
+
+
+@app.get("/api/seeds")
+async def list_seeds(limit: int = 50, sync_status: Optional[str] = None):
+    """Retrieve interaction seeds sorted by created_at DESC with total count."""
+    try:
+        seeds = database.get_seeds(limit=limit, sync_status=sync_status)
+        return {"count": len(seeds), "seeds": seeds}
+    except Exception as exc:
+        logger.exception("Failed to retrieve seeds: %s", exc)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to retrieve seeds: {str(exc)}",
+        ) from exc
+
+
+@app.delete("/api/seeds/{seed_id}")
+async def remove_seed(seed_id: str):
+    """Delete an interaction seed by its unique ID."""
+    try:
+        deleted = database.delete_seed(seed_id)
+        if not deleted:
+            raise HTTPException(status_code=404, detail=f"Seed with ID '{seed_id}' not found.")
+        return {"status": "deleted", "id": seed_id}
+    except HTTPException:
+        raise
+    except Exception as exc:
+        logger.exception("Failed to delete seed: %s", exc)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to delete seed: {str(exc)}",
+        ) from exc
+
+
+@app.get("/api/seeds/export")
+async def export_seeds():
+    """Export seeds in Firestore batch collection compatible format."""
+    try:
+        records = database.export_seeds_for_firebase()
+        return {"count": len(records), "records": records}
+    except Exception as exc:
+        logger.exception("Failed to export seeds for Firebase: %s", exc)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to export seeds: {str(exc)}",
         ) from exc
 

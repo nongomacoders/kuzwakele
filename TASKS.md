@@ -93,3 +93,14 @@
   - [x] Add empty state illustration for consultation timeline
   - [x] Verify production bundle compiles cleanly (`npm run build`)
   - [x] Update `STATE.md` and `TASKS.md`
+
+## SQLite Seed Harvester & Timeline Bookmarking
+- [x] Implement SQLite Seed Harvester with Firebase-compatible schema and 1-tap timeline bookmarking
+  - [x] Create `backend/database.py` with `init_db`, `save_seed`, `get_seeds`, `delete_seed`, and `export_seeds_for_firebase`
+  - [x] Add `backend/kuzwakele.db` to `.gitignore`
+  - [x] Connect FastAPI lifespan to auto-initialize SQLite database on startup
+  - [x] Define `SaveSeedRequest` and endpoints: `POST /api/seeds`, `GET /api/seeds`, `DELETE /api/seeds/{id}`, `GET /api/seeds/export`
+  - [x] Add automated test cases in `backend/test_server.py` verifying seed save, retrieval, Firestore export, and deletion
+  - [x] Integrate 1-tap bookmarking in `LiveConsult.jsx` timeline cards with target selector (`both`, `scenario`, `drill`) and state transitions (`Save Seed` -> `Saved Seed`)
+  - [x] Add session harvested seeds counter badge in Timeline Header
+  - [x] Verify frontend build (`npm run build`) and backend tests (`python backend/test_server.py`) pass cleanly

@@ -81,4 +81,18 @@
   - **Interactive Controls**: One-tap suggested steer chips, sticky bottom response input bar, and scenario restart reset.
 - **Build Verification**: `npm run build` compiled cleanly (2,164 modules, service worker precache generated).
 
-
+## SQLite Seed Harvester & Timeline Bookmarking
+- **Status**: Active & Verified (Firebase / Firestore Compatible)
+- **Database Module**: `backend/database.py` using standard library `sqlite3`
+- **Database File**: `backend/kuzwakele.db` (git-ignored)
+- **Table Schema**: `interaction_seeds` (`id`, `session_id`, `created_at`, `intake_summary`, `turn_number`, `doctor_isizulu`, `doctor_english`, `patient_isizulu`, `patient_english`, `cultural_note`, `steer_context`, `tags`, `distill_target`, `sync_status`, `firebase_id`, `raw_turn_payload`)
+- **API Endpoints**:
+  - `POST /api/seeds`: Saves interaction seed, generates UUID and ISO-8601 UTC timestamp.
+  - `GET /api/seeds`: Lists saved seeds sorted by `created_at DESC` with optional `sync_status` filter.
+  - `DELETE /api/seeds/{seed_id}`: Deletes a seed record.
+  - `GET /api/seeds/export`: Formats seeds into Firestore batch collection document format (`collection: "interaction_seeds"`, `data: {...}`).
+- **Frontend Integration**:
+  - `sessionId`: Session UUID generated when starting or resetting a case.
+  - 1-tap `[ Save Seed ]` bookmarking button on each history turn card with intent selector (`both`, `scenario`, `drill`).
+  - Instant transition to `[ ✓ Saved Seed ]` on save completion.
+  - Live session harvested count badge in Timeline Header.

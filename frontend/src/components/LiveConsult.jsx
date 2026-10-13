@@ -18,7 +18,9 @@ import {
   Zap,
   Clock,
   Timer,
-  Trash2
+  Trash2,
+  Bookmark,
+  BookmarkCheck
 } from 'lucide-react';
 
 const PRESET_EXAMPLES = [
@@ -103,6 +105,12 @@ const formatLatency = (ms) => {
 export default function LiveConsult() {
   const [inputText, setInputText] = useState('');
   const [caseSummary, setCaseSummary] = useState('');
+  const [sessionId, setSessionId] = useState(() =>
+    typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `session-${Date.now()}`
+  );
+  const [savedSeedIds, setSavedSeedIds] = useState(new Set());
+  const [savingSeedId, setSavingSeedId] = useState(null);
+  const [turnTargetIntent, setTurnTargetIntent] = useState({});
   const [loading, setLoading] = useState(false);
   const [isSteering, setIsSteering] = useState(false);
   const [elapsedWaitSec, setElapsedWaitSec] = useState('0.0');
@@ -148,6 +156,9 @@ export default function LiveConsult() {
     setCurrentQuestions([]);
     setHistory([]);
     setCaseSummary(inputText.trim());
+    setSessionId(typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `session-${Date.now()}`);
+    setSavedSeedIds(new Set());
+    setTurnTargetIntent({});
 
     const t0 = performance.now();
 
@@ -206,6 +217,8 @@ export default function LiveConsult() {
         doctorSubtext: doctorTurn.english,
         patientText: patientTurn.isizulu,
         patientSubtext: patientTurn.english,
+        culturalNote: doctorTurn.cultural_note || '',
+        steerContext: '',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         latencyMs: lastLatencyMs || 1050,
         latencyFormatted: formatLatency(lastLatencyMs || 1050)
@@ -219,6 +232,8 @@ export default function LiveConsult() {
         doctorSubtext: 'Clinician directed consultation inquiry',
         patientText: 'Pending response',
         patientSubtext: '',
+        culturalNote: '',
+        steerContext: customInstruction,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         latencyMs: lastLatencyMs || 1050,
         latencyFormatted: formatLatency(lastLatencyMs || 1050)
@@ -277,6 +292,50 @@ export default function LiveConsult() {
     }
   };
 
+  const handleSaveSeed = async (turn, target = 'both') => {
+    if (savingSeedId || savedSeedIds.has(turn.id)) return;
+    setSavingSeedId(turn.id);
+    try {
+      const payload = {
+        session_id: sessionId,
+        intake_summary: caseSummary || inputText,
+        turn_number: turn.turnNumber || 1,
+        doctor_isizulu: turn.doctorText,
+        doctor_english: turn.doctorSubtext || null,
+        patient_isizulu: turn.patientText,
+        patient_english: turn.patientSubtext || null,
+        cultural_note: turn.culturalNote || null,
+        steer_context: turn.steerContext || null,
+        tags: ['live_consult', 'kzn_rural', ...(caseSummary ? ['active_case'] : [])],
+        distill_target: target,
+        raw_turn_payload: {
+          doctorText: turn.doctorText,
+          doctorSubtext: turn.doctorSubtext,
+          patientText: turn.patientText,
+          patientSubtext: turn.patientSubtext,
+          timestamp: turn.timestamp,
+          latencyFormatted: turn.latencyFormatted
+        }
+      };
+
+      const res = await fetch('/api/seeds', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to save interaction seed');
+      }
+
+      setSavedSeedIds((prev) => new Set(prev).add(turn.id));
+    } catch (err) {
+      console.error('Failed to save interaction seed:', err);
+    } finally {
+      setSavingSeedId(null);
+    }
+  };
+
   const handleResetConsult = () => {
     setInputText('');
     setCaseSummary('');
@@ -286,6 +345,9 @@ export default function LiveConsult() {
     setSteerInput('');
     setError(null);
     setLastLatencyMs(null);
+    setSessionId(typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `session-${Date.now()}`);
+    setSavedSeedIds(new Set());
+    setTurnTargetIntent({});
   };
 
   const handlePresetClick = (preset) => {
@@ -592,17 +654,26 @@ export default function LiveConsult() {
                 </div>
               </div>
 
-              {history.length > 0 && (
-                <button
-                  type="button"
-                  onClick={handleResetConsult}
-                  className="text-xs px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-950 hover:bg-slate-800 text-slate-400 hover:text-slate-200 flex items-center gap-1.5 transition-colors font-medium"
-                  title="Clear history and start fresh case"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                  <span>Clear</span>
-                </button>
-              )}
+              <div className="flex items-center gap-2">
+                {savedSeedIds.size > 0 && (
+                  <span className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-emerald-950/80 text-emerald-300 border border-emerald-800/80 flex items-center gap-1.5 shadow-sm">
+                    <BookmarkCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>{savedSeedIds.size} Harvested</span>
+                  </span>
+                )}
+
+                {history.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleResetConsult}
+                    className="text-xs px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-950 hover:bg-slate-800 text-slate-400 hover:text-slate-200 flex items-center gap-1.5 transition-colors font-medium"
+                    title="Clear history and start fresh case"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Clear</span>
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* History Cards or Empty Placeholder */}
@@ -675,6 +746,49 @@ export default function LiveConsult() {
                           <p className="text-slate-400 text-[11px]">→ {turn.patientSubtext}</p>
                         )}
                       </div>
+                    </div>
+
+                    {/* Interaction Seed Harvester Bar */}
+                    <div className="pt-2 border-t border-slate-800/60 flex items-center justify-between gap-2 text-xs">
+                      <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
+                        <span className="hidden sm:inline font-medium text-slate-400">Target:</span>
+                        <select
+                          value={turnTargetIntent[turn.id] || 'both'}
+                          onChange={(e) => setTurnTargetIntent({ ...turnTargetIntent, [turn.id]: e.target.value })}
+                          className="bg-slate-950 border border-slate-800 hover:border-slate-700 rounded-lg px-2 py-0.5 text-slate-300 text-[11px] outline-none font-medium transition-colors cursor-pointer"
+                        >
+                          <option value="both">Both (Scenario & Drill)</option>
+                          <option value="scenario">Scenario Only</option>
+                          <option value="drill">Drill Only</option>
+                        </select>
+                      </div>
+
+                      {savedSeedIds.has(turn.id) ? (
+                        <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-950/80 border border-emerald-700/80 text-emerald-300 font-bold text-[11px] transition-all">
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Saved Seed</span>
+                        </span>
+                      ) : (
+                        <button
+                          type="button"
+                          disabled={savingSeedId === turn.id}
+                          onClick={() => handleSaveSeed(turn, turnTargetIntent[turn.id] || 'both')}
+                          className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-950 hover:bg-emerald-950/60 border border-slate-800 hover:border-emerald-600/80 text-slate-300 hover:text-emerald-300 font-medium text-[11px] transition-all group disabled:opacity-50"
+                          title="Bookmark this exchange as an interaction seed in SQLite"
+                        >
+                          {savingSeedId === turn.id ? (
+                            <>
+                              <Loader2 className="w-3 h-3 animate-spin text-emerald-400" />
+                              <span>Saving...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Bookmark className="w-3 h-3 text-slate-400 group-hover:text-emerald-400 transition-colors" />
+                              <span>Save Seed</span>
+                            </>
+                          )}
+                        </button>
+                      )}
                     </div>
                   </div>
                 );

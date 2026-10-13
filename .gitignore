@@ -10,3 +10,5 @@ __pycache__/
 !data/firestore-export.json
 node_modules/
 dist/
+*.db
+backend/*.db

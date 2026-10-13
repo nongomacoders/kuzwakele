@@ -160,12 +160,73 @@ def test_scenario_turn_endpoint():
     print("[PASS] Scenario turn endpoint verified.")
 
 
+def test_seeds_endpoints():
+    print("\n--- Testing Interaction Seeds SQLite Endpoints ---")
+    seed_payload = {
+        "session_id": "test-session-456",
+        "intake_summary": "2yo boy with acute diarrhoea and vomiting for 24h",
+        "turn_number": 2,
+        "doctor_isizulu": "Ngicela ukubuza mama, mancane kangakanani amanzi aphumayo?",
+        "doctor_english": "Please tell me mother, how much watery stool is passing?",
+        "patient_isizulu": "Uyakhipha kakhulu dokotela, amanabukeni omile.",
+        "patient_english": "He is passing a lot doctor, and the nappies are dry.",
+        "cultural_note": "Gentle polite softening using 'Ngicela ukubuza'.",
+        "steer_context": "Hydration status inquiry",
+        "tags": ["paediatrics", "dehydration", "kzn_rural"],
+        "distill_target": "both",
+        "raw_turn_payload": {"test": True, "turn": 2}
+    }
+
+    # 1. POST /api/seeds
+    post_res = client.post("/api/seeds", json=seed_payload)
+    print(f"POST /api/seeds Status: {post_res.status_code}")
+    assert post_res.status_code == 200, f"Expected 200, got {post_res.status_code}"
+    post_data = post_res.json()
+    assert post_data.get("status") == "saved", "Expected status 'saved'"
+    saved_id = post_data.get("id")
+    assert saved_id and len(saved_id) >= 10, "Expected valid seed ID"
+    print(f"Saved Seed ID: {saved_id}")
+
+    # 2. GET /api/seeds
+    get_res = client.get("/api/seeds")
+    print(f"GET /api/seeds Status: {get_res.status_code}")
+    assert get_res.status_code == 200, f"Expected 200, got {get_res.status_code}"
+    get_data = get_res.json()
+    assert "count" in get_data and get_data["count"] >= 1, "Expected count >= 1"
+    assert "seeds" in get_data and isinstance(get_data["seeds"], list)
+    matching = [s for s in get_data["seeds"] if s["id"] == saved_id]
+    assert len(matching) == 1, "Expected to find saved seed in seeds list"
+    assert matching[0]["doctor_isizulu"] == seed_payload["doctor_isizulu"]
+    print(f"Found saved seed: '{matching[0]['doctor_isizulu'][:40]}...' with tags: {matching[0]['tags']}")
+
+    # 3. GET /api/seeds/export
+    export_res = client.get("/api/seeds/export")
+    print(f"GET /api/seeds/export Status: {export_res.status_code}")
+    assert export_res.status_code == 200, f"Expected 200, got {export_res.status_code}"
+    export_data = export_res.json()
+    assert "records" in export_data and len(export_data["records"]) >= 1
+    sample_record = export_data["records"][0]
+    assert sample_record.get("collection") == "interaction_seeds", "Expected collection 'interaction_seeds'"
+    assert "data" in sample_record and "doctorIsizulu" in sample_record["data"]
+    print(f"Verified Firestore export schema for {export_data['count']} record(s)")
+
+    # 4. DELETE /api/seeds/{id}
+    del_res = client.delete(f"/api/seeds/{saved_id}")
+    print(f"DELETE /api/seeds/{saved_id} Status: {del_res.status_code}")
+    assert del_res.status_code == 200, f"Expected 200, got {del_res.status_code}"
+    del_data = del_res.json()
+    assert del_data.get("status") == "deleted"
+
+    print("[PASS] Interaction seeds SQLite & Firebase export endpoints verified.")
+
+
 if __name__ == "__main__":
     print("==================================================")
     print("Running Kuzwakele FastAPI Server Verification Tests")
     print("==================================================")
 
     test_health_endpoint()
+    test_seeds_endpoints()
     test_consult_questions_endpoint()
     test_consult_loop_with_steering()
     test_consult_translate_endpoint()
