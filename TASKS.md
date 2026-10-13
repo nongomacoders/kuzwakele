@@ -36,3 +36,13 @@
   - [x] Create `backend/test_server.py` and verify 200 OK responses
   - [x] Document server launch instructions in `ENVIRONMENT.md`
   - [x] Update `STATE.md` and `TASKS.md`
+
+## Frontend PWA & Live UI
+- [x] Scaffold Vite PWA with Tailwind CSS and build Live Co-Pilot UI
+  - [x] Scaffold Vite React app in `frontend/`
+  - [x] Install and configure Tailwind CSS, PostCSS, Autoprefixer, Lucide React, and VitePWA
+  - [x] Configure proxy for `/api` to `http://localhost:8000`
+  - [x] Build 3-tab navigation shell (`Live`, `Scenarios`, `Drills`) with header health indicator in `App.jsx`
+  - [x] Implement operational `LiveConsult.jsx` co-pilot with modes, presets, provider badge, and copy button
+  - [x] Verify production build compiles cleanly (`npm run build`)
+  - [x] Update `ENVIRONMENT.md`, `STATE.md`, and `TASKS.md`

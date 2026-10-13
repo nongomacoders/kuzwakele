@@ -3,6 +3,10 @@ __pycache__/
 *.pyc
 .env
 *.json
+!package.json
+!package-lock.json
+!frontend/package.json
+!frontend/package-lock.json
 !data/firestore-export.json
 node_modules/
 dist/

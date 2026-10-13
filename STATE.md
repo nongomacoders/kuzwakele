@@ -43,3 +43,11 @@
   - `POST /api/consult`: Clinical Co-Pilot consultation endpoint accepting `ConsultRequest` (`text`, `mode`: `questions` | `translate`) and returning `ConsultResponse` (`result`, `provider_used`, `model`).
   - **Clinical System Prompt**: `KZN_CLINICAL_SYSTEM_PROMPT` tailored for rural KwaZulu-Natal healthcare communication.
 - **Validation**: Fully verified via `backend/test_server.py` with 200 OK responses on all endpoints.
+
+## Frontend PWA & Live Interface
+- **Status**: Active & Verified
+- **Directory**: `frontend/`
+- **Stack**: Vite + React + Tailwind CSS + Lucide React + VitePWA
+- **Navigation Shell**: 3 tabs (`Live Co-Pilot`, `Scenarios`, `Drills Gym`) with header health indicator pinging `/api/health`.
+- **Live Tab (`LiveConsult.jsx`)**: Operational consultation co-pilot with `Clinical Questions` and `Express Translate` modes, KZN presets, high-contrast inputs, provider badge, and copy functionality.
+- **Build Verification**: `npm run build` compiled cleanly (1912 modules, service worker precache generated).
