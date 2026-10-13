@@ -51,15 +51,17 @@
   - `POST /api/scenario/turn`: "Beyond the Prescription" dialogue simulator advancing KZN persona interaction (Gogo MaMthethwa) and delivering coaching feedback with Widex hearing aid phonetic listening cues.
 - **Validation**: Fully verified via `backend/test_server.py` (200 OK across health, consult questions, loop steering, translation, and scenario turn endpoints).
 
-## Frontend PWA & Interactive Steering Loop
+## Frontend PWA & Desktop Split-Screen Optimization
 - **Status**: Active & Verified
 - **Directory**: `frontend/`
 - **Stack**: Vite + React + Tailwind CSS + Lucide React + VitePWA + ReactMarkdown + RemarkGfm
-- **Interactive Steering Loop**:
-  - **Clickable Patient Response Chips**: Under each clinical card, 2-3 anticipated replies (with colloquial isiZulu, English translation, and clinical meaning tags) allow the clinician to advance turns with a single tap.
-  - **Consultation History Log**: Collapsible turn-by-turn history log tracking completed doctor/patient exchanges and clinical findings.
-  - **Sticky Bottom Steering Bar**: Fixed high-contrast input at the viewport bottom with quick steering chips (e.g. wet nappies, fever duration, traditional medicine) and direct prompt input.
-  - **Utility Controls**: Reset / "New Consult" button to clear history and start fresh, alongside quick KZN Presets.
+- **Desktop Split-Screen Architecture**:
+  - **Left Pane (`lg:col-span-8`)**: Active Consultation Console with editable intake box, quick KZN presets, and high-contrast clinical question cards.
+  - **Animated Waiting State Card**: Glowing pulse card with live second-counter ticking (`⏱️ {elapsedWaitSec}s`), typing animation, and `"Waiting for Gemini (gemini-3.5-flash-lite)..."` status.
+  - **Right Pane (`lg:col-span-4`)**: Sticky Consultation History Log (`lg:sticky lg:top-6 max-h-[calc(100vh-7rem)] overflow-y-auto`) featuring clear count badge and "Clear / New Case" action.
+  - **Per-Turn Latency Badges**: History turn headers prominently display request execution metrics (`⚡ 1.2s` / `⏱️ 850ms`) alongside timestamp and turn index.
+  - **Empty State Illustration**: Elegant placeholder graphic when no turns have occurred yet.
+  - **Interactive Steering Loop**: Clickable anticipated patient reply chips and fixed bottom steering bar with rapid prompt chips.
 
 ## Scenario Dialogue Simulator (TASK-006)
 - **Status**: Active & Verified
@@ -74,4 +76,5 @@
     - **Hearing Aid & Phonetic Listening Cue (Widex Tuning)**: Explains elided/dropped vowels (e.g. *uphuz'amanzi*, *baphil'ekhaya*), cadence, and pitch changes for auditory comprehension.
   - **Interactive Controls**: One-tap suggested steer chips, sticky bottom response input bar, and scenario restart reset.
 - **Build Verification**: `npm run build` compiled cleanly (2,164 modules, service worker precache generated).
+
 

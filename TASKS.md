@@ -84,5 +84,12 @@
     - [x] Conversational Coach Card with Natural Phrasing Alternative, Cultural & Tone Nuance, and Widex hearing aid phonetic listening cues
     - [x] Suggested Steer Chips, bottom text input bar, and Restart Scenario reset
   - [x] Verify frontend build via `npm run build`
+## Desktop Split-Screen & Latency Tracking Optimization
+- [x] Optimize the Live tab for desktop with a split-screen layout, animated waiting state, and per-turn request latency badges
+  - [x] Measure latency using `time.perf_counter()` on backend (`execution_time_ms`) and `performance.now()` in frontend
+  - [x] Implement live ticking waiting state (`Timer` and animated dots) while awaiting Vertex AI (`gemini-3.5-flash-lite`)
+  - [x] Redesign layout to desktop split-screen grid (`lg:col-span-8` active console, `lg:col-span-4` sticky history)
+  - [x] Enhance history cards with turn latency badges (`⚡ 1.2s`), timestamp, and clean dividers
+  - [x] Add empty state illustration for consultation timeline
+  - [x] Verify production bundle compiles cleanly (`npm run build`)
   - [x] Update `STATE.md` and `TASKS.md`
-

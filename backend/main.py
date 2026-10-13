@@ -8,6 +8,7 @@ with clickable anticipated patient replies and dynamic steering.
 import json
 import logging
 import re
+import time
 from typing import Any, Dict, List, Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -58,6 +59,7 @@ class ConsultResponse(BaseModel):
     result: Any
     provider_used: str
     model: str
+    execution_time_ms: Optional[float] = None
 
 
 class ChatMessage(BaseModel):
@@ -402,11 +404,13 @@ async def consult(request: ConsultRequest):
         prompt_parts.append("Each question MUST have 'isizulu', 'english', 'cultural_note', and 2 to 3 'anticipated_patient_replies'.")
         prompt = "\n".join(prompt_parts)
 
+    t_start = time.perf_counter()
     try:
         resp = await ai_client.generate_response(
             prompt=prompt,
             system_instruction=KZN_CLINICAL_SYSTEM_PROMPT,
         )
+        elapsed_ms = round((time.perf_counter() - t_start) * 1000, 1)
 
         raw_output = resp["text"]
 
@@ -416,12 +420,14 @@ async def consult(request: ConsultRequest):
                 result=parsed_result,
                 provider_used=resp["provider_used"],
                 model=resp["model"],
+                execution_time_ms=elapsed_ms,
             )
 
         return ConsultResponse(
             result=sanitize_hallucinated_scripts(raw_output),
             provider_used=resp["provider_used"],
             model=resp["model"],
+            execution_time_ms=elapsed_ms,
         )
     except Exception as exc:
         logger.exception("AI generation error: %s", exc)
