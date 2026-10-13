@@ -8,3 +8,13 @@
   - [x] Document Windows execution rules in `ENVIRONMENT.md`
   - [x] Configure `.gitignore`
   - [x] Update `STATE.md` and `TASKS.md`
+
+## Backend Configuration
+- [x] Configure backend secrets loading from external credentials store
+  - [x] Create `backend/` package and `backend/config.py`
+  - [x] Load external `secrets.env` via `python-dotenv`
+  - [x] Read and export `OPENROUTER_API_KEY`, `GOOGLE_APPLICATION_CREDENTIALS`, and `DEFAULT_MODEL`
+  - [x] Ensure `os.environ["GOOGLE_APPLICATION_CREDENTIALS"]` is explicitly set
+  - [x] Configure fallback AI provider resolution
+  - [x] Update `ENVIRONMENT.md` with credentials location and security rules
+  - [x] Update `STATE.md`
