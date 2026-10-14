@@ -31,6 +31,11 @@ const TABLE_THEMES = {
     containerBorder: 'border-rose-900/50',
     iconBox: 'bg-rose-950/80 border border-rose-800/80 text-rose-400',
     badge: 'bg-rose-950 text-rose-300 border border-rose-800/60'
+  },
+  sky: {
+    containerBorder: 'border-sky-900/50',
+    iconBox: 'bg-sky-950/80 border border-sky-800/80 text-sky-400',
+    badge: 'bg-sky-950 text-sky-300 border border-sky-800/60'
   }
 };
 

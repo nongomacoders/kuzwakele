@@ -90,6 +90,19 @@ const DRAWER_THEMES = {
     solutionLabel: 'text-rose-400',
     solutionText: 'text-rose-200',
     tokenChip: 'text-rose-300 bg-rose-950/80 border border-rose-900/60'
+  },
+  sky: {
+    container: 'bg-gradient-to-br from-sky-950/40 via-slate-900/90 to-slate-900 border border-sky-800/60',
+    headerBorder: 'border-sky-900/40',
+    iconBox: 'bg-sky-900/60 border border-sky-700/60 text-sky-300',
+    badge: 'bg-sky-950 text-sky-300 border border-sky-800/80',
+    toggleBtn: 'text-sky-300 hover:text-white bg-sky-950 border border-sky-800',
+    challengeBadge: 'text-sky-400 bg-sky-950/80 border border-sky-900/60',
+    revealBtn: 'bg-sky-950 text-sky-300 hover:bg-sky-900 border border-sky-800/80',
+    solutionCard: 'border-sky-900/50',
+    solutionLabel: 'text-sky-400',
+    solutionText: 'text-sky-200',
+    tokenChip: 'text-sky-300 bg-sky-950/80 border border-sky-900/60'
   }
 };
 

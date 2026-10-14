@@ -1,11 +1,12 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
   CONJUNCTION_PRACTICE_CHECKPOINTS,
   ASPECT_INFIX_CHECKPOINTS,
   VERBAL_EXTENSIONS_CHECKPOINTS,
-  COPULATIVE_LOCATIVE_CHECKPOINTS
+  COPULATIVE_LOCATIVE_CHECKPOINTS,
+  DEFICIENT_VERBS_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -13,7 +14,8 @@ import {
   ConjunctionGovernanceTable,
   AspectInfixTable,
   VerbalExtensionsTable,
-  CopulativesLocativesTable
+  CopulativesLocativesTable,
+  DeficientVerbsTable
 } from './GrammarSectionTables';
 
 export const CATEGORY_THEMES = {
@@ -64,6 +66,14 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-rose-950/60 border-rose-800/50 text-rose-200',
     iconBg: 'bg-rose-950/80 border-rose-800/80 text-rose-400',
     codeBadge: 'bg-rose-950 text-rose-300 border-rose-800/60'
+  },
+  'deficient-verbs': {
+    badge: 'bg-sky-950/80 text-sky-300 border-sky-800/80',
+    border: 'border-sky-900/50 hover:border-sky-600/70',
+    cardBg: 'from-sky-950/30 to-slate-900/90',
+    formulaBg: 'bg-sky-950/60 border-sky-800/50 text-sky-200',
+    iconBg: 'bg-sky-950/80 border-sky-800/80 text-sky-400',
+    codeBadge: 'bg-sky-950 text-sky-300 border-sky-800/60'
   }
 };
 
@@ -154,5 +164,18 @@ export const SECTION_CONFIGS = {
     checkpoints: COPULATIVE_LOCATIVE_CHECKPOINTS,
     drillCategory: 'copulatives',
     drillTitle: 'Copulatives & Locatives'
+  },
+  'deficient-verbs': {
+    theme: 'sky',
+    tableIcon: Zap,
+    tableTitle: 'Auxiliary Verbs & Mood Chaining Matrix',
+    tableSubtitle: 'Direct reference comparing defective auxiliary stems, core meanings, governed moods, and clinical syntax.',
+    tableBadge: '6 Core Stems',
+    TableComponent: DeficientVerbsTable,
+    practiceTitle: 'Interactive Checkpoint: Clinical Auxiliary & Mood Chaining Self-Check',
+    practiceSubtitle: 'Practice near-fall elicitation (-cishe), adherence warnings (-phinde), and hortative prompting (-vele).',
+    checkpoints: DEFICIENT_VERBS_CHECKPOINTS,
+    drillCategory: 'deficient-verbs',
+    drillTitle: 'Deficient Verbs Practice'
   }
 };

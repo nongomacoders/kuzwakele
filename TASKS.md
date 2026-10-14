@@ -281,3 +281,28 @@
     - [x] Verified Section 6 (Copulatives & Locatives) table, 5 rules, and practice reveal
     - [x] Flagged challenges from both sections and confirmed presence in Drills Gym
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+## Deficient / Auxiliary Verbs (Izenzo Ezisizayo - Section 7)
+- [x] Implement Section 7 ("Deficient / Auxiliary Verbs") covering auxiliary stems, mood chaining, reference matrix, and bedside practice checkpoints
+  - [x] Deepen Grammar Data in rontend/src/data/grammarData.js:
+    - [x] Register Section 7 deficient-verbs ("Deficient / Auxiliary Verbs", 5 Rules, Zap icon, sky theme)
+    - [x] Append 5 clinical-grade rules: Casual Occurrence & Immediacy (-vele), Near-Misses & Imminent Events (-cishe), Recurrence & Adherence Warnings (-phinde), Inevitable Choice & Resignation (-sale), and Elapsed Time & Chronicity (-kade)
+    - [x] Export DEFICIENT_VERBS_TABLE mapping 6 stems (-vele, -cishe, -phinde, -sale, -kade, -simze) with governed moods and clinical utility
+    - [x] Export DEFICIENT_VERBS_CHECKPOINTS with 3 interactive challenges (near-fall with -cishe, hortative prompt with -vele, adherence warning with -phinde)
+  - [x] Create Table Renderer in rontend/src/components/grammar/GrammarSectionTables.jsx:
+    - [x] Export DeficientVerbsTable mapping auxiliary stem, meaning, governed mood, formula, clinical application, and bedside example
+  - [x] Configure Subcomponents & Themes:
+    - [x] Add sky theme palette in GrammarPracticeDrawer.jsx and GrammarMatrixTable.jsx
+    - [x] Register theme and section config in grammarSectionConfigs.js
+    - [x] Bind Zap icon in GrammarDirectoryView.jsx (dynamic badge shows 7 Sections • 35 Rules)
+    - [x] Sync DEFICIENT_VERBS_CHECKPOINTS in GrammarReference.jsx efreshFlaggedState()
+  - [x] Run production verification:
+    - [x] 
+pm run build in rontend/ (0 compilation errors, clean PWA bundle)
+    - [x] ackend/test_server.py (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified Directory displays 7 section cards
+    - [x] Verified Section 7 (Deficient Verbs) matrix table, 5 rules, and practice drawer
+    - [x] Revealed Challenge #2 (*Ake uvele ulale embhedeni*) and flagged for drills
+    - [x] Confirmed presence in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (irebase deploy --only hosting)
