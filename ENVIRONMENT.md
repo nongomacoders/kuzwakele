@@ -32,3 +32,17 @@ npm run dev
 ## Windows-Specific Execution Rules
 1. **Direct Binary Invocation**: NEVER use Linux commands like `source venv/bin/activate`. Always call `.\venv\Scripts\python.exe` directly (or `.\venv\Scripts\pip.exe`).
 2. **PowerShell ExecutionPolicy Restrictions**: Do not run `.ps1` scripts (including `activate.ps1`) due to PowerShell ExecutionPolicy restrictions.
+
+## Firebase Hosting Deployment Rule
+Whenever coding or UI updates are completed:
+1. Build the frontend production bundle:
+   ```powershell
+   cd frontend
+   npm run build
+   ```
+2. Deploy to Firebase Hosting:
+   ```powershell
+   firebase deploy --only hosting
+   ```
+- **Live Hosting URL**: `https://kuzwakele-33067.web.app`
+- **Firebase Project**: `kuzwakele-33067`
