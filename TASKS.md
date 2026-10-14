@@ -165,3 +165,28 @@
     - [x] Render Interactive Checkpoint Bedside Self-Test with toggleable answer reveal and 1-tap `[ Flag for Drills ]` bookmarking
   - [x] Verify clean production build (`npm run build`)
   - [x] Verify in mobile browser subagent: 5 rules rendered, answers revealed, drill flagged and verified in Drills Gym
+
+## Intensive Past Tenses Expansion & Interactive History-Taking Checkpoints
+- [x] Intensively expand "Past Continuous & Remote Past" in Grammar Reference with 5 clinical-grade rules, compound concord matrix, and interactive diagnostic self-checks
+  - [x] Update `frontend/src/data/grammarData.js`:
+    - [x] Rule 1: Immediate Past Continuous / Imperfect (`past-immediate-continuous`, `be-` + concords `bengi-`, `ubu-`, `ube-`, `bebe-`)
+    - [x] Rule 2: Remote Past Simple / Deep Past (`past-remote-simple`, fused `-a-` concords `nga-`, `wa-`, `sa-`, `ba-`, `kwa-`)
+    - [x] Rule 3: Remote Past Continuous / Habitual (`past-remote-continuous`, `ngangi-`, `wawu-`, `waye-`, `sasi-`, `babe-`)
+    - [x] Rule 4: Past Negation Systems (`past-negation-systems`, completed `-anga` vs continuous `bengi-nga-...-i`)
+    - [x] Rule 5: Clinical History-Taking & Onset Formulas (`past-clinical-history-stems`, onset timeline formulas)
+    - [x] Export `PAST_CONCORD_MATRIX` comparing 7 subject persons/classes across the 3 past paradigms
+    - [x] Export `PAST_PRACTICE_CHECKPOINTS` with 3 clinical challenges, target concepts, answer reveals, rule tips, and breakdown tokens
+    - [x] Update `past-tenses` section in `GRAMMAR_SECTIONS` to `badge: '5 Rules'`, `ruleCount: 5`
+  - [x] Enhance `frontend/src/components/GrammarReference.jsx`:
+    - [x] Render collapsible Past Concord & Auxiliary Reference Matrix table comparing 7 core forms with styled badges
+    - [x] Render Interactive Checkpoint: History-Taking Clinical Self-Check with answer reveal toggles and 1-tap `[ Flag for Drills ]` bookmarking
+    - [x] Sync past checkpoints in `refreshFlaggedState()` for cross-tab reactivity with Drills Gym
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean PWA bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified 5 rules, pitfall callouts, and formulas
+    - [x] Verified concord matrix table
+    - [x] Tested answer reveal on Challenge #1
+    - [x] Flagged Challenge #1 and confirmed in Drills Gym
+

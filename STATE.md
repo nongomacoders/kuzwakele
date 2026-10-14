@@ -120,10 +120,14 @@
   - **Search Results View**:
     - Automatically displays matching rules across all sections whenever search query is non-empty, with one-tap `[ Clear Search ]` button.
 - **Targeted Grammatical Modules**:
-  1. **Past Continuous & Remote Past (`past-tenses`)**:
-     - *Immediate Past Continuous*: `be-` + concord (`bengi-`, `ubu-`, `ube-`, `bebe-`) for actions ongoing earlier today or yesterday.
-     - *Remote Past Simple*: Elided long `-a-` concords (`nga-`, `wa-`, `sa-`, `ba-`, `kwa-`) for events days/months/years ago.
-     - *Remote Past Continuous*: Remote continuous concords (`ngangi-`, `wawu-`, `waye-`, `sasi-`, `babe-`) for chronic or habitual distant actions.
+  1. **Past Continuous & Remote Past (`past-tenses` - Comprehensive 5-Rule Curriculum & Concord Matrix)**:
+     - *Rule 1: Immediate Past Continuous / Imperfect (`past-immediate-continuous`)*: `be-` + concord (`bengi-`, `ubu-`, `ube-`, `sibe-`, `bebe-`, `beku-`) for actions ongoing earlier today or yesterday. Contrast of Class 1 *ube-* with 2nd person *ubu-*.
+     - *Rule 2: Remote Past Simple / Deep Past (`past-remote-simple`)*: Elided long `-a-` concords (`nga-`, `wa-`, `sa-`, `ba-`, `kwa-`) for events days, months, or years ago. Pitfall warning against confusing remote *nga-* with present *ngiya-*.
+     - *Rule 3: Remote Past Continuous / Habitual (`past-remote-continuous`)*: Remote continuous concords (`ngangi-`, `wawu-`, `waye-`, `sasi-`, `babe-`, `kwaku-`) for chronic history, childhood habits, and occupational exposures (e.g. *wawubhema*).
+     - *Rule 4: Past Negation Systems (`past-negation-systems`)*: Dual negation architecture: completed past negation with suffix `-anga` (*a-ngi-phuz-anga* = *angiphuzanga*) versus ongoing continuous negation with mid-verb participial particle `-nga-...-i` (*bengi-nga-z-i* = *bengingazi*).
+     - *Rule 5: Clinical History-Taking & Onset Formulas (`past-clinical-history-stems`)*: Core clinical onset patterns (*Kuqale nini lokhu?*, *Kwenzeka nini lokhu okokuqala?*, *Ubuhlungu buqale ngenkathi wenzani?*, *Wawunayo le nkinga ngaphambili?*).
+     - *Compound Past Concord Matrix Table*: Responsive quick-reference grid comparing 7 core person and noun classes (`Mina`, `Wena`, `Yena`, `Thina`, `Nina`, `Bona`, `Khona`) across Immediate Continuous, Remote Simple, and Remote Continuous.
+     - *Interactive Checkpoint History-Taking Self-Check*: 3 clinical challenges (walking to clinic when pain started, smoking history, skipped medication yesterday) with toggleable answer reveals, linguistic keys, and 1-tap `[ Flag for Drills ]` bookmarking.
   2. **The Stative Aspect (`stative` - Comprehensive 5-Rule Curriculum)**:
      - *Rule 1: Process vs. Present Resulting State (`stative-core-concept`)*: Root verbs of process where past suffix `-ile` / `-e` denotes present bodily/mental reality (*-vuvukile*, *-khathele*, *-lambile*, *-lele*, *-mile*).
      - *Rule 2: The Contraction Rule (`stative-contraction-rule`)*: Drop from full `-ile` to contracted `-e` when directly followed by an adverb, complement, or locative (*Ngilambe kakhulu* vs *Ngilambile*).
@@ -138,7 +142,9 @@
      - *Progressive Infix `-sa-`*: "still" / continuing (e.g. *usaphila*, *usabuzwa*).
      - *Exclusive Prefix `se-` / `-se-`*: "now" / "already" (e.g. *sengiphuzile*, *sekuyisikhathi*).
      - *Negative Incomplete Infix `-ka-`*: "not yet" (e.g. *angikawatholi*, *akakadli*).
-- **Stative Interactive Tools**:
+- **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **Past Concord Matrix**: Responsive reference grid comparing immediate continuous, remote simple, and remote continuous across 7 subject persons/classes with clinical examples and usage notes.
+  - **History-Taking Self-Check**: 3 bedside scenarios with instant answer reveal and 1-tap `[ Flag for Drills ]` bookmarking into `localStorage` (`kuzwakele_flagged_drills`).
   - **High-Yield Stative Mutation Reference Grid**: Dedicated responsive table comparing 10 high-yield roots, process meanings, present positive statives, present negative statives, and clinical applications.
   - **Interactive Checkpoints Bedside Self-Test**: 3 clinical self-check scenarios (tired gogo, alert baby, unswollen feet) with toggleable answer reveal, concord breakdowns, linguistic rule tips, and 1-tap `[ Flag for Drills ]` bookmarking.
 - **Core User Features**:
