@@ -75,16 +75,16 @@
 - [x] Implement text-only mobile scenario stepper with grammar breakdown and 1-tap drill flagging
   - [x] Create `frontend/src/utils/drillsStorage.js` with `localStorage` persistence and `drills-updated` reactive event dispatching
   - [x] Create `frontend/src/data/scenariosData.js` with pre-filled community scenarios:
-    - [x] Scenario 1: Gogo MaMthethwa — Ukubonisana (Life Counseling)
-    - [x] Scenario 2: The Roadside Greeting — Ukubingelela & News
+    - [x] Scenario 1: Gogo MaMthethwa â Ukubonisana (Life Counseling)
+    - [x] Scenario 2: The Roadside Greeting â Ukubingelela & News
     - [x] Detailed phonetic text cues and multi-morpheme grammatical breakdowns on all patient turns and doctor options
   - [x] Redesign `frontend/src/components/ScenariosView.jsx` as a mobile-first offline stepper:
     - [x] Scenario selector and step progress indicator (`Step X of Y`)
-    - [x] Dual independent toggles: `[ 🌐 English ]` and `[ 🔬 Detailed Grammar ]`
+    - [x] Dual independent toggles: `[ ð English ]` and `[ ð¬ Detailed Grammar ]`
     - [x] High-contrast patient speech bubble with phonetic cue and 1-tap `[ Flag for Drills ]` bookmark button
     - [x] Collapsible/expandable morpheme grammar breakdown cards
-    - [x] Selectable clinician phrasing options with bedside nuance and dedicated `[ 🔖 Drill ]` flagging
-    - [x] Fixed bottom navigation bar with thumb-accessible `[ ‹ Back ]` and `[ Next Step › ]` / `[ Restart Scenario ]`
+    - [x] Selectable clinician phrasing options with bedside nuance and dedicated `[ ð Drill ]` flagging
+    - [x] Fixed bottom navigation bar with thumb-accessible `[ â¹ Back ]` and `[ Next Step âº ]` / `[ Restart Scenario ]`
   - [x] Connect `frontend/src/components/DrillsGym.jsx`:
     - [x] Primary "Review List" section reactively displaying flagged scenario sentences from `localStorage`
     - [x] Speaker filters (`All`, `Patient`, `Doctor`), translation reveal toggle, complete grammar panel, and remove button
@@ -94,7 +94,7 @@
   - [x] Measure latency using `time.perf_counter()` on backend (`execution_time_ms`) and `performance.now()` in frontend
   - [x] Implement live ticking waiting state (`Timer` and animated dots) while awaiting Vertex AI (`gemini-3.5-flash-lite`)
   - [x] Redesign layout to desktop split-screen grid (`lg:col-span-8` active console, `lg:col-span-4` sticky history)
-  - [x] Enhance history cards with turn latency badges (`⚡ 1.2s`), timestamp, and clean dividers
+  - [x] Enhance history cards with turn latency badges (`â¡ 1.2s`), timestamp, and clean dividers
   - [x] Add empty state illustration for consultation timeline
   - [x] Verify production bundle compiles cleanly (`npm run build`)
   - [x] Update `STATE.md` and `TASKS.md`
@@ -144,7 +144,7 @@
   - [x] Refactor `frontend/src/components/GrammarReference.jsx`:
     - [x] State architecture with `selectedCategory === null` (Directory Hub) and `searchQuery`
     - [x] Level 1 Directory Index Hub displaying 4 section cards with icons, badges, key concepts, preview hooks, and drill-down links
-    - [x] Level 2 Section Detail View with `[ ‹ All Sections ]` header navigation, active section rules, and bottom return button
+    - [x] Level 2 Section Detail View with `[ â¹ All Sections ]` header navigation, active section rules, and bottom return button
     - [x] Unified search results view searching across all sections with clear search action
   - [x] Verify production build (`npm run build`)
   - [x] End-to-end browser subagent verification on mobile viewport (380x750)
@@ -284,25 +284,47 @@
 
 ## Deficient / Auxiliary Verbs (Izenzo Ezisizayo - Section 7)
 - [x] Implement Section 7 ("Deficient / Auxiliary Verbs") covering auxiliary stems, mood chaining, reference matrix, and bedside practice checkpoints
-  - [x] Deepen Grammar Data in rontend/src/data/grammarData.js:
+  - [x] Deepen Grammar Data in frontend/src/data/grammarData.js:
     - [x] Register Section 7 deficient-verbs ("Deficient / Auxiliary Verbs", 5 Rules, Zap icon, sky theme)
     - [x] Append 5 clinical-grade rules: Casual Occurrence & Immediacy (-vele), Near-Misses & Imminent Events (-cishe), Recurrence & Adherence Warnings (-phinde), Inevitable Choice & Resignation (-sale), and Elapsed Time & Chronicity (-kade)
     - [x] Export DEFICIENT_VERBS_TABLE mapping 6 stems (-vele, -cishe, -phinde, -sale, -kade, -simze) with governed moods and clinical utility
     - [x] Export DEFICIENT_VERBS_CHECKPOINTS with 3 interactive challenges (near-fall with -cishe, hortative prompt with -vele, adherence warning with -phinde)
-  - [x] Create Table Renderer in rontend/src/components/grammar/GrammarSectionTables.jsx:
+  - [x] Create Table Renderer in frontend/src/components/grammar/GrammarSectionTables.jsx:
     - [x] Export DeficientVerbsTable mapping auxiliary stem, meaning, governed mood, formula, clinical application, and bedside example
   - [x] Configure Subcomponents & Themes:
     - [x] Add sky theme palette in GrammarPracticeDrawer.jsx and GrammarMatrixTable.jsx
     - [x] Register theme and section config in grammarSectionConfigs.js
-    - [x] Bind Zap icon in GrammarDirectoryView.jsx (dynamic badge shows 7 Sections � 35 Rules)
-    - [x] Sync DEFICIENT_VERBS_CHECKPOINTS in GrammarReference.jsx efreshFlaggedState()
+    - [x] Bind Zap icon in GrammarDirectoryView.jsx (dynamic badge shows 7 Sections  35 Rules)
+    - [x] Sync DEFICIENT_VERBS_CHECKPOINTS in GrammarReference.jsx 
+efreshFlaggedState()
   - [x] Run production verification:
     - [x] 
-pm run build in rontend/ (0 compilation errors, clean PWA bundle)
+pm run build in frontend/ (0 compilation errors, clean PWA bundle)
     - [x] ackend/test_server.py (all tests passing)
   - [x] Test end-to-end in mobile browser subagent:
     - [x] Verified Directory displays 7 section cards
     - [x] Verified Section 7 (Deficient Verbs) matrix table, 5 rules, and practice drawer
     - [x] Revealed Challenge #2 (*Ake uvele ulale embhedeni*) and flagged for drills
     - [x] Confirmed presence in Drills Gym review deck
-  - [x] Deploy to Firebase Hosting (irebase deploy --only hosting)
+  - [x] Deploy to Firebase Hosting (firebase deploy --only hosting)
+
+## Grammar Data Modularization & Aggregating Barrel Exporter
+- [x] Decompose frontend/src/data/grammarData.js into modular, category-specific data files in frontend/src/data/grammar/ and convert grammarData.js into a clean aggregating barrel exporter
+  - [x] Create directory frontend/src/data/grammar/
+  - [x] Create pastTenses.js exporting PAST_TENSES_SECTION, PAST_TENSES_RULES, PAST_CONCORD_MATRIX, PAST_PRACTICE_CHECKPOINTS
+  - [x] Create stative.js exporting STATIVE_SECTION, STATIVE_RULES, STATIVE_IRREGULAR_TABLE, STATIVE_PRACTICE_CHECKPOINTS
+  - [x] Create conjunctions.js exporting CONJUNCTIONS_SECTION, CONJUNCTIONS_RULES, CONJUNCTION_GOVERNANCE_TABLE, CONJUNCTION_PRACTICE_CHECKPOINTS
+  - [x] Create aspectInfixes.js exporting ASPECT_INFIXES_SECTION, ASPECT_INFIXES_RULES, ASPECT_INFIX_MATRIX, ASPECT_INFIX_CHECKPOINTS
+  - [x] Create verbalExtensions.js exporting VERBAL_EXTENSIONS_SECTION, VERBAL_EXTENSIONS_RULES, VERBAL_EXTENSIONS_TABLE, VERBAL_EXTENSIONS_CHECKPOINTS
+  - [x] Create copulativesLocatives.js exporting COPULATIVES_LOCATIVES_SECTION, COPULATIVES_LOCATIVES_RULES, COPULATIVE_LOCATIVE_TABLE, COPULATIVE_LOCATIVE_CHECKPOINTS
+  - [x] Create deficientVerbs.js exporting DEFICIENT_VERBS_SECTION, DEFICIENT_VERBS_RULES, DEFICIENT_VERBS_TABLE, DEFICIENT_VERBS_CHECKPOINTS
+  - [x] Refactor frontend/src/data/grammarData.js into an aggregating barrel exporter (67 lines, under 80-line limit) re-exporting GRAMMAR_CATEGORIES, GRAMMAR_SECTIONS, GRAMMAR_RULES, all 7 reference matrices, and all 7 checkpoint sets with 100% backward compatibility
+  - [x] Run production verification:
+    - [x] 
+pm run build in frontend/ (0 compilation errors, clean bundle)
+    - [x] ackend/test_server.py (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified 7 sections and 35 total rules load seamlessly
+    - [x] Verified table rendering and checkpoint breakdowns across modules
+    - [x] Verified reactive drill flagging into Drills Gym
+  - [x] Deploy to Firebase Hosting (firebase deploy --only hosting)

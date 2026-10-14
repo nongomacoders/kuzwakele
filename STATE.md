@@ -185,6 +185,15 @@
   - **Interactive Checkpoints Bedside Self-Test**: 3 clinical self-check scenarios (tired gogo, alert baby, unswollen feet) with toggleable answer reveal, concord breakdowns, linguistic rule tips, and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Symptom Trajectory & Aspect Infix Matrix Table**: Responsive comparison table displaying 4 core temporal infixes (`-sa-`, `se- / -se-`, `-ka-`, `-ke-`) across positive/negative morphology and bedside diagnostic functions.
   - **Symptom Trajectory & Aspect Infix Self-Check**: 3 clinical challenges (symptom persistence vs cessation, pending lab turnaround, and prior allergic history) with answer reveals, linguistic keys, morpheme gloss chips, and 1-tap `[ Flag for Drills ]` bookmarking.
+- **Modular Data Architecture (rontend/src/data/grammar/)**:
+  - pastTenses.js: Section metadata, 5 rules, PAST_CONCORD_MATRIX, and PAST_PRACTICE_CHECKPOINTS.
+  - stative.js: Section metadata, 5 rules, STATIVE_IRREGULAR_TABLE, and STATIVE_PRACTICE_CHECKPOINTS.
+  - conjunctions.js: Section metadata, 5 rules, CONJUNCTION_GOVERNANCE_TABLE, and CONJUNCTION_PRACTICE_CHECKPOINTS.
+  - spectInfixes.js: Section metadata, 5 rules, ASPECT_INFIX_MATRIX, and ASPECT_INFIX_CHECKPOINTS.
+  - erbalExtensions.js: Section metadata, 5 rules, VERBAL_EXTENSIONS_TABLE, and VERBAL_EXTENSIONS_CHECKPOINTS.
+  - copulativesLocatives.js: Section metadata, 5 rules, COPULATIVE_LOCATIVE_TABLE, and COPULATIVE_LOCATIVE_CHECKPOINTS.
+  - deficientVerbs.js: Section metadata, 5 rules, DEFICIENT_VERBS_TABLE, and DEFICIENT_VERBS_CHECKPOINTS.
+  - grammarData.js: Clean aggregating barrel exporter (67 lines) assembling GRAMMAR_SECTIONS, GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).
