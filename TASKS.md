@@ -240,5 +240,21 @@
     - [x] Flagged Challenge #1 and confirmed in Drills Gym
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
 
+## GrammarReference Modularization & Subcomponent Architecture
+- [x] Modularize `GrammarReference.jsx` by extracting reusable subcomponents to shrink file under 250 lines without regressions
+  - [x] Create `frontend/src/components/grammar/GrammarRuleCard.jsx` (standalone rule card with formula, explanation, pitfall box, examples, breakdowns, and copy/drill actions)
+  - [x] Create `frontend/src/components/grammar/GrammarPracticeDrawer.jsx` (generic collapsible clinical challenge drawer with reveal and drill toggle)
+  - [x] Create `frontend/src/components/grammar/GrammarMatrixTable.jsx` (generic collapsible reference table container with responsive scrollbar)
+  - [x] Create `frontend/src/components/grammar/GrammarSectionTables.jsx` (specialized table content for past tenses, statives, conjunctions, and aspect infixes)
+  - [x] Create `frontend/src/components/grammar/GrammarDirectoryView.jsx` (Level 1 Section Hub directory view with 2x2 cards and search bar)
+  - [x] Create `frontend/src/components/grammar/grammarSectionConfigs.js` (presets and theme configuration)
+  - [x] Refactor `frontend/src/components/GrammarReference.jsx` (consolidated state, unified practice drill handler, shrunk to 237 lines)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean PWA bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent (Directory view, search, section navigation, matrix collapse/expand, practice reveal, drill flagging)
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+
 
 

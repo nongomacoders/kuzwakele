@@ -1,0 +1,278 @@
+import React, { useState } from 'react';
+import {
+  Target,
+  ChevronDown,
+  ChevronUp,
+  Bookmark,
+  BookmarkCheck,
+  Eye,
+  EyeOff,
+  Copy,
+  Check,
+  Lightbulb
+} from 'lucide-react';
+
+const DRAWER_THEMES = {
+  indigo: {
+    container: 'bg-gradient-to-br from-indigo-950/40 via-slate-900/90 to-slate-900 border border-indigo-800/60',
+    headerBorder: 'border-indigo-900/40',
+    iconBox: 'bg-indigo-900/60 border border-indigo-700/60 text-indigo-300',
+    badge: 'bg-indigo-950 text-indigo-300 border border-indigo-800/80',
+    toggleBtn: 'text-indigo-300 hover:text-white bg-indigo-950 border border-indigo-800',
+    challengeBadge: 'text-indigo-400 bg-indigo-950/80 border border-indigo-900/60',
+    revealBtn: 'bg-indigo-950 text-indigo-300 hover:bg-indigo-900 border border-indigo-800/80',
+    solutionCard: 'border-indigo-900/50',
+    solutionLabel: 'text-indigo-400',
+    solutionText: 'text-indigo-200',
+    tokenChip: 'text-indigo-300 bg-indigo-950/80 border border-indigo-900/60'
+  },
+  teal: {
+    container: 'bg-gradient-to-br from-teal-950/40 via-slate-900/90 to-slate-900 border border-teal-800/60',
+    headerBorder: 'border-teal-900/40',
+    iconBox: 'bg-teal-900/60 border border-teal-700/60 text-teal-300',
+    badge: 'bg-teal-950 text-teal-300 border border-teal-800/80',
+    toggleBtn: 'text-teal-300 hover:text-white bg-teal-950 border border-teal-800',
+    challengeBadge: 'text-teal-400 bg-teal-950/80 border border-teal-900/60',
+    revealBtn: 'bg-teal-950 text-teal-300 hover:bg-teal-900 border border-teal-800/80',
+    solutionCard: 'border-teal-900/50',
+    solutionLabel: 'text-teal-400',
+    solutionText: 'text-teal-200',
+    tokenChip: 'text-teal-300 bg-teal-950/80 border border-teal-900/60'
+  },
+  amber: {
+    container: 'bg-gradient-to-br from-amber-950/40 via-slate-900/90 to-slate-900 border border-amber-800/60',
+    headerBorder: 'border-amber-900/40',
+    iconBox: 'bg-amber-900/60 border border-amber-700/60 text-amber-300',
+    badge: 'bg-amber-950 text-amber-300 border border-amber-800/80',
+    toggleBtn: 'text-amber-300 hover:text-white bg-amber-950 border border-amber-800',
+    challengeBadge: 'text-amber-400 bg-amber-950/80 border border-amber-900/60',
+    revealBtn: 'bg-amber-950 text-amber-300 hover:bg-amber-900 border border-amber-800/80',
+    solutionCard: 'border-amber-900/50',
+    solutionLabel: 'text-amber-400',
+    solutionText: 'text-amber-200',
+    tokenChip: 'text-amber-300 bg-amber-950/80 border border-amber-900/60'
+  },
+  emerald: {
+    container: 'bg-gradient-to-br from-emerald-950/40 via-slate-900/90 to-slate-900 border border-emerald-800/60',
+    headerBorder: 'border-emerald-900/40',
+    iconBox: 'bg-emerald-900/60 border border-emerald-700/60 text-emerald-300',
+    badge: 'bg-emerald-950 text-emerald-300 border border-emerald-800/80',
+    toggleBtn: 'text-emerald-300 hover:text-white bg-emerald-950 border border-emerald-800',
+    challengeBadge: 'text-emerald-400 bg-emerald-950/80 border border-emerald-900/60',
+    revealBtn: 'bg-emerald-950 text-emerald-300 hover:bg-emerald-900 border border-emerald-800/80',
+    solutionCard: 'border-emerald-900/50',
+    solutionLabel: 'text-emerald-400',
+    solutionText: 'text-emerald-200',
+    tokenChip: 'text-emerald-300 bg-emerald-950/80 border border-emerald-900/60'
+  }
+};
+
+export default function GrammarPracticeDrawer({
+  title,
+  subtitle,
+  badgeText = '3 Clinical Scenarios',
+  checkpoints = [],
+  theme = 'indigo',
+  flaggedIds,
+  revealedCheckpoints = {},
+  copiedId = null,
+  onToggleReveal,
+  onToggleDrill,
+  onCopyText
+}) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  // Resolve theme object
+  const resolvedTheme = typeof theme === 'string'
+    ? (DRAWER_THEMES[theme] || DRAWER_THEMES.indigo)
+    : { ...DRAWER_THEMES.indigo, ...theme };
+
+  return (
+    <div className={`${resolvedTheme.container} rounded-2xl p-4 sm:p-6 shadow-xl space-y-4`}>
+      {/* Header */}
+      <div className={`flex items-center justify-between gap-2 border-b ${resolvedTheme.headerBorder} pb-3`}>
+        <div className="flex items-center gap-2.5">
+          <div className={`p-2.5 rounded-xl shadow-md ${resolvedTheme.iconBox}`}>
+            <Target className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-black text-slate-100 tracking-tight">
+                {title}
+              </h3>
+              {badgeText && (
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold hidden sm:inline-block ${resolvedTheme.badge}`}>
+                  {badgeText}
+                </span>
+              )}
+            </div>
+            {subtitle && (
+              <p className="text-xs text-slate-400 mt-0.5">
+                {subtitle}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className={`text-xs flex items-center gap-1 py-1 px-3 rounded-lg transition-colors font-bold ${resolvedTheme.toggleBtn}`}
+        >
+          <span>{isOpen ? 'Hide Checkpoints' : 'Start Practice'}</span>
+          {isOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+        </button>
+      </div>
+
+      {/* Checkpoints Body */}
+      {isOpen && (
+        <div className="space-y-4 pt-1 animate-fadeIn">
+          {checkpoints.map((chk) => {
+            const isRevealed = !!revealedCheckpoints[chk.id];
+            const isFlagged = flaggedIds?.has(chk.id);
+
+            return (
+              <div
+                key={chk.id}
+                className="bg-slate-950 border border-slate-800 hover:border-slate-700/80 rounded-xl p-4 space-y-3.5 shadow-md transition-all"
+              >
+                {/* Challenge Header & Drill Bookmark */}
+                <div className="flex items-center justify-between gap-2 border-b border-slate-850 pb-2.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className={`font-mono text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md border ${resolvedTheme.challengeBadge}`}>
+                      Challenge #{chk.challengeNumber}
+                    </span>
+                    <span className="text-[11px] font-bold text-slate-400">
+                      • {chk.targetConcept}
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => onToggleDrill?.(chk)}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold transition-all border ${
+                      isFlagged
+                        ? 'bg-amber-600 text-white border-amber-500 shadow-md shadow-amber-950/50'
+                        : 'bg-slate-900 text-slate-300 hover:text-amber-300 hover:bg-slate-850 border-slate-700'
+                    }`}
+                    title={isFlagged ? 'Remove from Drills Gym' : 'Save to Drills Gym for spaced repetition'}
+                  >
+                    {isFlagged ? (
+                      <>
+                        <BookmarkCheck className="w-3.5 h-3.5 text-white" />
+                        <span>Flagged</span>
+                      </>
+                    ) : (
+                      <>
+                        <Bookmark className="w-3.5 h-3.5 text-slate-400" />
+                        <span>Flag for Drills</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Target Prompt */}
+                <div>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                    Target English Meaning:
+                  </span>
+                  <p className="text-sm sm:text-base font-bold text-slate-100 mt-0.5">
+                    "{chk.prompt}"
+                  </p>
+                </div>
+
+                {/* Reveal Button */}
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => onToggleReveal?.(chk.id)}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${resolvedTheme.revealBtn}`}
+                  >
+                    {isRevealed ? (
+                      <>
+                        <EyeOff className="w-3.5 h-3.5" />
+                        <span>Hide Answer</span>
+                      </>
+                    ) : (
+                      <>
+                        <Eye className="w-3.5 h-3.5" />
+                        <span>Reveal isiZulu & Concord Breakdown</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Revealed Answer & Morpheme Breakdown */}
+                {isRevealed && (
+                  <div className="pt-2 border-t border-slate-800/80 space-y-3 animate-fadeIn">
+                    <div className={`bg-slate-900/90 border rounded-xl p-3 flex items-start justify-between gap-2 ${resolvedTheme.solutionCard}`}>
+                      <div>
+                        <span className={`text-[10px] font-bold uppercase tracking-wider block ${resolvedTheme.solutionLabel}`}>
+                          Spoken isiZulu Solution:
+                        </span>
+                        <p className={`text-base font-bold mt-0.5 ${resolvedTheme.solutionText}`}>
+                          "{chk.primaryAnswer}"
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => onCopyText?.(chk.primaryAnswer, `chk-${chk.id}`)}
+                        className="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition-colors shrink-0"
+                        title="Copy isiZulu phrase"
+                      >
+                        {copiedId === `chk-${chk.id}` ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+                    </div>
+
+                    {/* Linguistic Rule Tip Callout */}
+                    {chk.ruleTip && (
+                      <div className="bg-amber-950/20 border border-amber-800/40 rounded-xl p-3 text-xs text-amber-200/90 flex items-start gap-2.5">
+                        <Lightbulb className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                        <div>
+                          <span className="font-bold text-amber-300 block text-[11px]">
+                            Linguistic Checkpoint Key:
+                          </span>
+                          <p className="text-xs text-amber-200/90 leading-relaxed mt-0.5">
+                            {chk.ruleTip}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Breakdown Grid Tokens */}
+                    {chk.breakdown && chk.breakdown.length > 0 && (
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                          Morpheme & Gloss Analysis:
+                        </span>
+                        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                          {chk.breakdown.map((item, bIdx) => (
+                            <div
+                              key={bIdx}
+                              className="bg-slate-900 border border-slate-800 rounded-lg p-2 space-y-1 text-xs"
+                            >
+                              <span className={`font-mono font-bold text-[11px] px-1.5 py-0.5 rounded inline-block ${resolvedTheme.tokenChip}`}>
+                                {item.chunk}
+                              </span>
+                              <p className="text-[11px] text-slate-300 leading-snug">
+                                {item.gloss}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}

@@ -105,8 +105,14 @@
 ## Grammar Reference Tab & Spaced Repetition Drill Integration
 - **Status**: Active & Verified (2-Level Section Hub Architecture)
 - **Components & Data**:
-  - `frontend/src/data/grammarData.js`: Curated, linguistically deep grammar reference dataset covering 4 targeted modules with 10 detailed rules, verified clinical/community examples, and `GRAMMAR_SECTIONS` metadata.
-  - `frontend/src/components/GrammarReference.jsx`: 2-level hierarchical reference viewer with Directory Index Hub (`selectedCategory === null`), Section Detail drill-down views (`selectedCategory !== null`), global real-time search, pitfall warnings, and 1-tap drill flagging.
+  - `frontend/src/data/grammarData.js`: Curated, linguistically deep grammar reference dataset covering 4 targeted modules with 20 detailed clinical rules, verified clinical/community examples, and `GRAMMAR_SECTIONS` metadata.
+  - `frontend/src/components/GrammarReference.jsx`: Main grammar view controller (shrunk to 237 lines) managing section selection, search state, unified drill flagging, and reactive drill synchronization.
+  - `frontend/src/components/grammar/GrammarRuleCard.jsx`: Reusable rule card component rendering formula banners, structural rules, pitfall warnings, and contextual examples with morpheme breakdowns.
+  - `frontend/src/components/grammar/GrammarPracticeDrawer.jsx`: Generic collapsible clinical challenge drawer rendering question prompts, answer reveals, rule keys, and 1-tap drill bookmarks.
+  - `frontend/src/components/grammar/GrammarMatrixTable.jsx`: Reusable collapsible reference table container with responsive overflow.
+  - `frontend/src/components/grammar/GrammarSectionTables.jsx`: Specialized reference tables (`PastConcordTable`, `StativeMutationTable`, `ConjunctionGovernanceTable`, `AspectInfixTable`).
+  - `frontend/src/components/grammar/GrammarDirectoryView.jsx`: Level 1 Section Hub directory view with 2x2 cards and search bar.
+  - `frontend/src/components/grammar/grammarSectionConfigs.js`: Theme tokens and section presets mapping.
   - `frontend/src/App.jsx`: Responsive 4-tab top navigation shell (`Live`, `Scenarios`, `Drills`, `Grammar`) with tailored mobile padding (`px-2.5 sm:px-3.5`) and responsive text spans to prevent truncation on screens down to 360px.
 - **2-Level Section Hub Architecture**:
   - **Level 1: Section Hub / Directory Index**:

@@ -1,0 +1,155 @@
+import React from 'react';
+import {
+  PAST_CONCORD_MATRIX,
+  STATIVE_IRREGULAR_TABLE,
+  CONJUNCTION_GOVERNANCE_TABLE,
+  ASPECT_INFIX_MATRIX
+} from '../../data/grammarData';
+
+export function PastConcordTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3">Person / Class</th>
+          <th className="py-2.5 px-3 text-indigo-400">Immediate Cont (be-)</th>
+          <th className="py-2.5 px-3 text-purple-400">Remote Simple (-a-)</th>
+          <th className="py-2.5 px-3 text-cyan-400">Remote Cont (Habitual)</th>
+          <th className="py-2.5 px-3">Form Comparison</th>
+          <th className="py-2.5 px-3">Clinical Utility</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {PAST_CONCORD_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-mono font-bold text-indigo-300 whitespace-nowrap">{row.person}</td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-indigo-300 bg-indigo-950/80 border border-indigo-900/60 px-2 py-0.5 rounded">
+                {row.immediateCont}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-purple-300 bg-purple-950/80 border border-purple-900/60 px-2 py-0.5 rounded">
+                {row.remoteSimple}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-cyan-300 bg-cyan-950/80 border border-cyan-900/60 px-2 py-0.5 rounded">
+                {row.remoteCont}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.example}</td>
+            <td className="py-2.5 px-3 text-slate-400 whitespace-nowrap text-[11px]">{row.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function StativeMutationTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3">Root Verb</th>
+          <th className="py-2.5 px-3">Process Meaning</th>
+          <th className="py-2.5 px-3 text-emerald-400">Present (+) Stative</th>
+          <th className="py-2.5 px-3 text-rose-400">Present (-) Stative</th>
+          <th className="py-2.5 px-3">Mutation Pattern</th>
+          <th className="py-2.5 px-3">Clinical Application</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {STATIVE_IRREGULAR_TABLE.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-mono font-bold text-teal-300 whitespace-nowrap">{row.root}</td>
+            <td className="py-2.5 px-3 text-slate-400 whitespace-nowrap">{row.meaning}</td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-900/60 px-2 py-0.5 rounded">
+                {row.positive}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-rose-300 bg-rose-950/80 border border-rose-900/60 px-2 py-0.5 rounded">
+                {row.negative}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-400 whitespace-nowrap">{row.pattern}</td>
+            <td className="py-2.5 px-3 text-slate-300 whitespace-nowrap text-[11px]">{row.clinicalUse}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function ConjunctionGovernanceTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3">Conjunction</th>
+          <th className="py-2.5 px-3">Grammatical Role</th>
+          <th className="py-2.5 px-3 text-amber-400">Triggered Mood</th>
+          <th className="py-2.5 px-3">Verb Mutation</th>
+          <th className="py-2.5 px-3 text-rose-400">Negative Formation</th>
+          <th className="py-2.5 px-3">Clinical Example</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {CONJUNCTION_GOVERNANCE_TABLE.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-mono font-bold text-amber-300 whitespace-nowrap">{row.conjunction}</td>
+            <td className="py-2.5 px-3 text-slate-400 whitespace-nowrap">{row.meaning}</td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className={`font-mono font-bold px-2 py-0.5 rounded border text-[11px] ${
+                row.triggeredMood === 'Subjunctive'
+                  ? 'bg-emerald-950/80 text-emerald-300 border-emerald-800/70'
+                  : row.triggeredMood === 'Participial'
+                  ? 'bg-blue-950/80 text-blue-300 border-blue-800/70'
+                  : 'bg-slate-800/80 text-slate-300 border-slate-700/70'
+              }`}>
+                {row.triggeredMood}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-200/90 whitespace-nowrap">{row.mutationRule}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-rose-300 whitespace-nowrap">{row.negativeFormation}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.clinicalExample}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function AspectInfixTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3">Infix Morpheme</th>
+          <th className="py-2.5 px-3">Temporal Concept</th>
+          <th className="py-2.5 px-3 text-emerald-400">Affirmative Formula</th>
+          <th className="py-2.5 px-3 text-rose-400">Negative Formula</th>
+          <th className="py-2.5 px-3">Clinical Trajectory Utility</th>
+          <th className="py-2.5 px-3">Bedside Example</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {ASPECT_INFIX_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-mono font-bold text-emerald-300 whitespace-nowrap">
+              <span className="bg-emerald-950/80 border border-emerald-900/60 px-2 py-0.5 rounded">{row.infix}</span>
+            </td>
+            <td className="py-2.5 px-3 text-slate-300 font-bold whitespace-nowrap">{row.temporalConcept}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 whitespace-nowrap">{row.positiveFormula}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-rose-300 whitespace-nowrap">{row.negativeFormula}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] whitespace-nowrap">{row.clinicalFunction}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.clinicalExample}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
