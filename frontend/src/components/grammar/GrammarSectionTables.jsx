@@ -3,7 +3,9 @@ import {
   PAST_CONCORD_MATRIX,
   STATIVE_IRREGULAR_TABLE,
   CONJUNCTION_GOVERNANCE_TABLE,
-  ASPECT_INFIX_MATRIX
+  ASPECT_INFIX_MATRIX,
+  VERBAL_EXTENSIONS_TABLE,
+  COPULATIVE_LOCATIVE_TABLE
 } from '../../data/grammarData';
 
 export function PastConcordTable() {
@@ -147,6 +149,76 @@ export function AspectInfixTable() {
             <td className="py-2.5 px-3 font-mono text-[11px] text-rose-300 whitespace-nowrap">{row.negativeFormula}</td>
             <td className="py-2.5 px-3 text-slate-400 text-[11px] whitespace-nowrap">{row.clinicalFunction}</td>
             <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.clinicalExample}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function VerbalExtensionsTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3">Extension</th>
+          <th className="py-2.5 px-3">Suffix Morpheme</th>
+          <th className="py-2.5 px-3 text-fuchsia-400">Meaning & Function</th>
+          <th className="py-2.5 px-3 text-purple-300">Phonological Sound Shift</th>
+          <th className="py-2.5 px-3">Clinical Application</th>
+          <th className="py-2.5 px-3">Bedside Example</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {VERBAL_EXTENSIONS_TABLE.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-fuchsia-300 whitespace-nowrap">{row.extension}</td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-fuchsia-300 bg-fuchsia-950/80 border border-fuchsia-900/60 px-2 py-0.5 rounded">
+                {row.morpheme}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 text-slate-300 whitespace-nowrap">{row.meaning}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-purple-300 whitespace-nowrap">{row.soundShift}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] whitespace-nowrap">{row.clinicalUtility}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.example}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function CopulativesLocativesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3">Noun Class</th>
+          <th className="py-2.5 px-3">Example Noun</th>
+          <th className="py-2.5 px-3 text-rose-400">Positive Copulative ("is")</th>
+          <th className="py-2.5 px-3 text-red-400">Negative Copulative ("is not")</th>
+          <th className="py-2.5 px-3 text-orange-300">Locative Mutation (at/in)</th>
+          <th className="py-2.5 px-3">Clinical Utility</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {COPULATIVE_LOCATIVE_TABLE.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-rose-300 whitespace-nowrap">{row.nounClass}</td>
+            <td className="py-2.5 px-3 font-mono text-slate-400 whitespace-nowrap">{row.nounExample}</td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-rose-300 bg-rose-950/80 border border-rose-900/60 px-2 py-0.5 rounded">
+                {row.positiveCopulative}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-red-300 bg-red-950/80 border border-red-900/60 px-2 py-0.5 rounded">
+                {row.negativeCopulative}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-orange-200 whitespace-nowrap">{row.locativeForm}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] whitespace-nowrap">{row.clinicalUtility}</td>
           </tr>
         ))}
       </tbody>

@@ -64,6 +64,32 @@ const DRAWER_THEMES = {
     solutionLabel: 'text-emerald-400',
     solutionText: 'text-emerald-200',
     tokenChip: 'text-emerald-300 bg-emerald-950/80 border border-emerald-900/60'
+  },
+  fuchsia: {
+    container: 'bg-gradient-to-br from-fuchsia-950/40 via-slate-900/90 to-slate-900 border border-fuchsia-800/60',
+    headerBorder: 'border-fuchsia-900/40',
+    iconBox: 'bg-fuchsia-900/60 border border-fuchsia-700/60 text-fuchsia-300',
+    badge: 'bg-fuchsia-950 text-fuchsia-300 border border-fuchsia-800/80',
+    toggleBtn: 'text-fuchsia-300 hover:text-white bg-fuchsia-950 border border-fuchsia-800',
+    challengeBadge: 'text-fuchsia-400 bg-fuchsia-950/80 border border-fuchsia-900/60',
+    revealBtn: 'bg-fuchsia-950 text-fuchsia-300 hover:bg-fuchsia-900 border border-fuchsia-800/80',
+    solutionCard: 'border-fuchsia-900/50',
+    solutionLabel: 'text-fuchsia-400',
+    solutionText: 'text-fuchsia-200',
+    tokenChip: 'text-fuchsia-300 bg-fuchsia-950/80 border border-fuchsia-900/60'
+  },
+  rose: {
+    container: 'bg-gradient-to-br from-rose-950/40 via-slate-900/90 to-slate-900 border border-rose-800/60',
+    headerBorder: 'border-rose-900/40',
+    iconBox: 'bg-rose-900/60 border border-rose-700/60 text-rose-300',
+    badge: 'bg-rose-950 text-rose-300 border border-rose-800/80',
+    toggleBtn: 'text-rose-300 hover:text-white bg-rose-950 border border-rose-800',
+    challengeBadge: 'text-rose-400 bg-rose-950/80 border border-rose-900/60',
+    revealBtn: 'bg-rose-950 text-rose-300 hover:bg-rose-900 border border-rose-800/80',
+    solutionCard: 'border-rose-900/50',
+    solutionLabel: 'text-rose-400',
+    solutionText: 'text-rose-200',
+    tokenChip: 'text-rose-300 bg-rose-950/80 border border-rose-900/60'
   }
 };
 

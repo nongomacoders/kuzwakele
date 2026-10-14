@@ -8,7 +8,9 @@ import {
   Clock,
   Activity,
   GitFork,
-  FastForward
+  FastForward,
+  Repeat,
+  MapPin
 } from 'lucide-react';
 import { CATEGORY_THEMES, DEFAULT_CATEGORY_THEME } from './grammarSectionConfigs';
 
@@ -18,6 +20,8 @@ const getSectionIcon = (id) => {
     case 'stative': return <Activity className="w-5 h-5 text-teal-400" />;
     case 'conjunctions': return <GitFork className="w-5 h-5 text-amber-400" />;
     case 'aspect-infixes': return <FastForward className="w-5 h-5 text-emerald-400" />;
+    case 'verbal-extensions': return <Repeat className="w-5 h-5 text-fuchsia-400" />;
+    case 'copulatives-locatives': return <MapPin className="w-5 h-5 text-rose-400" />;
     default: return <BookOpen className="w-5 h-5 text-slate-400" />;
   }
 };
@@ -55,7 +59,7 @@ export default function GrammarDirectoryView({
 
           <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl self-start sm:self-auto">
             <Layers className="w-3.5 h-3.5 text-indigo-400" />
-            <span>4 Sections • {totalRules} Rules</span>
+            <span>{sections.length} Sections • {totalRules} Rules</span>
           </div>
         </div>
 

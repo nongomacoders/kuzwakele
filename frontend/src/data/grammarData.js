@@ -12,7 +12,9 @@ export const GRAMMAR_CATEGORIES = [
   { id: 'past-tenses', label: 'Past Continuous & Remote' },
   { id: 'stative', label: 'Stative Aspect' },
   { id: 'conjunctions', label: 'Conjunctions & Clauses' },
-  { id: 'aspect-infixes', label: 'Time Infixes (-sa-, se-, -ka-)' }
+  { id: 'aspect-infixes', label: 'Time Infixes (-sa-, se-, -ka-)' },
+  { id: 'verbal-extensions', label: 'Verbal Extensions (-ela, -isa, -wa)' },
+  { id: 'copulatives-locatives', label: 'Copulatives & Locatives (ngu-, y-, e-...-ini)' }
 ];
 
 export const GRAMMAR_SECTIONS = [
@@ -51,6 +53,24 @@ export const GRAMMAR_SECTIONS = [
     keyConcept: 'Temporal modifiers for continuity (-sa-), state transitions (se-), pending action (-ka-), and episodic history (-ke-).',
     previewHook: '-sa- (still), se- (now), -ka- (not yet), -ke- (ever)',
     description: 'Master the 5 core aspectual infix rules: progressive continuity (-sa-), exclusive transition (se-), negative incomplete (-ka-), occasional history (-ke-), and longitudinal symptom trajectory monitoring.'
+  },
+  {
+    id: 'verbal-extensions',
+    title: 'Verbal Extensions & Mutations',
+    badge: '5 Rules',
+    ruleCount: 5,
+    keyConcept: 'Derivational verbal suffixes modifying direction, causation, reciprocity, and passive labial palatalization.',
+    previewHook: '-ela, -isa, -wa (palatalization), -eka',
+    description: 'Master the 5 core verbal extensions: applicative (-ela), causative (-isa), passive labial palatalization (-wa), neuter feasibility (-eka/-akala), and reciprocal interaction (-ana).'
+  },
+  {
+    id: 'copulatives-locatives',
+    title: 'Copulatives & Locative Shifts',
+    badge: '5 Rules',
+    ruleCount: 5,
+    keyConcept: 'Non-verbal predicatives ("it is / is not"), physical presence (khona / akakho), locative e-...-ini palatalization, and possessive vowel coalescence.',
+    previewHook: 'ngu-, y-, e-...-ini, akakho, womntwana',
+    description: 'Master the 5 core non-verbal predicative and locative systems: positive identification copulatives, negative copulatives, locative presence and absence, locative palatalization, and possessive concord vowel coalescence.'
   }
 ];
 
@@ -359,6 +379,194 @@ export const ASPECT_INFIX_CHECKPOINTS = [
       { chunk: 'noma nanoma yimuphi umuthi', gloss: 'noma (or) + nanoma yimuphi (with any whatever) + umuthi (medicine)' }
     ],
     ruleTip: 'Wake (u- + -a- + -ke-) fuses remote past with frequentative -ke- to ask "have you ever...". Ukungezwani nomuthi is the standard clinical term for drug allergy or intolerance.'
+  }
+];
+
+export const VERBAL_EXTENSIONS_TABLE = [
+  {
+    extension: 'Applicative',
+    morpheme: '-ela',
+    meaning: 'For / On behalf of / Towards',
+    soundShift: 'Regular suffixation (-a -> -ela)',
+    clinicalUtility: 'Preparing therapy for patient, asking reason/purpose (-elani)',
+    example: 'ungilungiselela imithi / uhlalelani phansi?'
+  },
+  {
+    extension: 'Causative',
+    morpheme: '-isa',
+    meaning: 'Cause to / Help to / Intensify',
+    soundShift: 'Final -ka -> -sa, -la -> -za (e.g. sula -> suza)',
+    clinicalUtility: 'Medication side effects (ukuhambisa isisu), assisted ambulation',
+    example: 'lamaphilisi ayahambisa isisu'
+  },
+  {
+    extension: 'Passive & Palatalization',
+    morpheme: '-wa',
+    meaning: 'Be acted upon (Patient focus)',
+    soundShift: 'b->tsh, p->tsh, ph->sh, m->ny, mb->nj',
+    clinicalUtility: 'Describing treatment received (welashwa), symptoms experienced (ulunywa)',
+    example: 'isiguli selashwa ngemithi emisha'
+  },
+  {
+    extension: 'Neuter-Stative',
+    morpheme: '-eka / -akala',
+    meaning: 'Feasible / Observable state',
+    soundShift: 'Regular suffixation (-eka / -akala)',
+    clinicalUtility: 'Consultation comprehension (kuzwakele), clinical needs (kuyadingeka)',
+    example: 'kuzwakele gogo, imithi iyadingeka'
+  },
+  {
+    extension: 'Reciprocal',
+    morpheme: '-ana',
+    meaning: 'Mutual interaction (Each other)',
+    soundShift: 'Requires plural subject concord (si-, ni-, ba-)',
+    clinicalUtility: 'Family caregiver mutual support (sisizane), review follow-ups (sizobonana)',
+    example: 'kumele sisizane emndenini'
+  }
+];
+
+export const VERBAL_EXTENSIONS_CHECKPOINTS = [
+  {
+    id: 'ext-check-1',
+    challengeNumber: 1,
+    prompt: 'The patient is being treated with new medication.',
+    targetConcept: 'Passive Palatalization (ph -> sh: -elapha -> -elashwa)',
+    primaryAnswer: 'Isiguli selashwa ngemithi emisha.',
+    breakdown: [
+      { chunk: 'Isiguli', gloss: 'Class 7 noun ("the patient")' },
+      { chunk: 's-elashw-a', gloss: 'si- (Class 7 SC) + elashwa (-elapha with ph -> sh palatalization before -wa: "is being treated")' },
+      { chunk: 'ngemithi', gloss: 'nga- (instrumental: by means of / with) + imithi (Class 4: "medication")' },
+      { chunk: 'emisha', gloss: 'Class 4 adjective concord + -sha ("new")' }
+    ],
+    ruleTip: "When -elapha takes the passive suffix -wa, the labial consonant 'ph' cannot stand directly before 'w'. It obligatorily palatalizes to prepalatal 'sh': selashwa, NEVER *selaphwa."
+  },
+  {
+    id: 'ext-check-2',
+    challengeNumber: 2,
+    prompt: 'This medicine causes diarrhea if taken on an empty stomach.',
+    targetConcept: 'Causative Extension (-isa: ukuhambisa isisu)',
+    primaryAnswer: 'Lo muthi uyahambisa isisu uma uphuzwa ngaphandle kokudla.',
+    breakdown: [
+      { chunk: 'Lo muthi', gloss: 'demonstrative lo ("this") + Class 3 umuthi ("medicine")' },
+      { chunk: 'u-ya-hamb-is-a isisu', gloss: 'u- (Class 3 SC) + -ya- (continuous) + -hamba (run) + -isa (causative) + isisu (stomach: "causes the stomach to run -> diarrhea")' },
+      { chunk: 'uma', gloss: 'conditional conjunction ("if / when")' },
+      { chunk: 'u-phuz-w-a', gloss: 'u- (Class 3 participial SC) + -phuza (drink) + -wa (passive: "if it is taken/drunk")' },
+      { chunk: 'ngaphandle kokudla', gloss: 'compound preposition ("without food / on an empty stomach")' }
+    ],
+    ruleTip: "In clinical isiZulu, 'ukuhambisa isisu' is the standard causative formulation for diarrhea (literally: 'causing the stomach to run'). Notice that uphuzwa also demonstrates the passive -wa."
+  },
+  {
+    id: 'ext-check-3',
+    challengeNumber: 3,
+    prompt: 'The nurse is preparing the injection for the grandmother.',
+    targetConcept: 'Applicative Suffix (-ela: acting for / on behalf of)',
+    primaryAnswer: 'Umhlengikazi ulungiselela ugogo umjovo.',
+    breakdown: [
+      { chunk: 'Umhlengikazi', gloss: 'Class 1 noun ("the nurse")' },
+      { chunk: 'u-lungis-el-el-a', gloss: 'u- (Class 1 SC) + -lungisa (prepare) + -ela (applicative suffix: "prepares for / on behalf of")' },
+      { chunk: 'ugogo', gloss: 'Class 1a indirect object ("for grandmother")' },
+      { chunk: 'umjovo', gloss: 'Class 3 direct object ("the injection")' }
+    ],
+    ruleTip: "The applicative extension -ela directs the action towards a beneficiary: -lungiselela means 'to prepare for someone'. In word order, the human beneficiary (ugogo) immediately follows the verb."
+  }
+];
+
+export const COPULATIVE_LOCATIVE_TABLE = [
+  {
+    nounClass: 'Class 1/1a (u- / umu-)',
+    nounExample: 'udokotela / umntwana',
+    positiveCopulative: 'ngudokotela / ngumntwana',
+    negativeCopulative: 'akuyena udokotela',
+    locativeForm: 'kudokotela / kumntwana (ku- with people)',
+    clinicalUtility: 'Clinician identity, caregiver role, personal referents'
+  },
+  {
+    nounClass: 'Class 2/2a (ba- / o-)',
+    nounExample: 'abahlengikazi / ogogo',
+    positiveCopulative: 'ngabahlengikazi / ngogogo',
+    negativeCopulative: 'akubona abahlengikazi',
+    locativeForm: 'kubahlengikazi / kogogo',
+    clinicalUtility: 'Nursing cadre, family guardians'
+  },
+  {
+    nounClass: 'Class 3/4 (um- / imi-)',
+    nounExample: 'umkhuhlane / imithi',
+    positiveCopulative: 'ngumkhuhlane / yimithi',
+    negativeCopulative: 'akuwona umkhuhlane / akayona imithi',
+    locativeForm: 'emkhuhlaneni / emithini',
+    clinicalUtility: 'Etiology identification, pharmacotherapy'
+  },
+  {
+    nounClass: 'Class 5/6 (i- / ili- / ama-)',
+    nounExample: 'igazi / amaphilisi',
+    positiveCopulative: 'yigazi / ngamaphilisi',
+    negativeCopulative: 'akulona igazi / akuwona amaphilisi',
+    locativeForm: 'egazini / emaphilisini',
+    clinicalUtility: 'Blood diagnostics, medication delivery'
+  },
+  {
+    nounClass: 'Class 7/8 (isi- / izi-)',
+    nounExample: 'isifo / izilonda',
+    positiveCopulative: 'yisifo / yizilonda',
+    negativeCopulative: 'akusona isifo / akuzona izilonda',
+    locativeForm: 'esifweni / ezilondeni',
+    clinicalUtility: 'Pathology classification (yisifo sikashukela), ulcers'
+  },
+  {
+    nounClass: 'Class 9/10 (in- / izin-)',
+    nounExample: 'ingozi / izinyawo',
+    positiveCopulative: 'yingozi / yizinyawo',
+    negativeCopulative: 'akuyona ingozi / akuzona izinyawo',
+    locativeForm: 'engozini / ezinyaweni',
+    clinicalUtility: 'Triage emergency status (akuyona ingozi), anatomical examination'
+  }
+];
+
+export const COPULATIVE_LOCATIVE_CHECKPOINTS = [
+  {
+    id: 'cop-check-1',
+    challengeNumber: 1,
+    prompt: 'This condition is diabetes, it is not a contagious disease.',
+    targetConcept: 'Identification Copulative (yisifo) vs Negative Copulative (akusona)',
+    primaryAnswer: 'Lesi simo yisifo sikashukela, akusona isifo esithathelanayo.',
+    breakdown: [
+      { chunk: 'Lesi simo', gloss: 'demonstrative lesi ("this") + Class 7 simo ("condition / state")' },
+      { chunk: 'y-isifo sikashukela', gloss: 'y- (Class 7 copulative formative: "it is") + isifo (disease) + sikashukela (of sugar: "diabetes")' },
+      { chunk: 'akusona isifo', gloss: 'akusona (negative copulative for Class 7: "it is not") + isifo ("a disease")' },
+      { chunk: 'esithathelanayo', gloss: 'relative clause (-thathelana: contagious / transmissible)' }
+    ],
+    ruleTip: "Form the positive copulative on isifo by prefixing y- (yisifo = 'it is a disease'). Form the negative using the pronominal negative copulative akusona ('it is not'). Never use English verbs like 'is'."
+  },
+  {
+    id: 'cop-check-2',
+    challengeNumber: 2,
+    prompt: 'Does the child have white sores inside the mouth?',
+    targetConcept: 'Locative Palatalization (umlomo -> emlonyeni, m -> ny)',
+    primaryAnswer: 'Ingabe umntwana unezilonda ezimhlophe ngaphakathi emlonyeni?',
+    breakdown: [
+      { chunk: 'Ingabe', gloss: 'polite interrogative question marker' },
+      { chunk: 'umntwana', gloss: 'Class 1 noun ("the child")' },
+      { chunk: 'u-ne-zilonda', gloss: 'u- (SC 1) + na- (associative copulative "has") + izilonda (Class 8: sores / ulcers)' },
+      { chunk: 'ezimhlophe', gloss: 'adjective ("white / candidiasis")' },
+      { chunk: 'ngaphakathi', gloss: 'locative adverb ("inside")' },
+      { chunk: 'e-mlony-eni', gloss: 'e-...-ini locative wrapper on umlomo (mouth) with m -> ny palatalization ("in the mouth")' }
+    ],
+    ruleTip: "When turning umlomo into a locative with e-...-ini, the labial 'm' before the final vowel palatalizes to 'ny': emlonyeni. Saying *emlomweni is a major phonological error."
+  },
+  {
+    id: 'cop-check-3',
+    challengeNumber: 3,
+    prompt: 'The doctor is not at the clinic; he is at the hospital today.',
+    targetConcept: 'Absence (akakho) + Locative Copulative (usesibhedlela)',
+    primaryAnswer: 'Udokotela akakho emtholampilo; usesibhedlela namhlanje.',
+    breakdown: [
+      { chunk: 'Udokotela', gloss: 'Class 1a noun ("the doctor")' },
+      { chunk: 'a-ka-kho', gloss: 'a- (negative prefix) + ka- (Class 1 negative concord) + -kho (presence enclitic: "is not present / absent")' },
+      { chunk: 'emtholampilo', gloss: 'locative ("at the clinic")' },
+      { chunk: 'u-se-sibhedlela', gloss: 'u- (Class 1 SC) + -se- (locative copulative infix: "is at") + isibhedlela (hospital)' },
+      { chunk: 'namhlanje', gloss: 'adverb of time ("today")' }
+    ],
+    ruleTip: "For human absence, use akakho (Class 1). To state where someone currently is, insert the locative copulative infix -se- between the subject concord and locative noun: usesibhedlela ('he is at the hospital')."
   }
 ];
 
@@ -1284,6 +1492,445 @@ export const GRAMMAR_RULES = [
           { chunk: 'se-ku-sel-e', gloss: 'se- (now/already) + ku- (impersonal SC) + -sala (remain) + -e (stative: has remained)' },
           { chunk: 'ukukhathala nje', gloss: 'tiredness / fatigue only' },
           { chunk: 'komzimba wonke', gloss: 'of the whole body' }
+        ]
+      }
+    ]
+  },
+  // ==========================================
+  // CATEGORY 5: VERBAL EXTENSIONS & SOUND MUTATIONS
+  // ==========================================
+  {
+    id: 'ext-applicative-ela',
+    category: 'verbal-extensions',
+    title: 'Applicative Extension -ela ("For / On behalf of / Towards")',
+    subtitle: 'Directing actions toward beneficiaries, locations, and inquiring reasons (-elani)',
+    formula: 'Verb Root + -ela + Final Vowel',
+    explanation:
+      'Indicates that an action is performed for, on behalf of, or toward someone or a specific location (-sebenzela = work for, -lindela = wait for, -lungiselela = prepare for). In interrogative history-taking, affixing -elani to a verb asks "why / for what reason" an action or symptom occurs.',
+    commonPitfall:
+      'Forgetting that question words like "ngani" (why) grammatically require the applicative suffix on the verb: say "Uhlalelani phansi?" ("Why are you sitting down?"), not *"Uhlelani phansi ngani?".',
+    rules: [
+      'Beneficiary Suffixation: -lungisa (prepare) -> -lungiselela (prepare for someone)',
+      'Direction / Destination: -baleka (flee) -> -balekela esibhedlela (run to the hospital)',
+      'Interrogative Reason: Root + -elani asks "why/what for" (Ukhwehlelelani? = Why are you coughing?)',
+      'Negative Beneficiary: a- + SC + Root + -eli (angimsebenzeli = I am not working for him)'
+    ],
+    examples: [
+      {
+        id: 'ext-app-ex-1',
+        type: 'clinical',
+        isizulu: 'Udokotela ungilungiselela imithi emtholampilo manje.',
+        english: 'The doctor is preparing medication for me at the clinic right now.',
+        breakdown: [
+          { chunk: 'Udokotela', gloss: 'Class 1a noun ("the doctor")' },
+          { chunk: 'u-ngi-lungis-el-el-a', gloss: 'u- (SC 1) + -ngi- (1st person object: "me") + -lungisa + -ela (applicative: "prepares for me")' },
+          { chunk: 'imithi', gloss: 'Class 4 noun ("medication")' },
+          { chunk: 'emtholampilo manje', gloss: 'locative clinic + now' }
+        ]
+      },
+      {
+        id: 'ext-app-ex-2',
+        type: 'clinical',
+        isizulu: 'Ngilindele imiphumela yegazi egumbini lokuhlola.',
+        english: 'I am waiting for the blood results in the consultation room.',
+        breakdown: [
+          { chunk: 'Ngi-lind-el-e', gloss: 'ngi- (SC 1st) + -linda (wait) + -ela (applicative) + -e (contracted/stative: "I am waiting for")' },
+          { chunk: 'imiphumela yegazi', gloss: 'imiphumela (Class 4 results) + yegazi (of blood)' },
+          { chunk: 'egumbini lokuhlola', gloss: 'in the examination room' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'ext-causative-isa',
+    category: 'verbal-extensions',
+    title: 'Causative Extension -isa ("Cause to / Help to / Intensify")',
+    subtitle: 'Eliciting drug side effects, assisted ambulation, and symptom intensification',
+    formula: 'Verb Root + -isa + Final Vowel',
+    explanation:
+      'Signifies causing an action to happen, assisting someone to perform an action, or intensifying effort (-hambisa = cause to walk &rarr; diarrhea; -sebenzisa = cause to work &rarr; use; -khulumisa = engage someone in conversation; -phuzisa = help/cause to drink). In pharmacology, causative formulations explain medication mechanisms and adverse effects.',
+    commonPitfall:
+      'In clinical isiZulu, "ukuhambisa isisu" is the indispensable medical idiom for diarrhea (literally: "to cause the stomach to run"). Saying *isisu siyagijima is not idiomatic medical Zulu.',
+    rules: [
+      'Causation: -hamba (walk/run) -> -hambisa isisu (cause diarrhea)',
+      'Assistance: -phuza (drink) -> -phuzisa umntwana amanzi (assist the baby to drink water)',
+      'Intensification: -bheka (look) -> -bhekisisa (examine very carefully)',
+      'Irregular mutations: Verbs ending in -ka often mutate to -sa (-suka -> -susa: remove); -la mutates to -za (-khumbula -> -khumbuza: remind)'
+    ],
+    examples: [
+      {
+        id: 'ext-caus-ex-1',
+        type: 'clinical',
+        isizulu: 'Lamaphilisi ayahambisa isisu uma ungadlile kahle ngaphambi kokuwaphuza.',
+        english: 'These pills cause diarrhea if you have not eaten well before taking them.',
+        breakdown: [
+          { chunk: 'Lamaphilisi', gloss: 'these pills (Class 6)' },
+          { chunk: 'a-ya-hamb-is-a isisu', gloss: 'a- (SC 6) + -ya- + -hamba + -isa (causative) + isisu (stomach: "causes diarrhea")' },
+          { chunk: 'uma ungadlile kahle', gloss: 'if you haven\'t eaten well (participial negative)' },
+          { chunk: 'ngaphambi kokuwaphuza', gloss: 'before drinking/taking them' }
+        ]
+      },
+      {
+        id: 'ext-caus-ex-2',
+        type: 'clinical',
+        isizulu: 'Ake ungisize ungisebenzise lo mshini wokuphefumula.',
+        english: 'Please help me use this breathing machine.',
+        breakdown: [
+          { chunk: 'Ake ungisize', gloss: 'please help me (subjunctive)' },
+          { chunk: 'u-ngi-sebenz-is-e', gloss: 'u- (SC 2nd) + -ngi- (object "me") + -sebenza (work) + -isa (causative: "help me use") + -e (subjunctive)' },
+          { chunk: 'lo mshini wokuphefumula', gloss: 'this breathing machine (nebulizer / CPAP)' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'ext-passive-palatalization',
+    category: 'verbal-extensions',
+    title: 'Passive Extension -wa & Labial Palatalization',
+    subtitle: 'Shifting focus to the patient and mandatory prepalatal consonant sound shifts',
+    formula: 'Labial Consonant (b, p, ph, m, mb) + -wa -> Prepalatal Shift (tsh, sh, ny, nj)',
+    explanation:
+      'When verbs form the passive with -wa ("to be acted upon"), any bilabial consonant in the verb stem undergoes mandatory palatalization to avoid acoustic clash with the bilabial glide -w-. The shifts are universal: b -> tsh, p -> tsh, ph -> sh, m -> ny, mb -> nj. Clinically, passive verbs focus squarely on what is being done to the patient or experienced by a bodily organ.',
+    commonPitfall:
+      'Trying to avoid palatalization by saying *"uyelaphwa"* instead of the strictly required prepalatal shift *"uyelashwa"*, or *"ulunywa"* for *"ulumwa"*.',
+    rules: [
+      'b -> tsh: -bopha (bind/arrest) -> -boshwa (be bound/plastered)',
+      'ph -> sh: -elapha (treat/cure) -> -elashwa (be treated/medicated)',
+      'm -> ny: -luma (bite/sting) -> -lunywa (be bitten / experience itching)',
+      'mb -> nj: -bamba (hold/catch) -> -banjwa (be held/caught)',
+      'Monosyllabic & vowel verbs insert -iw-: -dla -> -dliwa (be eaten), -zwa -> -zwiwa (be felt)'
+    ],
+    examples: [
+      {
+        id: 'ext-pass-ex-1',
+        type: 'clinical',
+        isizulu: 'Isiguli selashwa ngemithi enamandla egumbini labagula kakhulu.',
+        english: 'The patient is being treated with strong medication in the intensive care unit.',
+        breakdown: [
+          { chunk: 'Isiguli', gloss: 'Class 7 noun ("the patient")' },
+          { chunk: 's-elashw-a', gloss: 'si- (SC 7) + -elashwa (passive of -elapha with ph -> sh palatalization: "is treated")' },
+          { chunk: 'ngemithi enamandla', gloss: 'with strong medication' },
+          { chunk: 'egumbini labagula kakhulu', gloss: 'in the ICU / room of those very sick' }
+        ]
+      },
+      {
+        id: 'ext-pass-ex-2',
+        type: 'clinical',
+        isizulu: 'Umlenze wesokudla ulunywa kakhulu yilezi zilonda.',
+        english: 'The right leg is itching severely from these sores.',
+        breakdown: [
+          { chunk: 'Umlenze wesokudla', gloss: 'the right leg' },
+          { chunk: 'u-luny-w-a', gloss: 'u- (Class 3 SC) + -luma (bite/itch) + m -> ny palatalization + -wa (passive: "is being bitten/itching")' },
+          { chunk: 'kakhulu', gloss: 'severely / very much' },
+          { chunk: 'yilezi zilonda', gloss: 'by these sores' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'ext-neuter-stative',
+    category: 'verbal-extensions',
+    title: 'Neuter-Stative Extension -eka / -akala ("Feasibility & Potentiality")',
+    subtitle: 'Communicating clinical comprehensibility, feasibility, and observable reality',
+    formula: 'Verb Root + -eka / -akala + Final Vowel',
+    explanation:
+      'The neuter extension indicates that an action is doable, feasible, comprehensible, or has entered an observable state without reference to an active human agent. In clinical communication, it underpins the core concept of mutual understanding (kuzwakele = it is clearly heard and understood), requirement (kuyadingeka = it is needed), and visibility (kuyabonakala = it is apparent/visible).',
+    commonPitfall:
+      'Confusing the passive with the neuter: kuzwiwa ngudokotela ("it is heard by the doctor" - passive with agent) versus kuzwakele ("it makes sense / it is clearly understood" - neuter state).',
+    rules: [
+      '-zwa (hear/feel) -> -zwakala (be audible / make sense / be understood)',
+      '-bona (see) -> -bonakala (be visible / noticeable / evident)',
+      '-dinga (need) -> -dingeka (be necessary / required)',
+      '-thola (find) -> -tholakala (be available / obtainable)',
+      '-qonda (understand) -> -qondeka (be straightforward / comprehensible)'
+    ],
+    examples: [
+      {
+        id: 'ext-neut-ex-1',
+        type: 'clinical',
+        isizulu: 'Imithi eyengeziwe iyadingeka kulesi simo ukuvikela ukutheleleka.',
+        english: 'Additional medication is required in this condition to prevent infection.',
+        breakdown: [
+          { chunk: 'Imithi eyengeziwe', gloss: 'additional medication' },
+          { chunk: 'i-ya-ding-ek-a', gloss: 'i- (SC 4) + -ya- + -dinga (need) + -eka (neuter: "is needed / required")' },
+          { chunk: 'kulesi simo', gloss: 'in this condition' },
+          { chunk: 'ukuvikela ukutheleleka', gloss: 'to prevent infection' }
+        ]
+      },
+      {
+        id: 'ext-neut-ex-2',
+        type: 'clinical',
+        isizulu: 'Kuzwakele gogo, ungakhathazeki ngizokunikeza usizo olufanele.',
+        english: 'It is clearly understood grandmother, do not worry I will give you appropriate care.',
+        breakdown: [
+          { chunk: 'Ku-zwak-el-e', gloss: 'ku- (impersonal SC) + -zwa (hear) + -akala (neuter) + -e (stative perfect: "it is clearly understood")' },
+          { chunk: 'gogo', gloss: 'grandmother' },
+          { chunk: 'ungakhathazeki', gloss: 'do not worry' },
+          { chunk: 'ngizokunikeza usizo olufanele', gloss: 'I will give you appropriate help' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'ext-reciprocal-ana',
+    category: 'verbal-extensions',
+    title: 'Reciprocal Extension -ana ("Mutual Interaction & Support")',
+    subtitle: 'Caregiver collaboration, family adherence support, and follow-up consultation',
+    formula: 'Verb Root + -ana + Final Vowel',
+    explanation:
+      'Expresses reciprocal, mutual action between plural entities ("each other / one another"). In clinical care, it is central to counseling family members on collaborative home nursing (-sizana = help each other, -nakekelana = care for one another) and establishing follow-up agreements (-bonana = see each other again).',
+    commonPitfall:
+      'Trying to use -ana with a singular subject without the associative particle "na-". Say "Siyabonana" (plural: "We see each other") or "Ngibonana nomndeni" (singular + na-: "I meet with the family").',
+    rules: [
+      '-siza (help) -> -sizana (help one another)',
+      '-bona (see) -> -bonana (see each other / meet)',
+      '-nakekela (care) -> -nakekelana (care for one another)',
+      '-thinta (contact) -> -thintana (keep in touch / follow up)',
+      'With associative na-: SC + Root + -ana + na- + Noun (Udokotela ubambisana nomndeni = The doctor collaborates with the family)'
+    ],
+    examples: [
+      {
+        id: 'ext-recip-ex-1',
+        type: 'clinical',
+        isizulu: 'Kumele nibambisane ekhaya ukuze anakekelwe kahle umntwana.',
+        english: 'You must collaborate together at home so that the child is well cared for.',
+        breakdown: [
+          { chunk: 'Kumele ni-bamb-is-an-e', gloss: 'kumele + ni- (2nd plur SC) + -bamba (hold) + -isa (causative) + -ana (reciprocal) + -e (subjunctive: "you all collaborate / work together")' },
+          { chunk: 'ekhaya', gloss: 'at home' },
+          { chunk: 'ukuze anakekelwe kahle', gloss: 'so that he is well cared for (passive)' },
+          { chunk: 'umntwana', gloss: 'the child' }
+        ]
+      },
+      {
+        id: 'ext-recip-ex-2',
+        type: 'clinical',
+        isizulu: 'Sizobonana futhi emtholampilo ngenyanga ezayo ukuhlola umfutho.',
+        english: 'We will see each other again at the clinic next month to check the blood pressure.',
+        breakdown: [
+          { chunk: 'Si-zo-bon-an-a', gloss: 'si- (1st plur SC) + -zo- (future) + -bona (see) + -ana (reciprocal: "we will see each other")' },
+          { chunk: 'futhi emtholampilo', gloss: 'again at the clinic' },
+          { chunk: 'ngenyanga ezayo', gloss: 'next month' },
+          { chunk: 'ukuhlola umfutho', gloss: 'to check blood pressure' }
+        ]
+      }
+    ]
+  },
+
+  // ==========================================
+  // CATEGORY 6: COPULATIVES, LOCATIVES & SOUND SHIFTS
+  // ==========================================
+  {
+    id: 'cop-identification-prefixes',
+    category: 'copulatives-locatives',
+    title: 'Identification Copulatives ("It is / They are")',
+    subtitle: 'Non-verbal predication identifying diseases, clinicians, and medications',
+    formula: 'u-, o-, a- nouns -> ngu- | i- nouns -> y- | ili-/olu- nouns -> l- / lu-',
+    explanation:
+      'isiZulu does not possess a standalone linking verb equivalent to English "is / are". Instead, identifying predication ("X is Y") is achieved by attaching copulative prefix formatives directly to nouns. Nouns starting with u-, o-, a- take ngu- (ngumkhuhlane = it is the flu, ngudokotela = it is the doctor); nouns with initial i- take y- (yisifo = it is a disease, yigazi = it is blood); nouns with ili- take l- (lithambo = it is a bone).',
+    commonPitfall:
+      'Inserting artificial verbs like *"ngi-is-dokotela"* or *"lesi simo siba yisifo"*. The copulative formative itself carries the full predicative weight of "is / are".',
+    rules: [
+      'Class 1/1a/2/2a/6 (u-, o-, a-): ngu- / nga- (ngudokotela, ngabantwana, ngamaphilisi)',
+      'Class 3/4/9 (u-, i-, in-): ngu- (Class 3 umkhuhlane -> ngumkhuhlane), y- (Class 4/9 imithi -> yimithi, ingozi -> yingozi)',
+      'Class 7/8 (isi-, izi-): y- (isifo -> yisifo, izilonda -> yizilonda)',
+      'Class 5 (i- / ili-): y- (igazi -> yigazi) or l- (ithambo -> lithambo)'
+    ],
+    examples: [
+      {
+        id: 'cop-ident-ex-1',
+        type: 'clinical',
+        isizulu: 'Lesi simo yisifo sikashukela esidinga ukwelashwa njalo.',
+        english: 'This condition is diabetes mellitus which requires continuous treatment.',
+        breakdown: [
+          { chunk: 'Lesi simo', gloss: 'this condition' },
+          { chunk: 'y-isifo sikashukela', gloss: 'y- (copulative: "it is") + isifo (disease) + sikashukela (of sugar)' },
+          { chunk: 'esidinga ukwelashwa njalo', gloss: 'which requires treatment continuously' }
+        ]
+      },
+      {
+        id: 'cop-ident-ex-2',
+        type: 'clinical',
+        isizulu: 'Lona ngumhlengikazi ozokusiza ngomjovo wamanzi.',
+        english: 'This is the nurse who will assist you with the IV fluid infusion.',
+        breakdown: [
+          { chunk: 'Lona', gloss: 'demonstrative ("this person")' },
+          { chunk: 'ngu-mhlengikazi', gloss: 'ngu- (copulative: "is a nurse") + umhlengikazi' },
+          { chunk: 'ozokusiza', gloss: 'relative ("who will help you")' },
+          { chunk: 'ngomjovo wamanzi', gloss: 'with the water injection / IV fluid' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'cop-negative-identification',
+    category: 'copulatives-locatives',
+    title: 'Negative Identification Copulatives ("It is NOT")',
+    subtitle: 'Refuting diagnoses, de-escalating triage anxiety, and ruling out conditions',
+    formula: 'aku- / asi- + Pronoun Formative (akuyona, akuyena, akusona, akubona, akulona)',
+    explanation:
+      'Negative identification denies that a subject belongs to a noun category ("it is not X"). Formed using the negative prefix aku- fused with the absolute pronoun root corresponding to the noun class: Class 1 akuyena (he/she is not), Class 7 akusona (it is not [isifo]), Class 9 akuyona (it is not [ingozi]), Class 6 akuwona (they are not [amaphilisi]). Crucial in triage for reassuring patients when acute pathology is ruled out.',
+    commonPitfall:
+      'Using generic Class 9 *akuyona* for every noun class, or attempting verbal negation with *-i* (*akisifoi). Match the negative copulative pronoun to the noun class of the negated entity.',
+    rules: [
+      'Class 1/1a: akuyena udokotela (he/she is not a doctor)',
+      'Class 6: akuwona amaphilisi (they are not pills)',
+      'Class 7: akusona isifo esithathelanayo (it is not a contagious disease)',
+      'Class 9: akuyona ingozi ephuthumayo (it is not an acute emergency)',
+      'Class 15: akukona ukugula okungelapheki (it is not an incurable illness)'
+    ],
+    examples: [
+      {
+        id: 'cop-neg-ex-1',
+        type: 'clinical',
+        isizulu: 'Lokhu kuhlaba akuyona ingozi yenhliziyo, yizicubu ezibuhlungu nje.',
+        english: 'This sharp pain is not a heart emergency; it is only sore chest muscles.',
+        breakdown: [
+          { chunk: 'Lokhu kuhlaba', gloss: 'this sharp pain' },
+          { chunk: 'akuyona ingozi', gloss: 'akuyona (neg copulative Class 9: "it is not") + ingozi (emergency/danger)' },
+          { chunk: 'yenhliziyo', gloss: 'of the heart' },
+          { chunk: 'yizicubu ezibuhlungu nje', gloss: 'y- (copulative: "it is") + izicubu (muscles) + sore only' }
+        ]
+      },
+      {
+        id: 'cop-neg-ex-2',
+        type: 'clinical',
+        isizulu: 'Lesi sifo akusona esokufa, singalapheka ngemithi efanele.',
+        english: 'This illness is not fatal; it can be treated with appropriate medication.',
+        breakdown: [
+          { chunk: 'Lesi sifo', gloss: 'this disease' },
+          { chunk: 'akusona esokufa', gloss: 'akusona (neg copulative Class 7: "it is not") + of death' },
+          { chunk: 'singalapheka', gloss: 'it can be cured/treated' },
+          { chunk: 'ngemithi efanele', gloss: 'with appropriate medication' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'cop-locative-presence',
+    category: 'copulatives-locatives',
+    title: 'Locative Copulatives & Physical Presence (khona, akakho, ngise-)',
+    subtitle: 'Confirming staff availability, patient location in clinic/ward, and absence',
+    formula: 'Presence: SC + khona | Absence: a- + SC + -kho | Location: SC + -se- + Locative',
+    explanation:
+      'Expresses whether a person or resource is physically available (ukhona = he/she is present; bakhona = they are available), absent (akakho = he/she is not here; abekho = they are not here; akukho = there is nothing), or positioned in a specific medical location (ngisesibhedlela = I am at the hospital; usesigulini = he is at the ward).',
+    commonPitfall:
+      'Confusing akakho (Class 1 person is absent) with akukho (Class 15/17 impersonal absence: "there is nothing / nowhere"). Saying *akukho udokotela is a frequent error; say Udokotela akakho.',
+    rules: [
+      'Positive Presence: SC + khona (Udokotela ukhona namuhla? = Is the doctor present today?)',
+      'Negative Person Absence: a- + ka- + -kho -> akakho (akakho emtholampilo = he/she is not at the clinic)',
+      'Impersonal Absence: a- + ku- + -kho -> akukho (akukho lutho olonakele = there is nothing damaged)',
+      'Location Placement: SC + -se- + Locative (Usesibhedlela = He/she is at the hospital; Ngisemtholampilo = I am at the clinic)',
+      'Past Location: Bengi- + -se- + Locative (Bengisesibhedlela izolo = I was at the hospital yesterday)'
+    ],
+    examples: [
+      {
+        id: 'cop-loc-ex-1',
+        type: 'clinical',
+        isizulu: 'Udokotela oyingcweti akakho emtholampilo namhlanje, usesibhedlela esikhulu.',
+        english: 'The specialist doctor is not at the clinic today; he is at the tertiary hospital.',
+        breakdown: [
+          { chunk: 'Udokotela oyingcweti', gloss: 'specialist doctor' },
+          { chunk: 'a-ka-kho', gloss: 'a- (neg) + ka- (SC 1 neg) + -kho (presence enclitic: "is not present")' },
+          { chunk: 'emtholampilo namhlanje', gloss: 'at the clinic today' },
+          { chunk: 'u-se-sibhedlela esikhulu', gloss: 'u- (SC 1) + -se- (locative copulative infix: "is at") + isibhedlela esikhulu (big hospital)' }
+        ]
+      },
+      {
+        id: 'cop-loc-ex-2',
+        type: 'clinical',
+        isizulu: 'Ingabe unina womntwana ukhona lapha ukuze asayine imvume?',
+        english: 'Is the mother of the child present here so that she can sign the consent form?',
+        breakdown: [
+          { chunk: 'Ingabe unina womntwana', gloss: 'is the mother of the child' },
+          { chunk: 'u-khona lapha', gloss: 'u- (SC 1) + khona (present) + lapha (here)' },
+          { chunk: 'ukuze asayine imvume', gloss: 'so that she may sign consent' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'loc-mutations-palatalization',
+    category: 'copulatives-locatives',
+    title: 'Locative Sound Mutations (e-...-ini & Labial Palatalization)',
+    subtitle: 'Prepositional "at / in / on" shifts with compulsory anatomical palatalization',
+    formula: 'Initial Vowel -> e- / o- + Root + -ini (with labial shifts: b->tsh, p->tsh, ph->sh, m->ny)',
+    explanation:
+      'Locatives ("at, in, on, to") are formed by replacing the initial noun vowel with e- (or o- for Class 11 ulu-) and suffixing -ini. When the final syllable contains a bilabial consonant (b, p, ph, m), it undergoes mandatory palatalization before the suffix: umlomo (mouth) -> emlonyeni (m -> ny); isifuba (chest) -> esifubeni; umzimba (body) -> emzimbeni; ithambo (bone) -> ethanjeni (mb -> nj). Borrowed nouns drop final -ini: isibhedlela -> esibhedlela.',
+    commonPitfall:
+      'Saying *"emlomweni"* or *"esifubwini"*. Labial consonants never retain bilabial articulation directly before the locative suffix -ini; they must palatalize (emlonyeni, esifubeni).',
+    rules: [
+      'm -> ny: umlomo (mouth) -> emlonyeni (in the mouth)',
+      'mb -> nj: umthambo (vein/artery) -> emthanjeni (in the vein); ithambo -> ethanjeni',
+      'b -> tsh/w: isigubhu -> esigujini; isibhedlela -> esibhedlela (loanwords omit -ini)',
+      'Personal Locatives: Nouns referring to people take ku- instead of e-...-ini (kudokotela = to/at the doctor, kumama = to mother)',
+      'Anatomical Pairs: esifubeni (in the chest), emhlane (on the back), esiswini (in the abdomen)'
+    ],
+    examples: [
+      {
+        id: 'loc-mut-ex-1',
+        type: 'clinical',
+        isizulu: 'Umntwana unezilonda ezibuhlungu emlonyeni nasemphinjeni ezimvimbela ukugwinya.',
+        english: 'The child has painful ulcers in the mouth and throat that prevent him from swallowing.',
+        breakdown: [
+          { chunk: 'Umntwana unezilonda ezibuhlungu', gloss: 'the child has painful ulcers' },
+          { chunk: 'e-mlony-eni', gloss: 'e- + umlomo + m -> ny + -eni (in the mouth)' },
+          { chunk: 'nasemphinjeni', gloss: 'na- + e- + umphimbo + -eni (and in the throat)' },
+          { chunk: 'ezimvimbela ukugwinya', gloss: 'which prevent him from swallowing' }
+        ]
+      },
+      {
+        id: 'loc-mut-ex-2',
+        type: 'clinical',
+        isizulu: 'Ubuhlungu buqala esifubeni buye ehoxweni nasengalweni yesobunxele.',
+        english: 'The pain begins in the chest and radiates to the armpit and left arm.',
+        breakdown: [
+          { chunk: 'Ubuhlungu buqala esifubeni', gloss: 'the pain begins in the chest (isifuba -> esifubeni)' },
+          { chunk: 'buye ehoxweni', gloss: 'and goes to the armpit (ihoxo -> ehoxweni)' },
+          { chunk: 'nasengalweni yesobunxele', gloss: 'and into the left arm (ingalo -> engalweni)' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'loc-possessive-coalescence',
+    category: 'copulatives-locatives',
+    title: 'Possessive Concord Coalescence (a + i = e, a + u = o, a + a = a)',
+    subtitle: 'Vowel merging mechanics governing anatomy, symptoms, and clinical relationships',
+    formula: 'Possessive Concord (wa-, ba-, ya-, za-) + Noun Initial Vowel -> Coalesced Vowel',
+    explanation:
+      'When possessive concords (wa-, ya-, za-, ba-, kwa-) attach to a noun to show ownership, etiology, or anatomical origin ("of the..."), the possessive vowel -a- merges obligatorily with the noun\'s initial vowel: a + i -> e (wa- + inhliziyo -> wenhliziyo: of the heart); a + u -> o (wa- + umntwana -> womntwana: of the child; za- + umuthi -> zomuthi: of the medicine); a + a -> a (wa- + amazinyo -> wamazinyo: of the teeth).',
+    commonPitfall:
+      'Writing separated uncoalesced words like *"izimpawu za ukugula"* or *"umzimba wa umntwana"*. isiZulu strictly forbids vowel hiatus; coalescence is orthographically mandatory: izimpawu zokugula, umzimba womntwana.',
+    rules: [
+      'a + u -> o: umzimba wa- + umntwana -> umzimba womntwana ("the child\'s body")',
+      'a + i -> e: isifo sa- + inhliziyo -> isifo senhliziyo ("heart disease")',
+      'a + a -> a: amaphilisi a- + amandla -> amaphilisi amandla ("strong pills")',
+      'Class 1a nouns (uGogo, uDokotela): use possessive ka- without vowel coalescence (umuthi kadokotela = the doctor\'s medicine; iphilisi likagogo = grandmother\'s pill)',
+      'Locative Possessive: kwa- for clinic/hospital sites (emtholampilo wakwa-Ceza = at Ceza clinic)'
+    ],
+    examples: [
+      {
+        id: 'loc-poss-ex-1',
+        type: 'clinical',
+        isizulu: 'Lezi zimpawu zokugula kwenhliziyo zidinga ukuthi ahlolwe ngokushesha.',
+        english: 'These symptoms of heart disease require that he be evaluated immediately.',
+        breakdown: [
+          { chunk: 'Lezi zimpawu', gloss: 'these symptoms' },
+          { chunk: 'z-o-kugula', gloss: 'za- + ukugula (a + u -> o: "of illness")' },
+          { chunk: 'kw-e-nhliziyo', gloss: 'kwa- + inhliziyo (a + i -> e: "of the heart")' },
+          { chunk: 'zidinga ukuthi ahlolwe ngokushesha', gloss: 'require that he be examined promptly' }
+        ]
+      },
+      {
+        id: 'loc-poss-ex-2',
+        type: 'clinical',
+        isizulu: 'Umsindo wamaphaphu womntwana ubonisa ukuthi unesifuba somoya.',
+        english: 'The sound of the child\'s lungs indicates that he has asthma.',
+        breakdown: [
+          { chunk: 'Umsindo w-a-maphaphu', gloss: 'wa- + amaphaphu (a + a -> a: "sound of the lungs")' },
+          { chunk: 'w-o-mntwana', gloss: 'wa- + umntwana (a + u -> o: "of the child")' },
+          { chunk: 'ubonisa ukuthi', gloss: 'indicates that' },
+          { chunk: 'unesifuba s-o-moya', gloss: 'sa- + umoya (a + u -> o: "chest of wind -> asthma")' }
         ]
       }
     ]

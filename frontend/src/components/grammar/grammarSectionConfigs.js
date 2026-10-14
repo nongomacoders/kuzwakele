@@ -1,15 +1,19 @@
-import { Clock, Activity, GitFork, FastForward, Table } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
   CONJUNCTION_PRACTICE_CHECKPOINTS,
-  ASPECT_INFIX_CHECKPOINTS
+  ASPECT_INFIX_CHECKPOINTS,
+  VERBAL_EXTENSIONS_CHECKPOINTS,
+  COPULATIVE_LOCATIVE_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
   StativeMutationTable,
   ConjunctionGovernanceTable,
-  AspectInfixTable
+  AspectInfixTable,
+  VerbalExtensionsTable,
+  CopulativesLocativesTable
 } from './GrammarSectionTables';
 
 export const CATEGORY_THEMES = {
@@ -44,6 +48,22 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-emerald-950/60 border-emerald-800/50 text-emerald-200',
     iconBg: 'bg-emerald-950/80 border-emerald-800/80 text-emerald-400',
     codeBadge: 'bg-emerald-950 text-emerald-300 border-emerald-800/60'
+  },
+  'verbal-extensions': {
+    badge: 'bg-fuchsia-950/80 text-fuchsia-300 border-fuchsia-800/80',
+    border: 'border-fuchsia-900/50 hover:border-fuchsia-600/70',
+    cardBg: 'from-fuchsia-950/30 to-slate-900/90',
+    formulaBg: 'bg-fuchsia-950/60 border-fuchsia-800/50 text-fuchsia-200',
+    iconBg: 'bg-fuchsia-950/80 border-fuchsia-800/80 text-fuchsia-400',
+    codeBadge: 'bg-fuchsia-950 text-fuchsia-300 border-fuchsia-800/60'
+  },
+  'copulatives-locatives': {
+    badge: 'bg-rose-950/80 text-rose-300 border-rose-800/80',
+    border: 'border-rose-900/50 hover:border-rose-600/70',
+    cardBg: 'from-rose-950/30 to-slate-900/90',
+    formulaBg: 'bg-rose-950/60 border-rose-800/50 text-rose-200',
+    iconBg: 'bg-rose-950/80 border-rose-800/80 text-rose-400',
+    codeBadge: 'bg-rose-950 text-rose-300 border-rose-800/60'
   }
 };
 
@@ -108,5 +128,31 @@ export const SECTION_CONFIGS = {
     checkpoints: ASPECT_INFIX_CHECKPOINTS,
     drillCategory: 'aspect',
     drillTitle: 'Symptom Trajectory'
+  },
+  'verbal-extensions': {
+    theme: 'fuchsia',
+    tableIcon: Repeat,
+    tableTitle: 'Verbal Extensions & Sound Mutation Matrix',
+    tableSubtitle: 'Direct comparison across derivational suffixes, meaning alterations, labial shifts, and clinical applications.',
+    tableBadge: '5 Core Extensions',
+    TableComponent: VerbalExtensionsTable,
+    practiceTitle: 'Interactive Checkpoint: Verbal Extension & Mutation Self-Check',
+    practiceSubtitle: 'Practice applying passive palatalization, causative medication effects, and applicative preparation.',
+    checkpoints: VERBAL_EXTENSIONS_CHECKPOINTS,
+    drillCategory: 'extensions',
+    drillTitle: 'Verbal Extensions'
+  },
+  'copulatives-locatives': {
+    theme: 'rose',
+    tableIcon: MapPin,
+    tableTitle: 'Noun Class Copulative & Locative Matrix',
+    tableSubtitle: 'Direct reference comparing noun class, identification copulative, negative copulative, and locative palatalization.',
+    tableBadge: '6 Noun Classes',
+    TableComponent: CopulativesLocativesTable,
+    practiceTitle: 'Interactive Checkpoint: Copulatives & Locatives Clinical Self-Check',
+    practiceSubtitle: 'Practice identifying chronic diseases, detecting oral sores via palatalized locatives, and confirming clinic presence.',
+    checkpoints: COPULATIVE_LOCATIVE_CHECKPOINTS,
+    drillCategory: 'copulatives',
+    drillTitle: 'Copulatives & Locatives'
   }
 };

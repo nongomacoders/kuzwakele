@@ -21,6 +21,16 @@ const TABLE_THEMES = {
     containerBorder: 'border-emerald-900/50',
     iconBox: 'bg-emerald-950/80 border border-emerald-800/80 text-emerald-400',
     badge: 'bg-emerald-950 text-emerald-300 border border-emerald-800/60'
+  },
+  fuchsia: {
+    containerBorder: 'border-fuchsia-900/50',
+    iconBox: 'bg-fuchsia-950/80 border border-fuchsia-800/80 text-fuchsia-400',
+    badge: 'bg-fuchsia-950 text-fuchsia-300 border border-fuchsia-800/60'
+  },
+  rose: {
+    containerBorder: 'border-rose-900/50',
+    iconBox: 'bg-rose-950/80 border border-rose-800/80 text-rose-400',
+    badge: 'bg-rose-950 text-rose-300 border border-rose-800/60'
   }
 };
 

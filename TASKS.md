@@ -255,6 +255,29 @@
   - [x] Test end-to-end in mobile browser subagent (Directory view, search, section navigation, matrix collapse/expand, practice reveal, drill flagging)
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
 
-
-
-
+## Complete Grammar Reference Curriculum (Verbal Extensions & Copulative Locatives)
+- [x] Complete the Grammar Reference curriculum by adding the final two core grammatical pillars with 10 clinical-grade rules, reference tables, practice checkpoints, and drill integration
+  - [x] Deepen Grammar Data in `frontend/src/data/grammarData.js`:
+    - [x] Register Section 5 `verbal-extensions` ("Verbal Extensions & Mutations", 5 Rules, `Repeat` icon, fuchsia theme)
+    - [x] Register Section 6 `copulatives-locatives` ("Copulatives & Locative Shifts", 5 Rules, `MapPin` icon, rose theme)
+    - [x] Append 5 clinical rules for `verbal-extensions`: Applicative `-ela`, Causative `-isa`, Passive `-wa` with labial palatalization, Neuter-Stative `-eka`/`-akala`, and Reciprocal `-ana`
+    - [x] Append 5 clinical rules for `copulatives-locatives`: Identification Copulatives, Negative Identification, Locative Copulatives & Presence (`khona`/`akakho`), Locative Sound Mutations (`e-...-ini` & palatalization), and Possessive Concord Coalescence
+    - [x] Export `VERBAL_EXTENSIONS_TABLE` and `VERBAL_EXTENSIONS_CHECKPOINTS` (3 interactive challenges)
+    - [x] Export `COPULATIVE_LOCATIVE_TABLE` and `COPULATIVE_LOCATIVE_CHECKPOINTS` (3 interactive challenges)
+  - [x] Create Table Renderers in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `VerbalExtensionsTable` with 5 extension rows, formulas, sound shifts, and clinical examples
+    - [x] Export `CopulativesLocativesTable` comparing 6 noun classes across positive/negative copulatives and locative shifts
+  - [x] Configure Subcomponents & Themes:
+    - [x] Add fuchsia and rose themes in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register themes and section configs in `grammarSectionConfigs.js`
+    - [x] Add icons and dynamic sections count in `GrammarDirectoryView.jsx`
+    - [x] Sync `VERBAL_EXTENSIONS_CHECKPOINTS` and `COPULATIVE_LOCATIVE_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()`
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean PWA bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified Directory displays all 6 sections dynamically
+    - [x] Verified Section 5 (Verbal Extensions) table, 5 rules, and practice reveal
+    - [x] Verified Section 6 (Copulatives & Locatives) table, 5 rules, and practice reveal
+    - [x] Flagged challenges from both sections and confirmed presence in Drills Gym
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
