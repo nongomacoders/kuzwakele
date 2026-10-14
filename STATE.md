@@ -101,3 +101,33 @@
   - Silent error handling ensures consultation flow is never interrupted or blocked by network or database issues.
   - Removed all manual bookmarking UI: stripped `[ Save Seed ]` / `[ Saved Seed ]` buttons, intent dropdowns, and associated component state.
   - Minimal History Cards: each card now displays solely the Turn header (Turn #N, latency badge, timestamp), Doctor turn (isiZulu & English subtitle), and Patient turn (isiZulu & English subtitle).
+
+## Grammar Reference Tab & Spaced Repetition Drill Integration
+- **Status**: Active & Verified
+- **Components & Data**:
+  - `frontend/src/data/grammarData.js`: Curated, linguistically deep grammar reference dataset covering 4 targeted modules with 10 detailed rules and verified clinical/community examples.
+  - `frontend/src/components/GrammarReference.jsx`: Mobile-first interactive grammar reference viewer with real-time search, category filter pills, structural formulas, pitfall warnings, and 1-tap drill flagging.
+  - `frontend/src/App.jsx`: 4-tab top navigation shell (`Live Co-Pilot`, `Scenarios`, `Drills Gym`, `Grammar Rules`).
+- **Targeted Grammatical Modules**:
+  1. **Past Continuous & Remote Past (`past-tenses`)**:
+     - *Immediate Past Continuous*: `be-` + concord (`bengi-`, `ubu-`, `ube-`, `bebe-`) for actions ongoing earlier today or yesterday.
+     - *Remote Past Simple*: Elided long `-a-` concords (`nga-`, `wa-`, `sa-`, `ba-`, `kwa-`) for events days/months/years ago.
+     - *Remote Past Continuous*: Remote continuous concords (`ngangi-`, `wawu-`, `waye-`, `sasi-`, `babe-`) for chronic or habitual distant actions.
+  2. **The Stative Aspect (`stative`)**:
+     - *The Stative Mechanism*: Root verbs of process where past suffix `-ile` / `-e` denotes present ongoing reality (*-vuvukile*, *-khathele*, *-lambile*, *-lele*, *-mile*).
+     - *Contracted Stative Rule*: Drop from full `-ile` to contracted `-e` when directly followed by an adverb, object, or complement (*Ngilambe kakhulu* vs *Ngilambile*).
+  3. **Conjunctions & Clause Governance (`conjunctions`)**:
+     - *Subjunctive Triggers*: *ukuze* (so that), *kumele / kufanele* (must/should), *ake* (polite hortative) forcing verb ending `-e`.
+     - *Participial Triggers*: *uma* (if/when), *ngenkathi* (while), *ngoba* (because), *lapho... khona* (where) forcing Class 1 `u-` -> `e-` and negative infix `-nga-...-i`.
+     - *Independent Coordinating*: *kodwa* (but), *futhi* (and/furthermore), *noma* (or), *kanti* (whereas) requiring no mood shifts.
+  4. **Time-Flow Aspectual Infixes (`aspect-infixes`)**:
+     - *Progressive Infix `-sa-`*: "still" / continuing (e.g. *usaphila*, *usabuzwa*).
+     - *Exclusive Prefix `se-` / `-se-`*: "now" / "already" (e.g. *sengiphuzile*, *sekuyisikhathi*).
+     - *Negative Incomplete Infix `-ka-`*: "not yet" (e.g. *angikawatholi*, *akakadli*).
+- **Core User Features**:
+  - **Quick Search & Category Filter Pills**: Smooth client-side filtering across rule titles, formulas, isiZulu expressions, English meanings, and breakdown glosses.
+  - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
+  - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).
+  - **Contextual Clinical vs Community Cards**: Distinguishes clinical consultation phrases from everyday community dialogue.
+  - **Expandable Morpheme Token Breakdowns**: Detailed breakdown tokens identifying prefix, root, suffix, and grammatical gloss.
+  - **1-Tap Drill Gym Integration**: Instant flagging into `drillsStorage` (`kuzwakele_flagged_drills`) with cross-tab reactive event sync (`drills-updated`), populating directly into the Drills Gym Review Deck.

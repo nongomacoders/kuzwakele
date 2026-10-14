@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Radio, BookOpen, Dumbbell, Stethoscope, RefreshCw } from 'lucide-react';
+import { Activity, Radio, BookOpen, Dumbbell, Stethoscope, RefreshCw, Library } from 'lucide-react';
 import LiveConsult from './components/LiveConsult';
 import ScenariosView from './components/ScenariosView';
 import DrillsGym from './components/DrillsGym';
+import GrammarReference from './components/GrammarReference';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('live'); // 'live' | 'scenarios' | 'drills'
+  const [activeTab, setActiveTab] = useState('live'); // 'live' | 'scenarios' | 'drills' | 'grammar'
   const [backendStatus, setBackendStatus] = useState('checking'); // 'online' | 'offline' | 'checking'
   const [activeProvider, setActiveProvider] = useState(null);
 
@@ -94,6 +95,19 @@ export default function App() {
               <Dumbbell className="w-4 h-4" />
               <span>Drills Gym</span>
             </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('grammar')}
+              className={`flex items-center gap-2 py-1.5 px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+                activeTab === 'grammar'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950/40'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+              }`}
+            >
+              <Library className="w-4 h-4" />
+              <span>Grammar Rules</span>
+            </button>
           </nav>
 
           {/* Backend Status Indicator */}
@@ -136,6 +150,7 @@ export default function App() {
         {activeTab === 'live' && <LiveConsult />}
         {activeTab === 'scenarios' && <ScenariosView />}
         {activeTab === 'drills' && <DrillsGym />}
+        {activeTab === 'grammar' && <GrammarReference />}
       </main>
 
       {/* Footer */}

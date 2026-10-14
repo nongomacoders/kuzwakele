@@ -299,7 +299,7 @@ export default function DrillsGym() {
                                 </span>
                               </div>
                               <p className="text-[11px] text-slate-300 font-medium leading-snug">
-                                {g.analysis}
+                                {g.analysis || g.gloss}
                               </p>
                               {g.rule && (
                                 <p className="text-[10px] text-slate-500 italic pt-1 border-t border-slate-900">

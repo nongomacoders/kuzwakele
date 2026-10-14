@@ -12,3 +12,5 @@ node_modules/
 dist/
 *.db
 backend/*.db
+.firebase/
+frontend/.firebase/

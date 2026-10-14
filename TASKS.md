@@ -114,3 +114,21 @@
     - [x] Minimize history cards to Turn Header, Doctor turn, and Patient turn
   - [x] Verify clean frontend compilation (`npm run build`) and backend tests (`python backend/test_server.py`)
 
+## Grammar Reference Tab & Drill Integration
+- [x] Implement dedicated Grammar Reference Tab with category filters, structural formulas, clinical/community examples, and drill integration
+  - [x] Create curated grammar reference dataset `frontend/src/data/grammarData.js` across 4 targeted modules:
+    - [x] Category 1: Past Continuous & Remote Past (`past-tenses`) - Immediate Past Continuous (`be-`), Remote Past Simple (`nga-`, `wa-`, `sa-`), Remote Past Continuous (`ngangi-`, `waye-`)
+    - [x] Category 2: The Stative Aspect (`stative`) - Stative mechanism (*-vuvukile*, *-khathele*, *-lambile*, *-lele*) and contracted stative rule (*-ile* to *-e* before complement)
+    - [x] Category 3: Conjunctions & Clause Governance (`conjunctions`) - Subjunctive triggers (*ukuze*, *kumele*, *ake*), Participial triggers (*uma*, *ngenkathi*, *ngoba*, *lapho... khona* with Class 1 `u-` -> `e-` and `-nga-...-i`), Coordinating (*kodwa*, *futhi*, *noma*, *kanti*)
+    - [x] Category 4: Time-Flow Aspectual Infixes (`aspect-infixes`) - Progressive `-sa-`, Exclusive `se-` / `-se-`, Negative incomplete `-ka-`
+  - [x] Create `frontend/src/components/GrammarReference.jsx`:
+    - [x] Header, stats pill, and search input with instant filtering across title, formula, words, and explanations
+    - [x] Category filter pills (`All Rules`, `Past Continuous & Remote`, `Stative Aspect`, `Conjunctions & Clauses`, `Time Infixes (-sa-, se-, -ka-)`)
+    - [x] High-contrast rule cards with category badges, monospace formula banners, and one-click copy buttons
+    - [x] Common English-speaker pitfall warning callouts (`AlertTriangle`)
+    - [x] Contextual clinical vs community example cards with expandable/collapsible morpheme breakdown tokens
+    - [x] 1-Tap "Flag for Drills" button integrated with `localStorage` and reactive `drills-updated` event dispatch
+  - [x] Update `frontend/src/App.jsx` with 4th navigation tab (`Grammar Rules` with `Library` icon)
+  - [x] Enhance `frontend/src/components/DrillsGym.jsx` to render both `g.analysis` and `g.gloss`
+  - [x] Verify production build (`npm run build`) and backend tests (`python backend/test_server.py`)
+  - [x] Test responsive UI, category filtering, morpheme expansion, and drill flagging end-to-end in browser subagent
