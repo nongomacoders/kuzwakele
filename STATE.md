@@ -134,15 +134,19 @@
      - *Rule 3: Irregular Stative Mutations (`stative-irregular-stems`)*: Roots ending in `-ala` $\to$ `-ele` (*-khathala*, *-limala*, *-zala*), `-ama` $\to$ `-eme` (*-phapama*), and special stems (*-lala* $\to$ *ulele*, *-sutha* $\to$ *usuthi*, *-hlala* $\to$ *uhlezi*).
      - *Rule 4: Stative Negation Trap (`stative-negation-trap`)*: Statives retain their `-ile` / `-ele` suffix in the negative without shifting to `-i` (*angilambile*, *akalele*, *azivuvukile*).
      - *Rule 5: Essential Clinical Stative Inventory (`stative-clinical-lexicon`)*: Core diagnostic vocabulary for dehydration (*womile*), effusion (*kugcwele*), loss of consciousness (*uqulekile*), alertness (*uphapheme*), and airway congestion (*sivalekile*).
-  3. **Conjunctions & Clause Governance (`conjunctions`)**:
-     - *Subjunctive Triggers*: *ukuze* (so that), *kumele / kufanele* (must/should), *ake* (polite hortative) forcing verb ending `-e`.
-     - *Participial Triggers*: *uma* (if/when), *ngenkathi* (while), *ngoba* (because), *lapho... khona* (where) forcing Class 1 `u-` -> `e-` and negative infix `-nga-...-i`.
-     - *Independent Coordinating*: *kodwa* (but), *futhi* (and/furthermore), *noma* (or), *kanti* (whereas) requiring no mood shifts.
+  3. **Conjunctions & Clause Governance (`conjunctions` - Comprehensive 5-Rule Curriculum)**:
+     - *Rule 1: Subjunctive-Triggering Conjunctions (`conj-subjunctive-triggers`)*: Purposive and obligative conjunctions (*ukuze*, *kufanele*, *kumele*, *ake*) strictly demanding final vowel `-a` $\to$ `-e` and negative infix `-nga-...-i` (*ukuze wehlise umfutho*, *kufanele uhlale phansi*, *ukuze ungaguli*).
+     - *Rule 2: Participial-Triggering Conjunctions (`conj-participial-triggers`)*: Conditionals and temporal particles (*uma*, *ngenkathi*, *ngoba*, *selokhu*) forcing 3rd-person Class 1 singular `u-` $\to$ `e-` and Class 2 `ba-` $\to$ `be-`, with mandatory negative infix `-nga-...-i` (*uma isifuba siqhubeka*, *uma engaphuzi mithi*).
+     - *Rule 3: Independent Coordinating Conjunctions (`conj-coordinating-linkers`)*: Neutral clause bridges (*kodwa*, *futhi*, *noma*, *kanti*) connecting independent indicative statements without mood, concord, or vowel ending alterations.
+     - *Rule 4: Prepositional Conjunctions (`conj-compound-prepositional`)*: Inflected nouns of time constructing chronological sequences: *ngaphambi kokuba* (before, triggering subjunctive `-e`) versus *emva kokuba* (after, triggering participial/stative aspect).
+     - *Rule 5: Clinical Advisory & Action-Plan Formulations (`conj-clinical-advisories`)*: The 3-tier compound sentence architecture for patient discharge safety-netting: `[Condition: uma...] + [Escalation: kumele...] + [Purpose: ukuze...]`, alongside adherence warnings using *noma* ("even if").
   4. **Time-Flow Aspectual Infixes (`aspect-infixes`)**:
      - *Progressive Infix `-sa-`*: "still" / continuing (e.g. *usaphila*, *usabuzwa*).
      - *Exclusive Prefix `se-` / `-se-`*: "now" / "already" (e.g. *sengiphuzile*, *sekuyisikhathi*).
      - *Negative Incomplete Infix `-ka-`*: "not yet" (e.g. *angikawatholi*, *akakadli*).
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **Clause Governance Matrix**: Responsive reference grid comparing 8 key conjunctions (*ukuze*, *kufanele*, *ake*, *uma*, *ngenkathi*, *ngoba*, *kodwa*, *ngaphambi kokuba*), grammatical roles, induced moods, verb mutations, and negative formations.
+  - **Clause Governance Self-Check**: 3 clinical challenges (dehydration prevention with *ukuze* + *ungomi*, medication non-adherence with *uma* + *engaphuzi*, and medication timing sequence with *emva kokuba* + *kodwa* + *ngaphambi kokuba*) with instant answer reveal and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Past Concord Matrix**: Responsive reference grid comparing immediate continuous, remote simple, and remote continuous across 7 subject persons/classes with clinical examples and usage notes.
   - **History-Taking Self-Check**: 3 bedside scenarios with instant answer reveal and 1-tap `[ Flag for Drills ]` bookmarking into `localStorage` (`kuzwakele_flagged_drills`).
   - **High-Yield Stative Mutation Reference Grid**: Dedicated responsive table comparing 10 high-yield roots, process meanings, present positive statives, present negative statives, and clinical applications.

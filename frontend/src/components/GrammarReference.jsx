@@ -37,7 +37,9 @@ import {
   PAST_CONCORD_MATRIX,
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_IRREGULAR_TABLE,
-  STATIVE_PRACTICE_CHECKPOINTS
+  STATIVE_PRACTICE_CHECKPOINTS,
+  CONJUNCTION_GOVERNANCE_TABLE,
+  CONJUNCTION_PRACTICE_CHECKPOINTS
 } from '../data/grammarData';
 import { toggleDrillFlag, isDrillFlagged } from '../utils/drillsStorage';
 
@@ -58,6 +60,11 @@ export default function GrammarReference() {
   const [isPastPracticeOpen, setIsPastPracticeOpen] = useState(true);
   const [isPastMatrixOpen, setIsPastMatrixOpen] = useState(true);
 
+  // Conjunctions specific interactive states
+  const [revealedConjCheckpoints, setRevealedConjCheckpoints] = useState({});
+  const [isConjPracticeOpen, setIsConjPracticeOpen] = useState(true);
+  const [isConjMatrixOpen, setIsConjMatrixOpen] = useState(true);
+
   // Sync flagged state with localStorage and reactive drills-updated event
   const refreshFlaggedState = () => {
     const updated = new Set();
@@ -69,7 +76,7 @@ export default function GrammarReference() {
       });
     });
 
-    // Also sync practice checkpoints (stative + past tenses)
+    // Also sync practice checkpoints (stative + past tenses + conjunctions)
     STATIVE_PRACTICE_CHECKPOINTS.forEach((chk) => {
       if (isDrillFlagged(chk.id)) {
         updated.add(chk.id);
@@ -77,6 +84,12 @@ export default function GrammarReference() {
     });
 
     PAST_PRACTICE_CHECKPOINTS.forEach((chk) => {
+      if (isDrillFlagged(chk.id)) {
+        updated.add(chk.id);
+      }
+    });
+
+    CONJUNCTION_PRACTICE_CHECKPOINTS.forEach((chk) => {
       if (isDrillFlagged(chk.id)) {
         updated.add(chk.id);
       }
@@ -192,6 +205,41 @@ export default function GrammarReference() {
 
   const togglePastCheckpointReveal = (chkId) => {
     setRevealedPastCheckpoints((prev) => ({
+      ...prev,
+      [chkId]: !prev[chkId]
+    }));
+  };
+
+  const handleToggleConjPracticeDrill = (chk) => {
+    const isNowFlagged = toggleDrillFlag({
+      id: chk.id,
+      scenarioId: 'grammar-conjunctions-practice',
+      scenarioTitle: `Conjunctions: #${chk.challengeNumber}`,
+      turnNumber: chk.challengeNumber,
+      speaker: 'doctor',
+      isizuluText: chk.primaryAnswer,
+      englishText: chk.prompt,
+      phoneticCue: chk.targetConcept,
+      grammarBreakdown: chk.breakdown.map((b) => ({
+        chunk: b.chunk,
+        analysis: b.gloss,
+        rule: chk.targetConcept
+      }))
+    });
+
+    setFlaggedIds((prev) => {
+      const next = new Set(prev);
+      if (isNowFlagged) {
+        next.add(chk.id);
+      } else {
+        next.delete(chk.id);
+      }
+      return next;
+    });
+  };
+
+  const toggleConjCheckpointReveal = (chkId) => {
+    setRevealedConjCheckpoints((prev) => ({
       ...prev,
       [chkId]: !prev[chkId]
     }));
@@ -1061,6 +1109,275 @@ export default function GrammarReference() {
                                       className="bg-slate-900 border border-slate-800 rounded-lg p-2 space-y-1 text-xs"
                                     >
                                       <span className="font-mono font-bold text-[11px] text-teal-300 bg-teal-950/80 border border-teal-900/60 px-1.5 py-0.5 rounded inline-block">
+                                        {item.chunk}
+                                      </span>
+                                      <p className="text-[11px] text-slate-300 leading-snug">
+                                        {item.gloss}
+                                      </p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ========================================================= */}
+          {/* CONJUNCTIONS SPECIAL ENHANCEMENT: GOVERNANCE MATRIX & QUIZ */}
+          {/* ========================================================= */}
+          {selectedCategory === 'conjunctions' && (
+            <div className="space-y-6">
+              {/* 1. Quick-Reference Clause Governance Matrix Table */}
+              <div className="bg-slate-900/90 border border-amber-900/50 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
+                <div className="flex items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 bg-amber-950/80 border border-amber-800/80 rounded-xl text-amber-400">
+                      <GitFork className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-black text-slate-100 tracking-tight flex items-center gap-2">
+                        <span>Clause Governance & Conjunction Matrix</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800/60 font-bold hidden sm:inline-block">
+                          8 Key Conjunctions
+                        </span>
+                      </h3>
+                      <p className="text-xs text-slate-400">
+                        Direct reference comparing conjunction particle, induced mood, verb vowel mutation, and negative formation.
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsConjMatrixOpen(!isConjMatrixOpen)}
+                    className="text-xs text-slate-400 hover:text-slate-200 flex items-center gap-1 py-1 px-2.5 bg-slate-950 border border-slate-800 rounded-lg transition-colors"
+                  >
+                    <span>{isConjMatrixOpen ? 'Collapse' : 'Expand'}</span>
+                    {isConjMatrixOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
+
+                {isConjMatrixOpen && (
+                  <div className="overflow-x-auto scrollbar-thin">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+                          <th className="py-2.5 px-3">Conjunction</th>
+                          <th className="py-2.5 px-3">Grammatical Role</th>
+                          <th className="py-2.5 px-3 text-amber-400">Triggered Mood</th>
+                          <th className="py-2.5 px-3">Verb Mutation</th>
+                          <th className="py-2.5 px-3 text-rose-400">Negative Formation</th>
+                          <th className="py-2.5 px-3">Clinical Example</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+                        {CONJUNCTION_GOVERNANCE_TABLE.map((row, idx) => {
+                          const moodBadgeClass =
+                            row.triggeredMood === 'Subjunctive'
+                              ? 'bg-emerald-950/80 text-emerald-300 border-emerald-800/70'
+                              : row.triggeredMood === 'Participial'
+                              ? 'bg-blue-950/80 text-blue-300 border-blue-800/70'
+                              : 'bg-slate-800/80 text-slate-300 border-slate-700/70';
+
+                          return (
+                            <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+                              <td className="py-2.5 px-3 font-mono font-bold text-amber-300 whitespace-nowrap">
+                                {row.conjunction}
+                              </td>
+                              <td className="py-2.5 px-3 text-slate-400 whitespace-nowrap">
+                                {row.meaning}
+                              </td>
+                              <td className="py-2.5 px-3 whitespace-nowrap">
+                                <span className={`font-mono font-bold px-2 py-0.5 rounded border text-[11px] ${moodBadgeClass}`}>
+                                  {row.triggeredMood}
+                                </span>
+                              </td>
+                              <td className="py-2.5 px-3 font-mono text-[11px] text-amber-200/90 whitespace-nowrap">
+                                {row.mutationRule}
+                              </td>
+                              <td className="py-2.5 px-3 font-mono text-[11px] text-rose-300 whitespace-nowrap">
+                                {row.negativeFormation}
+                              </td>
+                              <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">
+                                {row.clinicalExample}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+
+              {/* 2. Interactive Checkpoint / Self-Test Drawer */}
+              <div className="bg-gradient-to-br from-amber-950/40 via-slate-900/90 to-slate-900 border border-amber-800/60 rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
+                <div className="flex items-center justify-between gap-2 border-b border-amber-900/40 pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2.5 bg-amber-900/60 border border-amber-700/60 rounded-xl text-amber-300 shadow-md">
+                      <Target className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-base sm:text-lg font-black text-slate-100 tracking-tight">
+                          Interactive Checkpoint: Clause Governance Clinical Self-Check
+                        </h3>
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800/80 font-bold hidden sm:inline-block">
+                          3 Clinical Scenarios
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-400">
+                        Practice applying subjunctive purpose triggers (-e), participial conditional shifts (uma), and compound sequences.
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsConjPracticeOpen(!isConjPracticeOpen)}
+                    className="text-xs text-amber-300 hover:text-white flex items-center gap-1 py-1 px-3 bg-amber-950 border border-amber-800 rounded-lg transition-colors font-bold"
+                  >
+                    <span>{isConjPracticeOpen ? 'Hide Checkpoints' : 'Start Practice'}</span>
+                    {isConjPracticeOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
+
+                {isConjPracticeOpen && (
+                  <div className="space-y-4 pt-1 animate-fadeIn">
+                    {CONJUNCTION_PRACTICE_CHECKPOINTS.map((chk) => {
+                      const isRevealed = !!revealedConjCheckpoints[chk.id];
+                      const isFlagged = flaggedIds.has(chk.id);
+
+                      return (
+                        <div
+                          key={chk.id}
+                          className="bg-slate-950 border border-slate-800 hover:border-slate-700/80 rounded-xl p-4 space-y-3.5 shadow-md transition-all"
+                        >
+                          {/* Checkpoint Header */}
+                          <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-2.5 flex-wrap">
+                            <div className="flex items-center gap-2">
+                              <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800/60">
+                                Challenge #{chk.challengeNumber}
+                              </span>
+                              <span className="text-xs font-bold text-slate-300">
+                                {chk.targetConcept}
+                              </span>
+                            </div>
+
+                            {/* 1-Tap Flag for Drills Button */}
+                            <button
+                              type="button"
+                              onClick={() => handleToggleConjPracticeDrill(chk)}
+                              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold transition-all border ${
+                                isFlagged
+                                  ? 'bg-amber-600 text-white border-amber-500 shadow-md shadow-amber-950/50'
+                                  : 'bg-slate-900 text-slate-300 hover:text-amber-300 hover:bg-slate-850 border-slate-700'
+                              }`}
+                              title={isFlagged ? 'Remove from Drills Gym' : 'Save challenge to Drills Gym'}
+                            >
+                              {isFlagged ? (
+                                <>
+                                  <BookmarkCheck className="w-3.5 h-3.5 text-white" />
+                                  <span>Flagged</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Bookmark className="w-3.5 h-3.5 text-slate-400" />
+                                  <span>Flag for Drills</span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+
+                          {/* Challenge Prompt */}
+                          <div>
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
+                              Target English Meaning:
+                            </span>
+                            <p className="text-sm sm:text-base font-bold text-slate-100 mt-0.5">
+                              "{chk.prompt}"
+                            </p>
+                          </div>
+
+                          {/* Reveal Button */}
+                          <div>
+                            <button
+                              type="button"
+                              onClick={() => toggleConjCheckpointReveal(chk.id)}
+                              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-950 text-amber-300 hover:bg-amber-900 border border-amber-800/80 transition-colors"
+                            >
+                              {isRevealed ? (
+                                <>
+                                  <EyeOff className="w-3.5 h-3.5" />
+                                  <span>Hide Answer</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Eye className="w-3.5 h-3.5" />
+                                  <span>Reveal isiZulu & Concord Breakdown</span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+
+                          {/* Revealed Answer & Morpheme Breakdown */}
+                          {isRevealed && (
+                            <div className="pt-2 border-t border-slate-800/80 space-y-3 animate-fadeIn">
+                              <div className="bg-slate-900/90 border border-amber-900/50 rounded-xl p-3 flex items-start justify-between gap-2">
+                                <div>
+                                  <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider block">
+                                    Spoken isiZulu Solution:
+                                  </span>
+                                  <p className="text-base font-bold text-amber-200 mt-0.5">
+                                    "{chk.primaryAnswer}"
+                                  </p>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => handleCopyText(chk.primaryAnswer, `chk-${chk.id}`)}
+                                  className="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition-colors shrink-0"
+                                  title="Copy isiZulu phrase"
+                                >
+                                  {copiedId === `chk-${chk.id}` ? (
+                                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                                  ) : (
+                                    <Copy className="w-3.5 h-3.5" />
+                                  )}
+                                </button>
+                              </div>
+
+                              {/* Linguistic Rule Tip Callout */}
+                              <div className="bg-amber-950/20 border border-amber-800/40 rounded-xl p-3 text-xs text-amber-200/90 flex items-start gap-2.5">
+                                <Lightbulb className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                                <div>
+                                  <span className="font-bold text-amber-300 block text-[11px]">
+                                    Linguistic Checkpoint Key:
+                                  </span>
+                                  <p className="text-xs text-amber-200/90 leading-relaxed mt-0.5">
+                                    {chk.ruleTip}
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Breakdown Grid Tokens */}
+                              <div className="space-y-1.5">
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                                  Morpheme & Gloss Analysis:
+                                </span>
+                                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                                  {chk.breakdown.map((item, bIdx) => (
+                                    <div
+                                      key={bIdx}
+                                      className="bg-slate-900 border border-slate-800 rounded-lg p-2 space-y-1 text-xs"
+                                    >
+                                      <span className="font-mono font-bold text-[11px] text-amber-300 bg-amber-950/80 border border-amber-900/60 px-1.5 py-0.5 rounded inline-block">
                                         {item.chunk}
                                       </span>
                                       <p className="text-[11px] text-slate-300 leading-snug">

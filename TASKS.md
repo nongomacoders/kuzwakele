@@ -190,3 +190,29 @@
     - [x] Tested answer reveal on Challenge #1
     - [x] Flagged Challenge #1 and confirmed in Drills Gym
 
+## Intensive Conjunctions & Clause Governance Expansion
+- [x] Intensively expand "Conjunctions & Clause Governance" in Grammar Reference with 5 clinical-grade rules, clause governance matrix, and clinical advisory self-checks
+  - [x] Update `frontend/src/data/grammarData.js`:
+    - [x] Rule 1: Subjunctive-Triggering Conjunctions (`conj-subjunctive-triggers`, *ukuze*, *kufanele*, *kumele*, *ake*, final vowel `-e`, `-nga-...-i` negative)
+    - [x] Rule 2: Participial-Triggering Conjunctions (`conj-participial-triggers`, *uma*, *ngenkathi*, *ngoba*, Class 1 `u-` -> `e-`, Class 2 `ba-` -> `be-`, `-nga-...-i` negative)
+    - [x] Rule 3: Independent Coordinating Conjunctions (`conj-coordinating-linkers`, *kodwa*, *futhi*, *noma*, *kanti*, neutral clause coordination)
+    - [x] Rule 4: Prepositional Conjunctions (`conj-compound-prepositional`, *ngaphambi kokuba* + subjunctive vs *emva kokuba* + participial/stative)
+    - [x] Rule 5: Clinical Advisory & Action-Plan Formulations (`conj-clinical-advisories`, multi-clause conditional discharge advisories and emergency escalation)
+    - [x] Export `CONJUNCTION_GOVERNANCE_TABLE` comparing 8 key conjunction particles, triggered moods, mutation rules, and negative forms
+    - [x] Export `CONJUNCTION_PRACTICE_CHECKPOINTS` with 3 clinical challenges, target concepts, answer reveals, rule tips, and breakdown tokens
+    - [x] Update `conjunctions` section in `GRAMMAR_SECTIONS` to `badge: '5 Rules'`, `ruleCount: 5`
+  - [x] Enhance `frontend/src/components/GrammarReference.jsx`:
+    - [x] Render collapsible Clause Governance Matrix Table comparing 8 core forms with amber styling
+    - [x] Render Interactive Checkpoint: Clause Governance Clinical Self-Check with answer reveal toggles and 1-tap `[ Flag for Drills ]` bookmarking
+    - [x] Sync conjunctions checkpoints in `refreshFlaggedState()` for cross-tab reactivity with Drills Gym
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean PWA bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified 5 rules, pitfall callouts, and formulas
+    - [x] Verified Clause Governance Matrix table
+    - [x] Tested answer reveal on Challenge #1
+    - [x] Flagged Challenge #1 and confirmed in Drills Gym
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+
