@@ -215,4 +215,30 @@
     - [x] Flagged Challenge #1 and confirmed in Drills Gym
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
 
+## Intensive Time-Flow Aspectual Infixes Expansion
+- [x] Intensively expand "Time-Flow Aspectual Infixes" in Grammar Reference with 5 clinical-grade rules, symptom trajectory matrix, and longitudinal monitoring self-checks
+  - [x] Update `frontend/src/data/grammarData.js`:
+    - [x] Rule 1: Progressive Infix `-sa-` ("Still" & "No Longer", `aspect-progressive-sa`, `SC + -sa- + Verb Root + -a` vs `a- + SC + -sa- + Verb Root + -i`)
+    - [x] Rule 2: Exclusive Aspect `se-` / `-se-` ("Now" & "Already", `aspect-exclusive-se`, `sengi-`, `ususe-` / `use-`, `sebe-`, `sekuyi-`, state transitions)
+    - [x] Rule 3: Negative Incomplete Infix `-ka-` ("Not Yet", `aspect-incomplete-ka`, `a- + SC + -ka- + Verb Root + -i / -e`, pending lab turnaround and unfulfilled therapy)
+    - [x] Rule 4: Occasional / Frequentative Infix `-ke-` ("Ever / Once / Sometimes", `aspect-occasional-ke`, `SC + -ke- + Verb Root + -e / -a`, review of systems and allergic history)
+    - [x] Rule 5: Clinical Symptom Trajectory & Longitudinal Monitoring (`aspect-clinical-trajectory`, multi-encounter disease tracking: prior `wake...`, transition `se-...`, persistence `-sa-...`, resolution `abusekho...`)
+    - [x] Export `ASPECT_INFIX_MATRIX` comparing 4 temporal infixes with formulas, concepts, and bedside examples
+    - [x] Export `ASPECT_INFIX_CHECKPOINTS` with 3 clinical challenges, target concepts, answer reveals, rule tips, and breakdown tokens
+    - [x] Update `aspect-infixes` section in `GRAMMAR_SECTIONS` to `badge: '5 Rules'`, `ruleCount: 5`
+  - [x] Enhance `frontend/src/components/GrammarReference.jsx`:
+    - [x] Render collapsible Symptom Trajectory Matrix Table comparing 4 core temporal infixes with emerald styling
+    - [x] Render Interactive Checkpoint: Symptom Trajectory Clinical Self-Check with answer reveal toggles and 1-tap `[ Flag for Drills ]` bookmarking
+    - [x] Sync aspect infix checkpoints in `refreshFlaggedState()` for cross-tab reactivity with Drills Gym
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean PWA bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified 5 rules, formulas, and pitfall callouts
+    - [x] Verified Symptom Trajectory Matrix table
+    - [x] Tested answer reveal on Challenge #1 (`Usabuzwa ubuhlungu besifuba, noma abusebuhlungu?`)
+    - [x] Flagged Challenge #1 and confirmed in Drills Gym
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+
 

@@ -140,10 +140,12 @@
      - *Rule 3: Independent Coordinating Conjunctions (`conj-coordinating-linkers`)*: Neutral clause bridges (*kodwa*, *futhi*, *noma*, *kanti*) connecting independent indicative statements without mood, concord, or vowel ending alterations.
      - *Rule 4: Prepositional Conjunctions (`conj-compound-prepositional`)*: Inflected nouns of time constructing chronological sequences: *ngaphambi kokuba* (before, triggering subjunctive `-e`) versus *emva kokuba* (after, triggering participial/stative aspect).
      - *Rule 5: Clinical Advisory & Action-Plan Formulations (`conj-clinical-advisories`)*: The 3-tier compound sentence architecture for patient discharge safety-netting: `[Condition: uma...] + [Escalation: kumele...] + [Purpose: ukuze...]`, alongside adherence warnings using *noma* ("even if").
-  4. **Time-Flow Aspectual Infixes (`aspect-infixes`)**:
-     - *Progressive Infix `-sa-`*: "still" / continuing (e.g. *usaphila*, *usabuzwa*).
-     - *Exclusive Prefix `se-` / `-se-`*: "now" / "already" (e.g. *sengiphuzile*, *sekuyisikhathi*).
-     - *Negative Incomplete Infix `-ka-`*: "not yet" (e.g. *angikawatholi*, *akakadli*).
+  4. **Time-Flow Aspectual Infixes (`aspect-infixes` - Comprehensive 5-Rule Curriculum & Trajectory Matrix)**:
+     - *Rule 1: Progressive Infix `-sa-` ("Still" & "No Longer", `aspect-progressive-sa`)*: Mid-verb continuity marker (`SC + -sa- + Root + -a`). Negation shifts to "no longer" via prefix `a-` and final `-i` (`a- + SC + -sa- + Root + -i`, e.g. *Usabuzwa ubuhlungu?* vs. *Angisabhemi*, *Izinyawo azisavuvukile*).
+     - *Rule 2: Exclusive Aspect `se-` / `-se-` ("Now" & "Already", `aspect-exclusive-se`)*: Marks newly initiated states, completed onset, or threshold timing (*sengi-*, *ususe-* / *use-*, *sebe-*, *sekuyi-*). Contrasts simple stative (*ngilambile*) with exclusive stative (*sengilambile* = "I am now hungry / I have become hungry").
+     - *Rule 3: Negative Incomplete Infix `-ka-` ("Not Yet", `aspect-incomplete-ka`)*: Strictly negative incomplete construction (`a- + SC + -ka- + Root + -i / -e`) tracking pending lab turnaround, unfulfilled appointments, and pending doses (*Angikaqedi*, *Imiphumela yegazi ayikafiki evela elabhorethri*).
+     - *Rule 4: Occasional / Frequentative Infix `-ke-` ("Ever / Once / Sometimes", `aspect-occasional-ke`)*: Review of systems, prior allergic history, and episodic symptom elicitation (`SC + -ke- + Root + -e / -a`, e.g. *Wake waba nalokhu ngaphambili?*, *Uke uzwe isiyezi?*, *Wake waba nokungezwani nephinisilini?*). Contrasted with hortative prefix *Ake...* ("please").
+     - *Rule 5: Clinical Symptom Trajectory & Longitudinal Monitoring (`aspect-clinical-trajectory`)*: Multi-encounter formulation architecture chaining temporal infixes across baseline (*Kuthe uqala ukugula...*), episodic recurrence (*Kuke kubuye lokhu kuhlaba?*), persistence (*Kusesebuhlungu yini noma sekungcono?*), and resolution (*Ubuhlungu abusekho, sekusele ukukhathala nje*).
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
   - **Clause Governance Matrix**: Responsive reference grid comparing 8 key conjunctions (*ukuze*, *kufanele*, *ake*, *uma*, *ngenkathi*, *ngoba*, *kodwa*, *ngaphambi kokuba*), grammatical roles, induced moods, verb mutations, and negative formations.
   - **Clause Governance Self-Check**: 3 clinical challenges (dehydration prevention with *ukuze* + *ungomi*, medication non-adherence with *uma* + *engaphuzi*, and medication timing sequence with *emva kokuba* + *kodwa* + *ngaphambi kokuba*) with instant answer reveal and 1-tap `[ Flag for Drills ]` bookmarking.
@@ -151,6 +153,8 @@
   - **History-Taking Self-Check**: 3 bedside scenarios with instant answer reveal and 1-tap `[ Flag for Drills ]` bookmarking into `localStorage` (`kuzwakele_flagged_drills`).
   - **High-Yield Stative Mutation Reference Grid**: Dedicated responsive table comparing 10 high-yield roots, process meanings, present positive statives, present negative statives, and clinical applications.
   - **Interactive Checkpoints Bedside Self-Test**: 3 clinical self-check scenarios (tired gogo, alert baby, unswollen feet) with toggleable answer reveal, concord breakdowns, linguistic rule tips, and 1-tap `[ Flag for Drills ]` bookmarking.
+  - **Symptom Trajectory & Aspect Infix Matrix Table**: Responsive comparison table displaying 4 core temporal infixes (`-sa-`, `se- / -se-`, `-ka-`, `-ke-`) across positive/negative morphology and bedside diagnostic functions.
+  - **Symptom Trajectory & Aspect Infix Self-Check**: 3 clinical challenges (symptom persistence vs cessation, pending lab turnaround, and prior allergic history) with answer reveals, linguistic keys, morpheme gloss chips, and 1-tap `[ Flag for Drills ]` bookmarking.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).
