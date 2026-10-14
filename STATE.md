@@ -103,11 +103,22 @@
   - Minimal History Cards: each card now displays solely the Turn header (Turn #N, latency badge, timestamp), Doctor turn (isiZulu & English subtitle), and Patient turn (isiZulu & English subtitle).
 
 ## Grammar Reference Tab & Spaced Repetition Drill Integration
-- **Status**: Active & Verified
+- **Status**: Active & Verified (2-Level Section Hub Architecture)
 - **Components & Data**:
-  - `frontend/src/data/grammarData.js`: Curated, linguistically deep grammar reference dataset covering 4 targeted modules with 10 detailed rules and verified clinical/community examples.
-  - `frontend/src/components/GrammarReference.jsx`: Mobile-first interactive grammar reference viewer with real-time search, category filter pills, structural formulas, pitfall warnings, and 1-tap drill flagging.
-  - `frontend/src/App.jsx`: 4-tab top navigation shell (`Live Co-Pilot`, `Scenarios`, `Drills Gym`, `Grammar Rules`).
+  - `frontend/src/data/grammarData.js`: Curated, linguistically deep grammar reference dataset covering 4 targeted modules with 10 detailed rules, verified clinical/community examples, and `GRAMMAR_SECTIONS` metadata.
+  - `frontend/src/components/GrammarReference.jsx`: 2-level hierarchical reference viewer with Directory Index Hub (`selectedCategory === null`), Section Detail drill-down views (`selectedCategory !== null`), global real-time search, pitfall warnings, and 1-tap drill flagging.
+  - `frontend/src/App.jsx`: Responsive 4-tab top navigation shell (`Live`, `Scenarios`, `Drills`, `Grammar`) with tailored mobile padding (`px-2.5 sm:px-3.5`) and responsive text spans to prevent truncation on screens down to 360px.
+- **2-Level Section Hub Architecture**:
+  - **Level 1: Section Hub / Directory Index**:
+    - Clean 2x2 grid displaying thumb-friendly section cards for each core module (`past-tenses`, `stative`, `conjunctions`, `aspect-infixes`).
+    - Visual hierarchy with module icons (`Clock`, `Activity`, `GitFork`, `FastForward`), rule count badges (`3 Rules`), key concepts, and monospace preview hooks (`bengihamba vs. ngahamba`, `-vuvukile, -khathele`, `ukuze vs. uma`, `-sa-, se-, -ka-`).
+    - Quick global search input searching across titles, formulas, roots, and English glosses.
+  - **Level 2: Section Detail View**:
+    - Accessible `[ ‹ All Sections ]` top navigation bar returning directly to directory index.
+    - Isolates rules belonging strictly to the selected module, eliminating infinite vertical scrolling.
+    - Bottom `[ ‹ Back to All Sections ]` navigation button allowing quick return after reviewing long clinical examples.
+  - **Search Results View**:
+    - Automatically displays matching rules across all sections whenever search query is non-empty, with one-tap `[ Clear Search ]` button.
 - **Targeted Grammatical Modules**:
   1. **Past Continuous & Remote Past (`past-tenses`)**:
      - *Immediate Past Continuous*: `be-` + concord (`bengi-`, `ubu-`, `ube-`, `bebe-`) for actions ongoing earlier today or yesterday.
@@ -125,7 +136,6 @@
      - *Exclusive Prefix `se-` / `-se-`*: "now" / "already" (e.g. *sengiphuzile*, *sekuyisikhathi*).
      - *Negative Incomplete Infix `-ka-`*: "not yet" (e.g. *angikawatholi*, *akakadli*).
 - **Core User Features**:
-  - **Quick Search & Category Filter Pills**: Smooth client-side filtering across rule titles, formulas, isiZulu expressions, English meanings, and breakdown glosses.
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).
   - **Contextual Clinical vs Community Cards**: Distinguishes clinical consultation phrases from everyday community dialogue.

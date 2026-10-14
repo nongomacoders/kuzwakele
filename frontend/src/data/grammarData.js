@@ -15,6 +15,45 @@ export const GRAMMAR_CATEGORIES = [
   { id: 'aspect-infixes', label: 'Time Infixes (-sa-, se-, -ka-)' }
 ];
 
+export const GRAMMAR_SECTIONS = [
+  {
+    id: 'past-tenses',
+    title: 'Past Continuous & Remote Past',
+    badge: '3 Rules',
+    ruleCount: 3,
+    keyConcept: 'Imperfect be-, deep past -a-, and remote continuous ngangi-.',
+    previewHook: 'bengihamba vs. ngahamba',
+    description: 'Master immediate imperfect actions, historical events, and distant past habitual conditions.'
+  },
+  {
+    id: 'stative',
+    title: 'The Stative Aspect',
+    badge: '2 Rules',
+    ruleCount: 2,
+    keyConcept: 'Bodily & mental states using past endings for present conditions.',
+    previewHook: '-vuvukile, -khathele, -lambile',
+    description: 'Express current physical reality, swelling, exhaustion, and pain using stative suffixes (-ile / -e).'
+  },
+  {
+    id: 'conjunctions',
+    title: 'Conjunctions & Clause Governance',
+    badge: '3 Rules',
+    ruleCount: 3,
+    keyConcept: 'Subjunctive triggers (ukuze), participial shifts (uma), coordinating linkers (kodwa).',
+    previewHook: 'ukuze uphole vs. uma egula',
+    description: 'Learn how linking particles govern verbs into subjunctive or participial moods and negative concords.'
+  },
+  {
+    id: 'aspect-infixes',
+    title: 'Time-Flow Aspectual Infixes',
+    badge: '3 Rules',
+    ruleCount: 3,
+    keyConcept: 'Infix modifiers for continuity, state transitions, and incomplete action.',
+    previewHook: '-sa- (still), se- (now/already), -ka- (not yet)',
+    description: 'Navigate temporal nuances embedded directly into the verb root (-sa-, se-, -ka-).'
+  }
+];
+
 export const GRAMMAR_RULES = [
   // ==========================================
   // CATEGORY 1: PAST CONTINUOUS & REMOTE PAST

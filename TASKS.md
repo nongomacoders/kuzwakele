@@ -132,3 +132,19 @@
   - [x] Enhance `frontend/src/components/DrillsGym.jsx` to render both `g.analysis` and `g.gloss`
   - [x] Verify production build (`npm run build`) and backend tests (`python backend/test_server.py`)
   - [x] Test responsive UI, category filtering, morpheme expansion, and drill flagging end-to-end in browser subagent
+
+## Grammar Section Hub Refactor & Mobile Navigation Overflow Fix
+- [x] Refactor Grammar Reference into a 2-level Section Hub (Directory Index -> Section Detail View) and fix mobile tab clipping
+  - [x] Update `frontend/src/App.jsx` navigation bar:
+    - [x] Adjust tab padding to `px-2.5 sm:px-3.5` and gap to `gap-1 sm:gap-1.5`
+    - [x] Add responsive text spans: `Live<span className="hidden md:inline"> Co-Pilot</span>`, `Drills<span className="hidden sm:inline"> Gym</span>`, `Grammar<span className="hidden sm:inline"> Rules</span>`
+    - [x] Verify clean fit on narrow mobile screens (375px - 390px) without truncation
+  - [x] Update `frontend/src/data/grammarData.js`:
+    - [x] Export `GRAMMAR_SECTIONS` with badges, rule counts, key concepts, and preview hooks
+  - [x] Refactor `frontend/src/components/GrammarReference.jsx`:
+    - [x] State architecture with `selectedCategory === null` (Directory Hub) and `searchQuery`
+    - [x] Level 1 Directory Index Hub displaying 4 section cards with icons, badges, key concepts, preview hooks, and drill-down links
+    - [x] Level 2 Section Detail View with `[ ‹ All Sections ]` header navigation, active section rules, and bottom return button
+    - [x] Unified search results view searching across all sections with clear search action
+  - [x] Verify production build (`npm run build`)
+  - [x] End-to-end browser subagent verification on mobile viewport (380x750)

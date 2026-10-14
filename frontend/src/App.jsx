@@ -60,53 +60,53 @@ export default function App() {
             <button
               type="button"
               onClick={() => setActiveTab('live')}
-              className={`flex items-center gap-2 py-1.5 px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+              className={`flex items-center gap-1.5 sm:gap-2 py-1.5 px-2.5 sm:px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
                 activeTab === 'live'
                   ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
               }`}
             >
-              <Radio className="w-4 h-4" />
-              <span>Live Co-Pilot</span>
+              <Radio className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span>Live<span className="hidden md:inline"> Co-Pilot</span></span>
             </button>
 
             <button
               type="button"
               onClick={() => setActiveTab('scenarios')}
-              className={`flex items-center gap-2 py-1.5 px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+              className={`flex items-center gap-1.5 sm:gap-2 py-1.5 px-2.5 sm:px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
                 activeTab === 'scenarios'
                   ? 'bg-purple-600 text-white shadow-md shadow-purple-950/40'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
               }`}
             >
-              <BookOpen className="w-4 h-4" />
+              <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span>Scenarios</span>
             </button>
 
             <button
               type="button"
               onClick={() => setActiveTab('drills')}
-              className={`flex items-center gap-2 py-1.5 px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+              className={`flex items-center gap-1.5 sm:gap-2 py-1.5 px-2.5 sm:px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
                 activeTab === 'drills'
                   ? 'bg-amber-600 text-white shadow-md shadow-amber-950/40'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
               }`}
             >
-              <Dumbbell className="w-4 h-4" />
-              <span>Drills Gym</span>
+              <Dumbbell className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span>Drills<span className="hidden sm:inline"> Gym</span></span>
             </button>
 
             <button
               type="button"
               onClick={() => setActiveTab('grammar')}
-              className={`flex items-center gap-2 py-1.5 px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+              className={`flex items-center gap-1.5 sm:gap-2 py-1.5 px-2.5 sm:px-3.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
                 activeTab === 'grammar'
                   ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950/40'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
               }`}
             >
-              <Library className="w-4 h-4" />
-              <span>Grammar Rules</span>
+              <Library className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span>Grammar<span className="hidden sm:inline"> Rules</span></span>
             </button>
           </nav>
 
