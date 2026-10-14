@@ -124,9 +124,12 @@
      - *Immediate Past Continuous*: `be-` + concord (`bengi-`, `ubu-`, `ube-`, `bebe-`) for actions ongoing earlier today or yesterday.
      - *Remote Past Simple*: Elided long `-a-` concords (`nga-`, `wa-`, `sa-`, `ba-`, `kwa-`) for events days/months/years ago.
      - *Remote Past Continuous*: Remote continuous concords (`ngangi-`, `wawu-`, `waye-`, `sasi-`, `babe-`) for chronic or habitual distant actions.
-  2. **The Stative Aspect (`stative`)**:
-     - *The Stative Mechanism*: Root verbs of process where past suffix `-ile` / `-e` denotes present ongoing reality (*-vuvukile*, *-khathele*, *-lambile*, *-lele*, *-mile*).
-     - *Contracted Stative Rule*: Drop from full `-ile` to contracted `-e` when directly followed by an adverb, object, or complement (*Ngilambe kakhulu* vs *Ngilambile*).
+  2. **The Stative Aspect (`stative` - Comprehensive 5-Rule Curriculum)**:
+     - *Rule 1: Process vs. Present Resulting State (`stative-core-concept`)*: Root verbs of process where past suffix `-ile` / `-e` denotes present bodily/mental reality (*-vuvukile*, *-khathele*, *-lambile*, *-lele*, *-mile*).
+     - *Rule 2: The Contraction Rule (`stative-contraction-rule`)*: Drop from full `-ile` to contracted `-e` when directly followed by an adverb, complement, or locative (*Ngilambe kakhulu* vs *Ngilambile*).
+     - *Rule 3: Irregular Stative Mutations (`stative-irregular-stems`)*: Roots ending in `-ala` $\to$ `-ele` (*-khathala*, *-limala*, *-zala*), `-ama` $\to$ `-eme` (*-phapama*), and special stems (*-lala* $\to$ *ulele*, *-sutha* $\to$ *usuthi*, *-hlala* $\to$ *uhlezi*).
+     - *Rule 4: Stative Negation Trap (`stative-negation-trap`)*: Statives retain their `-ile` / `-ele` suffix in the negative without shifting to `-i` (*angilambile*, *akalele*, *azivuvukile*).
+     - *Rule 5: Essential Clinical Stative Inventory (`stative-clinical-lexicon`)*: Core diagnostic vocabulary for dehydration (*womile*), effusion (*kugcwele*), loss of consciousness (*uqulekile*), alertness (*uphapheme*), and airway congestion (*sivalekile*).
   3. **Conjunctions & Clause Governance (`conjunctions`)**:
      - *Subjunctive Triggers*: *ukuze* (so that), *kumele / kufanele* (must/should), *ake* (polite hortative) forcing verb ending `-e`.
      - *Participial Triggers*: *uma* (if/when), *ngenkathi* (while), *ngoba* (because), *lapho... khona* (where) forcing Class 1 `u-` -> `e-` and negative infix `-nga-...-i`.
@@ -135,6 +138,9 @@
      - *Progressive Infix `-sa-`*: "still" / continuing (e.g. *usaphila*, *usabuzwa*).
      - *Exclusive Prefix `se-` / `-se-`*: "now" / "already" (e.g. *sengiphuzile*, *sekuyisikhathi*).
      - *Negative Incomplete Infix `-ka-`*: "not yet" (e.g. *angikawatholi*, *akakadli*).
+- **Stative Interactive Tools**:
+  - **High-Yield Stative Mutation Reference Grid**: Dedicated responsive table comparing 10 high-yield roots, process meanings, present positive statives, present negative statives, and clinical applications.
+  - **Interactive Checkpoints Bedside Self-Test**: 3 clinical self-check scenarios (tired gogo, alert baby, unswollen feet) with toggleable answer reveal, concord breakdowns, linguistic rule tips, and 1-tap `[ Flag for Drills ]` bookmarking.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).

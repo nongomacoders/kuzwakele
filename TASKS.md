@@ -148,3 +148,20 @@
     - [x] Unified search results view searching across all sections with clear search action
   - [x] Verify production build (`npm run build`)
   - [x] End-to-end browser subagent verification on mobile viewport (380x750)
+
+## Intensive Stative Aspect Expansion & Interactive Checkpoints
+- [x] Intensively expand "The Stative Aspect" section in Grammar Reference with 5 deep rules, irregular mutation grid, negative formations, bedside inventory, and interactive practice checkpoints
+  - [x] Update `frontend/src/data/grammarData.js`:
+    - [x] Rule 1: Process vs. Present Resulting State (`stative-core-concept`)
+    - [x] Rule 2: The Contraction Rule (`stative-contraction-rule`, `-ile` vs `-e` before adverbs/complements)
+    - [x] Rule 3: Irregular Stative Mutations (`stative-irregular-stems`, `-ala -> -ele`, `-ama -> -eme`, `-sutha -> -suthi`, `-lala -> -lele`)
+    - [x] Rule 4: Stative Negation Retention Trap (`stative-negation-trap`, retaining `-ile` / `-ele` without shifting to `-i`)
+    - [x] Rule 5: Essential Clinical Stative Inventory (`stative-clinical-lexicon`, peripheral edema, dehydration, consciousness, effusion)
+    - [x] Export `STATIVE_IRREGULAR_TABLE` comparing 10 high-yield roots, positive statives, and negative statives
+    - [x] Export `STATIVE_PRACTICE_CHECKPOINTS` with 3 clinical challenges, target concepts, answer reveals, and breakdown tokens
+    - [x] Update `stative` section in `GRAMMAR_SECTIONS` to `5 Rules`
+  - [x] Enhance `frontend/src/components/GrammarReference.jsx`:
+    - [x] Render collapsible High-Yield Stative Mutation Reference Grid with color-coded positive/negative badges
+    - [x] Render Interactive Checkpoint Bedside Self-Test with toggleable answer reveal and 1-tap `[ Flag for Drills ]` bookmarking
+  - [x] Verify clean production build (`npm run build`)
+  - [x] Verify in mobile browser subagent: 5 rules rendered, answers revealed, drill flagged and verified in Drills Gym
