@@ -21,7 +21,9 @@ import {
   COMPOUND_TENSES_MATRIX,
   NARRATIVE_SEQUENCE_MATRIX,
   PRESENT_INDICATIVE_MATRIX,
-  FUTURE_TENSES_MATRIX
+  FUTURE_TENSES_MATRIX,
+  INFINITIVES_MATRIX,
+  INHLONIPHO_MATRIX
 } from '../../data/grammarData';
 
 
@@ -731,7 +733,56 @@ export function FutureTensesTable() {
   );
 }
 
+export function InfinitivesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-teal-400">Prepositional Pattern</th>
+          <th className="py-2.5 px-3 text-teal-300">Formula</th>
+          <th className="py-2.5 px-3 text-emerald-300">Clinical Example</th>
+          <th className="py-2.5 px-3 text-cyan-300">Timing &amp; Procedural Role</th>
+          <th className="py-2.5 px-3">Diagnostic Application</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {INFINITIVES_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-slate-200 whitespace-nowrap">{row.prepositionalType}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-teal-300 whitespace-nowrap">{row.formula}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 whitespace-nowrap">{row.clinicalExample}</td>
+            <td className="py-2.5 px-3 text-cyan-300 text-[11px] whitespace-nowrap">{row.timingProceduralRole}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[190px]">{row.diagnosticApplication}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
 
-
-
-
+export function InhloniphoTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-rose-400">Register Category</th>
+          <th className="py-2.5 px-3 text-rose-300">Respectful isiZulu Form</th>
+          <th className="py-2.5 px-3 text-red-400">Crude / Incorrect Pitfall</th>
+          <th className="py-2.5 px-3 text-amber-300">Cultural Nuance</th>
+          <th className="py-2.5 px-3">Clinical Application</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {INHLONIPHO_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-slate-200 whitespace-nowrap">{row.registerCategory}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-rose-300 whitespace-nowrap">{row.respectfulZuluForm}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-red-400/90 whitespace-nowrap">{row.crudeOrIncorrectPitfall}</td>
+            <td className="py-2.5 px-3 text-amber-300/90 text-[11px] min-w-[210px]">{row.culturalNuance}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[190px]">{row.clinicalApplication}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}

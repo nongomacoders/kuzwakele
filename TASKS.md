@@ -667,3 +667,39 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Confirmed presence of flagged items in Drills Gym review deck
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
 
+## Sections 23 (Class 15 Infinitives & Prepositions) & 24 (Clinical Inhlonipho & Vocatives) — 24-Section Master Curriculum Completion
+- [x] Complete the 24-Section Master Curriculum by implementing Section 23 ("Class 15 Infinitives & Prepositional Governance — Izakhi Zesenzo Sokwenza") and Section 24 ("Clinical Inhlonipho, Vocatives & Respectful Registers — Inhlonipho Nezokubingelela")
+  - [x] Create Category Data Module in `frontend/src/data/grammar/infinitives.js`:
+    - [x] Export `INFINITIVES_SECTION` (`infinitives`, "Class 15 Infinitives & Prepositional Governance", 5 Rules, FileText icon, teal theme)
+    - [x] Export `INFINITIVES_MATRIX` (8-row table comparing pre-prandial timing *ngaphambi ko-*, post-prandial *emva ko-*, procedural stillness *ngaphandle ko-*, prerequisite *ngaphambi kokuba*, Class 15 concord *ku-*, patient OC *ukukusiza*, organ OC *ukuyihlola*, and substance abstinence *ngaphandle kokuphuza*)
+    - [x] Export `INFINITIVES_CHECKPOINTS` (3 clinical challenges: pre-meal scheduling with *ngaphambi kokudla*, procedural stillness with *ngaphandle kokunyakazisa*, and embedded OC with *ukusihlola* / *nokukusiza*)
+    - [x] Export `INFINITIVES_RULES` (5 clinical rules: `inf-nominalization-agreement`, `inf-temporal-ngaphambi`, `inf-temporal-emva`, `inf-exclusion-ngaphandle`, `inf-object-concord-embedding`)
+  - [x] Create Category Data Module in `frontend/src/data/grammar/inhlonipho.js`:
+    - [x] Export `INHLONIPHO_SECTION` (`inhlonipho-registers`, "Clinical Inhlonipho, Vocatives & Respectful Registers", 5 Rules, HeartHandshake icon, rose theme)
+    - [x] Export `INHLONIPHO_MATRIX` (8-row table comparing respectful vs crude registers across vocatives, elders, clan praises, obstetrics, bereavement, palliative, procedures, and communal greetings)
+    - [x] Export `INHLONIPHO_CHECKPOINTS` (3 clinical challenges: vocative vowel drop with *Sawubona Sibiya, Nongombili!*, obstetric modesty with *uzithwele*, and compassionate bereavement with *udlule emhlabeni*)
+    - [x] Export `INHLONIPHO_RULES` (5 clinical rules: `inh-vocative-vowel-drop`, `inh-clan-izithakazelo`, `inh-obstetric-euphemism`, `inh-bereavement-palliative`, `inh-clinical-consent-etiquette`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export both sections, rules, matrices, and checkpoints
+    - [x] Add `{ id: 'infinitives' }` and `{ id: 'inhlonipho-registers' }` to `GRAMMAR_CATEGORIES` (bringing curriculum to exactly 24 sections, 120 rules, 72 checkpoints)
+    - [x] Update `ALL_CHECKPOINTS` to assemble all 72 clinical practice checkpoints
+  - [x] Create Table Renderers in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `InfinitivesTable` rendering 8 prepositional and governance rows
+    - [x] Export `InhloniphoTable` rendering 8 respectful vs crude communication rows
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `teal` and `rose` theme palettes in `grammarSectionConfigs.js`
+    - [x] Register `infinitives` (FileText) and `inhlonipho-registers` (HeartHandshake) in `grammarSectionConfigs.js`
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `FileText` and `HeartHandshake` in `GrammarDirectoryView.jsx` (dynamic badge shows `24 Sections • 120 Rules`)
+    - [x] Verify `ALL_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file strictly maintained at 229 lines, under 250 boundary)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all 6 tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 24 section cards with `24 Sections • 120 Rules`
+    - [x] Verified Section 23 rules, `InfinitivesTable` matrix, and Challenge 1 reveal (*Phuza leli philisi ngemizuzu engamashumi amathathu ngaphambi kokudla ekuseni.*)
+    - [x] Verified Section 24 rules, `InhloniphoTable` matrix, and Challenge 1 reveal (*Sawubona Sibiya, Nongombili! Uzizwa kanjani namuhla, gogo?*)
+    - [x] Confirmed presence of flagged items in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase.cmd deploy --only hosting`)
+
+

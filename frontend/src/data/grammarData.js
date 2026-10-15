@@ -26,6 +26,8 @@ import { COMPOUND_TENSES_SECTION, COMPOUND_TENSES_RULES, COMPOUND_TENSES_MATRIX,
 import { NARRATIVE_SEQUENCE_SECTION, NARRATIVE_SEQUENCE_RULES, NARRATIVE_SEQUENCE_MATRIX, NARRATIVE_SEQUENCE_CHECKPOINTS } from './grammar/narrativeSequence.js';
 import { PRESENT_INDICATIVE_SECTION, PRESENT_INDICATIVE_RULES, PRESENT_INDICATIVE_MATRIX, PRESENT_INDICATIVE_CHECKPOINTS } from './grammar/presentIndicative.js';
 import { FUTURE_TENSES_SECTION, FUTURE_TENSES_RULES, FUTURE_TENSES_MATRIX, FUTURE_TENSES_CHECKPOINTS } from './grammar/futureTenses.js';
+import { INFINITIVES_SECTION, INFINITIVES_RULES, INFINITIVES_MATRIX, INFINITIVES_CHECKPOINTS } from './grammar/infinitives.js';
+import { INHLONIPHO_SECTION, INHLONIPHO_RULES, INHLONIPHO_MATRIX, INHLONIPHO_CHECKPOINTS } from './grammar/inhlonipho.js';
 
 // Directory Categories
 export const GRAMMAR_CATEGORIES = [
@@ -51,7 +53,9 @@ export const GRAMMAR_CATEGORIES = [
   { id: 'compound-tenses', label: 'Compound Tenses & Aspect Chaining' },
   { id: 'narrative-irregular', label: 'Narrative Sequencing & Irregular Verbs' },
   { id: 'present-indicative', label: 'The Present Indicative Tense (-ya-)' },
-  { id: 'future-tenses', label: 'The Primary Future Tenses (-zo- & -yo-)' }
+  { id: 'future-tenses', label: 'The Primary Future Tenses (-zo- & -yo-)' },
+  { id: 'infinitives', label: 'Class 15 Infinitives & Prepositions' },
+  { id: 'inhlonipho-registers', label: 'Clinical Inhlonipho & Vocatives' }
 ];
 
 // Assembled Sections
@@ -77,7 +81,9 @@ export const GRAMMAR_SECTIONS = [
   COMPOUND_TENSES_SECTION,
   NARRATIVE_SEQUENCE_SECTION,
   PRESENT_INDICATIVE_SECTION,
-  FUTURE_TENSES_SECTION
+  FUTURE_TENSES_SECTION,
+  INFINITIVES_SECTION,
+  INHLONIPHO_SECTION
 ];
 
 // Assembled Rules
@@ -103,7 +109,9 @@ export const GRAMMAR_RULES = [
   ...COMPOUND_TENSES_RULES,
   ...NARRATIVE_SEQUENCE_RULES,
   ...PRESENT_INDICATIVE_RULES,
-  ...FUTURE_TENSES_RULES
+  ...FUTURE_TENSES_RULES,
+  ...INFINITIVES_RULES,
+  ...INHLONIPHO_RULES
 ];
 
 // Named Reference Tables & Matrices (100% Backward Compatible Re-exports)
@@ -129,7 +137,9 @@ export {
   COMPOUND_TENSES_MATRIX,
   NARRATIVE_SEQUENCE_MATRIX,
   PRESENT_INDICATIVE_MATRIX,
-  FUTURE_TENSES_MATRIX
+  FUTURE_TENSES_MATRIX,
+  INFINITIVES_MATRIX,
+  INHLONIPHO_MATRIX
 };
 
 // Named Practice Checkpoints (100% Backward Compatible Re-exports)
@@ -155,7 +165,9 @@ export {
   COMPOUND_TENSES_CHECKPOINTS,
   NARRATIVE_SEQUENCE_CHECKPOINTS,
   PRESENT_INDICATIVE_CHECKPOINTS,
-  FUTURE_TENSES_CHECKPOINTS
+  FUTURE_TENSES_CHECKPOINTS,
+  INFINITIVES_CHECKPOINTS,
+  INHLONIPHO_CHECKPOINTS
 };
 
 export const ALL_CHECKPOINTS = [
@@ -180,8 +192,7 @@ export const ALL_CHECKPOINTS = [
   ...COMPOUND_TENSES_CHECKPOINTS,
   ...NARRATIVE_SEQUENCE_CHECKPOINTS,
   ...PRESENT_INDICATIVE_CHECKPOINTS,
-  ...FUTURE_TENSES_CHECKPOINTS
+  ...FUTURE_TENSES_CHECKPOINTS,
+  ...INFINITIVES_CHECKPOINTS,
+  ...INHLONIPHO_CHECKPOINTS
 ];
-
-
-

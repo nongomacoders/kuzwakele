@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle, ShieldAlert, Flame, Minimize2, History, ListOrdered, Sun, CalendarClock } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle, ShieldAlert, Flame, Minimize2, History, ListOrdered, Sun, CalendarClock, FileText, HeartHandshake } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -21,7 +21,9 @@ import {
   COMPOUND_TENSES_CHECKPOINTS,
   NARRATIVE_SEQUENCE_CHECKPOINTS,
   PRESENT_INDICATIVE_CHECKPOINTS,
-  FUTURE_TENSES_CHECKPOINTS
+  FUTURE_TENSES_CHECKPOINTS,
+  INFINITIVES_CHECKPOINTS,
+  INHLONIPHO_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -45,7 +47,9 @@ import {
   CompoundTensesTable,
   NarrativeSequenceTable,
   PresentIndicativeTable,
-  FutureTensesTable
+  FutureTensesTable,
+  InfinitivesTable,
+  InhloniphoTable
 } from './GrammarSectionTables';
 
 
@@ -226,6 +230,22 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-sky-950/60 border-sky-800/50 text-sky-200',
     iconBg: 'bg-sky-950/80 border-sky-800/80 text-sky-400',
     codeBadge: 'bg-sky-950 text-sky-300 border-sky-800/60'
+  },
+  'infinitives': {
+    badge: 'bg-teal-950/80 text-teal-300 border-teal-800/80',
+    border: 'border-teal-900/50 hover:border-teal-600/70',
+    cardBg: 'from-teal-950/30 to-slate-900/90',
+    formulaBg: 'bg-teal-950/60 border-teal-800/50 text-teal-200',
+    iconBg: 'bg-teal-950/80 border-teal-800/80 text-teal-400',
+    codeBadge: 'bg-teal-950 text-teal-300 border-teal-800/60'
+  },
+  'inhlonipho-registers': {
+    badge: 'bg-rose-950/80 text-rose-300 border-rose-800/80',
+    border: 'border-rose-900/50 hover:border-rose-600/70',
+    cardBg: 'from-rose-950/30 to-slate-900/90',
+    formulaBg: 'bg-rose-950/60 border-rose-800/50 text-rose-200',
+    iconBg: 'bg-rose-950/80 border-rose-800/80 text-rose-400',
+    codeBadge: 'bg-rose-950 text-rose-300 border-rose-800/60'
   }
 };
 
@@ -524,6 +544,32 @@ export const SECTION_CONFIGS = {
     checkpoints: FUTURE_TENSES_CHECKPOINTS,
     drillCategory: 'future-tenses',
     drillTitle: 'Primary Future Tenses'
+  },
+  'infinitives': {
+    theme: 'teal',
+    tableIcon: FileText,
+    tableTitle: 'Class 15 Infinitives & Prepositional Governance Reference Matrix',
+    tableSubtitle: 'Direct comparison across pre-prandial timing (ngaphambi ko-), post-prandial dosing (emva ko-), procedural stillness (ngaphandle ko-), and embedded object concords.',
+    tableBadge: '8 Prepositional Forms',
+    TableComponent: InfinitivesTable,
+    practiceTitle: 'Interactive Checkpoint: Infinitives & Prepositional Governance Self-Check',
+    practiceSubtitle: 'Practice pre-meal instructions, procedural stillness in cannulation, and embedding patient concords.',
+    checkpoints: INFINITIVES_CHECKPOINTS,
+    drillCategory: 'infinitives',
+    drillTitle: 'Infinitives & Prepositions'
+  },
+  'inhlonipho-registers': {
+    theme: 'rose',
+    tableIcon: HeartHandshake,
+    tableTitle: 'Clinical Inhlonipho, Vocatives & Respectful Registers Matrix',
+    tableSubtitle: 'Direct reference comparing respectful bedside forms vs crude pitfalls across vocatives, clan salutations, obstetrics, and bereavement.',
+    tableBadge: '8 Respectful Registers',
+    TableComponent: InhloniphoTable,
+    practiceTitle: 'Interactive Checkpoint: Clinical Inhlonipho & Bedside Etiquette Self-Check',
+    practiceSubtitle: 'Practice dropping vocative preprefix vowels, clan salutations, obstetric modesty, and compassionate palliative news.',
+    checkpoints: INHLONIPHO_CHECKPOINTS,
+    drillCategory: 'inhlonipho-registers',
+    drillTitle: 'Inhlonipho & Vocatives'
   }
 };
 

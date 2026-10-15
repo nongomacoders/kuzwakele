@@ -25,7 +25,9 @@ import {
   History,
   ListOrdered,
   Sun,
-  CalendarClock
+  CalendarClock,
+  FileText,
+  HeartHandshake
 } from 'lucide-react';
 import { CATEGORY_THEMES, DEFAULT_CATEGORY_THEME } from './grammarSectionConfigs';
 
@@ -53,6 +55,8 @@ const getSectionIcon = (id) => {
     case 'narrative-irregular': return <ListOrdered className="w-5 h-5 text-stone-300" />;
     case 'present-indicative': return <Sun className="w-5 h-5 text-amber-400" />;
     case 'future-tenses': return <CalendarClock className="w-5 h-5 text-sky-400" />;
+    case 'infinitives': return <FileText className="w-5 h-5 text-teal-400" />;
+    case 'inhlonipho-registers': return <HeartHandshake className="w-5 h-5 text-rose-400" />;
     default: return <BookOpen className="w-5 h-5 text-slate-400" />;
   }
 };
