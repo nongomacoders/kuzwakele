@@ -385,4 +385,49 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Confirmed presence in Drills Gym review deck
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
 
+## Absolute & Quantitative Pronouns (Izabizwana Zoqobo Nezenani - Section 10)
+- [x] Implement Section 10 ("Absolute & Quantitative Pronouns") covering independent stems, prepositional binding (na-, nga-, ku-), quantifiers (-onke, -edwa), and clinical independence assessments
+  - [x] Create Category Data Module in `frontend/src/data/grammar/pronouns.js`:
+    - [x] Export `PRONOUNS_SECTION` (`pronouns`, "Absolute & Quantitative Pronouns", 5 Rules, UserCheck icon, cyan theme)
+    - [x] Export `PRONOUNS_MATRIX` (8-row table comparing 1st Sing, 2nd Sing, Class 1/1a, Class 2, Class 6, Class 7, Class 9, Class 10 across absolute, associative, instrumental, locative, and quantitative forms)
+    - [x] Export `PRONOUNS_CHECKPOINTS` with 3 clinical challenges (indirect relative with *kuso*, geriatric independence with *yedwa*, and complete antibiotic course with *wonke*)
+    - [x] Export `PRONOUNS_RULES` (5 clinical rules: `pron-absolute-contrast`, `pron-preposition-contractions`, `pron-quantitative-onke`, `pron-quantitative-edwa`, `pron-clinical-adherence`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export `PRONOUNS_SECTION`, `PRONOUNS_RULES`, `PRONOUNS_MATRIX`, and `PRONOUNS_CHECKPOINTS`
+    - [x] Add `{ id: 'pronouns', label: 'Absolute & Quantitative Pronouns' }` to `GRAMMAR_CATEGORIES`
+  - [x] Create Table Renderer in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `PronounsTable` rendering the 8-class matrix
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `cyan` theme palette in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `pronouns` in `grammarSectionConfigs.js` with `UserCheck` icon
+
+## Demonstratives & Spatial Deixis (Izabizwana Zokukhomba - Section 11)
+- [x] Implement Section 11 ("Demonstratives & Spatial Deixis") covering Positions 1/2/3, obligatory initial-vowel elision, copulative presenters (nangu, nasi), and physical examination deixis
+  - [x] Create Category Data Module in `frontend/src/data/grammar/demonstratives.js`:
+    - [x] Export `DEMONSTRATIVES_SECTION` (`demonstratives`, "Demonstratives & Spatial Deixis", 5 Rules, Navigation icon, amber theme)
+    - [x] Export `DEMONSTRATIVES_MATRIX` (8-row table comparing Position 1 "this", Position 2 "that referenced", Position 3 "that yonder", elided examples, and clinical applications)
+    - [x] Export `DEMONSTRATIVES_CHECKPOINTS` with 3 clinical challenges (anatomical localization with *lobu buhlungu* / *kulo mlenze*, referencing prior complaints with *leyo nkinga*, and handover with *nayi* / *nazi*)
+    - [x] Export `DEMONSTRATIVES_RULES` (5 clinical rules: `dem-position-1-near`, `dem-position-2-referenced`, `dem-position-3-remote`, `dem-vowel-elision`, `dem-copulative-presenters`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export `DEMONSTRATIVES_SECTION`, `DEMONSTRATIVES_RULES`, `DEMONSTRATIVES_MATRIX`, and `DEMONSTRATIVES_CHECKPOINTS`
+    - [x] Add `{ id: 'demonstratives', label: 'Demonstratives & Spatial Deixis' }` to `GRAMMAR_CATEGORIES` (now 11 sections, 55 rules total)
+  - [x] Create Table Renderer in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `DemonstrativesTable` rendering the 8-class demonstratives matrix
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `amber` / `yellow` theme palette in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `demonstratives` in `grammarSectionConfigs.js` with `Navigation` icon
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `UserCheck` (Pronouns) and `Navigation` (Demonstratives) in `GrammarDirectoryView.jsx` (dynamic badge shows `11 Sections • 55 Rules`)
+    - [x] Sync `PRONOUNS_CHECKPOINTS` and `DEMONSTRATIVES_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file maintained at 247 lines, strictly under 250 boundary)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 11 section cards with `11 Sections • 55 Rules`
+    - [x] Verified Section 10 rules and `PronounsTable` matrix
+    - [x] Revealed Challenge #1 (*Isimo akuso sinzima kakhulu.*) and flagged for drills
+    - [x] Confirmed presence in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+
 

@@ -46,6 +46,16 @@ const TABLE_THEMES = {
     containerBorder: 'border-orange-900/50',
     iconBox: 'bg-orange-950/80 border border-orange-800/80 text-orange-400',
     badge: 'bg-orange-950 text-orange-300 border border-orange-800/60'
+  },
+  cyan: {
+    containerBorder: 'border-cyan-900/50',
+    iconBox: 'bg-cyan-950/80 border border-cyan-800/80 text-cyan-400',
+    badge: 'bg-cyan-950 text-cyan-300 border border-cyan-800/60'
+  },
+  yellow: {
+    containerBorder: 'border-yellow-900/50',
+    iconBox: 'bg-yellow-950/80 border border-yellow-800/80 text-yellow-400',
+    badge: 'bg-yellow-950 text-yellow-300 border border-yellow-800/60'
   }
 };
 

@@ -129,6 +129,32 @@ const DRAWER_THEMES = {
     solutionLabel: 'text-orange-400',
     solutionText: 'text-orange-200',
     tokenChip: 'text-orange-300 bg-orange-950/80 border border-orange-900/60'
+  },
+  cyan: {
+    container: 'bg-gradient-to-br from-cyan-950/40 via-slate-900/90 to-slate-900 border border-cyan-800/60',
+    headerBorder: 'border-cyan-900/40',
+    iconBox: 'bg-cyan-900/60 border border-cyan-700/60 text-cyan-300',
+    badge: 'bg-cyan-950 text-cyan-300 border border-cyan-800/80',
+    toggleBtn: 'text-cyan-300 hover:text-white bg-cyan-950 border border-cyan-800',
+    challengeBadge: 'text-cyan-400 bg-cyan-950/80 border border-cyan-900/60',
+    revealBtn: 'bg-cyan-950 text-cyan-300 hover:bg-cyan-900 border border-cyan-800/80',
+    solutionCard: 'border-cyan-900/50',
+    solutionLabel: 'text-cyan-400',
+    solutionText: 'text-cyan-200',
+    tokenChip: 'text-cyan-300 bg-cyan-950/80 border border-cyan-900/60'
+  },
+  yellow: {
+    container: 'bg-gradient-to-br from-yellow-950/40 via-slate-900/90 to-slate-900 border border-yellow-800/60',
+    headerBorder: 'border-yellow-900/40',
+    iconBox: 'bg-yellow-900/60 border border-yellow-700/60 text-yellow-300',
+    badge: 'bg-yellow-950 text-yellow-300 border border-yellow-800/80',
+    toggleBtn: 'text-yellow-300 hover:text-white bg-yellow-950 border border-yellow-800',
+    challengeBadge: 'text-yellow-400 bg-yellow-950/80 border border-yellow-900/60',
+    revealBtn: 'bg-yellow-950 text-yellow-300 hover:bg-yellow-900 border border-yellow-800/80',
+    solutionCard: 'border-yellow-900/50',
+    solutionLabel: 'text-yellow-400',
+    solutionText: 'text-yellow-200',
+    tokenChip: 'text-yellow-300 bg-yellow-950/80 border border-yellow-900/60'
   }
 };
 

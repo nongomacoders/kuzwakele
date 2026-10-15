@@ -8,8 +8,11 @@ import {
   COPULATIVE_LOCATIVE_TABLE,
   DEFICIENT_VERBS_TABLE,
   OBJECT_CONCORD_MATRIX,
-  QUALIFICATIVE_MATRIX
+  QUALIFICATIVE_MATRIX,
+  PRONOUNS_MATRIX,
+  DEMONSTRATIVES_MATRIX
 } from '../../data/grammarData';
+
 
 
 export function PastConcordTable() {
@@ -336,6 +339,69 @@ export function QualificativesTable() {
     </table>
   );
 }
+
+export function PronounsTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-cyan-400">Class / Person</th>
+          <th className="py-2.5 px-3 text-slate-200">Absolute</th>
+          <th className="py-2.5 px-3 text-cyan-300">na- (with)</th>
+          <th className="py-2.5 px-3 text-cyan-300">nga- (about)</th>
+          <th className="py-2.5 px-3 text-cyan-300">ku- (locative)</th>
+          <th className="py-2.5 px-3 text-emerald-300">-onke (all/whole)</th>
+          <th className="py-2.5 px-3 text-amber-300">-edwa/-odwa (alone)</th>
+          <th className="py-2.5 px-3">Clinical Application</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {PRONOUNS_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-cyan-300 whitespace-nowrap">{row.nounClass}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-200 whitespace-nowrap">{row.absolutePronoun}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-cyan-300 whitespace-nowrap">{row.associativeNa}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-cyan-300 whitespace-nowrap">{row.instrumentalNga}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-cyan-300 whitespace-nowrap">{row.locativeKu}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 whitespace-nowrap">{row.quantitativeAll}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.quantitativeAlone}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.clinicalApplication}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function DemonstrativesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-amber-400">Noun Class</th>
+          <th className="py-2.5 px-3 text-emerald-300">Pos 1: This</th>
+          <th className="py-2.5 px-3 text-amber-300">Pos 2: That (Ref)</th>
+          <th className="py-2.5 px-3 text-cyan-300">Pos 3: That (Far)</th>
+          <th className="py-2.5 px-3 text-slate-200">Elided Example</th>
+          <th className="py-2.5 px-3">Clinical Application</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {DEMONSTRATIVES_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-amber-300 whitespace-nowrap">{row.nounClass}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 whitespace-nowrap">{row.pos1This}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.pos2ThatReferenced}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-cyan-300 whitespace-nowrap">{row.pos3ThatFar}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.nounExampleElided}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.clinicalApplication}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 
 
 

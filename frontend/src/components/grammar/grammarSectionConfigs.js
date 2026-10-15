@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -8,7 +8,9 @@ import {
   COPULATIVE_LOCATIVE_CHECKPOINTS,
   DEFICIENT_VERBS_CHECKPOINTS,
   OBJECT_CONCORD_CHECKPOINTS,
-  QUALIFICATIVE_CHECKPOINTS
+  QUALIFICATIVE_CHECKPOINTS,
+  PRONOUNS_CHECKPOINTS,
+  DEMONSTRATIVES_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -19,8 +21,11 @@ import {
   CopulativesLocativesTable,
   DeficientVerbsTable,
   ObjectConcordsTable,
-  QualificativesTable
+  QualificativesTable,
+  PronounsTable,
+  DemonstrativesTable
 } from './GrammarSectionTables';
+
 
 
 export const CATEGORY_THEMES = {
@@ -95,6 +100,22 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-orange-950/60 border-orange-800/50 text-orange-200',
     iconBg: 'bg-orange-950/80 border-orange-800/80 text-orange-400',
     codeBadge: 'bg-orange-950 text-orange-300 border-orange-800/60'
+  },
+  'pronouns': {
+    badge: 'bg-cyan-950/80 text-cyan-300 border-cyan-800/80',
+    border: 'border-cyan-900/50 hover:border-cyan-600/70',
+    cardBg: 'from-cyan-950/30 to-slate-900/90',
+    formulaBg: 'bg-cyan-950/60 border-cyan-800/50 text-cyan-200',
+    iconBg: 'bg-cyan-950/80 border-cyan-800/80 text-cyan-400',
+    codeBadge: 'bg-cyan-950 text-cyan-300 border-cyan-800/60'
+  },
+  'demonstratives': {
+    badge: 'bg-amber-950/80 text-amber-300 border-amber-800/80',
+    border: 'border-amber-900/50 hover:border-amber-600/70',
+    cardBg: 'from-amber-950/30 to-slate-900/90',
+    formulaBg: 'bg-amber-950/60 border-amber-800/50 text-amber-200',
+    iconBg: 'bg-amber-950/80 border-amber-800/80 text-amber-400',
+    codeBadge: 'bg-amber-950 text-amber-300 border-amber-800/60'
   }
 };
 
@@ -224,6 +245,33 @@ export const SECTION_CONFIGS = {
     checkpoints: QUALIFICATIVE_CHECKPOINTS,
     drillCategory: 'qualificatives',
     drillTitle: 'Qualificatives Practice'
+  },
+  'pronouns': {
+    theme: 'cyan',
+    tableIcon: UserCheck,
+    tableTitle: 'Absolute & Quantitative Pronoun Reference Matrix',
+    tableSubtitle: 'Direct comparison across noun classes: absolute stems, prepositional contractions (na-, nga-, ku-), and quantifiers (-onke, -edwa).',
+    tableBadge: '8 Core Classes',
+    TableComponent: PronounsTable,
+    practiceTitle: 'Interactive Checkpoint: Pronoun Contraction & Social History Self-Check',
+    practiceSubtitle: 'Practice applying locative pronoun contractions (kuso), evaluating living alone (yedwa), and complete dosing (wonke).',
+    checkpoints: PRONOUNS_CHECKPOINTS,
+    drillCategory: 'pronouns',
+    drillTitle: 'Pronouns Practice'
+  },
+  'demonstratives': {
+    theme: 'amber',
+    tableIcon: Navigation,
+    tableTitle: 'Demonstratives & Spatial Deixis Reference Matrix',
+    tableSubtitle: 'Direct reference comparing Position 1 (this), Position 2 (that mentioned), Position 3 (that yonder), and obligatory noun initial-vowel stripping.',
+    tableBadge: '8 Noun Classes',
+    TableComponent: DemonstrativesTable,
+    practiceTitle: 'Interactive Checkpoint: Demonstrative Deixis & Examination Self-Check',
+    practiceSubtitle: 'Practice pinpointing anatomical sites (kulo mlenze), referencing prior complaints (leyo nkinga), and presenting discharge results (nayi/nazi).',
+    checkpoints: DEMONSTRATIVES_CHECKPOINTS,
+    drillCategory: 'demonstratives',
+    drillTitle: 'Demonstratives Practice'
   }
 };
+
 

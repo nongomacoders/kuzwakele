@@ -181,7 +181,23 @@
       - *Rule 3: Verbal Relatives & The Suffix -yo (`qual-verbal-relatives`)*: Converting verbs into relative clauses with obligatory suffix *-yo* when clause-final or intransitive (*abaphilayo*, *okhwehlelayo*), dropping *-yo* when an explicit noun object follows (*esikhwehlela igazi*).
       - *Rule 4: Attributive vs. Predicative Transformation (`qual-attributive-vs-predicative`)*: Transforming noun modifiers into clinical diagnostic statements by dropping initial demonstrative vowel for true adjectives (*elikhulu* $\to$ *likhulu*) or using Subject Concords for relatives (*esithambile* $\to$ *sithambile*, *obukhali* $\to$ *bukhali*).
       - *Rule 5: Essential Clinical Qualificative Inventory (`qual-clinical-descriptors`)*: Standard terminology for acuity (*-khali*, *-dambile*), color/exudate (*-bomvu*, *-mhlophe*, *-mnyama*), consistency (*-thambile*, *-qatha*, *-manzi*), and status (*-ngcono*).
+   10. **Absolute & Quantitative Pronouns (`pronouns` - Comprehensive 5-Rule Curriculum & Prepositional Contraction Grid)**:
+      - *Rule 1: Absolute Pronoun Stems & Contrastive Emphasis (`pron-absolute-contrast`)*: Independent pronoun roots (*mina*, *wena*, *yena*, *thina*, *nina*, *bona*, *sona*, *zona*) used for contrastive topic shifts and subject focus.
+      - *Rule 2: Prepositional Contractions (na-, nga-, ku-, `pron-preposition-contractions`)*: Dropping final *-na* to bind prepositions (*nami*, *naye*, *ngaye*, *kuso*), enabling indirect relative clauses (*isimo akuso sinzima*).
+      - *Rule 3: The Quantitative Stem -onke ("All / Whole", `pron-quantitative-onke`)*: Full body regions (*wonke umzimba*) and complete pharmacological course adherence (*wonke amaphilisi*, *lonke isonto*).
+      - *Rule 4: The Exclusive Stem -edwa / -odwa ("Alone / Only", `pron-quantitative-edwa`)*: Vowel alternation (-e- for 1st/2nd/Class 1: *yedwa*, *ngedwa*; -o- for others: *bodwa*, *odwa*) for ADL independence and monotherapy.
+      - *Rule 5: Essential Clinical Social & Adherence Formulations (`pron-clinical-adherence`)*: Living arrangement screening (*ubani ohlala naye?*), chaperone verification, and antibiotic completion.
+   11. **Demonstratives & Spatial Deixis (`demonstratives` - Comprehensive 5-Rule Curriculum & Deictic Position Grid)**:
+      - *Rule 1: Position 1 Demonstrative ("This / These Near Me", `dem-position-1-near`)*: Bedside examination deixis (*lo dokotela*, *lesi sifuba*, *leli philisi*, *la maphilisi*, *lezi zilonda*).
+      - *Rule 2: Position 2 Demonstrative ("That Near You / Referenced", `dem-position-2-referenced`)*: Characteristic terminal *-o* shift (*lowo*, *lelo*, *leso*, *leyo*, *lezo*) for referencing patient-reported symptoms.
+      - *Rule 3: Position 3 Demonstrative ("That Over There Visible", `dem-position-3-remote`)*: Terminal suffix *-ya* (*lowaya*, *leliya*, *lesiya*, *leyaya*, *leziya*) for hospital wayfinding and ward routing.
+      - *Rule 4: The Obligatory Initial-Vowel Elision Rule (`dem-vowel-elision`)*: Demonstrative + noun forces initial augment vowel stripping (*lo muntu*, *lesi sifuba*, *kulo mlenze*).
+      - *Rule 5: Copulative Demonstratives ("Here is / There is" — Nangu, Nasi, `dem-copulative-presenters`)*: Bedside presenters for test results, sick notes, and medication handover (*nasi isitifiketi*, *nanka amaphilisi*, *nayi imiphumela*).
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **Absolute & Quantitative Pronoun Reference Matrix Table**: Responsive comparison table displaying 8 core noun classes / persons across absolute, associative (*na-*), instrumental (*nga-*), locative (*ku-*), and quantitative (*-onke*, *-edwa/-odwa*) forms.
+  - **Pronoun Contraction & Social History Self-Check**: 3 clinical challenges (indirect relative with *kuso*, geriatric independence with *yedwa*, and complete antibiotic course with *wonke*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
+  - **Demonstratives & Spatial Deixis Reference Matrix Table**: Responsive comparison table displaying 8 core noun classes across Position 1 ("this"), Position 2 ("that referenced"), Position 3 ("that yonder"), and elided clinical examples.
+  - **Demonstrative Deixis & Examination Self-Check**: 3 clinical challenges (anatomical localization with *lobu buhlungu* / *kulo mlenze*, referencing prior complaints with *leyo nkinga*, and handover with *nayi* / *nazi*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
   - **The Qualificative System: Adjectives & Relatives Matrix Table**: Responsive comparison table displaying 8 core noun classes comparing True Adjectives (attributive vs predicative), Relatives (attributive vs predicative), and clinical examination applications.
   - **Qualificative & Clinical Description Self-Check**: 3 clinical challenges (True Adj vs Relative distinction, verbal relative with clause-final *-yo*, and physical exam predicative shift) with answer reveals, concord gloss chips, and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Object Concord & Pronoun Infix Matrix Table**: Responsive comparison table displaying 11 core noun classes / persons with Subject Concords, Object Concords, Noun Triggers, Formula Placements, Clinical Bedside Examples, and Grammatical Functions.
@@ -210,12 +226,15 @@
   - deficientVerbs.js: Section metadata, 5 rules, DEFICIENT_VERBS_TABLE, and DEFICIENT_VERBS_CHECKPOINTS.
   - objectConcords.js: Section metadata, 5 rules, OBJECT_CONCORD_MATRIX, and OBJECT_CONCORD_CHECKPOINTS.
   - qualificatives.js: Section metadata, 5 rules, QUALIFICATIVE_MATRIX, and QUALIFICATIVE_CHECKPOINTS.
-  - grammarData.js: Clean aggregating barrel exporter assembling 9 GRAMMAR_SECTIONS, 45 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
+  - pronouns.js: Section metadata, 5 rules, PRONOUNS_MATRIX, and PRONOUNS_CHECKPOINTS.
+  - demonstratives.js: Section metadata, 5 rules, DEMONSTRATIVES_MATRIX, and DEMONSTRATIVES_CHECKPOINTS.
+  - grammarData.js: Clean aggregating barrel exporter assembling 11 GRAMMAR_SECTIONS, 55 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).
   - **Contextual Clinical vs Community Cards**: Distinguishes clinical consultation phrases from everyday community dialogue.
   - **Expandable Morpheme Token Breakdowns**: Detailed breakdown tokens identifying prefix, root, suffix, and grammatical gloss.
   - **1-Tap Drill Gym Integration**: Instant flagging into `drillsStorage` (`kuzwakele_flagged_drills`) with cross-tab reactive event sync (`drills-updated`), populating directly into the Drills Gym Review Deck.
+
 
 

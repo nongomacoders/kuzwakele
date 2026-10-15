@@ -11,7 +11,9 @@ import {
   COPULATIVE_LOCATIVE_CHECKPOINTS,
   DEFICIENT_VERBS_CHECKPOINTS,
   OBJECT_CONCORD_CHECKPOINTS,
-  QUALIFICATIVE_CHECKPOINTS
+  QUALIFICATIVE_CHECKPOINTS,
+  PRONOUNS_CHECKPOINTS,
+  DEMONSTRATIVES_CHECKPOINTS
 } from '../data/grammarData';
 import { toggleDrillFlag, isDrillFlagged } from '../utils/drillsStorage';
 import GrammarRuleCard from './grammar/GrammarRuleCard';
@@ -33,20 +35,17 @@ export default function GrammarReference() {
   const [revealedCheckpoints, setRevealedCheckpoints] = useState({});
 
   const refreshFlaggedState = () => {
-    const allItems = [
-      ...GRAMMAR_RULES.flatMap((r) => r.examples),
-      ...PAST_PRACTICE_CHECKPOINTS,
-      ...STATIVE_PRACTICE_CHECKPOINTS,
-      ...CONJUNCTION_PRACTICE_CHECKPOINTS,
-      ...ASPECT_INFIX_CHECKPOINTS,
-      ...VERBAL_EXTENSIONS_CHECKPOINTS,
-      ...COPULATIVE_LOCATIVE_CHECKPOINTS,
-      ...DEFICIENT_VERBS_CHECKPOINTS,
-      ...OBJECT_CONCORD_CHECKPOINTS,
-      ...QUALIFICATIVE_CHECKPOINTS
+    const allCheckpoints = [
+      ...PAST_PRACTICE_CHECKPOINTS, ...STATIVE_PRACTICE_CHECKPOINTS,
+      ...CONJUNCTION_PRACTICE_CHECKPOINTS, ...ASPECT_INFIX_CHECKPOINTS,
+      ...VERBAL_EXTENSIONS_CHECKPOINTS, ...COPULATIVE_LOCATIVE_CHECKPOINTS,
+      ...DEFICIENT_VERBS_CHECKPOINTS, ...OBJECT_CONCORD_CHECKPOINTS,
+      ...QUALIFICATIVE_CHECKPOINTS, ...PRONOUNS_CHECKPOINTS, ...DEMONSTRATIVES_CHECKPOINTS
     ];
+    const allItems = [...GRAMMAR_RULES.flatMap((r) => r.examples), ...allCheckpoints];
     setFlaggedIds(new Set(allItems.filter((item) => isDrillFlagged(item.id)).map((item) => item.id)));
   };
+
 
   useEffect(() => {
     refreshFlaggedState();

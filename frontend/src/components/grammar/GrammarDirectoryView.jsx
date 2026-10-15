@@ -13,7 +13,9 @@ import {
   MapPin,
   Zap,
   Target,
-  Sparkles
+  Sparkles,
+  UserCheck,
+  Navigation
 } from 'lucide-react';
 import { CATEGORY_THEMES, DEFAULT_CATEGORY_THEME } from './grammarSectionConfigs';
 
@@ -28,6 +30,8 @@ const getSectionIcon = (id) => {
     case 'deficient-verbs': return <Zap className="w-5 h-5 text-sky-400" />;
     case 'object-concords': return <Target className="w-5 h-5 text-blue-400" />;
     case 'qualificatives': return <Sparkles className="w-5 h-5 text-orange-400" />;
+    case 'pronouns': return <UserCheck className="w-5 h-5 text-cyan-400" />;
+    case 'demonstratives': return <Navigation className="w-5 h-5 text-amber-400" />;
     default: return <BookOpen className="w-5 h-5 text-slate-400" />;
   }
 };
