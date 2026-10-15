@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -10,7 +10,9 @@ import {
   OBJECT_CONCORD_CHECKPOINTS,
   QUALIFICATIVE_CHECKPOINTS,
   PRONOUNS_CHECKPOINTS,
-  DEMONSTRATIVES_CHECKPOINTS
+  DEMONSTRATIVES_CHECKPOINTS,
+  POTENTIAL_MOOD_CHECKPOINTS,
+  IMPERATIVES_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -23,7 +25,9 @@ import {
   ObjectConcordsTable,
   QualificativesTable,
   PronounsTable,
-  DemonstrativesTable
+  DemonstrativesTable,
+  PotentialMoodTable,
+  ImperativesTable
 } from './GrammarSectionTables';
 
 
@@ -116,6 +120,22 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-amber-950/60 border-amber-800/50 text-amber-200',
     iconBg: 'bg-amber-950/80 border-amber-800/80 text-amber-400',
     codeBadge: 'bg-amber-950 text-amber-300 border-amber-800/60'
+  },
+  'potential-mood': {
+    badge: 'bg-emerald-950/80 text-emerald-300 border-emerald-800/80',
+    border: 'border-emerald-900/50 hover:border-emerald-600/70',
+    cardBg: 'from-emerald-950/30 to-slate-900/90',
+    formulaBg: 'bg-emerald-950/60 border-emerald-800/50 text-emerald-200',
+    iconBg: 'bg-emerald-950/80 border-emerald-800/80 text-emerald-400',
+    codeBadge: 'bg-emerald-950 text-emerald-300 border-emerald-800/60'
+  },
+  'imperatives-prohibitions': {
+    badge: 'bg-red-950/80 text-red-300 border-red-800/80',
+    border: 'border-red-900/50 hover:border-red-600/70',
+    cardBg: 'from-red-950/30 to-slate-900/90',
+    formulaBg: 'bg-red-950/60 border-red-800/50 text-red-200',
+    iconBg: 'bg-red-950/80 border-red-800/80 text-red-400',
+    codeBadge: 'bg-red-950 text-red-300 border-red-800/60'
   }
 };
 
@@ -271,6 +291,32 @@ export const SECTION_CONFIGS = {
     checkpoints: DEMONSTRATIVES_CHECKPOINTS,
     drillCategory: 'demonstratives',
     drillTitle: 'Demonstratives Practice'
+  },
+  'potential-mood': {
+    theme: 'emerald',
+    tableIcon: Activity,
+    tableTitle: 'Potential Mood & Capability Reference Matrix',
+    tableSubtitle: 'Direct comparison across noun classes: positive potential (-nga-), negative potential (-nge-...-e), and absolute negative (angeke).',
+    tableBadge: '8 Core Classes',
+    TableComponent: PotentialMoodTable,
+    practiceTitle: 'Interactive Checkpoint: Potential Mood & Mobility Self-Check',
+    practiceSubtitle: 'Practice assessing functional mobility, triage consent, and treatment feasibility.',
+    checkpoints: POTENTIAL_MOOD_CHECKPOINTS,
+    drillCategory: 'potential-mood',
+    drillTitle: 'Potential Mood Practice'
+  },
+  'imperatives-prohibitions': {
+    theme: 'red',
+    tableIcon: AlertCircle,
+    tableTitle: 'Imperatives, Prohibitions & Obligative -bo- Reference Matrix',
+    tableSubtitle: 'Direct comparison across verb types: singular imperatives (yi-), plural commands (-ni), negative safety prohibitions (musa), and mandatory adherence (-bo-).',
+    tableBadge: '8 Verb Types',
+    TableComponent: ImperativesTable,
+    practiceTitle: 'Interactive Checkpoint: Procedural Commands & Adherence Self-Check',
+    practiceSubtitle: 'Practice procedural stillness warnings (musa ukunyakaza), strict chronic adherence (ubophuza njalo), and caregiver group directives (-ni).',
+    checkpoints: IMPERATIVES_CHECKPOINTS,
+    drillCategory: 'imperatives-prohibitions',
+    drillTitle: 'Imperatives & Prohibitions'
   }
 };
 

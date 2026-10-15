@@ -10,8 +10,11 @@ import {
   OBJECT_CONCORD_MATRIX,
   QUALIFICATIVE_MATRIX,
   PRONOUNS_MATRIX,
-  DEMONSTRATIVES_MATRIX
+  DEMONSTRATIVES_MATRIX,
+  POTENTIAL_MOOD_MATRIX,
+  IMPERATIVES_MATRIX
 } from '../../data/grammarData';
+
 
 
 
@@ -401,6 +404,61 @@ export function DemonstrativesTable() {
     </table>
   );
 }
+
+export function PotentialMoodTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-emerald-400">Class / Person</th>
+          <th className="py-2.5 px-3 text-emerald-300">Positive Potential (-nga-)</th>
+          <th className="py-2.5 px-3 text-teal-300">Negative Potential (-nge-...-e)</th>
+          <th className="py-2.5 px-3 text-rose-300">Absolute Negative (angeke)</th>
+          <th className="py-2.5 px-3">Clinical Application</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {POTENTIAL_MOOD_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-emerald-300 whitespace-nowrap">{row.nounClass}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 whitespace-nowrap">{row.positivePotential}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-teal-300 whitespace-nowrap">{row.negativePotential}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-rose-300 whitespace-nowrap">{row.absoluteNegativeAngeke}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.clinicalApplication}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function ImperativesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-red-400">Verb Category</th>
+          <th className="py-2.5 px-3 text-slate-200">Base Verb</th>
+          <th className="py-2.5 px-3 text-red-300">Singular Command</th>
+          <th className="py-2.5 px-3 text-amber-300">Plural Command (-ni)</th>
+          <th className="py-2.5 px-3">Clinical Application</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {IMPERATIVES_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-red-300 whitespace-nowrap">{row.verbType}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.baseVerb}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-red-300 whitespace-nowrap">{row.singularCommand}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.pluralCommand}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.clinicalApplication}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 
 
 

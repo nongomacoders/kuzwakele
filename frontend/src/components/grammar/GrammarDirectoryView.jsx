@@ -15,7 +15,8 @@ import {
   Target,
   Sparkles,
   UserCheck,
-  Navigation
+  Navigation,
+  AlertCircle
 } from 'lucide-react';
 import { CATEGORY_THEMES, DEFAULT_CATEGORY_THEME } from './grammarSectionConfigs';
 
@@ -32,6 +33,8 @@ const getSectionIcon = (id) => {
     case 'qualificatives': return <Sparkles className="w-5 h-5 text-orange-400" />;
     case 'pronouns': return <UserCheck className="w-5 h-5 text-cyan-400" />;
     case 'demonstratives': return <Navigation className="w-5 h-5 text-amber-400" />;
+    case 'potential-mood': return <Activity className="w-5 h-5 text-emerald-400" />;
+    case 'imperatives-prohibitions': return <AlertCircle className="w-5 h-5 text-red-400" />;
     default: return <BookOpen className="w-5 h-5 text-slate-400" />;
   }
 };

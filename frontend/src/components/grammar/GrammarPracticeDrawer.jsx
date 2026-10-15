@@ -155,6 +155,19 @@ const DRAWER_THEMES = {
     solutionLabel: 'text-yellow-400',
     solutionText: 'text-yellow-200',
     tokenChip: 'text-yellow-300 bg-yellow-950/80 border border-yellow-900/60'
+  },
+  red: {
+    container: 'bg-gradient-to-br from-red-950/40 via-slate-900/90 to-slate-900 border border-red-800/60',
+    headerBorder: 'border-red-900/40',
+    iconBox: 'bg-red-900/60 border border-red-700/60 text-red-300',
+    badge: 'bg-red-950 text-red-300 border border-red-800/80',
+    toggleBtn: 'text-red-300 hover:text-white bg-red-950 border border-red-800',
+    challengeBadge: 'text-red-400 bg-red-950/80 border border-red-900/60',
+    revealBtn: 'bg-red-950 text-red-300 hover:bg-red-900 border border-red-800/80',
+    solutionCard: 'border-red-900/50',
+    solutionLabel: 'text-red-400',
+    solutionText: 'text-red-200',
+    tokenChip: 'text-red-300 bg-red-950/80 border border-red-900/60'
   }
 };
 

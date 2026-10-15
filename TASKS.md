@@ -429,5 +429,48 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Confirmed presence in Drills Gym review deck
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
 
+## The Potential Mood (Isimo Sokwenzeka - Section 12)
+- [x] Implement Section 12 ("The Potential Mood") covering capability/permission with -nga-, negative potential with -nge-...-e, absolute negative with angeke, and functional mobility assessments
+  - [x] Create Category Data Module in `frontend/src/data/grammar/potentialMood.js`:
+    - [x] Export `POTENTIAL_MOOD_SECTION` (`potential-mood`, "The Potential Mood (Can / May)", 5 Rules, Activity icon, emerald theme)
+    - [x] Export `POTENTIAL_MOOD_MATRIX` (8-row table comparing 1st Sing, 2nd Sing, Class 1/1a, Class 2, Class 6, Class 7, Class 9, Class 10 across positive potential, negative potential, absolute negative angeke, and clinical application)
+    - [x] Export `POTENTIAL_MOOD_CHECKPOINTS` with 3 clinical challenges (mobility assessment with *singehambe* / *angeke sihambe*, triage consent with *ungangena*, and treatment feasibility with *singasipholisa*)
+    - [x] Export `POTENTIAL_MOOD_RULES` (5 clinical rules: `pot-positive-nga`, `pot-negative-nge`, `pot-absolute-angeke`, `pot-with-oc-stative`, `pot-clinical-mobility`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export `POTENTIAL_MOOD_SECTION`, `POTENTIAL_MOOD_RULES`, `POTENTIAL_MOOD_MATRIX`, and `POTENTIAL_MOOD_CHECKPOINTS`
+    - [x] Add `{ id: 'potential-mood', label: 'The Potential Mood (-nga-)' }` to `GRAMMAR_CATEGORIES`
+  - [x] Create Table Renderer in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `PotentialMoodTable` rendering the 8-class matrix
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `emerald` theme palette in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `potential-mood` in `grammarSectionConfigs.js` with `Activity` icon
 
-
+## Imperatives, Prohibitions & Obligative -bo- (Imiyalo Nezivimbelo - Section 13)
+- [x] Implement Section 13 ("Imperatives, Prohibitions & Obligative -bo-") covering direct commands, monosyllabic yi-, plural -ni, musa/musani prohibitions, mandatory -bo-, and procedural instructions
+  - [x] Create Category Data Module in `frontend/src/data/grammar/imperatives.js`:
+    - [x] Export `IMPERATIVES_SECTION` (`imperatives-prohibitions`, "Imperatives, Prohibitions & Obligative -bo-", 5 Rules, AlertCircle icon, red theme)
+    - [x] Export `IMPERATIVES_MATRIX` (8-row table comparing 8 verb types across singular commands, plural commands, negative safety prohibitions, and mandatory adherence)
+    - [x] Export `IMPERATIVES_CHECKPOINTS` with 3 clinical challenges (procedural stillness with *Musa ukunyakazisa*, chronic medication adherence with *Ubophuza*, and group instructions with *Hlalani*)
+    - [x] Export `IMPERATIVES_RULES` (5 clinical rules: `imp-direct-monosyllabic`, `imp-plural-ni`, `imp-prohibitions-musa`, `imp-obligative-bo`, `imp-clinical-procedural`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export `IMPERATIVES_SECTION`, `IMPERATIVES_RULES`, `IMPERATIVES_MATRIX`, and `IMPERATIVES_CHECKPOINTS`
+    - [x] Add `{ id: 'imperatives-prohibitions', label: 'Imperatives & Prohibitions' }` to `GRAMMAR_CATEGORIES` (now 13 sections, 65 rules total)
+  - [x] Create Table Renderer in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `ImperativesTable` rendering the 8-verb-type matrix
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `red` theme palette in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `imperatives-prohibitions` in `grammarSectionConfigs.js` with `AlertCircle` icon
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `Activity` (Potential Mood) and `AlertCircle` (Imperatives & Prohibitions) in `GrammarDirectoryView.jsx` (dynamic badge shows `13 Sections • 65 Rules`)
+    - [x] Sync `POTENTIAL_MOOD_CHECKPOINTS` and `IMPERATIVES_CHECKPOINTS` via `ALL_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file maintained at 230 lines, strictly under 250 boundary)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 13 section cards with `13 Sections • 65 Rules`
+    - [x] Verified Section 12 rules and `PotentialMoodTable` matrix
+    - [x] Revealed Challenge #1 in Section 12 and flagged for drills
+    - [x] Verified Section 13 rules and `ImperativesTable` matrix
+    - [x] Revealed Challenge #1 in Section 13 and flagged for drills
+    - [x] Confirmed presence of flagged items in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)

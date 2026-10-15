@@ -193,7 +193,25 @@
       - *Rule 3: Position 3 Demonstrative ("That Over There Visible", `dem-position-3-remote`)*: Terminal suffix *-ya* (*lowaya*, *leliya*, *lesiya*, *leyaya*, *leziya*) for hospital wayfinding and ward routing.
       - *Rule 4: The Obligatory Initial-Vowel Elision Rule (`dem-vowel-elision`)*: Demonstrative + noun forces initial augment vowel stripping (*lo muntu*, *lesi sifuba*, *kulo mlenze*).
       - *Rule 5: Copulative Demonstratives ("Here is / There is" — Nangu, Nasi, `dem-copulative-presenters`)*: Bedside presenters for test results, sick notes, and medication handover (*nasi isitifiketi*, *nanka amaphilisi*, *nayi imiphumela*).
+    12. **The Potential Mood ("Can / May" — Isimo Sokwenzeka, `potential-mood` - Comprehensive 5-Rule Curriculum & Capability Grid)**:
+       - *Rule 1: Positive Potential with -nga- ("Can / May / Might", `pot-positive-nga`)*: `Subject Concord + -nga- + Verb Root + -a`. Capability, clinical permission, or potential side-effect onset (*ungangena*, *angavuka*).
+       - *Rule 2: Negative Potential with -nge-...-e ("Cannot / May Not", `pot-negative-nge`)*: `Subject Concord + -nge- + Verb Root + -e`. Temporary inability, physical incapacity, or clinical contraindication (*angengene*, *ngingesize*).
+       - *Rule 3: Absolute Categorical Negative with angeke ("Will Never / Cannot Ever", `pot-absolute-angeke`)*: `angeke + Subject Concord + Subjunctive (-e)`. Standard clinical formulation for ruling out fatal outcomes or stating non-negotiable impossibility (*angeke afe*, *angeke akwazi ukuhamba*).
+       - *Rule 4: Potential Infix with Object Concords & Statives (`pot-with-oc-stative`)*: Slot mechanics pairing potential `-nga-` with object concords (`SC + -nga- + OC + Root + -a`: *ngingakusiza*, *singawahlola*) and stative roots (*angakhathala*).
+       - *Rule 5: Functional Mobility & Independence Evaluation (`pot-clinical-mobility`)*: Bedside ADL evaluation formulas (*Ungakwazi ukusukuma?*, *Uyakwazi ukusukuma eyedwa?*), post-stroke limb capacity, and occupational clearance (*angabuyela emsebenzini*).
+    13. **Imperatives, Prohibitions & Obligative -bo- ("Imiyalo Nezivimbelo", `imperatives-prohibitions` - Comprehensive 5-Rule Curriculum & Directive Grid)**:
+       - *Rule 1: Standard Direct Imperatives & Monosyllabic Verbs (`imp-direct-monosyllabic`)*: Plain stem for polysyllabic verbs (*Vula umlomo!*), prepending `yi-` for monosyllabic stems (*Yidla!*, *Yizwa!*), and `y-` for vowel verbs (*Yenza lokhu!*).
+       - *Rule 2: Plural Patient / Caregiver Commands with -ni (`imp-plural-ni`)*: Suffixing `-ni` to address multiple people or show polite communal instruction (*Hlalani phansi!*, *Musani ukukhathazeka!*).
+       - *Rule 3: Prohibitions & Safety Advisories with Musa / Musani (`imp-prohibitions-musa`)*: `Musa + Infinitive (uku-)` for singular, `Musani + Infinitive` for plural. Bedside procedural safety during physical examination, cannulation, and imaging (*Musa ukunyakaza!*).
+       - *Rule 4: Mandatory / Obligative Future Infix -bo- ("Must Always / Must Never", `imp-obligative-bo`)*: `Subject Concord + -bo- + Verb Root + -a`. Binding chronic treatment mandates (*Ubophuza lamaphilisi njalo*). Negative: `SC + -nga- + -bo- + Root + -a` (*Ungabophuza utshwala*).
+       - *Rule 5: Bedside Procedural Commands & Examination Etiquette (`imp-clinical-procedural`)*: Physical exam command formulas (*Phefumula kakhulu*, *Khipha umoya*, *Gwinya amathe*) and polite hortative softening with *Ake...*.
+
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **Potential Mood & Capability Reference Matrix Table**: Responsive comparison table displaying 8 core noun classes / persons across positive potential (*-nga-*), negative potential (*-nge-...-e*), absolute negative (*angeke*), and clinical applications.
+  - **Potential Mood & Mobility Self-Check**: 3 clinical challenges (mobility assessment with *singehambe* / *angeke sihambe*, triage consent with *ungangena*, and treatment feasibility with *singasipholisa*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
+  - **Imperatives, Prohibitions & Obligative -bo- Reference Matrix Table**: Responsive comparison table displaying 8 verb types across singular commands, plural commands (*-ni*), negative safety prohibitions (*musa*), and mandatory adherence (*-bo-*).
+  - **Procedural Commands & Adherence Self-Check**: 3 clinical challenges (procedural stillness with *Musa ukunyakazisa*, chronic medication adherence with *Ubophuza*, and group instructions with *Hlalani*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
+
   - **Absolute & Quantitative Pronoun Reference Matrix Table**: Responsive comparison table displaying 8 core noun classes / persons across absolute, associative (*na-*), instrumental (*nga-*), locative (*ku-*), and quantitative (*-onke*, *-edwa/-odwa*) forms.
   - **Pronoun Contraction & Social History Self-Check**: 3 clinical challenges (indirect relative with *kuso*, geriatric independence with *yedwa*, and complete antibiotic course with *wonke*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Demonstratives & Spatial Deixis Reference Matrix Table**: Responsive comparison table displaying 8 core noun classes across Position 1 ("this"), Position 2 ("that referenced"), Position 3 ("that yonder"), and elided clinical examples.
@@ -228,7 +246,10 @@
   - qualificatives.js: Section metadata, 5 rules, QUALIFICATIVE_MATRIX, and QUALIFICATIVE_CHECKPOINTS.
   - pronouns.js: Section metadata, 5 rules, PRONOUNS_MATRIX, and PRONOUNS_CHECKPOINTS.
   - demonstratives.js: Section metadata, 5 rules, DEMONSTRATIVES_MATRIX, and DEMONSTRATIVES_CHECKPOINTS.
-  - grammarData.js: Clean aggregating barrel exporter assembling 11 GRAMMAR_SECTIONS, 55 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
+  - potentialMood.js: Section metadata, 5 rules, POTENTIAL_MOOD_MATRIX, and POTENTIAL_MOOD_CHECKPOINTS.
+  - imperatives.js: Section metadata, 5 rules, IMPERATIVES_MATRIX, and IMPERATIVES_CHECKPOINTS.
+
+  - grammarData.js: Clean aggregating barrel exporter assembling 13 GRAMMAR_SECTIONS, 65 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).

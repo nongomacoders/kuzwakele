@@ -15,6 +15,8 @@ import { OBJECT_CONCORDS_SECTION, OBJECT_CONCORDS_RULES, OBJECT_CONCORD_MATRIX, 
 import { QUALIFICATIVES_SECTION, QUALIFICATIVES_RULES, QUALIFICATIVE_MATRIX, QUALIFICATIVE_CHECKPOINTS } from './grammar/qualificatives.js';
 import { PRONOUNS_SECTION, PRONOUNS_RULES, PRONOUNS_MATRIX, PRONOUNS_CHECKPOINTS } from './grammar/pronouns.js';
 import { DEMONSTRATIVES_SECTION, DEMONSTRATIVES_RULES, DEMONSTRATIVES_MATRIX, DEMONSTRATIVES_CHECKPOINTS } from './grammar/demonstratives.js';
+import { POTENTIAL_MOOD_SECTION, POTENTIAL_MOOD_RULES, POTENTIAL_MOOD_MATRIX, POTENTIAL_MOOD_CHECKPOINTS } from './grammar/potentialMood.js';
+import { IMPERATIVES_SECTION, IMPERATIVES_RULES, IMPERATIVES_MATRIX, IMPERATIVES_CHECKPOINTS } from './grammar/imperatives.js';
 
 // Directory Categories
 export const GRAMMAR_CATEGORIES = [
@@ -29,7 +31,9 @@ export const GRAMMAR_CATEGORIES = [
   { id: 'object-concords', label: 'Object Concords (-m-, -wa-, -ku-)' },
   { id: 'qualificatives', label: 'Qualificatives (Adjectives & Relatives)' },
   { id: 'pronouns', label: 'Absolute & Quantitative Pronouns' },
-  { id: 'demonstratives', label: 'Demonstratives & Spatial Deixis' }
+  { id: 'demonstratives', label: 'Demonstratives & Spatial Deixis' },
+  { id: 'potential-mood', label: 'The Potential Mood (-nga-)' },
+  { id: 'imperatives-prohibitions', label: 'Imperatives & Prohibitions' }
 ];
 
 // Assembled Sections
@@ -44,7 +48,9 @@ export const GRAMMAR_SECTIONS = [
   OBJECT_CONCORDS_SECTION,
   QUALIFICATIVES_SECTION,
   PRONOUNS_SECTION,
-  DEMONSTRATIVES_SECTION
+  DEMONSTRATIVES_SECTION,
+  POTENTIAL_MOOD_SECTION,
+  IMPERATIVES_SECTION
 ];
 
 // Assembled Rules
@@ -59,7 +65,9 @@ export const GRAMMAR_RULES = [
   ...OBJECT_CONCORDS_RULES,
   ...QUALIFICATIVES_RULES,
   ...PRONOUNS_RULES,
-  ...DEMONSTRATIVES_RULES
+  ...DEMONSTRATIVES_RULES,
+  ...POTENTIAL_MOOD_RULES,
+  ...IMPERATIVES_RULES
 ];
 
 // Named Reference Tables & Matrices (100% Backward Compatible Re-exports)
@@ -74,7 +82,9 @@ export {
   OBJECT_CONCORD_MATRIX,
   QUALIFICATIVE_MATRIX,
   PRONOUNS_MATRIX,
-  DEMONSTRATIVES_MATRIX
+  DEMONSTRATIVES_MATRIX,
+  POTENTIAL_MOOD_MATRIX,
+  IMPERATIVES_MATRIX
 };
 
 // Named Practice Checkpoints (100% Backward Compatible Re-exports)
@@ -89,7 +99,26 @@ export {
   OBJECT_CONCORD_CHECKPOINTS,
   QUALIFICATIVE_CHECKPOINTS,
   PRONOUNS_CHECKPOINTS,
-  DEMONSTRATIVES_CHECKPOINTS
+  DEMONSTRATIVES_CHECKPOINTS,
+  POTENTIAL_MOOD_CHECKPOINTS,
+  IMPERATIVES_CHECKPOINTS
 };
+
+export const ALL_CHECKPOINTS = [
+  ...PAST_PRACTICE_CHECKPOINTS,
+  ...STATIVE_PRACTICE_CHECKPOINTS,
+  ...CONJUNCTION_PRACTICE_CHECKPOINTS,
+  ...ASPECT_INFIX_CHECKPOINTS,
+  ...VERBAL_EXTENSIONS_CHECKPOINTS,
+  ...COPULATIVE_LOCATIVE_CHECKPOINTS,
+  ...DEFICIENT_VERBS_CHECKPOINTS,
+  ...OBJECT_CONCORD_CHECKPOINTS,
+  ...QUALIFICATIVE_CHECKPOINTS,
+  ...PRONOUNS_CHECKPOINTS,
+  ...DEMONSTRATIVES_CHECKPOINTS,
+  ...POTENTIAL_MOOD_CHECKPOINTS,
+  ...IMPERATIVES_CHECKPOINTS
+];
+
 
 
