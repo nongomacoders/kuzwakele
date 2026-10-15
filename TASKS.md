@@ -521,3 +521,32 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Revealed Challenge #1 in Section 15 and flagged for drills
     - [x] Confirmed presence of flagged items in Drills Gym review deck
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+## The Complete Negation Systems (Izindlela Zokuphika - Section 16)
+- [x] Implement Section 16 ("The Complete Negation Systems") covering main clause initial a-...-i vs subordinate medial -nga-...-i, mandatory negative object vowel drop, future negation (-zu-/-zuku-), and infinitive fasting (ukungadli)
+  - [x] Create Category Data Module in `frontend/src/data/grammar/negation.js`:
+    - [x] Export `NEGATION_SECTION` (`negation`, "The Complete Negation Systems", 5 Rules, ShieldAlert icon, purple theme)
+    - [x] Export `NEGATION_MATRIX` (8-row table comparing Present Indicative, Dependent/Subordinate, Immediate Past Continuous, Remote Completed Past, Near Future, Stative Aspect, Class 15 Infinitive, and Associative Copulative)
+    - [x] Export `NEGATION_CHECKPOINTS` with 3 clinical challenges (mandatory object vowel drop with *Angizwa buhlungu*, pre-operative fasting with *ukungadli*, and subordinate condition with *uma singawaphuzi*)
+    - [x] Export `NEGATION_RULES` (5 clinical rules: `neg-present-indicative`, `neg-vowel-drop-objects`, `neg-main-vs-subordinate`, `neg-future-systems`, `neg-infinitive-ukunga`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export `NEGATION_SECTION`, `NEGATION_RULES`, `NEGATION_MATRIX`, and `NEGATION_CHECKPOINTS`
+    - [x] Add `{ id: 'negation', label: 'The Complete Negation Systems' }` to `GRAMMAR_CATEGORIES` (now 16 sections, 80 rules total)
+    - [x] Update `ALL_CHECKPOINTS` to include all 48 clinical practice challenges
+  - [x] Create Table Renderer in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `NegationTable` rendering the 8-tense/mood master negation matrix
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `purple` theme palette in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `negation` in `grammarSectionConfigs.js` with `ShieldAlert` icon
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `ShieldAlert` (Negation) in `GrammarDirectoryView.jsx` (dynamic badge shows `16 Sections • 80 Rules`)
+    - [x] Sync `ALL_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file maintained at 230 lines, strictly under 250 boundary)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 16 section cards with `16 Sections • 80 Rules`
+    - [x] Verified Section 16 rules and `NegationTable` matrix
+    - [x] Revealed Challenge #1 in Section 16 (*Angizwa buhlungu esifubeni namhlanje.*) and flagged for drills
+    - [x] Confirmed presence of flagged item in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)

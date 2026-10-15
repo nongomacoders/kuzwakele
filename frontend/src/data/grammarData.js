@@ -19,6 +19,7 @@ import { POTENTIAL_MOOD_SECTION, POTENTIAL_MOOD_RULES, POTENTIAL_MOOD_MATRIX, PO
 import { IMPERATIVES_SECTION, IMPERATIVES_RULES, IMPERATIVES_MATRIX, IMPERATIVES_CHECKPOINTS } from './grammar/imperatives.js';
 import { FORMATIVES_SECTION, FORMATIVES_RULES, FORMATIVES_MATRIX, FORMATIVES_CHECKPOINTS } from './grammar/formatives.js';
 import { INTERROGATIVES_SECTION, INTERROGATIVES_RULES, INTERROGATIVES_MATRIX, INTERROGATIVES_CHECKPOINTS } from './grammar/interrogatives.js';
+import { NEGATION_SECTION, NEGATION_RULES, NEGATION_MATRIX, NEGATION_CHECKPOINTS } from './grammar/negation.js';
 
 // Directory Categories
 export const GRAMMAR_CATEGORIES = [
@@ -37,7 +38,8 @@ export const GRAMMAR_CATEGORIES = [
   { id: 'potential-mood', label: 'The Potential Mood (-nga-)' },
   { id: 'imperatives-prohibitions', label: 'Imperatives & Prohibitions' },
   { id: 'formatives', label: 'Formatives (na-, nga-, njenga-)' },
-  { id: 'interrogatives', label: 'Interrogatives & Question Enclitics' }
+  { id: 'interrogatives', label: 'Interrogatives & Question Enclitics' },
+  { id: 'negation', label: 'The Complete Negation Systems' }
 ];
 
 // Assembled Sections
@@ -56,7 +58,8 @@ export const GRAMMAR_SECTIONS = [
   POTENTIAL_MOOD_SECTION,
   IMPERATIVES_SECTION,
   FORMATIVES_SECTION,
-  INTERROGATIVES_SECTION
+  INTERROGATIVES_SECTION,
+  NEGATION_SECTION
 ];
 
 // Assembled Rules
@@ -75,7 +78,8 @@ export const GRAMMAR_RULES = [
   ...POTENTIAL_MOOD_RULES,
   ...IMPERATIVES_RULES,
   ...FORMATIVES_RULES,
-  ...INTERROGATIVES_RULES
+  ...INTERROGATIVES_RULES,
+  ...NEGATION_RULES
 ];
 
 // Named Reference Tables & Matrices (100% Backward Compatible Re-exports)
@@ -94,7 +98,8 @@ export {
   POTENTIAL_MOOD_MATRIX,
   IMPERATIVES_MATRIX,
   FORMATIVES_MATRIX,
-  INTERROGATIVES_MATRIX
+  INTERROGATIVES_MATRIX,
+  NEGATION_MATRIX
 };
 
 // Named Practice Checkpoints (100% Backward Compatible Re-exports)
@@ -113,7 +118,8 @@ export {
   POTENTIAL_MOOD_CHECKPOINTS,
   IMPERATIVES_CHECKPOINTS,
   FORMATIVES_CHECKPOINTS,
-  INTERROGATIVES_CHECKPOINTS
+  INTERROGATIVES_CHECKPOINTS,
+  NEGATION_CHECKPOINTS
 };
 
 export const ALL_CHECKPOINTS = [
@@ -131,7 +137,8 @@ export const ALL_CHECKPOINTS = [
   ...POTENTIAL_MOOD_CHECKPOINTS,
   ...IMPERATIVES_CHECKPOINTS,
   ...FORMATIVES_CHECKPOINTS,
-  ...INTERROGATIVES_CHECKPOINTS
+  ...INTERROGATIVES_CHECKPOINTS,
+  ...NEGATION_CHECKPOINTS
 ];
 
 

@@ -217,9 +217,19 @@
        - *Rule 3: Stems of Timeline, Manner & Caregiver Identity (`int-stems-timeline-manner`)*: Chronological onset (*Kuqale nini?*), sensation and review of systems (*Uzizwa kanjani?*), and caregiver screening (*Ubani ophethe imithi?*).
        - *Rule 4: Causal Inquiries: kungani? vs. The Applicative Root -elani? (`int-causal-etiology`)*: Exploring adherence obstacles with *Kungani...?* (+ participial negative) vs verbal applicative *-elani?* (*Ubuyelani lapha?*).
        - *Rule 5: Polite Conversational Openers & Question Tags (`int-clinical-polite-openers`)*: Preserving *inhlonipho* through polite modal particles *Ingabe...* / *Ngabe...* and terminal tags *...yini?* / *...na?* (*Ingabe unayo le nkinga yini?*).
+    16. **The Complete Negation Systems (`negation` - Comprehensive 5-Rule Curriculum & Master Negation Architecture)**:
+       - *Rule 1: Present Indicative Negation & The Class 1 aka- Shift (`neg-present-indicative`)*: Main clause bracket formula `a- + SC + Root + -i`. Class 1/1a shifts to `aka-` (*akaguli*, *akaphuzi*). Monosyllabic verbs retain stem vowel (*akadli*).
+       - *Rule 2: The Mandatory Negative Object Preprefix Vowel Drop (`neg-vowel-drop-objects`)*: Any direct object of a negated verb drops initial augment vowel to convey complete categorical absence (*Angizwa buhlungu*, *Angifuni muthi*, *Akanamali*).
+       - *Rule 3: Main Clause vs. Subordinate Medial Negation (-nga-...-i) (`neg-main-vs-subordinate`)*: Dependent markers (*uma*, *ukuze*, *ngoba*, relatives) strictly forbid external `a-` and require medial `-nga-...-i` (*uma engaphuzi*, *ukuze ungafi*).
+       - *Rule 4: Future Tense Negation Systems (-zu- / -zuku-) (`neg-future-systems`)*: Negating future intent and adverse prognosis: `a- + SC + -zu(ku)- + Root + -a`. Reassuring against procedural pain (*awuzukudala buhlungu*). Strictly retains final `-a`.
+       - *Rule 5: Class 15 Infinitive Negation (ukunga-) & Procedural Fasting (`neg-infinitive-ukunga`)*: Gerund negation `uku- + -nga- + Root + -i` for pre-operative fasting / nil per os (*ukungadli ukudla*), substance cessation (*ukungaphuzi utshwala*), and adherence analysis.
+
 
 
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **The Complete Negation Systems Reference Matrix Table**: Master comparative grid displaying 8 tense/mood systems across positive formulas, negative formulas, bedside examples, vowel shift rules, and clinical diagnostic utilities.
+  - **Negation Architecture & Fasting Self-Check**: 3 clinical challenges (mandatory object vowel drop with *Angizwa buhlungu*, pre-operative fasting with *ukungadli*, and subordinate conditional negation with *uma singawaphuzi*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
+
   - **Formatives & Case-Relation Reference Matrix Table**: Responsive comparison table displaying 8 core noun classes comparing associative (*na-*), instrumental (*nga-*), comparative (*njenga-*), and equative (*nganga-*) formatives across clinical scenarios.
   - **Formatives & Case-Relation Self-Check**: 3 clinical challenges (MVA mechanism of injury with *washayiswa ngemoto*, burning pain simile with *njengomlilo*, and mass sizing with *ngangengqindi*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Clinical Interrogatives & Question Enclitics Matrix Table**: Responsive reference grid comparing 8 question strategies across morphemes, clinical formulas, bedside question examples, and diagnostic utilities.
@@ -268,9 +278,11 @@
   - imperatives.js: Section metadata, 5 rules, IMPERATIVES_MATRIX, and IMPERATIVES_CHECKPOINTS.
   - formatives.js: Section metadata, 5 rules, FORMATIVES_MATRIX, and FORMATIVES_CHECKPOINTS.
   - interrogatives.js: Section metadata, 5 rules, INTERROGATIVES_MATRIX, and INTERROGATIVES_CHECKPOINTS.
+  - negation.js: Section metadata, 5 rules, NEGATION_MATRIX, and NEGATION_CHECKPOINTS.
 
 
-  - grammarData.js: Clean aggregating barrel exporter assembling 15 GRAMMAR_SECTIONS, 75 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
+
+  - grammarData.js: Clean aggregating barrel exporter assembling 16 GRAMMAR_SECTIONS, 80 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).

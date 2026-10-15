@@ -14,7 +14,8 @@ import {
   POTENTIAL_MOOD_MATRIX,
   IMPERATIVES_MATRIX,
   FORMATIVES_MATRIX,
-  INTERROGATIVES_MATRIX
+  INTERROGATIVES_MATRIX,
+  NEGATION_MATRIX
 } from '../../data/grammarData';
 
 
@@ -510,6 +511,35 @@ export function InterrogativesTable() {
             <td className="py-2.5 px-3 font-mono text-[11px] text-teal-300 whitespace-nowrap">{row.clinicalFormula}</td>
             <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 min-w-[200px]">{row.clinicalExample}</td>
             <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.diagnosticUtility}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function NegationTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-purple-400">Tense / Mood</th>
+          <th className="py-2.5 px-3 text-emerald-300">Positive Formula</th>
+          <th className="py-2.5 px-3 text-rose-300">Negative Formula</th>
+          <th className="py-2.5 px-3 text-purple-300">Bedside Negative Example</th>
+          <th className="py-2.5 px-3 text-amber-300">Vowel Shift Rule</th>
+          <th className="py-2.5 px-3">Clinical Diagnostic Utility</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {NEGATION_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-purple-300 whitespace-nowrap">{row.tenseMood}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 whitespace-nowrap">{row.positiveFormula}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-rose-300 whitespace-nowrap">{row.negativeFormula}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-purple-200 min-w-[190px]">{row.negativeExample}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.vowelShift}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.clinicalUtility}</td>
           </tr>
         ))}
       </tbody>

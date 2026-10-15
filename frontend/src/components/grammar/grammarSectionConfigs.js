@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle, ShieldAlert } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -14,7 +14,8 @@ import {
   POTENTIAL_MOOD_CHECKPOINTS,
   IMPERATIVES_CHECKPOINTS,
   FORMATIVES_CHECKPOINTS,
-  INTERROGATIVES_CHECKPOINTS
+  INTERROGATIVES_CHECKPOINTS,
+  NEGATION_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -31,7 +32,8 @@ import {
   PotentialMoodTable,
   ImperativesTable,
   FormativesTable,
-  InterrogativesTable
+  InterrogativesTable,
+  NegationTable
 } from './GrammarSectionTables';
 
 
@@ -156,6 +158,14 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-indigo-950/60 border-indigo-800/50 text-indigo-200',
     iconBg: 'bg-indigo-950/80 border-indigo-800/80 text-indigo-400',
     codeBadge: 'bg-indigo-950 text-indigo-300 border-indigo-800/60'
+  },
+  'negation': {
+    badge: 'bg-purple-950/80 text-purple-300 border-purple-800/80',
+    border: 'border-purple-900/50 hover:border-purple-600/70',
+    cardBg: 'from-purple-950/30 to-slate-900/90',
+    formulaBg: 'bg-purple-950/60 border-purple-800/50 text-purple-200',
+    iconBg: 'bg-purple-950/80 border-purple-800/80 text-purple-400',
+    codeBadge: 'bg-purple-950 text-purple-300 border-purple-800/60'
   }
 };
 
@@ -363,6 +373,19 @@ export const SECTION_CONFIGS = {
     checkpoints: INTERROGATIVES_CHECKPOINTS,
     drillCategory: 'interrogatives',
     drillTitle: 'Interrogatives Practice'
+  },
+  'negation': {
+    theme: 'purple',
+    tableIcon: ShieldAlert,
+    tableTitle: 'The Complete Negation Systems Reference Matrix',
+    tableSubtitle: 'Master comparison across tenses and moods: positive formulas, negative formulas, vowel shifts, and clinical utilities.',
+    tableBadge: '8 Tense/Mood Systems',
+    TableComponent: NegationTable,
+    practiceTitle: 'Interactive Checkpoint: Negation Architecture & Fasting Self-Check',
+    practiceSubtitle: 'Practice mandatory object vowel drop (buhlungu), pre-op fasting gerunds (ukungadli), and subordinate condition negation (uma singaphuzi).',
+    checkpoints: NEGATION_CHECKPOINTS,
+    drillCategory: 'negation',
+    drillTitle: 'Negation Systems Practice'
   }
 };
 

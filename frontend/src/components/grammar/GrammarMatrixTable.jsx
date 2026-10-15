@@ -61,6 +61,11 @@ const TABLE_THEMES = {
     containerBorder: 'border-red-900/50',
     iconBox: 'bg-red-950/80 border border-red-800/80 text-red-400',
     badge: 'bg-red-950 text-red-300 border border-red-800/60'
+  },
+  purple: {
+    containerBorder: 'border-purple-900/50',
+    iconBox: 'bg-purple-950/80 border border-purple-800/80 text-purple-400',
+    badge: 'bg-purple-950 text-purple-300 border border-purple-800/60'
   }
 };
 

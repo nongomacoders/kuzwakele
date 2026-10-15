@@ -168,6 +168,19 @@ const DRAWER_THEMES = {
     solutionLabel: 'text-red-400',
     solutionText: 'text-red-200',
     tokenChip: 'text-red-300 bg-red-950/80 border border-red-900/60'
+  },
+  purple: {
+    container: 'bg-gradient-to-br from-purple-950/40 via-slate-900/90 to-slate-900 border border-purple-800/60',
+    headerBorder: 'border-purple-900/40',
+    iconBox: 'bg-purple-900/60 border border-purple-700/60 text-purple-300',
+    badge: 'bg-purple-950 text-purple-300 border border-purple-800/80',
+    toggleBtn: 'text-purple-300 hover:text-white bg-purple-950 border border-purple-800',
+    challengeBadge: 'text-purple-400 bg-purple-950/80 border border-purple-900/60',
+    revealBtn: 'bg-purple-950 text-purple-300 hover:bg-purple-900 border border-purple-800/80',
+    solutionCard: 'border-purple-900/50',
+    solutionLabel: 'text-purple-400',
+    solutionText: 'text-purple-200',
+    tokenChip: 'text-purple-300 bg-purple-950/80 border border-purple-900/60'
   }
 };
 
