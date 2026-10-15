@@ -624,3 +624,46 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Revealed Challenge #1 in Section 20 (*Qala uhlanze isilonda ngamanzi ahlanzekile, bese ugcoba umuthi, bese usibopha ngebhandishi elihlanzekile.*) and flagged for drills
     - [x] Confirmed presence of flagged items in Drills Gym review deck
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+## Section 1 Past Tense Systems Refactor & Sections 21 (Present Indicative) & 22 (Primary Future Tenses)
+- [x] Refactor Section 1 ("The Complete Past Tense Systems") to incorporate Recent Completed Past (-ile / -e), and implement Section 21 ("The Present Indicative Tense — Inkathi Yamanje") and Section 22 ("The Primary Future Tenses — Inkathi Ezayo")
+  - [x] Refactor Section 1 in `frontend/src/data/grammar/pastTenses.js`:
+    - [x] Update `PAST_TENSES_SECTION` with recent completed past (-ile / -e) description and preview hook
+    - [x] Update `PAST_CONCORD_MATRIX` adding Recent Completed Long (`recentCompletedLong`) and Recent Completed Short (`recentCompletedShort`) columns
+    - [x] Dedicate Rule 1 to Recent Completed Past: Long Form -ile vs. Short Form -e (`past-recent-completed-ile-e`)
+    - [x] Update `PAST_PRACTICE_CHECKPOINTS` Challenge 1 to test short form -e before complements (*Ngiphuze amaphilisi ami ekuseni kakhulu ekhaya.*)
+  - [x] Create Category Data Module in `frontend/src/data/grammar/presentIndicative.js`:
+    - [x] Export `PRESENT_INDICATIVE_SECTION` (`present-indicative`, "The Present Indicative Tense", 5 Rules, Sun icon, amber theme)
+    - [x] Export `PRESENT_INDICATIVE_MATRIX` (8-row clinical verbs table comparing *-gula*, *-phuza*, *-funa*, *-zwa*, *-hlola*, *-buhlungu*, *-khwehlela*, *-phefumula* across long form -ya-, short form complement, with object concord, and syntax rule)
+    - [x] Export `PRESENT_INDICATIVE_CHECKPOINTS` (3 clinical challenges: mandatory -ya- drop before object, long form -ya- emphatic/intransitive, and ROS with adverbial qualifier)
+    - [x] Export `PRESENT_INDICATIVE_RULES` (5 clinical rules: `pres-long-form-ya`, `pres-short-drop-ya`, `pres-habitual-aspect`, `pres-object-concords`, `pres-clinical-ros`)
+  - [x] Create Category Data Module in `frontend/src/data/grammar/futureTenses.js`:
+    - [x] Export `FUTURE_TENSES_SECTION` (`future-tenses`, "The Primary Future Tenses (Near -zo- & Remote -yo-)", 5 Rules, CalendarClock icon, sky theme)
+    - [x] Export `FUTURE_TENSES_MATRIX` (8-row table comparing noun classes/persons across near future contracted, near future monosyllabic with -zoku-, remote future -yo-, with object concord, and prognostic utility)
+    - [x] Export `FUTURE_TENSES_CHECKPOINTS` (3 clinical challenges: near future with OC insertion, monosyllabic stem retention of -zoku-, and remote future prognosis with -yo-)
+    - [x] Export `FUTURE_TENSES_RULES` (5 clinical rules: `fut-near-zo`, `fut-monosyllabic-retention`, `fut-remote-yo`, `fut-object-concord-slot`, `fut-clinical-prognosis`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export both sections, rules, matrices, and checkpoints
+    - [x] Add `{ id: 'present-indicative' }` and `{ id: 'future-tenses' }` to `GRAMMAR_CATEGORIES` (bringing curriculum to exactly 22 sections, 110 rules, 66 checkpoints)
+    - [x] Update `ALL_CHECKPOINTS` to assemble all 66 clinical practice checkpoints
+  - [x] Update Table Renderers in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Update `PastConcordTable` to include Recent Long (`-ile`) and Recent Short (`-e`) columns
+    - [x] Export `PresentIndicativeTable` rendering 8 clinical verb rows
+    - [x] Export `FutureTensesTable` rendering 8 noun class / person rows
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `amber` and `sky` theme palettes in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `present-indicative` (Sun) and `future-tenses` (CalendarClock) in `grammarSectionConfigs.js`
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `Sun` and `CalendarClock` in `GrammarDirectoryView.jsx` (dynamic badge shows `22 Sections • 110 Rules`)
+    - [x] Verify `ALL_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file strictly maintained at 230 lines)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all 6 tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 22 section cards with `22 Sections • 110 Rules`
+    - [x] Verified Section 1 refactored table (Recent Completed Long & Short), Rule 1, and Challenge 1 reveal (*Ngiphuze amaphilisi ami ekuseni kakhulu ekhaya.*)
+    - [x] Verified Section 21 rules, `PresentIndicativeTable` matrix, and Challenge 1 reveal (*Ngiphuza amaphilisi omfutho wegazi njalo ekuseni.*)
+    - [x] Verified Section 22 rules, `FutureTensesTable` matrix, and Challenge 1 reveal (*Ngizokunika amaphilisi aqinile obuhlungu ozowaphuza ekhaya.*)
+    - [x] Confirmed presence of flagged items in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+

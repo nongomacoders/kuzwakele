@@ -19,7 +19,9 @@ import {
   IDEOPHONES_MATRIX,
   DIMINUTIVES_MATRIX,
   COMPOUND_TENSES_MATRIX,
-  NARRATIVE_SEQUENCE_MATRIX
+  NARRATIVE_SEQUENCE_MATRIX,
+  PRESENT_INDICATIVE_MATRIX,
+  FUTURE_TENSES_MATRIX
 } from '../../data/grammarData';
 
 
@@ -31,17 +33,28 @@ export function PastConcordTable() {
       <thead>
         <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
           <th className="py-2.5 px-3">Person / Class</th>
+          <th className="py-2.5 px-3 text-emerald-400">Recent Long (-ile)</th>
+          <th className="py-2.5 px-3 text-teal-400">Recent Short (-e)</th>
           <th className="py-2.5 px-3 text-indigo-400">Immediate Cont (be-)</th>
           <th className="py-2.5 px-3 text-purple-400">Remote Simple (-a-)</th>
-          <th className="py-2.5 px-3 text-cyan-400">Remote Cont (Habitual)</th>
-          <th className="py-2.5 px-3">Form Comparison</th>
-          <th className="py-2.5 px-3">Clinical Utility</th>
+          <th className="py-2.5 px-3 text-cyan-400">Remote Cont (ngangi-)</th>
+          <th className="py-2.5 px-3">Clinical Note</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-slate-800/60 text-slate-300">
         {PAST_CONCORD_MATRIX.map((row, idx) => (
           <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
             <td className="py-2.5 px-3 font-mono font-bold text-indigo-300 whitespace-nowrap">{row.person}</td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-900/60 px-2 py-0.5 rounded">
+                {row.recentCompletedLong}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono font-bold text-teal-300 bg-teal-950/80 border border-teal-900/60 px-2 py-0.5 rounded">
+                {row.recentCompletedShort}
+              </span>
+            </td>
             <td className="py-2.5 px-3 whitespace-nowrap">
               <span className="font-mono font-bold text-indigo-300 bg-indigo-950/80 border border-indigo-900/60 px-2 py-0.5 rounded">
                 {row.immediateCont}
@@ -57,8 +70,7 @@ export function PastConcordTable() {
                 {row.remoteCont}
               </span>
             </td>
-            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.example}</td>
-            <td className="py-2.5 px-3 text-slate-400 whitespace-nowrap text-[11px]">{row.note}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.clinicalNote}</td>
           </tr>
         ))}
       </tbody>
@@ -656,6 +668,62 @@ export function NarrativeSequenceTable() {
             <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 min-w-[240px]">{row.bedsideClinicalExample}</td>
             <td className="py-2.5 px-3 text-slate-300 min-w-[180px]">{row.communicativeFunction}</td>
             <td className="py-2.5 px-3 text-rose-400 text-[11px] min-w-[190px]">{row.clinicalPitfallToAvoid}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function PresentIndicativeTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-amber-400">Verb Stem & Meaning</th>
+          <th className="py-2.5 px-3 text-amber-300">Long Form (-ya-)</th>
+          <th className="py-2.5 px-3 text-emerald-300">Short Form (Complement)</th>
+          <th className="py-2.5 px-3 text-cyan-300">With Object Concord</th>
+          <th className="py-2.5 px-3">Clinical Syntax Rule</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {PRESENT_INDICATIVE_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-slate-200 whitespace-nowrap">{row.verbStemMeaning}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.longFormYa}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 whitespace-nowrap">{row.shortFormComplement}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-cyan-300 whitespace-nowrap">{row.withObjectConcord}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[190px]">{row.clinicalSyntaxRule}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function FutureTensesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-sky-400">Noun Class / Subject</th>
+          <th className="py-2.5 px-3 text-sky-300">Near Future (-zo-)</th>
+          <th className="py-2.5 px-3 text-teal-300">Monosyllabic (-zoku-)</th>
+          <th className="py-2.5 px-3 text-purple-300">Remote Future (-yo-)</th>
+          <th className="py-2.5 px-3 text-amber-300">With Object Concord</th>
+          <th className="py-2.5 px-3">Clinical Prognostic Utility</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {FUTURE_TENSES_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-slate-200 whitespace-nowrap">{row.nounClass}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-sky-300 whitespace-nowrap">{row.nearFutureContracted}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-teal-300 whitespace-nowrap">{row.nearFutureMonosyllabic}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-purple-300 whitespace-nowrap">{row.remoteFuture}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.withObjectConcord}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[200px]">{row.clinicalPrognosticUtility}</td>
           </tr>
         ))}
       </tbody>

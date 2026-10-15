@@ -23,7 +23,9 @@ import {
   Flame,
   Minimize2,
   History,
-  ListOrdered
+  ListOrdered,
+  Sun,
+  CalendarClock
 } from 'lucide-react';
 import { CATEGORY_THEMES, DEFAULT_CATEGORY_THEME } from './grammarSectionConfigs';
 
@@ -49,6 +51,8 @@ const getSectionIcon = (id) => {
     case 'diminutives-palatalization': return <Minimize2 className="w-5 h-5 text-lime-400" />;
     case 'compound-tenses': return <History className="w-5 h-5 text-violet-400" />;
     case 'narrative-irregular': return <ListOrdered className="w-5 h-5 text-stone-300" />;
+    case 'present-indicative': return <Sun className="w-5 h-5 text-amber-400" />;
+    case 'future-tenses': return <CalendarClock className="w-5 h-5 text-sky-400" />;
     default: return <BookOpen className="w-5 h-5 text-slate-400" />;
   }
 };

@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle, ShieldAlert, Flame, Minimize2, History, ListOrdered } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle, ShieldAlert, Flame, Minimize2, History, ListOrdered, Sun, CalendarClock } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -19,7 +19,9 @@ import {
   IDEOPHONES_CHECKPOINTS,
   DIMINUTIVES_CHECKPOINTS,
   COMPOUND_TENSES_CHECKPOINTS,
-  NARRATIVE_SEQUENCE_CHECKPOINTS
+  NARRATIVE_SEQUENCE_CHECKPOINTS,
+  PRESENT_INDICATIVE_CHECKPOINTS,
+  FUTURE_TENSES_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -41,7 +43,9 @@ import {
   IdeophonesTable,
   DiminutivesTable,
   CompoundTensesTable,
-  NarrativeSequenceTable
+  NarrativeSequenceTable,
+  PresentIndicativeTable,
+  FutureTensesTable
 } from './GrammarSectionTables';
 
 
@@ -206,6 +210,22 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-stone-900/60 border-stone-800/50 text-stone-200',
     iconBg: 'bg-stone-900/80 border-stone-700/80 text-stone-300',
     codeBadge: 'bg-stone-900 text-stone-300 border-stone-700/60'
+  },
+  'present-indicative': {
+    badge: 'bg-amber-950/80 text-amber-300 border-amber-800/80',
+    border: 'border-amber-900/50 hover:border-amber-600/70',
+    cardBg: 'from-amber-950/30 to-slate-900/90',
+    formulaBg: 'bg-amber-950/60 border-amber-800/50 text-amber-200',
+    iconBg: 'bg-amber-950/80 border-amber-800/80 text-amber-400',
+    codeBadge: 'bg-amber-950 text-amber-300 border-amber-800/60'
+  },
+  'future-tenses': {
+    badge: 'bg-sky-950/80 text-sky-300 border-sky-800/80',
+    border: 'border-sky-900/50 hover:border-sky-600/70',
+    cardBg: 'from-sky-950/30 to-slate-900/90',
+    formulaBg: 'bg-sky-950/60 border-sky-800/50 text-sky-200',
+    iconBg: 'bg-sky-950/80 border-sky-800/80 text-sky-400',
+    codeBadge: 'bg-sky-950 text-sky-300 border-sky-800/60'
   }
 };
 
@@ -478,6 +498,32 @@ export const SECTION_CONFIGS = {
     checkpoints: NARRATIVE_SEQUENCE_CHECKPOINTS,
     drillCategory: 'narrative-irregular',
     drillTitle: 'Narrative Sequencing'
+  },
+  'present-indicative': {
+    theme: 'amber',
+    tableIcon: Sun,
+    tableTitle: 'The Present Indicative & -ya- Drop Reference Matrix',
+    tableSubtitle: 'Direct comparison across common clinical verbs: long form with -ya-, short form before complements, and object concord integration.',
+    tableBadge: '8 Clinical Stems',
+    TableComponent: PresentIndicativeTable,
+    practiceTitle: 'Interactive Checkpoint: Present Indicative & -ya- Drop Self-Check',
+    practiceSubtitle: 'Practice mandatory -ya- drop before direct objects, emphatic long forms, and review of systems formulations.',
+    checkpoints: PRESENT_INDICATIVE_CHECKPOINTS,
+    drillCategory: 'present-indicative',
+    drillTitle: 'Present Indicative'
+  },
+  'future-tenses': {
+    theme: 'sky',
+    tableIcon: CalendarClock,
+    tableTitle: 'The Primary Future Tenses Reference Matrix',
+    tableSubtitle: 'Direct reference comparing near future (-zo-), monosyllabic stem retention (-zoku-), and remote prognostic future (-yo-).',
+    tableBadge: '8 Noun Classes',
+    TableComponent: FutureTensesTable,
+    practiceTitle: 'Interactive Checkpoint: Future Tenses & Prognosis Self-Check',
+    practiceSubtitle: 'Practice near future medication plans, monosyllabic ku- preservation, and annual remote follow-up expectations.',
+    checkpoints: FUTURE_TENSES_CHECKPOINTS,
+    drillCategory: 'future-tenses',
+    drillTitle: 'Primary Future Tenses'
   }
 };
 

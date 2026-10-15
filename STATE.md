@@ -126,14 +126,14 @@
   - **Search Results View**:
     - Automatically displays matching rules across all sections whenever search query is non-empty, with one-tap `[ Clear Search ]` button.
 - **Targeted Grammatical Modules**:
-  1. **Past Continuous & Remote Past (`past-tenses` - Comprehensive 5-Rule Curriculum & Concord Matrix)**:
-     - *Rule 1: Immediate Past Continuous / Imperfect (`past-immediate-continuous`)*: `be-` + concord (`bengi-`, `ubu-`, `ube-`, `sibe-`, `bebe-`, `beku-`) for actions ongoing earlier today or yesterday. Contrast of Class 1 *ube-* with 2nd person *ubu-*.
-     - *Rule 2: Remote Past Simple / Deep Past (`past-remote-simple`)*: Elided long `-a-` concords (`nga-`, `wa-`, `sa-`, `ba-`, `kwa-`) for events days, months, or years ago. Pitfall warning against confusing remote *nga-* with present *ngiya-*.
-     - *Rule 3: Remote Past Continuous / Habitual (`past-remote-continuous`)*: Remote continuous concords (`ngangi-`, `wawu-`, `waye-`, `sasi-`, `babe-`, `kwaku-`) for chronic history, childhood habits, and occupational exposures (e.g. *wawubhema*).
-     - *Rule 4: Past Negation Systems (`past-negation-systems`)*: Dual negation architecture: completed past negation with suffix `-anga` (*a-ngi-phuz-anga* = *angiphuzanga*) versus ongoing continuous negation with mid-verb participial particle `-nga-...-i` (*bengi-nga-z-i* = *bengingazi*).
-     - *Rule 5: Clinical History-Taking & Onset Formulas (`past-clinical-history-stems`)*: Core clinical onset patterns (*Kuqale nini lokhu?*, *Kwenzeka nini lokhu okokuqala?*, *Ubuhlungu buqale ngenkathi wenzani?*, *Wawunayo le nkinga ngaphambili?*).
-     - *Compound Past Concord Matrix Table*: Responsive quick-reference grid comparing 7 core person and noun classes (`Mina`, `Wena`, `Yena`, `Thina`, `Nina`, `Bona`, `Khona`) across Immediate Continuous, Remote Simple, and Remote Continuous.
-     - *Interactive Checkpoint History-Taking Self-Check*: 3 clinical challenges (walking to clinic when pain started, smoking history, skipped medication yesterday) with toggleable answer reveals, linguistic keys, and 1-tap `[ Flag for Drills ]` bookmarking.
+  1. **The Complete Past Tense Systems (`past-tenses` - Comprehensive 5-Rule Curriculum & Concord Matrix)**:
+     - *Rule 1: Recent Completed Past: Long Form -ile vs. Short Form -e (`past-recent-completed-ile-e`)*: Long form `-ile` strictly clause-final (*Ngiphuzile* = I have taken [it]; *Udokotela ufikile* = The doctor has arrived). When followed immediately by an object, adverb, time word, or prepositional phrase, the verb obligatorily shortens to `-e` (*Ngiphuze amaphilisi ekuseni*; *Ngibone udokotela izolo*). Common Pitfall: *ngiphuzile umuthi is ungrammatical.
+     - *Rule 2: Immediate Past Continuous / Imperfect (`past-immediate-continuous`)*: `be-` + concord (`bengi-`, `ubu-`, `ube-`, `sibe-`, `bebe-`, `beku-`) for actions ongoing earlier today or yesterday. Contrast of Class 1 *ube-* with 2nd person *ubu-*.
+     - *Rule 3: Remote Past Simple / Deep Past (`past-remote-simple`)*: Elided long `-a-` concords (`nga-`, `wa-`, `sa-`, `ba-`, `kwa-`) for events days, months, or years ago. Pitfall warning against confusing remote *nga-* with present *ngiya-*.
+     - *Rule 4: Remote Past Continuous / Habitual (`past-remote-continuous`)*: Remote continuous concords (`ngangi-`, `wawu-`, `waye-`, `sasi-`, `babe-`, `kwaku-`) for chronic history, childhood habits, and occupational exposures (e.g. *wawubhema*).
+     - *Rule 5: Past Negation Systems (`past-negation-systems`)*: Dual negation architecture: completed past negation with suffix `-anga` (*a-ngi-phuz-anga* = *angiphuzanga*) versus ongoing continuous negation with mid-verb participial particle `-nga-...-i` (*bengi-nga-z-i* = *bengingazi*).
+     - *Compound Past Concord Matrix Table*: Responsive quick-reference grid comparing 7 core person and noun classes (`Mina`, `Wena`, `Yena`, `Thina`, `Nina`, `Bona`, `Khona`) across Recent Completed Long (`-ile`), Recent Completed Short (`-e`), Immediate Continuous (`bengi-`), Remote Simple (`nga-`), and Remote Continuous (`ngangi-`).
+     - *Interactive Checkpoint History-Taking Self-Check*: 3 clinical challenges (morning pill ingestion with short form -e *Ngiphuze amaphilisi ami ekuseni kakhulu ekhaya.*, smoking history with *wawubhema*, skipped medication yesterday with *angiwaphuzanga*) with toggleable answer reveals, linguistic keys, and 1-tap `[ Flag for Drills ]` bookmarking.
   2. **The Stative Aspect (`stative` - Comprehensive 5-Rule Curriculum)**:
      - *Rule 1: Process vs. Present Resulting State (`stative-core-concept`)*: Root verbs of process where past suffix `-ile` / `-e` denotes present bodily/mental reality (*-vuvukile*, *-khathele*, *-lambile*, *-lele*, *-mile*).
      - *Rule 2: The Contraction Rule (`stative-contraction-rule`)*: Drop from full `-ile` to contracted `-e` when directly followed by an adverb, complement, or locative (*Ngilambe kakhulu* vs *Ngilambile*).
@@ -226,7 +226,48 @@
 
 
 
+    17. **Ideophones & Defective -thi (`ideophones` - Comprehensive 5-Rule Curriculum & Sensory Primitives)**:
+       - *Rule 1: Acute Sensory Ideophones & Visual Transitions (`ideo-acute-sensory-primitives`)*: Vivid sensory primitives (*dwe*, *tebhu*, *cwaka*, *bha*, *ngci*, *phaqa*, *qhu*, *ntwesi*) describing sudden physiological changes.
+       - *Rule 2: Tense Inflections of the Defective Verb -thi (`ideo-defective-thi-inflections`)*: *kwathi* (it happened that), *kuthe* (recent past), *kuzothi* (it will be).
+       - *Rule 3: Cardiovascular & Neurological Ideophones (`ideo-cardio-neuro-symptoms`)*: Sudden syncope (*kwathi dwe*), rapid pulse (*ngqungqu*).
+       - *Rule 4: Hemorrhage & Trauma Presentation (`ideo-trauma-hemorrhage`)*: Profuse bleeding (*kwathi tebhu*), fractures (*kwathi qhu*).
+       - *Rule 5: Clinical Triage Speed & Rapid Elicitation (`ideo-clinical-triage-speed`)*: Utilizing ideophones for concise emergency presentations.
+    18. **Diminutives, Augmentatives & Noun Palatalization (`diminutives-augmentatives` - Comprehensive 5-Rule Curriculum)**:
+       - *Rule 1: Alveolar & Labial Sound Shifts (`dim-sound-shifts`)*: $b \to tsh$, $m \to ny$, $mb \to nj$, $l \to dl$ with suffix `-ana`.
+       - *Rule 2: Pediatric & Anatomical Diminutives (`dim-pediatric-anatomy`)*: *ithambo* $\to$ *ithanjana*, *umlenze* $\to$ *umlenzana*.
+       - *Rule 3: Clinical Attenuation & Downplaying (`dim-symptom-attenuation`)*: *umkhuhlwana* (mild cold/fever), *kancane*.
+       - *Rule 4: Augmentative Suffix -kazi (`dim-augmentative-kazi`)*: Intensifying severity: *ingozikazi* (catastrophic accident).
+       - *Rule 5: Bedside Empathy & Patient Rapport (`dim-clinical-rapport`)*: Softening diagnosis and calming distress.
+    19. **Compound Tenses & Multi-Tier Aspect Chaining (`compound-tenses` - Comprehensive 5-Rule Curriculum)**:
+       - *Rule 1: Past Continuous with -lokhu (`comp-past-frequentative-lokhu`)*: Unbroken habitual action (*bengilokhu ngiphalaza*).
+       - *Rule 2: Prior State Transitions with se- (`comp-prior-state-se`)*: Prior state onset (*wayeselele*, *sasesiqulekile*).
+       - *Rule 3: Future Continuous & Perfect Horizons (`comp-future-continuous-perfect`)*: Anticipated future state (*ngobe sengiwaphuzile*).
+       - *Rule 4: Unfulfilled Intent with -sa- (`comp-unfulfilled-intent`)*: Interrupted plan (*ngangisazoya*).
+       - *Rule 5: Clinical Longitudinal Timeline Untangling (`comp-clinical-longitudinal-timeline`)*: Multi-encounter history mapping.
+    20. **Narrative Sequencing & Irregular Verbs (`narrative-irregular` - Comprehensive 5-Rule Curriculum)**:
+       - *Rule 1: Sequential Subjunctive with bese (`narr-sequential-subjunctive-bese`)*: Procedural step chaining (*bese ugcoba*).
+       - *Rule 2: Prerequisite Actions with anduba (`narr-prerequisite-anduba`)*: Condition precedence (*anduba uphuze*).
+       - *Rule 3: Narrative Past Chaining with wa- (`narr-past-chaining`)*: Incident chronology (*wawa phansi, wabe esequleka*).
+       - *Rule 4: Irregular Verb -azi (`narr-irregular-azi`)*: Knowledge and ability (*ngiyazi*, *angazi*).
+       - *Rule 5: Defective Stems -sho and -thi (`narr-defective-sho-thi`)*: Quoting and clarifying (*usho ukuthini?*, *wathi*).
+    21. **The Present Indicative Tense (`present-indicative` - Comprehensive 5-Rule Curriculum & Clinical Verbs Matrix)**:
+       - *Rule 1: Present Long Form with -ya- (`pres-long-form-ya`)*: `SC + -ya- + Verb Root + -a`. Affirmative terminal emphasis or intransitive state (*Ngiyagula* = I am sick; *Udokotela uyeza* = The doctor is coming).
+       - *Rule 2: Obligatory -ya- Drop Before Objects & Adverbials (`pres-short-drop-ya`)*: When followed by an object or adverb, `-ya-` is strictly excluded (*Ngifuna umuthi*, never * *Ngiyafuna umuthi*; *Ngigula kakhulu*, never * *Ngiyagula kakhulu*).
+       - *Rule 3: Habitual Present Aspect with -vame uku- / njalo (`pres-habitual-aspect`)*: Chronic baseline behaviors and symptom recurrence: `SC + -vame + Infinitive` (*Ngivame ukuba nekhanda* = I tend to have headaches; *Uphuza njalo* = He drinks regularly).
+       - *Rule 4: Object Concords in the Present Tense & Focus Shifts (`pres-object-concords`)*: Pairing present tense with object concords (*Ngiyawaphuza amaphilisi* vs *Ngiwaphuzela ukusinda*).
+       - *Rule 5: Present Review of Systems (ROS) & Physical Complaints (`pres-clinical-ros`)*: Active bedside symptom elicitation (*Ngizwa ubuhlungu*, *Ngiphefumula kanzima*, *Inhliziyo igxuma ngamandla*).
+    22. **The Primary Future Tenses (`future-tenses` - Comprehensive 5-Rule Curriculum & Prognosis Matrix)**:
+       - *Rule 1: Near Future Tense with -zo- (`fut-near-zo`)*: `SC + -zo- + Verb Root + -a`. Imminent clinical plans today, tonight, tomorrow (*Ngizobona udokotela kusasa*).
+       - *Rule 2: Obligatory Retention of -zoku- / -yoku- with Monosyllabic & Vowel Verbs (`fut-monosyllabic-retention`)*: Monosyllabic stems (*-dla*, *-za*, *-zwa*) and vowel verbs (*-enza*, *-oma*) obligatorily retain `ku-`: *uzokudla*, *ngizokwenza*, *kuzokuma*.
+       - *Rule 3: Remote Future Tense with -yo- / -yoku- (`fut-remote-yo`)*: Long-term prognosis months or years ahead (*Uyobuyela emtholampilo ngonyaka ozayo*).
+       - *Rule 4: Object Concord Slot Insertion in Future Tenses (`fut-object-concord-slot`)*: Object concord slots between `-zo-`/`-yo-` and stem, displacing dummy `-ku-` for monosyllabic verbs (*ngizokunika*, *ngizowadla*).
+       - *Rule 5: Clinical Prognosis & Therapeutic Expectation Setting (`fut-clinical-prognosis`)*: Bedside reassurance formulas (*Uzophola*, *Lo muthi uzodambisa ubuhlungu*, *Inxeba lizoma*).
+
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **Present Indicative Clinical Verbs Reference Matrix Table**: 8 common clinical verbs (*-gula*, *-phuza*, *-funa*, *-zwa*, *-hlola*, *-buhlungu*, *-khwehlela*, *-phefumula*) compared across Long Form (-ya-), Short Form (Complement), With Object Concord, and Clinical Syntax Rule.
+  - **Present Indicative & -ya- Drop Self-Check**: 3 clinical challenges (mandatory -ya- drop before direct object with *Ngiphuza amaphilisi omfutho wegazi njalo ekuseni.*, long form -ya- for intransitive affirmation with *Yebo dokotela, ngiyagula futhi ngiyaqhaqhazela.*, and review of systems with *Ngiphefumula kanzima kakhulu lapho ngilala phansi embhedeni.*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
+  - **Future Tenses & Prognosis Reference Matrix Table**: 8 noun class / person rows comparing Near Future Contracted (-zo-), Monosyllabic Retention (-zoku-), Remote Future (-yo-), With Object Concord, and Clinical Prognostic Utility.
+  - **Future Tenses & Prognosis Self-Check**: 3 clinical challenges (near future with object concord insertion *Ngizokunika amaphilisi aqinile obuhlungu ozowaphuza ekhaya.*, monosyllabic stem retention of -zoku- *Uzokudla ukudla okuthambile ngaphambi kokuba uphuze lo muthi kusasa.*, and remote future prognosis with -yo- *Uyohlolwa futhi esibhedlela esikhulu ngonyaka ozayo mayelana nenhliziyo yakho.*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Compound Tenses & Multi-Tier Aspect Chaining Matrix Table**: 8 compound patterns comparing past frequentative continuous (*-lokhu*), prior transition state (*wayese-*), future completed perfect (*ngobe sengiwaphuzile*), unfulfilled intent (*ngangisazoya*), and longitudinal disease chronologies.
   - **Compound Tenses & Multi-Tier Timeline Self-Check**: 3 clinical challenges (unbroken vomiting with *bengilokhu ngiphalaza*, pre-admission unconsciousness with *sasesiqulekile*, and completed antibiotic clearance with *ngobe sengiwacedile*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Narrative Step Sequencing & Irregular Verbs Matrix Table**: 8 narrative sequencing and irregular verb mechanics comparing sequential subjunctive (*bese*), prerequisite timing (*anduba*), narrative past chaining (*wa-... wa-...*), temporal pivot (*kwathi lapho*), and irregular verbs (*-azi*, *-sho*, *-thi*).

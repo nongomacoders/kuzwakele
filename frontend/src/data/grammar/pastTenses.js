@@ -1,48 +1,105 @@
 /**
  * Kuzwakele Grammar Reference - pastTenses.js
+ * Comprehensive guide to the complete past tense systems in isiZulu,
+ * covering recent completed past (-ile / -e), immediate continuous (be-),
+ * remote simple past (-a-), remote continuous (ngangi-), and completed past negation (-anga).
  */
 
 export const PAST_TENSES_SECTION = {
   id: 'past-tenses',
-  title: 'Past Continuous & Remote Past',
+  title: 'The Complete Past Tense Systems',
   badge: '5 Rules',
   ruleCount: 5,
-  keyConcept: 'Imperfect be-, deep past -a-, remote continuous ngangi-, and past negation.',
-  previewHook: 'bengihamba vs. ngahamba',
-  description: 'Master the 5 core past tense rules: immediate continuous (be-), deep past (-a-), remote continuous (ngangi-), negation (-anga), and history-taking onset formulas.'
+  keyConcept: 'Recent completed past (-ile / -e), immediate past continuous (bengi-), remote simple past (-a-), remote continuous (ngangi-), and completed past negation (-anga).',
+  previewHook: 'ngiphuzile vs ngiphuze izolo, bengihamba, ngahamba, ngangiye',
+  description: 'Master the 5 core past tense rules: recent completed past long form -ile vs short form -e before complements, immediate continuous (be-), remote past simple (-a-), remote continuous (ngangi-) for chronic habits, and completed past negation (-anga).'
 };
 
 export const PAST_CONCORD_MATRIX = [
-  { person: 'Mina [1st Sing]', immediateCont: 'bengi-', remoteSimple: 'nga-', remoteCont: 'ngangi-', example: 'bengisebenza / ngasebenza / ngangisebenza', note: 'Recent vs. deep vs. habitual' },
-  { person: 'Wena [2nd Sing]', immediateCont: 'ubu-', remoteSimple: 'wa-', remoteCont: 'wawu-', example: 'ubugula / wagula / wawugula', note: 'Essential for onset elicitation' },
-  { person: 'Yena [Class 1/1a]', immediateCont: 'ube-', remoteSimple: 'wa-', remoteCont: 'waye-', example: 'ubekhuluma / wakhuluma / wayekhuluma', note: 'Note irregular remote waye-' },
-  { person: 'Thina [1st Plur]', immediateCont: 'sibe-', remoteSimple: 'sa-', remoteCont: 'sasi-', example: 'sibehamba / sahamba / sasihamba', note: 'Household/family history' },
-  { person: 'Nina [2nd Plur]', immediateCont: 'nibe-', remoteSimple: 'na-', remoteCont: 'nani-', example: 'nibebona / nabona / nanibona', note: 'Caregiver group addressing' },
-  { person: 'Bona [Class 2]', immediateCont: 'bebe-', remoteSimple: 'ba-', remoteCont: 'babe-', example: 'bebelindile / balinda / babelindile', note: 'Community/relatives' },
-  { person: 'Khona [Class 15/17]', immediateCont: 'beku-', remoteSimple: 'kwa-', remoteCont: 'kwaku-', example: 'bekubuhlungu / kwenzeka / kwakubuhlungu', note: 'Impersonal / timeline onset' }
+  {
+    person: 'Mina [1st Sing]',
+    recentCompletedLong: 'ngiphuzile',
+    recentCompletedShort: 'ngiphuze...',
+    immediateCont: 'bengi-',
+    remoteSimple: 'nga-',
+    remoteCont: 'ngangi-',
+    clinicalNote: 'Recent completed today/yesterday vs ongoing vs remote habitual'
+  },
+  {
+    person: 'Wena [2nd Sing]',
+    recentCompletedLong: 'uphuzile',
+    recentCompletedShort: 'uphuze...',
+    immediateCont: 'ubu-',
+    remoteSimple: 'wa-',
+    remoteCont: 'wawu-',
+    clinicalNote: 'Patient history questions & adherence verification'
+  },
+  {
+    person: 'Yena [Class 1/1a]',
+    recentCompletedLong: 'uphuzile',
+    recentCompletedShort: 'uphuze...',
+    immediateCont: 'ube-',
+    remoteSimple: 'wa-',
+    remoteCont: 'waye-',
+    clinicalNote: 'Third-person caregiver / child symptom onset'
+  },
+  {
+    person: 'Thina [1st Plur]',
+    recentCompletedLong: 'siphuzile',
+    recentCompletedShort: 'siphuze...',
+    immediateCont: 'sibe-',
+    remoteSimple: 'sa-',
+    remoteCont: 'sasi-',
+    clinicalNote: 'Family / household contact history'
+  },
+  {
+    person: 'Nina [2nd Plur]',
+    recentCompletedLong: 'niphuzile',
+    recentCompletedShort: 'niphuze...',
+    immediateCont: 'nibe-',
+    remoteSimple: 'na-',
+    remoteCont: 'nani-',
+    clinicalNote: 'Addressing caregivers or family group'
+  },
+  {
+    person: 'Bona [Class 2]',
+    recentCompletedLong: 'baphuzile',
+    recentCompletedShort: 'baphuze...',
+    immediateCont: 'bebe-',
+    remoteSimple: 'ba-',
+    remoteCont: 'babe-',
+    clinicalNote: 'Community contacts or relatives'
+  },
+  {
+    person: 'Khona [Class 15/17]',
+    recentCompletedLong: 'kuphuzile',
+    recentCompletedShort: 'kuphuze...',
+    immediateCont: 'beku-',
+    remoteSimple: 'kwa-',
+    remoteCont: 'kwaku-',
+    clinicalNote: 'Impersonal onset & timeline occurrences'
+  }
 ];
-
 
 export const PAST_PRACTICE_CHECKPOINTS = [
   {
     id: 'past-check-1',
     challengeNumber: 1,
-    prompt: 'I was walking to the clinic when the chest pain started.',
-    targetConcept: 'Immediate Continuous (bengi-) + Past Onset (buqala)',
-    primaryAnswer: 'Bengihamba ngiya emtholampilo ngesikhathi ubuhlungu besifuba buqala.',
+    prompt: 'I took my pills early this morning at home.',
+    targetConcept: 'Recent Completed Past Short Form (-e before complement)',
+    primaryAnswer: 'Ngiphuze amaphilisi ami ekuseni kakhulu ekhaya.',
     breakdown: [
-      { chunk: 'Bengi-hamb-a', gloss: 'bengi- (1st person recent past continuous) + -hamba (walk / travel: "I was walking")' },
-      { chunk: 'ngiya emtholampilo', gloss: 'ngiya (heading towards) + emtholampilo (locative: to the clinic)' },
-      { chunk: 'ngesikhathi', gloss: 'temporal conjunction ("at the time when")' },
-      { chunk: 'ubuhlungu besifuba', gloss: 'ubuhlungu (Class 14 pain) + besifuba (of the chest)' },
-      { chunk: 'bu-qal-a', gloss: 'bu- (Class 14 SC) + -qala (start / begin: past event in participial clause)' }
+      { chunk: 'Ngi-phuz-e', gloss: 'ngi- (1st person SC) + -phuza (drink/take) + -e (recent completed short form before direct object)' },
+      { chunk: 'amaphilisi ami', gloss: 'amaphilisi (Class 6 pills) + ami (possessive: "my")' },
+      { chunk: 'ekuseni kakhulu', gloss: 'ekuseni (in the morning) + kakhulu (very / early)' },
+      { chunk: 'ekhaya', gloss: 'locative noun ("at home")' }
     ],
-    ruleTip: 'Use bengi- for the ongoing background activity (unfolding recently/yesterday), and buqala for the punctiliar onset.'
+    ruleTip: 'Because an object (amaphilisi ami) and adverbial phrases follow the verb, the recent past MUST shorten to -e (Ngiphuze). Using -ile here (*Ngiphuzile amaphilisi) is strictly ungrammatical in isiZulu.'
   },
   {
     id: 'past-check-2',
     challengeNumber: 2,
-    prompt: 'Did you use to smoke cigarettes long ago?',
+    prompt: 'Did you use to smoke cigarettes long ago in past years?',
     targetConcept: 'Remote Continuous (wawu-) for Chronic Habits',
     primaryAnswer: 'Ingabe wawubhema ugwayi ngaphambili eminyakeni edlule?',
     breakdown: [
@@ -70,13 +127,55 @@ export const PAST_PRACTICE_CHECKPOINTS = [
 ];
 
 export const PAST_TENSES_RULES = [
-// ==========================================
-  // CATEGORY 1: PAST CONTINUOUS & REMOTE PAST
-  // ==========================================
+  {
+    id: 'past-recent-completed-ile-e',
+    category: 'past-tenses',
+    title: 'Recent Completed Past: Long Form -ile vs. Short Form -e',
+    badge: 'Recent Completed Aspect',
+    subtitle: 'Choosing between clause-final -ile and complement-governed -e',
+    formula: 'Long (clause-final): SC + Root + -ile | Short (before object/adjunct): SC + Root + -e',
+    explanation:
+      'Actions completed earlier today or yesterday use -ile when clause-final or when no words follow (Ngiphuzile = "I have taken [it]"; Udokotela ufikile = "The doctor has arrived"). When followed immediately by an object, adverb, time word, or prepositional phrase, the verb obligatorily shortens to -e (Ngiphuze amaphilisi ekuseni, never *Ngiphuzile amaphilisi ekuseni; Ngibone udokotela izolo = "I saw the doctor yesterday").',
+    commonPitfall:
+      'Using the long form -ile before an object or adverb (*ngiphuzile umuthi is ungrammatical; must be ngiphuze umuthi). The short form -e is mandatory whenever any complement follows.',
+    rules: [
+      'Clause-final / No complement: SC + Root + -ile (Ngidulile / Ngilalele / Ufikile)',
+      'Pre-object / Pre-adverb: SC + Root + -e (Ngiphuze amaphilisi / Ufike izolo)',
+      'Timeframe: Unfolded earlier today or yesterday (for older events, use remote past -a-)',
+      'Clinical context: Verifying immediate medication intake, triage arrival, or recent meals'
+    ],
+    examples: [
+      {
+        id: 'past-rec-ex-1',
+        type: 'clinical',
+        isizulu: 'Ngiphuze amaphilisi ami ekuseni ngaphambi kokuba ngize emtholampilo.',
+        english: 'I took my pills in the morning before coming to the clinic.',
+        breakdown: [
+          { chunk: 'Ngi-phuz-e', gloss: 'ngi- (SC) + -phuza (take) + -e (short recent completed past before object)' },
+          { chunk: 'amaphilisi ami', gloss: 'my pills' },
+          { chunk: 'ekuseni', gloss: 'in the morning' },
+          { chunk: 'ngaphambi kokuba ngize', gloss: 'before I came' },
+          { chunk: 'emtholampilo', gloss: 'to the clinic' }
+        ]
+      },
+      {
+        id: 'past-rec-ex-2',
+        type: 'clinical',
+        isizulu: 'Udokotela ufikile, usendaweni yokuhlola iziguli.',
+        english: 'The doctor has arrived, he is in the consultation room.',
+        breakdown: [
+          { chunk: 'Udokotela', gloss: 'doctor' },
+          { chunk: 'u-fik-ile', gloss: 'u- (Class 1 SC) + -fika (arrive) + -ile (long recent completed form clause-final)' },
+          { chunk: 'usendaweni', gloss: 'he is in the place' }
+        ]
+      }
+    ]
+  },
   {
     id: 'past-immediate-continuous',
     category: 'past-tenses',
-    title: 'Immediate Past Continuous (Imperfect Tense)',
+    title: 'Immediate Past Continuous (Imperfect Tense with be-)',
+    badge: 'Immediate Past Continuous',
     subtitle: 'Using be- + concord for actions unfolding earlier today or yesterday',
     formula: 'be- + Subject Concord (bengi-, ubu-, ube-, sibe-, bebe-) + Verb Root + -a / complement',
     explanation:
@@ -124,7 +223,8 @@ export const PAST_TENSES_RULES = [
   {
     id: 'past-remote-simple',
     category: 'past-tenses',
-    title: 'Remote Past Simple (Deep Past Tense)',
+    title: 'Remote Past Simple (Deep Past Tense with -a-)',
+    badge: 'Remote Simple Past',
     subtitle: 'The elided long -a- tense for events completed days, months, or years ago',
     formula: 'Subject Concord fused with -a- (nga-, wa-, sa-, ba-, kwa-) + Verb Root + -a',
     explanation:
@@ -169,7 +269,8 @@ export const PAST_TENSES_RULES = [
   {
     id: 'past-remote-continuous',
     category: 'past-tenses',
-    title: 'Remote Past Continuous (Habitual / Chronic Past)',
+    title: 'Remote Past Continuous (Habitual / Chronic Past with ngangi-)',
+    badge: 'Chronic Habitual Past',
     subtitle: 'Remote prefix + participial concord for chronic history and long-term habits',
     formula: 'Remote Concord (ngangi-, wawu-, waye-, sasi-, babe-) + Verb Root + -a / stative',
     explanation:
@@ -215,7 +316,8 @@ export const PAST_TENSES_RULES = [
   {
     id: 'past-negation-systems',
     category: 'past-tenses',
-    title: 'Past Negation Systems (Simple vs. Continuous)',
+    title: 'Past Negation Systems (-anga vs. bengi-nga-...-i)',
+    badge: 'Past Negation',
     subtitle: 'How to negate completed past actions (-anga) versus ongoing past states (bengi-nga-...-i)',
     formula: 'Simple Past Neg: a- + SC + Root + -anga | Past Cont Neg: be- + SC + -nga- + Root + -i',
     explanation:
@@ -251,52 +353,6 @@ export const PAST_TENSES_RULES = [
           { chunk: 'ukuthi kumele ngidle', gloss: 'that it is necessary that I eat (subjunctive)' },
           { chunk: 'ngaphambi kokuba', gloss: 'before that' },
           { chunk: 'ngiphuze lo muthi', gloss: 'I take + lo (this) + umuthi (medicine)' }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'past-clinical-history-stems',
-    category: 'past-tenses',
-    title: 'Clinical History-Taking & Onset Formulas',
-    subtitle: 'Essential past-tense structures for symptom timeline and onset elicitation',
-    formula: 'Question Particle + Past Concord + Clinical Stem (Kuqale nini / Wenzani / Wawunayo)',
-    explanation:
-      'In clinical consultations across KwaZulu-Natal, establishing an accurate timeline of symptoms requires switching precisely between recent past, remote past, and background continuous forms.',
-    commonPitfall:
-      'Using present tense to ask onset questions. Saying *Kuqala nini?* (When does it usually start?) instead of *Kuqale nini?* (When did it start recently?) or *Kwenzeka nini lokhu okokuqala?* (When did this first happen?).',
-    rules: [
-      'Immediate symptom onset: Kuqale nini lokhu? ("When did this start?")',
-      'Remote historical onset: Kwenzeka nini lokhu okokuqala? ("When did this first happen?")',
-      'Precipitating activity: Ubuhlungu buqale ngenkathi wenzani? ("What were you doing when pain began?")',
-      'Prior episodes: Wawunayo le nkinga ngaphambili? ("Did you have this problem previously?")',
-      'Duration: Kuthathe isikhathi esingakanani? ("How long did it take / last?")'
-    ],
-    examples: [
-      {
-        id: 'past-hist-ex-1',
-        type: 'clinical',
-        isizulu: 'Ubuhlungu baqala ngokungazelelwe izolo ngenkathi ubelele embhedeni yini?',
-        english: 'Did the pain start suddenly yesterday while you were lying on the bed?',
-        breakdown: [
-          { chunk: 'Ubuhlungu', gloss: 'Class 14 noun (pain)' },
-          { chunk: 'ba-qal-a', gloss: 'ba- (Class 14 remote/narrative concord: bu- + -a-) + -qala (start: "started")' },
-          { chunk: 'ngokungazelelwe', gloss: 'adverb ("suddenly / unexpectedly")' },
-          { chunk: 'izolo ngenkathi', gloss: 'yesterday + while' },
-          { chunk: 'u-be-lel-e', gloss: 'ube- (2nd person past continuous: ubu- contracted before stative) + -lele (lying/asleep)' },
-          { chunk: 'embhedeni yini?', gloss: 'on the bed + question particle' }
-        ]
-      },
-      {
-        id: 'past-hist-ex-2',
-        type: 'clinical',
-        isizulu: 'Waqala nini ukuzizwa ngale ndlela, futhi wawunayo le nkinga ngaphambili?',
-        english: 'When did you begin to feel this way, and did you have this problem previously?',
-        breakdown: [
-          { chunk: 'Wa-qal-a nini', gloss: 'wa- (2nd person past concord: u- + -a-) + -qala (begin/start) + nini (when?)' },
-          { chunk: 'ukuzizwa ngale ndlela', gloss: 'to feel yourself + in this manner/way' },
-          { chunk: 'futhi wawu-nayo', gloss: 'and + wawu- (2nd person remote continuous) + na- (with) + -yo (Class 9 pronoun for inkinga: "did you have it?")' },
-          { chunk: 'le nkinga ngaphambili', gloss: 'this problem + previously / in the past' }
         ]
       }
     ]
