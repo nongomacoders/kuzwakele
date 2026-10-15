@@ -587,3 +587,40 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Revealed Challenge #1 in Section 18 (*Nginomkhuhlwana nje nekhandana elincane, akukho okusabisayo.*) and flagged for drills
     - [x] Confirmed presence of flagged items in Drills Gym review deck
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+## Compound Tenses (Section 19) and Narrative Sequencing & Irregular Verbs (Section 20) — 20-Section Master Curriculum Completion
+- [x] Complete the 20-Section Master Curriculum with Section 19 ("Compound Tenses & Multi-Tier Aspect Chaining — Izinkathi Ezimbaxambaxa") and Section 20 ("Narrative Sequencing & Irregular Verbs — Ukuxhumanisa Izenzo Nezinto Ezixakile")
+  - [x] Create Category Data Module in `frontend/src/data/grammar/compoundTenses.js`:
+    - [x] Export `COMPOUND_TENSES_SECTION` (`compound-tenses`, "Compound Tenses & Aspect Chaining", 5 Rules, History icon, violet theme)
+    - [x] Export `COMPOUND_TENSES_MATRIX` (8 compound patterns: past frequentative *-lokhu*, prior state *wayese-*, future perfect *ngobe sengi-*, progressive continuity *wayesa-*, future continuous *uzobe e-*, unfulfilled intent *ngangisazo-*, past pending *wayengaka-*, frequentative recurrence)
+    - [x] Export `COMPOUND_TENSES_CHECKPOINTS` (3 acute challenges: persistent vomiting with *bengilokhu*, pre-admission coma with *sasesiqulekile*, and future antibiotic clearance with *ngobe sengi-*)
+    - [x] Export `COMPOUND_TENSES_RULES` (5 clinical rules: `comp-past-frequentative-lokhu`, `comp-prior-state-se`, `comp-future-continuous-perfect`, `comp-unfulfilled-intent`, `comp-clinical-longitudinal-timeline`)
+  - [x] Create Category Data Module in `frontend/src/data/grammar/narrativeSequence.js`:
+    - [x] Export `NARRATIVE_SEQUENCE_SECTION` (`narrative-irregular`, "Narrative Sequencing & Irregular Verbs", 5 Rules, ListOrdered icon, stone theme)
+    - [x] Export `NARRATIVE_SEQUENCE_MATRIX` (8 sequencing mechanics: sequential subjunctive *bese*, prerequisite *anduba*, narrative chaining *wa-... wa-*, temporal pivot *kwathi lapho*, irregular *-azi*, defective *-sho*, defective *-thi*, consecutive care regimen)
+    - [x] Export `NARRATIVE_SEQUENCE_CHECKPOINTS` (3 clinical challenges: multi-step wound care with *bese*, symptom clarification with *usho ukuthini?*, and acute trauma fall chaining with *wabe esequleka*)
+    - [x] Export `NARRATIVE_SEQUENCE_RULES` (5 clinical rules: `narr-sequential-subjunctive-bese`, `narr-prerequisite-anduba`, `narr-past-chaining`, `narr-irregular-azi`, `narr-defective-sho-thi`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export both sections, rules, matrices, and checkpoints
+    - [x] Add `{ id: 'compound-tenses' }` and `{ id: 'narrative-irregular' }` to `GRAMMAR_CATEGORIES` (bringing curriculum to exactly 20 sections, 100 rules, 60 checkpoints)
+    - [x] Update `ALL_CHECKPOINTS` to assemble all 60 clinical practice checkpoints
+  - [x] Create Table Renderers in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `CompoundTensesTable` rendering 8 compound timeline patterns
+    - [x] Export `NarrativeSequenceTable` rendering 8 narrative sequencing mechanics
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `violet` and `stone` theme palettes in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `compound-tenses` (History) and `narrative-irregular` (ListOrdered) in `grammarSectionConfigs.js`
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `History` and `ListOrdered` in `GrammarDirectoryView.jsx` (dynamic badge shows `20 Sections • 100 Rules`)
+    - [x] Verify `ALL_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file strictly maintained at 230 lines)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all 6 tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 20 section cards with `20 Sections • 100 Rules`
+    - [x] Verified Section 19 rules and `CompoundTensesTable` matrix
+    - [x] Revealed Challenge #1 in Section 19 (*Bengilokhu ngiphalaza futhi ngizizwa nginesiyezi kusukela izolo ekuseni.*) and flagged for drills
+    - [x] Verified Section 20 rules and `NarrativeSequenceTable` matrix
+    - [x] Revealed Challenge #1 in Section 20 (*Qala uhlanze isilonda ngamanzi ahlanzekile, bese ugcoba umuthi, bese usibopha ngebhandishi elihlanzekile.*) and flagged for drills
+    - [x] Confirmed presence of flagged items in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)

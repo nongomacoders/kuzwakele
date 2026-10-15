@@ -227,6 +227,10 @@
 
 
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **Compound Tenses & Multi-Tier Aspect Chaining Matrix Table**: 8 compound patterns comparing past frequentative continuous (*-lokhu*), prior transition state (*wayese-*), future completed perfect (*ngobe sengiwaphuzile*), unfulfilled intent (*ngangisazoya*), and longitudinal disease chronologies.
+  - **Compound Tenses & Multi-Tier Timeline Self-Check**: 3 clinical challenges (unbroken vomiting with *bengilokhu ngiphalaza*, pre-admission unconsciousness with *sasesiqulekile*, and completed antibiotic clearance with *ngobe sengiwacedile*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
+  - **Narrative Step Sequencing & Irregular Verbs Matrix Table**: 8 narrative sequencing and irregular verb mechanics comparing sequential subjunctive (*bese*), prerequisite timing (*anduba*), narrative past chaining (*wa-... wa-...*), temporal pivot (*kwathi lapho*), and irregular verbs (*-azi*, *-sho*, *-thi*).
+  - **Narrative Sequencing & Irregular Verbs Self-Check**: 3 clinical challenges (multi-step wound dressing with *bese ugcoba*, symptom clarification with *usho ukuthini?*, and trauma history chaining with *wabe esequleka*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Acute Sensory Ideophones Reference Matrix Table**: 8 acute sensory ideophones (*dwe*, *tebhu*, *cwaka*, *bha*, *ngci*, *phaqa*, *qhu*, *ntwesi*) paired with defective *-thi* inflections, triage scenarios, and clinical significance.
   - **Acute Sensory Ideophones Self-Check**: 3 clinical challenges (syncopal blackout with *kwathi dwe*, spurting hemorrhage with *kwathi tebhu*, and high fever with *kushisa bha*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Noun Diminutives, Sound Shifts & Augmentatives Matrix Table**: 8 comparison entries detailing bilabial and alveolar sound shifts ($b \to tsh$, $m \to ny$, $mb \to nj$, $l \to dl$), symptom downplaying, pediatric anatomy, and augmentative `-kazi`.
@@ -285,7 +289,9 @@
   - negation.js: Section metadata, 5 rules, NEGATION_MATRIX, and NEGATION_CHECKPOINTS.
   - ideophones.js: Section metadata, 5 rules, IDEOPHONES_MATRIX, and IDEOPHONES_CHECKPOINTS.
   - diminutives.js: Section metadata, 5 rules, DIMINUTIVES_MATRIX, and DIMINUTIVES_CHECKPOINTS.
-  - grammarData.js: Clean aggregating barrel exporter assembling 18 GRAMMAR_SECTIONS, 90 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
+  - compoundTenses.js: Section metadata, 5 rules, COMPOUND_TENSES_MATRIX, and COMPOUND_TENSES_CHECKPOINTS.
+  - narrativeSequence.js: Section metadata, 5 rules, NARRATIVE_SEQUENCE_MATRIX, and NARRATIVE_SEQUENCE_CHECKPOINTS.
+  - grammarData.js: Clean aggregating barrel exporter assembling 20 GRAMMAR_SECTIONS, 100 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).

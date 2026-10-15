@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle, ShieldAlert, Flame, Minimize2 } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle, ShieldAlert, Flame, Minimize2, History, ListOrdered } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -17,7 +17,9 @@ import {
   INTERROGATIVES_CHECKPOINTS,
   NEGATION_CHECKPOINTS,
   IDEOPHONES_CHECKPOINTS,
-  DIMINUTIVES_CHECKPOINTS
+  DIMINUTIVES_CHECKPOINTS,
+  COMPOUND_TENSES_CHECKPOINTS,
+  NARRATIVE_SEQUENCE_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -37,7 +39,9 @@ import {
   InterrogativesTable,
   NegationTable,
   IdeophonesTable,
-  DiminutivesTable
+  DiminutivesTable,
+  CompoundTensesTable,
+  NarrativeSequenceTable
 } from './GrammarSectionTables';
 
 
@@ -186,6 +190,22 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-lime-950/60 border-lime-800/50 text-lime-200',
     iconBg: 'bg-lime-950/80 border-lime-800/80 text-lime-400',
     codeBadge: 'bg-lime-950 text-lime-300 border-lime-800/60'
+  },
+  'compound-tenses': {
+    badge: 'bg-violet-950/80 text-violet-300 border-violet-800/80',
+    border: 'border-violet-900/50 hover:border-violet-600/70',
+    cardBg: 'from-violet-950/30 to-slate-900/90',
+    formulaBg: 'bg-violet-950/60 border-violet-800/50 text-violet-200',
+    iconBg: 'bg-violet-950/80 border-violet-800/80 text-violet-400',
+    codeBadge: 'bg-violet-950 text-violet-300 border-violet-800/60'
+  },
+  'narrative-irregular': {
+    badge: 'bg-stone-900/80 text-stone-300 border-stone-700/80',
+    border: 'border-stone-800/60 hover:border-stone-600/70',
+    cardBg: 'from-stone-900/30 to-slate-900/90',
+    formulaBg: 'bg-stone-900/60 border-stone-800/50 text-stone-200',
+    iconBg: 'bg-stone-900/80 border-stone-700/80 text-stone-300',
+    codeBadge: 'bg-stone-900 text-stone-300 border-stone-700/60'
   }
 };
 
@@ -432,6 +452,32 @@ export const SECTION_CONFIGS = {
     checkpoints: DIMINUTIVES_CHECKPOINTS,
     drillCategory: 'diminutives-palatalization',
     drillTitle: 'Diminutives & Shifts'
+  },
+  'compound-tenses': {
+    theme: 'violet',
+    tableIcon: History,
+    tableTitle: 'Compound Tenses & Multi-Tier Aspect Chaining Matrix',
+    tableSubtitle: 'Direct comparison across multi-tier auxiliary structures, participial concords, aspect infixes, and clinical timelines.',
+    tableBadge: '8 Compound Patterns',
+    TableComponent: CompoundTensesTable,
+    practiceTitle: 'Interactive Checkpoint: Compound Tenses & Multi-Tier Timeline Self-Check',
+    practiceSubtitle: 'Practice assessing persistent vomiting (-lokhu), pre-admission states (wayese-), and antibiotic completion (ngobe sengi-).',
+    checkpoints: COMPOUND_TENSES_CHECKPOINTS,
+    drillCategory: 'compound-tenses',
+    drillTitle: 'Compound Tenses'
+  },
+  'narrative-irregular': {
+    theme: 'stone',
+    tableIcon: ListOrdered,
+    tableTitle: 'Narrative Step Sequencing & Irregular Verbs Matrix',
+    tableSubtitle: 'Direct reference comparing sequential subjunctive bese, prerequisite anduba, narrative past chaining, and defective verbs (-sho, -thi, -azi).',
+    tableBadge: '8 Sequencing Mechanics',
+    TableComponent: NarrativeSequenceTable,
+    practiceTitle: 'Interactive Checkpoint: Narrative Sequencing & Irregular Verbs Self-Check',
+    practiceSubtitle: 'Practice multi-step wound care orders (bese), symptom clarification (-sho), and trauma timeline reconstruction.',
+    checkpoints: NARRATIVE_SEQUENCE_CHECKPOINTS,
+    drillCategory: 'narrative-irregular',
+    drillTitle: 'Narrative Sequencing'
   }
 };
 

@@ -22,6 +22,8 @@ import { INTERROGATIVES_SECTION, INTERROGATIVES_RULES, INTERROGATIVES_MATRIX, IN
 import { NEGATION_SECTION, NEGATION_RULES, NEGATION_MATRIX, NEGATION_CHECKPOINTS } from './grammar/negation.js';
 import { IDEOPHONES_SECTION, IDEOPHONES_RULES, IDEOPHONES_MATRIX, IDEOPHONES_CHECKPOINTS } from './grammar/ideophones.js';
 import { DIMINUTIVES_SECTION, DIMINUTIVES_RULES, DIMINUTIVES_MATRIX, DIMINUTIVES_CHECKPOINTS } from './grammar/diminutives.js';
+import { COMPOUND_TENSES_SECTION, COMPOUND_TENSES_RULES, COMPOUND_TENSES_MATRIX, COMPOUND_TENSES_CHECKPOINTS } from './grammar/compoundTenses.js';
+import { NARRATIVE_SEQUENCE_SECTION, NARRATIVE_SEQUENCE_RULES, NARRATIVE_SEQUENCE_MATRIX, NARRATIVE_SEQUENCE_CHECKPOINTS } from './grammar/narrativeSequence.js';
 
 // Directory Categories
 export const GRAMMAR_CATEGORIES = [
@@ -43,7 +45,9 @@ export const GRAMMAR_CATEGORIES = [
   { id: 'interrogatives', label: 'Interrogatives & Question Enclitics' },
   { id: 'negation', label: 'The Complete Negation Systems' },
   { id: 'ideophones', label: 'Ideophones & Defective -thi' },
-  { id: 'diminutives-palatalization', label: 'Diminutives & Palatalization' }
+  { id: 'diminutives-palatalization', label: 'Diminutives & Palatalization' },
+  { id: 'compound-tenses', label: 'Compound Tenses & Aspect Chaining' },
+  { id: 'narrative-irregular', label: 'Narrative Sequencing & Irregular Verbs' }
 ];
 
 // Assembled Sections
@@ -65,7 +69,9 @@ export const GRAMMAR_SECTIONS = [
   INTERROGATIVES_SECTION,
   NEGATION_SECTION,
   IDEOPHONES_SECTION,
-  DIMINUTIVES_SECTION
+  DIMINUTIVES_SECTION,
+  COMPOUND_TENSES_SECTION,
+  NARRATIVE_SEQUENCE_SECTION
 ];
 
 // Assembled Rules
@@ -87,7 +93,9 @@ export const GRAMMAR_RULES = [
   ...INTERROGATIVES_RULES,
   ...NEGATION_RULES,
   ...IDEOPHONES_RULES,
-  ...DIMINUTIVES_RULES
+  ...DIMINUTIVES_RULES,
+  ...COMPOUND_TENSES_RULES,
+  ...NARRATIVE_SEQUENCE_RULES
 ];
 
 // Named Reference Tables & Matrices (100% Backward Compatible Re-exports)
@@ -109,7 +117,9 @@ export {
   INTERROGATIVES_MATRIX,
   NEGATION_MATRIX,
   IDEOPHONES_MATRIX,
-  DIMINUTIVES_MATRIX
+  DIMINUTIVES_MATRIX,
+  COMPOUND_TENSES_MATRIX,
+  NARRATIVE_SEQUENCE_MATRIX
 };
 
 // Named Practice Checkpoints (100% Backward Compatible Re-exports)
@@ -131,7 +141,9 @@ export {
   INTERROGATIVES_CHECKPOINTS,
   NEGATION_CHECKPOINTS,
   IDEOPHONES_CHECKPOINTS,
-  DIMINUTIVES_CHECKPOINTS
+  DIMINUTIVES_CHECKPOINTS,
+  COMPOUND_TENSES_CHECKPOINTS,
+  NARRATIVE_SEQUENCE_CHECKPOINTS
 };
 
 export const ALL_CHECKPOINTS = [
@@ -152,7 +164,9 @@ export const ALL_CHECKPOINTS = [
   ...INTERROGATIVES_CHECKPOINTS,
   ...NEGATION_CHECKPOINTS,
   ...IDEOPHONES_CHECKPOINTS,
-  ...DIMINUTIVES_CHECKPOINTS
+  ...DIMINUTIVES_CHECKPOINTS,
+  ...COMPOUND_TENSES_CHECKPOINTS,
+  ...NARRATIVE_SEQUENCE_CHECKPOINTS
 ];
 
 

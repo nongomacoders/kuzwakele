@@ -17,7 +17,9 @@ import {
   INTERROGATIVES_MATRIX,
   NEGATION_MATRIX,
   IDEOPHONES_MATRIX,
-  DIMINUTIVES_MATRIX
+  DIMINUTIVES_MATRIX,
+  COMPOUND_TENSES_MATRIX,
+  NARRATIVE_SEQUENCE_MATRIX
 } from '../../data/grammarData';
 
 
@@ -600,6 +602,60 @@ export function DiminutivesTable() {
             <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.soundShift}</td>
             <td className="py-2.5 px-3 text-slate-300 min-w-[190px]">{row.clinicalApplication}</td>
             <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[200px]">{row.patientSymptomInterpretation}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function CompoundTensesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-violet-400">Compound Pattern</th>
+          <th className="py-2.5 px-3 text-amber-300">Formula</th>
+          <th className="py-2.5 px-3 text-emerald-300">Clinical Bedside Example</th>
+          <th className="py-2.5 px-3 text-slate-200">Temporal Aspect</th>
+          <th className="py-2.5 px-3">Diagnostic Value</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {COMPOUND_TENSES_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-violet-300 whitespace-nowrap">{row.compoundPattern}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.formula}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 min-w-[240px]">{row.clinicalBedsideExample}</td>
+            <td className="py-2.5 px-3 text-slate-300 min-w-[180px]">{row.temporalAspect}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.diagnosticValue}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function NarrativeSequenceTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-amber-400">Mechanic Type</th>
+          <th className="py-2.5 px-3 text-cyan-300">Formula</th>
+          <th className="py-2.5 px-3 text-emerald-300">Bedside Clinical Example</th>
+          <th className="py-2.5 px-3 text-slate-200">Communicative Function</th>
+          <th className="py-2.5 px-3 text-rose-400">Clinical Pitfall to Avoid</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {NARRATIVE_SEQUENCE_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-amber-300 whitespace-nowrap">{row.mechanicType}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-cyan-300 whitespace-nowrap">{row.formula}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 min-w-[240px]">{row.bedsideClinicalExample}</td>
+            <td className="py-2.5 px-3 text-slate-300 min-w-[180px]">{row.communicativeFunction}</td>
+            <td className="py-2.5 px-3 text-rose-400 text-[11px] min-w-[190px]">{row.clinicalPitfallToAvoid}</td>
           </tr>
         ))}
       </tbody>

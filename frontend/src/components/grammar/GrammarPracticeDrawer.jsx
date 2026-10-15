@@ -207,6 +207,32 @@ const DRAWER_THEMES = {
     solutionLabel: 'text-lime-400',
     solutionText: 'text-lime-200',
     tokenChip: 'text-lime-300 bg-lime-950/80 border border-lime-900/60'
+  },
+  violet: {
+    container: 'bg-gradient-to-br from-violet-950/40 via-slate-900/90 to-slate-900 border border-violet-800/60',
+    headerBorder: 'border-violet-900/40',
+    iconBox: 'bg-violet-900/60 border border-violet-700/60 text-violet-300',
+    badge: 'bg-violet-950 text-violet-300 border border-violet-800/80',
+    toggleBtn: 'text-violet-300 hover:text-white bg-violet-950 border border-violet-800',
+    challengeBadge: 'text-violet-400 bg-violet-950/80 border border-violet-900/60',
+    revealBtn: 'bg-violet-950 text-violet-300 hover:bg-violet-900 border border-violet-800/80',
+    solutionCard: 'border-violet-900/50',
+    solutionLabel: 'text-violet-400',
+    solutionText: 'text-violet-200',
+    tokenChip: 'text-violet-300 bg-violet-950/80 border border-violet-900/60'
+  },
+  stone: {
+    container: 'bg-gradient-to-br from-stone-900/50 via-slate-900/90 to-slate-900 border border-stone-700/60',
+    headerBorder: 'border-stone-800/40',
+    iconBox: 'bg-stone-800/60 border border-stone-600/60 text-stone-300',
+    badge: 'bg-stone-900 text-stone-300 border border-stone-700/80',
+    toggleBtn: 'text-stone-300 hover:text-white bg-stone-900 border border-stone-700',
+    challengeBadge: 'text-stone-300 bg-stone-900/80 border border-stone-800/60',
+    revealBtn: 'bg-stone-900 text-stone-300 hover:bg-stone-800 border border-stone-700/80',
+    solutionCard: 'border-stone-800/50',
+    solutionLabel: 'text-stone-400',
+    solutionText: 'text-stone-200',
+    tokenChip: 'text-stone-300 bg-stone-900/80 border border-stone-800/60'
   }
 };
 
