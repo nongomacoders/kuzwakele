@@ -357,3 +357,32 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Confirmed presence in Drills Gym review deck
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
 
+## The Qualificative System: True Adjectives & Relatives (Section 9)
+- [x] Implement Section 9 ("The Qualificative System: True Adjectives & Relatives — Iziphawulo Nezibaluli") covering double vs. single concords, verbal relatives with -yo, attributive vs. predicative shifts, clinical diagnostic descriptors, and bedside practice checkpoints
+  - [x] Create Category Data Module in `frontend/src/data/grammar/qualificatives.js`:
+    - [x] Export `QUALIFICATIVES_SECTION` (`qualificatives`, "The Qualificative System (Adjectives & Relatives)", 5 Rules, Sparkles icon, orange theme)
+    - [x] Export `QUALIFICATIVE_MATRIX` (8 rows comparing Class 1/1a, Class 2, Class 5, Class 6, Class 7, Class 9, Class 10, Class 14 across attributive/predicative adjectives and relatives)
+    - [x] Export `QUALIFICATIVE_CHECKPOINTS` with 3 clinical challenges (True Adj vs Relative distinction, verbal relative with clause-final *-yo*, and physical exam predicative shift)
+    - [x] Export `QUALIFICATIVES_RULES` (5 clinical rules: `qual-true-adjectives`, `qual-relative-system`, `qual-verbal-relatives`, `qual-attributive-vs-predicative`, `qual-clinical-descriptors`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export `QUALIFICATIVES_SECTION`, `QUALIFICATIVES_RULES`, `QUALIFICATIVE_MATRIX`, and `QUALIFICATIVE_CHECKPOINTS`
+    - [x] Add `{ id: 'qualificatives', label: 'Qualificatives (Adjectives & Relatives)' }` to `GRAMMAR_CATEGORIES` (now 9 sections, 45 rules)
+  - [x] Create Table Renderer in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `QualificativesTable` rendering the 8-class matrix
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `orange` theme palette in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `qualificatives` in `grammarSectionConfigs.js` with Sparkles icon
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `Sparkles` icon for `qualificatives` in `GrammarDirectoryView.jsx` (displays dynamic badge `9 Sections • 45 Rules`)
+    - [x] Sync `QUALIFICATIVE_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file maintained at 248 lines, under 250 boundary)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 9 section cards with `9 Sections • 45 Rules`
+    - [x] Verified Section 9 rules and `QualificativesTable` matrix
+    - [x] Revealed Challenge #3 (*Isisu asithambile; siqatha futhi sibuhlungu kakhulu.*) and flagged for drills
+    - [x] Confirmed presence in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+

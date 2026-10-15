@@ -10,7 +10,8 @@ import {
   VERBAL_EXTENSIONS_CHECKPOINTS,
   COPULATIVE_LOCATIVE_CHECKPOINTS,
   DEFICIENT_VERBS_CHECKPOINTS,
-  OBJECT_CONCORD_CHECKPOINTS
+  OBJECT_CONCORD_CHECKPOINTS,
+  QUALIFICATIVE_CHECKPOINTS
 } from '../data/grammarData';
 import { toggleDrillFlag, isDrillFlagged } from '../utils/drillsStorage';
 import GrammarRuleCard from './grammar/GrammarRuleCard';
@@ -41,7 +42,8 @@ export default function GrammarReference() {
       ...VERBAL_EXTENSIONS_CHECKPOINTS,
       ...COPULATIVE_LOCATIVE_CHECKPOINTS,
       ...DEFICIENT_VERBS_CHECKPOINTS,
-      ...OBJECT_CONCORD_CHECKPOINTS
+      ...OBJECT_CONCORD_CHECKPOINTS,
+      ...QUALIFICATIVE_CHECKPOINTS
     ];
     setFlaggedIds(new Set(allItems.filter((item) => isDrillFlagged(item.id)).map((item) => item.id)));
   };

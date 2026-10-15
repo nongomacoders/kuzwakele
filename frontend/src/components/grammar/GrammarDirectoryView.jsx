@@ -12,7 +12,8 @@ import {
   Repeat,
   MapPin,
   Zap,
-  Target
+  Target,
+  Sparkles
 } from 'lucide-react';
 import { CATEGORY_THEMES, DEFAULT_CATEGORY_THEME } from './grammarSectionConfigs';
 
@@ -26,6 +27,7 @@ const getSectionIcon = (id) => {
     case 'copulatives-locatives': return <MapPin className="w-5 h-5 text-rose-400" />;
     case 'deficient-verbs': return <Zap className="w-5 h-5 text-sky-400" />;
     case 'object-concords': return <Target className="w-5 h-5 text-blue-400" />;
+    case 'qualificatives': return <Sparkles className="w-5 h-5 text-orange-400" />;
     default: return <BookOpen className="w-5 h-5 text-slate-400" />;
   }
 };

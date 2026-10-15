@@ -7,8 +7,10 @@ import {
   VERBAL_EXTENSIONS_TABLE,
   COPULATIVE_LOCATIVE_TABLE,
   DEFICIENT_VERBS_TABLE,
-  OBJECT_CONCORD_MATRIX
+  OBJECT_CONCORD_MATRIX,
+  QUALIFICATIVE_MATRIX
 } from '../../data/grammarData';
+
 
 export function PastConcordTable() {
   return (
@@ -299,5 +301,41 @@ export function ObjectConcordsTable() {
     </table>
   );
 }
+
+export function QualificativesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-orange-400">Noun Class</th>
+          <th className="py-2.5 px-3">Noun Example</th>
+          <th className="py-2.5 px-3 text-amber-300">True Adjective (Attr / Pred)</th>
+          <th className="py-2.5 px-3 text-orange-300">Relative (Attr / Pred)</th>
+          <th className="py-2.5 px-3">Clinical Application</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {QUALIFICATIVE_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-orange-300 whitespace-nowrap">{row.nounClass}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.nounExample}</td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono text-[11px] text-amber-300 font-semibold">{row.trueAdjAttributive}</span>
+              <span className="text-slate-500 mx-1">/</span>
+              <span className="font-mono text-[11px] text-amber-400/90">{row.trueAdjPredicative}</span>
+            </td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono text-[11px] text-orange-300 font-semibold">{row.relativeAttributive}</span>
+              <span className="text-slate-500 mx-1">/</span>
+              <span className="font-mono text-[11px] text-orange-400/90">{row.relativePredicative}</span>
+            </td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[190px]">{row.clinicalApplication}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 
 

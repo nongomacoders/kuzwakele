@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -7,7 +7,8 @@ import {
   VERBAL_EXTENSIONS_CHECKPOINTS,
   COPULATIVE_LOCATIVE_CHECKPOINTS,
   DEFICIENT_VERBS_CHECKPOINTS,
-  OBJECT_CONCORD_CHECKPOINTS
+  OBJECT_CONCORD_CHECKPOINTS,
+  QUALIFICATIVE_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -17,8 +18,10 @@ import {
   VerbalExtensionsTable,
   CopulativesLocativesTable,
   DeficientVerbsTable,
-  ObjectConcordsTable
+  ObjectConcordsTable,
+  QualificativesTable
 } from './GrammarSectionTables';
+
 
 export const CATEGORY_THEMES = {
   'past-tenses': {
@@ -84,6 +87,14 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-blue-950/60 border-blue-800/50 text-blue-200',
     iconBg: 'bg-blue-950/80 border-blue-800/80 text-blue-400',
     codeBadge: 'bg-blue-950 text-blue-300 border-blue-800/60'
+  },
+  'qualificatives': {
+    badge: 'bg-orange-950/80 text-orange-300 border-orange-800/80',
+    border: 'border-orange-900/50 hover:border-orange-600/70',
+    cardBg: 'from-orange-950/30 to-slate-900/90',
+    formulaBg: 'bg-orange-950/60 border-orange-800/50 text-orange-200',
+    iconBg: 'bg-orange-950/80 border-orange-800/80 text-orange-400',
+    codeBadge: 'bg-orange-950 text-orange-300 border-orange-800/60'
   }
 };
 
@@ -200,5 +211,19 @@ export const SECTION_CONFIGS = {
     checkpoints: OBJECT_CONCORD_CHECKPOINTS,
     drillCategory: 'object-concords',
     drillTitle: 'Object Concords Practice'
+  },
+  'qualificatives': {
+    theme: 'orange',
+    tableIcon: Sparkles,
+    tableTitle: 'The Qualificative System: Adjectives & Relatives Matrix',
+    tableSubtitle: 'Direct comparison across noun classes: double concord True Adjectives, single concord Relatives, and attributive vs predicative shifts.',
+    tableBadge: '8 Core Classes',
+    TableComponent: QualificativesTable,
+    practiceTitle: 'Interactive Checkpoint: Qualificative & Clinical Description Self-Check',
+    practiceSubtitle: 'Practice distinguishing double vs single concords, verbal relative -yo rules, and physical examination predication.',
+    checkpoints: QUALIFICATIVE_CHECKPOINTS,
+    drillCategory: 'qualificatives',
+    drillTitle: 'Qualificatives Practice'
   }
 };
+

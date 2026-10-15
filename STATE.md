@@ -175,7 +175,15 @@
       - *Rule 3: Class 1/1a Irregularity (-m- vs -mu-) & 2nd Person -ku- (`obj-class1-m-mu`)*: Standard Class 1 `-m-` shifting to `-mu-` before monosyllabic verb stems (*ake umuphe amaphilisi*), contrasted with 2nd person singular `-ku-` (*ngizokusiza*).
       - *Rule 4: High-Yield Anatomical & Pharmacological Concords (`obj-clinical-concords`)*: Direct mapping of medical nouns to concords: *amaphilisi* $\to$ `-wa-`, *iphilisi/iphaphu* $\to$ `-li-`, *ubuhlungu* $\to$ `-bu-`, *izinyawo* $\to$ `-zi-`, *isifuba* $\to$ `-si-`.
       - *Rule 5: The Invariable Reflexive Prefix -zi- ("Self / Oneself", `obj-reflexive-zi`)*: Universal reflexive marker occupying the OC slot across all classes and persons for subjective wellness (*uzizwa kanjani?*), self-care (*ukuzisiza*), and self-injury (*ukuzilimaza*).
+   9. **The Qualificative System: True Adjectives & Relatives (`qualificatives` - Comprehensive 5-Rule Curriculum & Dual Matrix Grid)**:
+      - *Rule 1: True Adjectives & The Double Concord System (`qual-true-adjectives`)*: The closed class of ~12 lexical roots taking demonstrative formative + basic noun class prefix (*omdala*, *amakhulu*, *enkulu* with nasal permutations $n + kh \to nk$).
+      - *Rule 2: The Relative System (Open Descriptive Class & Colors, `qual-relative-system`)*: Open class of colors (*-bomvu*, *-mhlophe*), sensations (*-buhlungu*), and physical states (*-manzi*, *-qatha*) taking a single relative concord (*o-*, *aba-*, *eli-*, *esi-*, *obu-*).
+      - *Rule 3: Verbal Relatives & The Suffix -yo (`qual-verbal-relatives`)*: Converting verbs into relative clauses with obligatory suffix *-yo* when clause-final or intransitive (*abaphilayo*, *okhwehlelayo*), dropping *-yo* when an explicit noun object follows (*esikhwehlela igazi*).
+      - *Rule 4: Attributive vs. Predicative Transformation (`qual-attributive-vs-predicative`)*: Transforming noun modifiers into clinical diagnostic statements by dropping initial demonstrative vowel for true adjectives (*elikhulu* $\to$ *likhulu*) or using Subject Concords for relatives (*esithambile* $\to$ *sithambile*, *obukhali* $\to$ *bukhali*).
+      - *Rule 5: Essential Clinical Qualificative Inventory (`qual-clinical-descriptors`)*: Standard terminology for acuity (*-khali*, *-dambile*), color/exudate (*-bomvu*, *-mhlophe*, *-mnyama*), consistency (*-thambile*, *-qatha*, *-manzi*), and status (*-ngcono*).
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **The Qualificative System: Adjectives & Relatives Matrix Table**: Responsive comparison table displaying 8 core noun classes comparing True Adjectives (attributive vs predicative), Relatives (attributive vs predicative), and clinical examination applications.
+  - **Qualificative & Clinical Description Self-Check**: 3 clinical challenges (True Adj vs Relative distinction, verbal relative with clause-final *-yo*, and physical exam predicative shift) with answer reveals, concord gloss chips, and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Object Concord & Pronoun Infix Matrix Table**: Responsive comparison table displaying 11 core noun classes / persons with Subject Concords, Object Concords, Noun Triggers, Formula Placements, Clinical Bedside Examples, and Grammatical Functions.
   - **Object Concord & Pronoun Infix Self-Check**: 3 clinical challenges (medication adherence with `-wa-`, doctor examination with `-ku-`, and subjective wellness with `-zi-`) with answer reveals, concord gloss chips, and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Auxiliary Verbs & Mood Chaining Matrix Table**: Responsive comparison table displaying 6 core defective auxiliary stems (-vele, -cishe, -phinde, -sale, -kade, -simze) with governed moods, formulas, clinical applications, and bedside examples.
@@ -201,11 +209,13 @@
   - copulativesLocatives.js: Section metadata, 5 rules, COPULATIVE_LOCATIVE_TABLE, and COPULATIVE_LOCATIVE_CHECKPOINTS.
   - deficientVerbs.js: Section metadata, 5 rules, DEFICIENT_VERBS_TABLE, and DEFICIENT_VERBS_CHECKPOINTS.
   - objectConcords.js: Section metadata, 5 rules, OBJECT_CONCORD_MATRIX, and OBJECT_CONCORD_CHECKPOINTS.
-  - grammarData.js: Clean aggregating barrel exporter assembling 8 GRAMMAR_SECTIONS, 40 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
+  - qualificatives.js: Section metadata, 5 rules, QUALIFICATIVE_MATRIX, and QUALIFICATIVE_CHECKPOINTS.
+  - grammarData.js: Clean aggregating barrel exporter assembling 9 GRAMMAR_SECTIONS, 45 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).
   - **Contextual Clinical vs Community Cards**: Distinguishes clinical consultation phrases from everyday community dialogue.
   - **Expandable Morpheme Token Breakdowns**: Detailed breakdown tokens identifying prefix, root, suffix, and grammatical gloss.
   - **1-Tap Drill Gym Integration**: Instant flagging into `drillsStorage` (`kuzwakele_flagged_drills`) with cross-tab reactive event sync (`drills-updated`), populating directly into the Drills Gym Review Deck.
+
 

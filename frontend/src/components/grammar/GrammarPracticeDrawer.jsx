@@ -116,6 +116,19 @@ const DRAWER_THEMES = {
     solutionLabel: 'text-blue-400',
     solutionText: 'text-blue-200',
     tokenChip: 'text-blue-300 bg-blue-950/80 border border-blue-900/60'
+  },
+  orange: {
+    container: 'bg-gradient-to-br from-orange-950/40 via-slate-900/90 to-slate-900 border border-orange-800/60',
+    headerBorder: 'border-orange-900/40',
+    iconBox: 'bg-orange-900/60 border border-orange-700/60 text-orange-300',
+    badge: 'bg-orange-950 text-orange-300 border border-orange-800/80',
+    toggleBtn: 'text-orange-300 hover:text-white bg-orange-950 border border-orange-800',
+    challengeBadge: 'text-orange-400 bg-orange-950/80 border border-orange-900/60',
+    revealBtn: 'bg-orange-950 text-orange-300 hover:bg-orange-900 border border-orange-800/80',
+    solutionCard: 'border-orange-900/50',
+    solutionLabel: 'text-orange-400',
+    solutionText: 'text-orange-200',
+    tokenChip: 'text-orange-300 bg-orange-950/80 border border-orange-900/60'
   }
 };
 
