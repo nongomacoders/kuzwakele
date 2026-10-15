@@ -6,7 +6,8 @@ import {
   ASPECT_INFIX_MATRIX,
   VERBAL_EXTENSIONS_TABLE,
   COPULATIVE_LOCATIVE_TABLE,
-  DEFICIENT_VERBS_TABLE
+  DEFICIENT_VERBS_TABLE,
+  OBJECT_CONCORD_MATRIX
 } from '../../data/grammarData';
 
 export function PastConcordTable() {
@@ -263,4 +264,40 @@ export function DeficientVerbsTable() {
     </table>
   );
 }
+
+export function ObjectConcordsTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-blue-400">Noun Class / Person</th>
+          <th className="py-2.5 px-3 text-cyan-400">SC vs. OC</th>
+          <th className="py-2.5 px-3">Noun Trigger</th>
+          <th className="py-2.5 px-3">Formula Placement</th>
+          <th className="py-2.5 px-3 text-blue-300">Clinical Bedside Example</th>
+          <th className="py-2.5 px-3">Function</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {OBJECT_CONCORD_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-blue-300 whitespace-nowrap">{row.personClass}</td>
+            <td className="py-2.5 px-3 whitespace-nowrap">
+              <span className="font-mono text-[11px] text-slate-400 mr-1.5">{row.subjectConcord}</span>
+              &rarr;
+              <span className="font-mono font-bold text-blue-300 bg-blue-950/80 border border-blue-800/80 px-2 py-0.5 rounded ml-1.5">
+                {row.objectConcord}
+              </span>
+            </td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-300 whitespace-nowrap">{row.nounTrigger}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-slate-400 whitespace-nowrap">{row.placementFormula}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-blue-200 whitespace-nowrap">{row.clinicalExample}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.functionDesc}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 

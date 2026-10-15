@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -6,7 +6,8 @@ import {
   ASPECT_INFIX_CHECKPOINTS,
   VERBAL_EXTENSIONS_CHECKPOINTS,
   COPULATIVE_LOCATIVE_CHECKPOINTS,
-  DEFICIENT_VERBS_CHECKPOINTS
+  DEFICIENT_VERBS_CHECKPOINTS,
+  OBJECT_CONCORD_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -15,7 +16,8 @@ import {
   AspectInfixTable,
   VerbalExtensionsTable,
   CopulativesLocativesTable,
-  DeficientVerbsTable
+  DeficientVerbsTable,
+  ObjectConcordsTable
 } from './GrammarSectionTables';
 
 export const CATEGORY_THEMES = {
@@ -74,6 +76,14 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-sky-950/60 border-sky-800/50 text-sky-200',
     iconBg: 'bg-sky-950/80 border-sky-800/80 text-sky-400',
     codeBadge: 'bg-sky-950 text-sky-300 border-sky-800/60'
+  },
+  'object-concords': {
+    badge: 'bg-blue-950/80 text-blue-300 border-blue-800/80',
+    border: 'border-blue-900/50 hover:border-blue-600/70',
+    cardBg: 'from-blue-950/30 to-slate-900/90',
+    formulaBg: 'bg-blue-950/60 border-blue-800/50 text-blue-200',
+    iconBg: 'bg-blue-950/80 border-blue-800/80 text-blue-400',
+    codeBadge: 'bg-blue-950 text-blue-300 border-blue-800/60'
   }
 };
 
@@ -177,5 +187,18 @@ export const SECTION_CONFIGS = {
     checkpoints: DEFICIENT_VERBS_CHECKPOINTS,
     drillCategory: 'deficient-verbs',
     drillTitle: 'Deficient Verbs Practice'
+  },
+  'object-concords': {
+    theme: 'blue',
+    tableIcon: Target,
+    tableTitle: 'Object Concord & Reflexive Reference Matrix',
+    tableSubtitle: 'Direct comparison across noun class concords, pre-radical placement, definite dual-mention, and the reflexive prefix -zi-.',
+    tableBadge: '11 Core Classes',
+    TableComponent: ObjectConcordsTable,
+    practiceTitle: 'Interactive Checkpoint: Object Concord & Pronoun Infix Self-Check',
+    practiceSubtitle: 'Practice medication adherence (-wa-), clinical instructions (-ku-), and reflexive well-being (-zi-).',
+    checkpoints: OBJECT_CONCORD_CHECKPOINTS,
+    drillCategory: 'object-concords',
+    drillTitle: 'Object Concords Practice'
   }
 };

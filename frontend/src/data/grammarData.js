@@ -11,6 +11,7 @@ import { ASPECT_INFIXES_SECTION, ASPECT_INFIXES_RULES, ASPECT_INFIX_MATRIX, ASPE
 import { VERBAL_EXTENSIONS_SECTION, VERBAL_EXTENSIONS_RULES, VERBAL_EXTENSIONS_TABLE, VERBAL_EXTENSIONS_CHECKPOINTS } from './grammar/verbalExtensions.js';
 import { COPULATIVES_LOCATIVES_SECTION, COPULATIVES_LOCATIVES_RULES, COPULATIVE_LOCATIVE_TABLE, COPULATIVE_LOCATIVE_CHECKPOINTS } from './grammar/copulativesLocatives.js';
 import { DEFICIENT_VERBS_SECTION, DEFICIENT_VERBS_RULES, DEFICIENT_VERBS_TABLE, DEFICIENT_VERBS_CHECKPOINTS } from './grammar/deficientVerbs.js';
+import { OBJECT_CONCORDS_SECTION, OBJECT_CONCORDS_RULES, OBJECT_CONCORD_MATRIX, OBJECT_CONCORD_CHECKPOINTS } from './grammar/objectConcords.js';
 
 // Directory Categories
 export const GRAMMAR_CATEGORIES = [
@@ -21,7 +22,8 @@ export const GRAMMAR_CATEGORIES = [
   { id: 'aspect-infixes', label: 'Time Infixes (-sa-, se-, -ka-)' },
   { id: 'verbal-extensions', label: 'Verbal Extensions (-ela, -isa, -wa)' },
   { id: 'copulatives-locatives', label: 'Copulatives & Locatives (ngu-, y-, e-...-ini)' },
-  { id: 'deficient-verbs', label: 'Deficient Verbs (-vele, -cishe, -phinde)' }
+  { id: 'deficient-verbs', label: 'Deficient Verbs (-vele, -cishe, -phinde)' },
+  { id: 'object-concords', label: 'Object Concords (-m-, -wa-, -ku-)' }
 ];
 
 // Assembled Sections
@@ -32,7 +34,8 @@ export const GRAMMAR_SECTIONS = [
   ASPECT_INFIXES_SECTION,
   VERBAL_EXTENSIONS_SECTION,
   COPULATIVES_LOCATIVES_SECTION,
-  DEFICIENT_VERBS_SECTION
+  DEFICIENT_VERBS_SECTION,
+  OBJECT_CONCORDS_SECTION
 ];
 
 // Assembled Rules
@@ -43,7 +46,8 @@ export const GRAMMAR_RULES = [
   ...ASPECT_INFIXES_RULES,
   ...VERBAL_EXTENSIONS_RULES,
   ...COPULATIVES_LOCATIVES_RULES,
-  ...DEFICIENT_VERBS_RULES
+  ...DEFICIENT_VERBS_RULES,
+  ...OBJECT_CONCORDS_RULES
 ];
 
 // Named Reference Tables & Matrices (100% Backward Compatible Re-exports)
@@ -54,7 +58,8 @@ export {
   ASPECT_INFIX_MATRIX,
   VERBAL_EXTENSIONS_TABLE,
   COPULATIVE_LOCATIVE_TABLE,
-  DEFICIENT_VERBS_TABLE
+  DEFICIENT_VERBS_TABLE,
+  OBJECT_CONCORD_MATRIX
 };
 
 // Named Practice Checkpoints (100% Backward Compatible Re-exports)
@@ -65,5 +70,6 @@ export {
   ASPECT_INFIX_CHECKPOINTS,
   VERBAL_EXTENSIONS_CHECKPOINTS,
   COPULATIVE_LOCATIVE_CHECKPOINTS,
-  DEFICIENT_VERBS_CHECKPOINTS
+  DEFICIENT_VERBS_CHECKPOINTS,
+  OBJECT_CONCORD_CHECKPOINTS
 };

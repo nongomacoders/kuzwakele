@@ -103,6 +103,19 @@ const DRAWER_THEMES = {
     solutionLabel: 'text-sky-400',
     solutionText: 'text-sky-200',
     tokenChip: 'text-sky-300 bg-sky-950/80 border border-sky-900/60'
+  },
+  blue: {
+    container: 'bg-gradient-to-br from-blue-950/40 via-slate-900/90 to-slate-900 border border-blue-800/60',
+    headerBorder: 'border-blue-900/40',
+    iconBox: 'bg-blue-900/60 border border-blue-700/60 text-blue-300',
+    badge: 'bg-blue-950 text-blue-300 border border-blue-800/80',
+    toggleBtn: 'text-blue-300 hover:text-white bg-blue-950 border border-blue-800',
+    challengeBadge: 'text-blue-400 bg-blue-950/80 border border-blue-900/60',
+    revealBtn: 'bg-blue-950 text-blue-300 hover:bg-blue-900 border border-blue-800/80',
+    solutionCard: 'border-blue-900/50',
+    solutionLabel: 'text-blue-400',
+    solutionText: 'text-blue-200',
+    tokenChip: 'text-blue-300 bg-blue-950/80 border border-blue-900/60'
   }
 };
 

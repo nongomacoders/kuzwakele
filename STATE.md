@@ -167,10 +167,17 @@
   7. **Deficient / Auxiliary Verbs (deficient-verbs - Comprehensive 5-Rule Curriculum & Mood Chaining Grid)**:
      - *Rule 1: Casual Occurrence & Immediacy (-vele, def-vele-casual)*: Signifies spontaneous action or casual permission ([Ake + SC + -vele] -> Following Verb in Subjunctive -e, e.g. *Ake uvele ulale embhedeni*, *Ak'uvele uphumule*, *Uvele athule*).
      - *Rule 2: Near-Misses & Imminent Events (-cishe, def-cishe-almost)*: Elicits near-falls, near-syncope, and narrow escapes in trauma/geriatrics (SC + -cishe + Following Verb in Past -a- / Infinitive, e.g. *Ugogo ucishe wawa*, *Ucishe waquleka*).
-     - *Rule 3: Recurrence & Adherence Warnings (-phinde, def-phinde-again)*: Schedules follow-ups in the positive (*ngizophinde ngikubone*) and constructs strict negative prohibitions with progressive *-sa-* (*ungabe usaphinda uphuze ungadlile*).
-     - *Rule 4: Inevitable Choice & Resignation (-sale, def-sale-might-as-well)*: Expresses that doing something is the only sensible remaining clinical option or admission decision (*kungcono usale ungeniswa esibhedlela*, *asisale sesithatha igazi*).
-     - *Rule 5: Elapsed Time & Chronicity (-kade, def-kade-duration)*: Establishes symptom chronicity and elapsed duration before triage presentation (SC + -kade + Participial Concord + Verb Stem, e.g. *Kade waqala ukuzwa lobu buhlungu?*, *Ubekade ekhononda*).
+     - *Rule 3: Recurrence & Adherence Warnings (-phinde, def-phinde-again)*: Schedules follow-ups in the positive (*ngizophinde ngikubone*) and constructs strict negative prohibitions with progressive *-sa-* (*ungabe usaphinda uph      - *Rule 4: Inevitable Choice & Resignation (-sale, def-sale-might-as-well)*: Expresses that doing something is the only sensible remaining clinical option or admission decision (*kungcono usale ungeniswa esibhedlela*, *asisale sesithatha igazi*).
+      - *Rule 5: Elapsed Time & Chronicity (-kade, def-kade-duration)*: Establishes symptom chronicity and elapsed duration before triage presentation (SC + -kade + Participial Concord + Verb Stem, e.g. *Kade waqala ukuzwa lobu buhlungu?*, *Ubekade ekhononda*).
+   8. **Object Concords — Izivumelwano Zikabagcwalisi (`object-concords` - Comprehensive 5-Rule Curriculum & Pronoun Infix Grid)**:
+      - *Rule 1: The Object Infix Slot & Pronoun Substitution (`obj-infix-slot`)*: Inserting the object concord immediately before the verb root (`SC + [Tense Marker] + OC + Verb Root + Final Vowel`) to replace known direct object nouns (*udokotela uzokuhlola*, *ngiyawaphuza njalo*).
+      - *Rule 2: Definiteness & The Dual-Mention Rule (`obj-definiteness-dual`)*: Co-occurrence of object concord and noun marking grammatical definiteness ("the / those specific") versus indefinite general mention (*ngifuna amaphilisi* = I want pills vs *ngiyawafuna amaphilisi* = I want THE pills).
+      - *Rule 3: Class 1/1a Irregularity (-m- vs -mu-) & 2nd Person -ku- (`obj-class1-m-mu`)*: Standard Class 1 `-m-` shifting to `-mu-` before monosyllabic verb stems (*ake umuphe amaphilisi*), contrasted with 2nd person singular `-ku-` (*ngizokusiza*).
+      - *Rule 4: High-Yield Anatomical & Pharmacological Concords (`obj-clinical-concords`)*: Direct mapping of medical nouns to concords: *amaphilisi* $\to$ `-wa-`, *iphilisi/iphaphu* $\to$ `-li-`, *ubuhlungu* $\to$ `-bu-`, *izinyawo* $\to$ `-zi-`, *isifuba* $\to$ `-si-`.
+      - *Rule 5: The Invariable Reflexive Prefix -zi- ("Self / Oneself", `obj-reflexive-zi`)*: Universal reflexive marker occupying the OC slot across all classes and persons for subjective wellness (*uzizwa kanjani?*), self-care (*ukuzisiza*), and self-injury (*ukuzilimaza*).
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **Object Concord & Pronoun Infix Matrix Table**: Responsive comparison table displaying 11 core noun classes / persons with Subject Concords, Object Concords, Noun Triggers, Formula Placements, Clinical Bedside Examples, and Grammatical Functions.
+  - **Object Concord & Pronoun Infix Self-Check**: 3 clinical challenges (medication adherence with `-wa-`, doctor examination with `-ku-`, and subjective wellness with `-zi-`) with answer reveals, concord gloss chips, and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Auxiliary Verbs & Mood Chaining Matrix Table**: Responsive comparison table displaying 6 core defective auxiliary stems (-vele, -cishe, -phinde, -sale, -kade, -simze) with governed moods, formulas, clinical applications, and bedside examples.
   - **Deficient Verbs Self-Check**: 3 clinical challenges (near-fall with *-cishe*, casual hortative instruction with *-vele*, and strict adherence warning with *-phinde*) with answer reveals, concord gloss chips, and 1-tap [ Flag for Drills ] bookmarking.
   - **Verbal Extensions Matrix Table**: Responsive comparison table displaying 5 core extensions (`Applicative (-ela)`, `Causative (-isa)`, `Passive (-wa)`, `Neuter (-eka/-akala)`, `Reciprocal (-ana)`) with formulas, sound shifts, and clinical examples.
@@ -185,18 +192,20 @@
   - **Interactive Checkpoints Bedside Self-Test**: 3 clinical self-check scenarios (tired gogo, alert baby, unswollen feet) with toggleable answer reveal, concord breakdowns, linguistic rule tips, and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Symptom Trajectory & Aspect Infix Matrix Table**: Responsive comparison table displaying 4 core temporal infixes (`-sa-`, `se- / -se-`, `-ka-`, `-ke-`) across positive/negative morphology and bedside diagnostic functions.
   - **Symptom Trajectory & Aspect Infix Self-Check**: 3 clinical challenges (symptom persistence vs cessation, pending lab turnaround, and prior allergic history) with answer reveals, linguistic keys, morpheme gloss chips, and 1-tap `[ Flag for Drills ]` bookmarking.
-- **Modular Data Architecture (rontend/src/data/grammar/)**:
+- **Modular Data Architecture (frontend/src/data/grammar/)**:
   - pastTenses.js: Section metadata, 5 rules, PAST_CONCORD_MATRIX, and PAST_PRACTICE_CHECKPOINTS.
   - stative.js: Section metadata, 5 rules, STATIVE_IRREGULAR_TABLE, and STATIVE_PRACTICE_CHECKPOINTS.
   - conjunctions.js: Section metadata, 5 rules, CONJUNCTION_GOVERNANCE_TABLE, and CONJUNCTION_PRACTICE_CHECKPOINTS.
-  - spectInfixes.js: Section metadata, 5 rules, ASPECT_INFIX_MATRIX, and ASPECT_INFIX_CHECKPOINTS.
-  - erbalExtensions.js: Section metadata, 5 rules, VERBAL_EXTENSIONS_TABLE, and VERBAL_EXTENSIONS_CHECKPOINTS.
+  - aspectInfixes.js: Section metadata, 5 rules, ASPECT_INFIX_MATRIX, and ASPECT_INFIX_CHECKPOINTS.
+  - verbalExtensions.js: Section metadata, 5 rules, VERBAL_EXTENSIONS_TABLE, and VERBAL_EXTENSIONS_CHECKPOINTS.
   - copulativesLocatives.js: Section metadata, 5 rules, COPULATIVE_LOCATIVE_TABLE, and COPULATIVE_LOCATIVE_CHECKPOINTS.
   - deficientVerbs.js: Section metadata, 5 rules, DEFICIENT_VERBS_TABLE, and DEFICIENT_VERBS_CHECKPOINTS.
-  - grammarData.js: Clean aggregating barrel exporter (67 lines) assembling GRAMMAR_SECTIONS, GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
+  - objectConcords.js: Section metadata, 5 rules, OBJECT_CONCORD_MATRIX, and OBJECT_CONCORD_CHECKPOINTS.
+  - grammarData.js: Clean aggregating barrel exporter assembling 8 GRAMMAR_SECTIONS, 40 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).
   - **Contextual Clinical vs Community Cards**: Distinguishes clinical consultation phrases from everyday community dialogue.
   - **Expandable Morpheme Token Breakdowns**: Detailed breakdown tokens identifying prefix, root, suffix, and grammatical gloss.
   - **1-Tap Drill Gym Integration**: Instant flagging into `drillsStorage` (`kuzwakele_flagged_drills`) with cross-tab reactive event sync (`drills-updated`), populating directly into the Drills Gym Review Deck.
+

@@ -328,3 +328,32 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Verified table rendering and checkpoint breakdowns across modules
     - [x] Verified reactive drill flagging into Drills Gym
   - [x] Deploy to Firebase Hosting (firebase deploy --only hosting)
+
+## Object Concords — Izivumelwano Zikabagcwalisi (Section 8)
+- [x] Implement Section 8 ("Object Concords — Izivumelwano Zikabagcwalisi") covering pronoun infix mechanics, class-specific concords, definiteness marking, the reflexive prefix `-zi-`, and clinical bedside checkpoints
+  - [x] Create Category Data Module in `frontend/src/data/grammar/objectConcords.js`:
+    - [x] Export `OBJECT_CONCORDS_SECTION` (`object-concords`, "Object Concords (Object Infixes)", 5 Rules, Target icon, blue theme)
+    - [x] Export `OBJECT_CONCORD_MATRIX` (11 rows comparing 1st Sing, 2nd Sing, Class 1/1a, Class 2, Class 3, Class 5, Class 6, Class 7, Class 10, Class 14, and Reflexive)
+    - [x] Export `OBJECT_CONCORD_CHECKPOINTS` with 3 clinical challenges (medication adherence with `-wa-`, doctor examination with `-ku-`, subjective wellness with `-zi-`)
+    - [x] Export `OBJECT_CONCORDS_RULES` (5 clinical rules: `obj-infix-slot`, `obj-definiteness-dual`, `obj-class1-m-mu`, `obj-clinical-concords`, `obj-reflexive-zi`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export `OBJECT_CONCORDS_SECTION`, `OBJECT_CONCORDS_RULES`, `OBJECT_CONCORD_MATRIX`, and `OBJECT_CONCORD_CHECKPOINTS`
+    - [x] Add `{ id: 'object-concords', label: 'Object Concords (-m-, -wa-, -ku-)' }` to `GRAMMAR_CATEGORIES` (now 8 sections, 40 rules)
+  - [x] Create Table Renderer in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `ObjectConcordsTable` rendering the 11-row object concord matrix
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `blue` theme palette in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `object-concords` in `grammarSectionConfigs.js`
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `Target` icon for `object-concords` in `GrammarDirectoryView.jsx` (displays dynamic badge `8 Sections • 40 Rules`)
+    - [x] Sync `OBJECT_CONCORD_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file maintained at 246 lines, under 250 boundary)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 8 section cards with `8 Sections • 40 Rules`
+    - [x] Verified Section 8 rules and `ObjectConcordsTable` matrix
+    - [x] Revealed Challenge #1 (*Uyawaphuza amaphilisi njalo ekuseni?*) and flagged for drills
+    - [x] Confirmed presence in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+

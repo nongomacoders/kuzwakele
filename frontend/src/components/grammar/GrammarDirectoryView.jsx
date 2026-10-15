@@ -11,7 +11,8 @@ import {
   FastForward,
   Repeat,
   MapPin,
-  Zap
+  Zap,
+  Target
 } from 'lucide-react';
 import { CATEGORY_THEMES, DEFAULT_CATEGORY_THEME } from './grammarSectionConfigs';
 
@@ -24,6 +25,7 @@ const getSectionIcon = (id) => {
     case 'verbal-extensions': return <Repeat className="w-5 h-5 text-fuchsia-400" />;
     case 'copulatives-locatives': return <MapPin className="w-5 h-5 text-rose-400" />;
     case 'deficient-verbs': return <Zap className="w-5 h-5 text-sky-400" />;
+    case 'object-concords': return <Target className="w-5 h-5 text-blue-400" />;
     default: return <BookOpen className="w-5 h-5 text-slate-400" />;
   }
 };
