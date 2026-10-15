@@ -12,7 +12,9 @@ import {
   PRONOUNS_MATRIX,
   DEMONSTRATIVES_MATRIX,
   POTENTIAL_MOOD_MATRIX,
-  IMPERATIVES_MATRIX
+  IMPERATIVES_MATRIX,
+  FORMATIVES_MATRIX,
+  INTERROGATIVES_MATRIX
 } from '../../data/grammarData';
 
 
@@ -452,6 +454,62 @@ export function ImperativesTable() {
             <td className="py-2.5 px-3 font-mono text-[11px] text-red-300 whitespace-nowrap">{row.singularCommand}</td>
             <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.pluralCommand}</td>
             <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.clinicalApplication}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function FormativesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-teal-400">Noun Class</th>
+          <th className="py-2.5 px-3 text-teal-300">Associative na- (With/Have)</th>
+          <th className="py-2.5 px-3 text-emerald-300">Instrumental nga- (By means)</th>
+          <th className="py-2.5 px-3 text-amber-300">Comparative njenga- (Like)</th>
+          <th className="py-2.5 px-3 text-purple-300">Equative nganga- (Size)</th>
+          <th className="py-2.5 px-3">Clinical Application</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {FORMATIVES_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-teal-300 whitespace-nowrap">{row.nounClass}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-teal-300 whitespace-nowrap">{row.associativeNa}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 whitespace-nowrap">{row.instrumentalNga}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.comparativeNjenga}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-purple-300 whitespace-nowrap">{row.equativeNganga}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.clinicalApplication}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function InterrogativesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-indigo-400">Strategy</th>
+          <th className="py-2.5 px-3 text-indigo-300">Morpheme</th>
+          <th className="py-2.5 px-3 text-teal-300">Formula</th>
+          <th className="py-2.5 px-3 text-amber-300">Bedside Question Example</th>
+          <th className="py-2.5 px-3">Diagnostic Utility</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {INTERROGATIVES_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-indigo-300 whitespace-nowrap">{row.questionType}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-indigo-300 whitespace-nowrap">{row.morpheme}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-teal-300 whitespace-nowrap">{row.clinicalFormula}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 min-w-[200px]">{row.clinicalExample}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.diagnosticUtility}</td>
           </tr>
         ))}
       </tbody>

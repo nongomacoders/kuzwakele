@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -12,7 +12,9 @@ import {
   PRONOUNS_CHECKPOINTS,
   DEMONSTRATIVES_CHECKPOINTS,
   POTENTIAL_MOOD_CHECKPOINTS,
-  IMPERATIVES_CHECKPOINTS
+  IMPERATIVES_CHECKPOINTS,
+  FORMATIVES_CHECKPOINTS,
+  INTERROGATIVES_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -27,7 +29,9 @@ import {
   PronounsTable,
   DemonstrativesTable,
   PotentialMoodTable,
-  ImperativesTable
+  ImperativesTable,
+  FormativesTable,
+  InterrogativesTable
 } from './GrammarSectionTables';
 
 
@@ -136,6 +140,22 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-red-950/60 border-red-800/50 text-red-200',
     iconBg: 'bg-red-950/80 border-red-800/80 text-red-400',
     codeBadge: 'bg-red-950 text-red-300 border-red-800/60'
+  },
+  'formatives': {
+    badge: 'bg-teal-950/80 text-teal-300 border-teal-800/80',
+    border: 'border-teal-900/50 hover:border-teal-600/70',
+    cardBg: 'from-teal-950/30 to-slate-900/90',
+    formulaBg: 'bg-teal-950/60 border-teal-800/50 text-teal-200',
+    iconBg: 'bg-teal-950/80 border-teal-800/80 text-teal-400',
+    codeBadge: 'bg-teal-950 text-teal-300 border-teal-800/60'
+  },
+  'interrogatives': {
+    badge: 'bg-indigo-950/80 text-indigo-300 border-indigo-800/80',
+    border: 'border-indigo-900/50 hover:border-indigo-600/70',
+    cardBg: 'from-indigo-950/30 to-slate-900/90',
+    formulaBg: 'bg-indigo-950/60 border-indigo-800/50 text-indigo-200',
+    iconBg: 'bg-indigo-950/80 border-indigo-800/80 text-indigo-400',
+    codeBadge: 'bg-indigo-950 text-indigo-300 border-indigo-800/60'
   }
 };
 
@@ -317,6 +337,32 @@ export const SECTION_CONFIGS = {
     checkpoints: IMPERATIVES_CHECKPOINTS,
     drillCategory: 'imperatives-prohibitions',
     drillTitle: 'Imperatives & Prohibitions'
+  },
+  'formatives': {
+    theme: 'teal',
+    tableIcon: Scale,
+    tableTitle: 'Formatives & Case-Relation Reference Matrix',
+    tableSubtitle: 'Direct comparison of associative (na-), instrumental (nga-), comparative (njenga-), and equative (nganga-) prefixes.',
+    tableBadge: '8 Core Classes',
+    TableComponent: FormativesTable,
+    practiceTitle: 'Interactive Checkpoint: Formatives & Case-Relation Self-Check',
+    practiceSubtitle: 'Practice assessing mechanism of injury, pain character similes, and organ sizing.',
+    checkpoints: FORMATIVES_CHECKPOINTS,
+    drillCategory: 'formatives',
+    drillTitle: 'Formatives Practice'
+  },
+  'interrogatives': {
+    theme: 'indigo',
+    tableIcon: HelpCircle,
+    tableTitle: 'Clinical Interrogatives & Question Enclitics Matrix',
+    tableSubtitle: 'Direct reference comparing question strategies, morphemes, clinical formulas, and diagnostic utilities.',
+    tableBadge: '8 Question Types',
+    TableComponent: InterrogativesTable,
+    practiceTitle: 'Interactive Checkpoint: Clinical Interrogatives & History-Taking Self-Check',
+    practiceSubtitle: 'Practice anatomical pain localization (kuphi?), chronological onset (nini?), and causal exploration (kungani?).',
+    checkpoints: INTERROGATIVES_CHECKPOINTS,
+    drillCategory: 'interrogatives',
+    drillTitle: 'Interrogatives Practice'
   }
 };
 

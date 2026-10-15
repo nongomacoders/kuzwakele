@@ -17,6 +17,8 @@ import { PRONOUNS_SECTION, PRONOUNS_RULES, PRONOUNS_MATRIX, PRONOUNS_CHECKPOINTS
 import { DEMONSTRATIVES_SECTION, DEMONSTRATIVES_RULES, DEMONSTRATIVES_MATRIX, DEMONSTRATIVES_CHECKPOINTS } from './grammar/demonstratives.js';
 import { POTENTIAL_MOOD_SECTION, POTENTIAL_MOOD_RULES, POTENTIAL_MOOD_MATRIX, POTENTIAL_MOOD_CHECKPOINTS } from './grammar/potentialMood.js';
 import { IMPERATIVES_SECTION, IMPERATIVES_RULES, IMPERATIVES_MATRIX, IMPERATIVES_CHECKPOINTS } from './grammar/imperatives.js';
+import { FORMATIVES_SECTION, FORMATIVES_RULES, FORMATIVES_MATRIX, FORMATIVES_CHECKPOINTS } from './grammar/formatives.js';
+import { INTERROGATIVES_SECTION, INTERROGATIVES_RULES, INTERROGATIVES_MATRIX, INTERROGATIVES_CHECKPOINTS } from './grammar/interrogatives.js';
 
 // Directory Categories
 export const GRAMMAR_CATEGORIES = [
@@ -33,7 +35,9 @@ export const GRAMMAR_CATEGORIES = [
   { id: 'pronouns', label: 'Absolute & Quantitative Pronouns' },
   { id: 'demonstratives', label: 'Demonstratives & Spatial Deixis' },
   { id: 'potential-mood', label: 'The Potential Mood (-nga-)' },
-  { id: 'imperatives-prohibitions', label: 'Imperatives & Prohibitions' }
+  { id: 'imperatives-prohibitions', label: 'Imperatives & Prohibitions' },
+  { id: 'formatives', label: 'Formatives (na-, nga-, njenga-)' },
+  { id: 'interrogatives', label: 'Interrogatives & Question Enclitics' }
 ];
 
 // Assembled Sections
@@ -50,7 +54,9 @@ export const GRAMMAR_SECTIONS = [
   PRONOUNS_SECTION,
   DEMONSTRATIVES_SECTION,
   POTENTIAL_MOOD_SECTION,
-  IMPERATIVES_SECTION
+  IMPERATIVES_SECTION,
+  FORMATIVES_SECTION,
+  INTERROGATIVES_SECTION
 ];
 
 // Assembled Rules
@@ -67,7 +73,9 @@ export const GRAMMAR_RULES = [
   ...PRONOUNS_RULES,
   ...DEMONSTRATIVES_RULES,
   ...POTENTIAL_MOOD_RULES,
-  ...IMPERATIVES_RULES
+  ...IMPERATIVES_RULES,
+  ...FORMATIVES_RULES,
+  ...INTERROGATIVES_RULES
 ];
 
 // Named Reference Tables & Matrices (100% Backward Compatible Re-exports)
@@ -84,7 +92,9 @@ export {
   PRONOUNS_MATRIX,
   DEMONSTRATIVES_MATRIX,
   POTENTIAL_MOOD_MATRIX,
-  IMPERATIVES_MATRIX
+  IMPERATIVES_MATRIX,
+  FORMATIVES_MATRIX,
+  INTERROGATIVES_MATRIX
 };
 
 // Named Practice Checkpoints (100% Backward Compatible Re-exports)
@@ -101,7 +111,9 @@ export {
   PRONOUNS_CHECKPOINTS,
   DEMONSTRATIVES_CHECKPOINTS,
   POTENTIAL_MOOD_CHECKPOINTS,
-  IMPERATIVES_CHECKPOINTS
+  IMPERATIVES_CHECKPOINTS,
+  FORMATIVES_CHECKPOINTS,
+  INTERROGATIVES_CHECKPOINTS
 };
 
 export const ALL_CHECKPOINTS = [
@@ -117,7 +129,9 @@ export const ALL_CHECKPOINTS = [
   ...PRONOUNS_CHECKPOINTS,
   ...DEMONSTRATIVES_CHECKPOINTS,
   ...POTENTIAL_MOOD_CHECKPOINTS,
-  ...IMPERATIVES_CHECKPOINTS
+  ...IMPERATIVES_CHECKPOINTS,
+  ...FORMATIVES_CHECKPOINTS,
+  ...INTERROGATIVES_CHECKPOINTS
 ];
 
 

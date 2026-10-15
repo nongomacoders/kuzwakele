@@ -205,8 +205,26 @@
        - *Rule 3: Prohibitions & Safety Advisories with Musa / Musani (`imp-prohibitions-musa`)*: `Musa + Infinitive (uku-)` for singular, `Musani + Infinitive` for plural. Bedside procedural safety during physical examination, cannulation, and imaging (*Musa ukunyakaza!*).
        - *Rule 4: Mandatory / Obligative Future Infix -bo- ("Must Always / Must Never", `imp-obligative-bo`)*: `Subject Concord + -bo- + Verb Root + -a`. Binding chronic treatment mandates (*Ubophuza lamaphilisi njalo*). Negative: `SC + -nga- + -bo- + Root + -a` (*Ungabophuza utshwala*).
        - *Rule 5: Bedside Procedural Commands & Examination Etiquette (`imp-clinical-procedural`)*: Physical exam command formulas (*Phefumula kakhulu*, *Khipha umoya*, *Gwinya amathe*) and polite hortative softening with *Ake...*.
+    14. **Associative, Instrumental & Comparative Formatives (`formatives` - Comprehensive 5-Rule Curriculum & Case Formative Grid)**:
+       - *Rule 1: Associative na- ("With / And / Have") & Clinical Possession (`form-associative-na`)*: Communicates clinical symptoms and comorbidities (*unomkhuhlane*, *unomfutho wegazi*, *unesifo sikashukela*) and accompaniment (*ufike nomntwana*).
+       - *Rule 2: Instrumental nga- ("By Means Of / With / About / On", `form-instrumental-nga`)*: Expresses mechanism of injury (*washayiswa ngemoto*, *ngommese*), route of administration (*ngomlomo*, *ngomjovo*), and scheduling (*ngolwesibili*).
+       - *Rule 3: Comparative njenga- ("Like / As") for Pain Quality (`form-comparative-njenga`)*: Essential for patient symptom similes (*kushisa njengomlilo*, *kuhlaba njengezinaliti*, *sicindezela njengedwala*).
+       - *Rule 4: Equative nganga- ("As Big As / The Size Of", `form-equative-nganga`)*: Palpation and surgical sizing of masses, effusions, hematomas, and lymphadenopathy (*ngangengqindi*, *ngangeqanda*).
+       - *Rule 5: Formative Vowel Coalescence Mechanics & Class 1a Exceptions (`form-coalescence-rules`)*: Universal coalescence: a + i = e, a + u = o, a + a = a. Class 1a takes no-, ngo-, njengo-, ngango- (*nodokotela*, *ngonesi*, *nomama*).
+    15. **Interrogatives & Question Enclitics (`interrogatives` - Comprehensive 5-Rule Curriculum & Question Strategy Grid)**:
+       - *Rule 1: The Verbal Enclitic -ni? ("What? / What For?", `int-enclitic-ni`)*: Chief complaint elicitation and rapid triage inquiry (*Uzwani?*, *Ufunani?*, *Kwenzekani?*, *Uphuzani?*).
+       - *Rule 2: The Locative Enclitic -phi? & kuphi? ("Where?", `int-enclitic-phi`)*: Verbal enclitic -phi (*Uhlalaphi?*) and independent locative kuphi? for pain radiation and primary lesion sites (*Ubuhlungu buhamba buye kuphi?*).
+       - *Rule 3: Stems of Timeline, Manner & Caregiver Identity (`int-stems-timeline-manner`)*: Chronological onset (*Kuqale nini?*), sensation and review of systems (*Uzizwa kanjani?*), and caregiver screening (*Ubani ophethe imithi?*).
+       - *Rule 4: Causal Inquiries: kungani? vs. The Applicative Root -elani? (`int-causal-etiology`)*: Exploring adherence obstacles with *Kungani...?* (+ participial negative) vs verbal applicative *-elani?* (*Ubuyelani lapha?*).
+       - *Rule 5: Polite Conversational Openers & Question Tags (`int-clinical-polite-openers`)*: Preserving *inhlonipho* through polite modal particles *Ingabe...* / *Ngabe...* and terminal tags *...yini?* / *...na?* (*Ingabe unayo le nkinga yini?*).
+
 
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **Formatives & Case-Relation Reference Matrix Table**: Responsive comparison table displaying 8 core noun classes comparing associative (*na-*), instrumental (*nga-*), comparative (*njenga-*), and equative (*nganga-*) formatives across clinical scenarios.
+  - **Formatives & Case-Relation Self-Check**: 3 clinical challenges (MVA mechanism of injury with *washayiswa ngemoto*, burning pain simile with *njengomlilo*, and mass sizing with *ngangengqindi*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
+  - **Clinical Interrogatives & Question Enclitics Matrix Table**: Responsive reference grid comparing 8 question strategies across morphemes, clinical formulas, bedside question examples, and diagnostic utilities.
+  - **Clinical Interrogatives & History-Taking Self-Check**: 3 clinical challenges (pain localization with *kuphi?*, onset timeline with *nini?*, and adherence exploration with *kungani?* + participial negative) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
+
   - **Potential Mood & Capability Reference Matrix Table**: Responsive comparison table displaying 8 core noun classes / persons across positive potential (*-nga-*), negative potential (*-nge-...-e*), absolute negative (*angeke*), and clinical applications.
   - **Potential Mood & Mobility Self-Check**: 3 clinical challenges (mobility assessment with *singehambe* / *angeke sihambe*, triage consent with *ungangena*, and treatment feasibility with *singasipholisa*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
   - **Imperatives, Prohibitions & Obligative -bo- Reference Matrix Table**: Responsive comparison table displaying 8 verb types across singular commands, plural commands (*-ni*), negative safety prohibitions (*musa*), and mandatory adherence (*-bo-*).
@@ -248,8 +266,11 @@
   - demonstratives.js: Section metadata, 5 rules, DEMONSTRATIVES_MATRIX, and DEMONSTRATIVES_CHECKPOINTS.
   - potentialMood.js: Section metadata, 5 rules, POTENTIAL_MOOD_MATRIX, and POTENTIAL_MOOD_CHECKPOINTS.
   - imperatives.js: Section metadata, 5 rules, IMPERATIVES_MATRIX, and IMPERATIVES_CHECKPOINTS.
+  - formatives.js: Section metadata, 5 rules, FORMATIVES_MATRIX, and FORMATIVES_CHECKPOINTS.
+  - interrogatives.js: Section metadata, 5 rules, INTERROGATIVES_MATRIX, and INTERROGATIVES_CHECKPOINTS.
 
-  - grammarData.js: Clean aggregating barrel exporter assembling 13 GRAMMAR_SECTIONS, 65 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
+
+  - grammarData.js: Clean aggregating barrel exporter assembling 15 GRAMMAR_SECTIONS, 75 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).

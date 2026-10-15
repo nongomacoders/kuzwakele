@@ -474,3 +474,50 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Revealed Challenge #1 in Section 13 and flagged for drills
     - [x] Confirmed presence of flagged items in Drills Gym review deck
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+## Associative, Instrumental & Comparative Formatives (Izakhi Zokuhlobanisa - Section 14)
+- [x] Implement Section 14 ("Associative, Instrumental & Comparative Formatives") covering vowel-coalescing prefixes na- ("with/have"), nga- ("by means of"), njenga- ("like"), and nganga- ("size of")
+  - [x] Create Category Data Module in `frontend/src/data/grammar/formatives.js`:
+    - [x] Export `FORMATIVES_SECTION` (`formatives`, "Associative, Instrumental & Comparative Formatives", 5 Rules, Scale icon, teal theme)
+    - [x] Export `FORMATIVES_MATRIX` (8-row table comparing Class 1/1a, Class 2, Class 3, Class 5, Class 6, Class 7, Class 9, Class 10/14 across associative, instrumental, comparative, and equative forms)
+    - [x] Export `FORMATIVES_CHECKPOINTS` with 3 clinical challenges (MVA mechanism of injury with *ngemoto*, neuropathic pain simile with *njengomlilo*, and mass sizing with *ngangengqindi*)
+    - [x] Export `FORMATIVES_RULES` (5 clinical rules: `form-associative-na`, `form-instrumental-nga`, `form-comparative-njenga`, `form-equative-nganga`, `form-coalescence-rules`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export `FORMATIVES_SECTION`, `FORMATIVES_RULES`, `FORMATIVES_MATRIX`, and `FORMATIVES_CHECKPOINTS`
+    - [x] Add `{ id: 'formatives', label: 'Formatives (na-, nga-, njenga-)' }` to `GRAMMAR_CATEGORIES`
+  - [x] Create Table Renderer in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `FormativesTable` rendering the 8-class matrix
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `teal` theme palette in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `formatives` in `grammarSectionConfigs.js` with `Scale` icon
+
+## Interrogatives & Question Enclitics (Izakhi Zokubuza - Section 15)
+- [x] Implement Section 15 ("Interrogatives & Question Enclitics") covering verbal enclitics (-ni?, -phi?), interrogative stems (nini?, kanjani?, ubani?), causal inquiry (kungani? vs -elani?), and polite question openers
+  - [x] Create Category Data Module in `frontend/src/data/grammar/interrogatives.js`:
+    - [x] Export `INTERROGATIVES_SECTION` (`interrogatives`, "Interrogatives & Question Enclitics", 5 Rules, HelpCircle icon, indigo theme)
+    - [x] Export `INTERROGATIVES_MATRIX` (8-row table comparing 8 question strategies across morphemes, clinical formulas, bedside question examples, and diagnostic utilities)
+    - [x] Export `INTERROGATIVES_CHECKPOINTS` with 3 clinical challenges (pain localization with *kuphi?*, onset timeline with *nini?*, and adherence exploration with *kungani?* + participial negative)
+    - [x] Export `INTERROGATIVES_RULES` (5 clinical rules: `int-enclitic-ni`, `int-enclitic-phi`, `int-stems-timeline-manner`, `int-causal-etiology`, `int-clinical-polite-openers`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export `INTERROGATIVES_SECTION`, `INTERROGATIVES_RULES`, `INTERROGATIVES_MATRIX`, and `INTERROGATIVES_CHECKPOINTS`
+    - [x] Add `{ id: 'interrogatives', label: 'Interrogatives & Question Enclitics' }` to `GRAMMAR_CATEGORIES` (now 15 sections, 75 rules total)
+    - [x] Update `ALL_CHECKPOINTS` to include all 45 clinical practice challenges
+  - [x] Create Table Renderer in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `InterrogativesTable` rendering the 8-strategy matrix
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `indigo` theme palette in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `interrogatives` in `grammarSectionConfigs.js` with `HelpCircle` icon
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `Scale` (Formatives) and `HelpCircle` (Interrogatives) in `GrammarDirectoryView.jsx` (dynamic badge shows `15 Sections • 75 Rules`)
+    - [x] Sync `ALL_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file maintained at 230 lines, strictly under 250 boundary)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 15 section cards with `15 Sections • 75 Rules`
+    - [x] Verified Section 14 rules and `FormativesTable` matrix
+    - [x] Revealed Challenge #1 in Section 14 and flagged for drills
+    - [x] Verified Section 15 rules and `InterrogativesTable` matrix
+    - [x] Revealed Challenge #1 in Section 15 and flagged for drills
+    - [x] Confirmed presence of flagged items in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
