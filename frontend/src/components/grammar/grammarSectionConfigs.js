@@ -1,4 +1,4 @@
-import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle, ShieldAlert } from 'lucide-react';
+import { Clock, Activity, GitFork, FastForward, Table, Repeat, MapPin, Zap, Target, Sparkles, UserCheck, Navigation, AlertCircle, Scale, HelpCircle, ShieldAlert, Flame, Minimize2 } from 'lucide-react';
 import {
   PAST_PRACTICE_CHECKPOINTS,
   STATIVE_PRACTICE_CHECKPOINTS,
@@ -15,7 +15,9 @@ import {
   IMPERATIVES_CHECKPOINTS,
   FORMATIVES_CHECKPOINTS,
   INTERROGATIVES_CHECKPOINTS,
-  NEGATION_CHECKPOINTS
+  NEGATION_CHECKPOINTS,
+  IDEOPHONES_CHECKPOINTS,
+  DIMINUTIVES_CHECKPOINTS
 } from '../../data/grammarData';
 import {
   PastConcordTable,
@@ -33,7 +35,9 @@ import {
   ImperativesTable,
   FormativesTable,
   InterrogativesTable,
-  NegationTable
+  NegationTable,
+  IdeophonesTable,
+  DiminutivesTable
 } from './GrammarSectionTables';
 
 
@@ -166,6 +170,22 @@ export const CATEGORY_THEMES = {
     formulaBg: 'bg-purple-950/60 border-purple-800/50 text-purple-200',
     iconBg: 'bg-purple-950/80 border-purple-800/80 text-purple-400',
     codeBadge: 'bg-purple-950 text-purple-300 border-purple-800/60'
+  },
+  'ideophones': {
+    badge: 'bg-pink-950/80 text-pink-300 border-pink-800/80',
+    border: 'border-pink-900/50 hover:border-pink-600/70',
+    cardBg: 'from-pink-950/30 to-slate-900/90',
+    formulaBg: 'bg-pink-950/60 border-pink-800/50 text-pink-200',
+    iconBg: 'bg-pink-950/80 border-pink-800/80 text-pink-400',
+    codeBadge: 'bg-pink-950 text-pink-300 border-pink-800/60'
+  },
+  'diminutives-palatalization': {
+    badge: 'bg-lime-950/80 text-lime-300 border-lime-800/80',
+    border: 'border-lime-900/50 hover:border-lime-600/70',
+    cardBg: 'from-lime-950/30 to-slate-900/90',
+    formulaBg: 'bg-lime-950/60 border-lime-800/50 text-lime-200',
+    iconBg: 'bg-lime-950/80 border-lime-800/80 text-lime-400',
+    codeBadge: 'bg-lime-950 text-lime-300 border-lime-800/60'
   }
 };
 
@@ -386,6 +406,32 @@ export const SECTION_CONFIGS = {
     checkpoints: NEGATION_CHECKPOINTS,
     drillCategory: 'negation',
     drillTitle: 'Negation Systems Practice'
+  },
+  'ideophones': {
+    theme: 'pink',
+    tableIcon: Flame,
+    tableTitle: 'Acute Sensory Ideophones Reference Matrix',
+    tableSubtitle: 'Direct comparison of sensory quality, verb -thi coupling, clinical scenario, and diagnostic triage significance.',
+    tableBadge: '8 Acute Ideophones',
+    TableComponent: IdeophonesTable,
+    practiceTitle: 'Interactive Checkpoint: Acute Sensory Ideophones Self-Check',
+    practiceSubtitle: 'Practice recognizing syncopal blackout (dwe), traumatic hemorrhage (tebhu), and febrile spikes (bha).',
+    checkpoints: IDEOPHONES_CHECKPOINTS,
+    drillCategory: 'ideophones',
+    drillTitle: 'Sensory Ideophones'
+  },
+  'diminutives-palatalization': {
+    theme: 'lime',
+    tableIcon: Minimize2,
+    tableTitle: 'Noun Diminutives, Sound Shifts & Augmentatives Matrix',
+    tableSubtitle: 'Direct reference comparing noun stems, sound mutations before -ana, symptom attenuation, and augmentative -kazi.',
+    tableBadge: '8 Shift Classes',
+    TableComponent: DiminutivesTable,
+    practiceTitle: 'Interactive Checkpoint: Diminutive Shifts & Attenuation Self-Check',
+    practiceSubtitle: 'Practice decoding symptom downplaying (umkhuhlwana), pediatric anatomy (ithanjana), and catastrophic trauma (-kazi).',
+    checkpoints: DIMINUTIVES_CHECKPOINTS,
+    drillCategory: 'diminutives-palatalization',
+    drillTitle: 'Diminutives & Shifts'
   }
 };
 

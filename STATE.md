@@ -227,6 +227,10 @@
 
 
 - **Interactive Grammar Diagnostic Checkpoints & Matrix Tables**:
+  - **Acute Sensory Ideophones Reference Matrix Table**: 8 acute sensory ideophones (*dwe*, *tebhu*, *cwaka*, *bha*, *ngci*, *phaqa*, *qhu*, *ntwesi*) paired with defective *-thi* inflections, triage scenarios, and clinical significance.
+  - **Acute Sensory Ideophones Self-Check**: 3 clinical challenges (syncopal blackout with *kwathi dwe*, spurting hemorrhage with *kwathi tebhu*, and high fever with *kushisa bha*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
+  - **Noun Diminutives, Sound Shifts & Augmentatives Matrix Table**: 8 comparison entries detailing bilabial and alveolar sound shifts ($b \to tsh$, $m \to ny$, $mb \to nj$, $l \to dl$), symptom downplaying, pediatric anatomy, and augmentative `-kazi`.
+  - **Diminutive Shifts & Attenuation Self-Check**: 3 clinical challenges (symptom attenuation with *umkhuhlwana*, pediatric hairline fissure on *ithanjana*, and multi-vehicle catastrophe with *ingozikazi*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
   - **The Complete Negation Systems Reference Matrix Table**: Master comparative grid displaying 8 tense/mood systems across positive formulas, negative formulas, bedside examples, vowel shift rules, and clinical diagnostic utilities.
   - **Negation Architecture & Fasting Self-Check**: 3 clinical challenges (mandatory object vowel drop with *Angizwa buhlungu*, pre-operative fasting with *ukungadli*, and subordinate conditional negation with *uma singawaphuzi*) with answer reveals and 1-tap `[ Flag for Drills ]` bookmarking.
 
@@ -279,10 +283,9 @@
   - formatives.js: Section metadata, 5 rules, FORMATIVES_MATRIX, and FORMATIVES_CHECKPOINTS.
   - interrogatives.js: Section metadata, 5 rules, INTERROGATIVES_MATRIX, and INTERROGATIVES_CHECKPOINTS.
   - negation.js: Section metadata, 5 rules, NEGATION_MATRIX, and NEGATION_CHECKPOINTS.
-
-
-
-  - grammarData.js: Clean aggregating barrel exporter assembling 16 GRAMMAR_SECTIONS, 80 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
+  - ideophones.js: Section metadata, 5 rules, IDEOPHONES_MATRIX, and IDEOPHONES_CHECKPOINTS.
+  - diminutives.js: Section metadata, 5 rules, DIMINUTIVES_MATRIX, and DIMINUTIVES_CHECKPOINTS.
+  - grammarData.js: Clean aggregating barrel exporter assembling 18 GRAMMAR_SECTIONS, 90 GRAMMAR_RULES, and re-exporting all tables and practice arrays with 100% backward compatibility.
 - **Core User Features**:
   - **Prominent Formula Banners**: Monospace badges showing grammatical morphology with one-click copy buttons.
   - **Pitfall Warnings**: High-visibility warning boxes highlighting frequent English-speaker traps (e.g. translating stative as English past tense).

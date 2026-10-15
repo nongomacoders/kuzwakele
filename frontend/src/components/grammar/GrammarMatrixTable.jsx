@@ -66,6 +66,16 @@ const TABLE_THEMES = {
     containerBorder: 'border-purple-900/50',
     iconBox: 'bg-purple-950/80 border border-purple-800/80 text-purple-400',
     badge: 'bg-purple-950 text-purple-300 border border-purple-800/60'
+  },
+  pink: {
+    containerBorder: 'border-pink-900/50',
+    iconBox: 'bg-pink-950/80 border border-pink-800/80 text-pink-400',
+    badge: 'bg-pink-950 text-pink-300 border border-pink-800/60'
+  },
+  lime: {
+    containerBorder: 'border-lime-900/50',
+    iconBox: 'bg-lime-950/80 border border-lime-800/80 text-lime-400',
+    badge: 'bg-lime-950 text-lime-300 border border-lime-800/60'
   }
 };
 

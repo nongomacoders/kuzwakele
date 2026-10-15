@@ -19,7 +19,9 @@ import {
   AlertCircle,
   Scale,
   HelpCircle,
-  ShieldAlert
+  ShieldAlert,
+  Flame,
+  Minimize2
 } from 'lucide-react';
 import { CATEGORY_THEMES, DEFAULT_CATEGORY_THEME } from './grammarSectionConfigs';
 
@@ -41,6 +43,8 @@ const getSectionIcon = (id) => {
     case 'formatives': return <Scale className="w-5 h-5 text-teal-400" />;
     case 'interrogatives': return <HelpCircle className="w-5 h-5 text-indigo-400" />;
     case 'negation': return <ShieldAlert className="w-5 h-5 text-purple-400" />;
+    case 'ideophones': return <Flame className="w-5 h-5 text-pink-400" />;
+    case 'diminutives-palatalization': return <Minimize2 className="w-5 h-5 text-lime-400" />;
     default: return <BookOpen className="w-5 h-5 text-slate-400" />;
   }
 };

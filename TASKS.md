@@ -550,3 +550,40 @@ pm run build in frontend/ (0 compilation errors, clean bundle)
     - [x] Revealed Challenge #1 in Section 16 (*Angizwa buhlungu esifubeni namhlanje.*) and flagged for drills
     - [x] Confirmed presence of flagged item in Drills Gym review deck
   - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)
+
+## Ideophones & Defective -thi (Section 17) and Diminutives & Noun Palatalization (Section 18)
+- [x] Implement Section 17 ("Ideophones & the Defective Verb -thi — Izifanekisombhalo") and Section 18 ("Diminutives, Augmentatives & Noun Palatalization — Izinciphiso Nezenkiso")
+  - [x] Create Category Data Module in `frontend/src/data/grammar/ideophones.js`:
+    - [x] Export `IDEOPHONES_SECTION` (`ideophones`, "Ideophones & Defective -thi", 5 Rules, Flame icon, pink theme)
+    - [x] Export `IDEOPHONES_MATRIX` (8 sensory ideophones: *dwe*, *tebhu*, *cwaka*, *bha*, *ngci*, *phaqa*, *qhu*, *ntwesi*)
+    - [x] Export `IDEOPHONES_CHECKPOINTS` (3 acute challenges: syncopal onset, traumatic hemorrhage, and pediatrics hyperpyrexia)
+    - [x] Export `IDEOPHONES_RULES` (5 clinical rules: `ideo-syntax-invariance`, `ideo-thi-conjugation`, `ideo-neuro-syncope`, `ideo-trauma-hemorrhage`, `ideo-thermal-obstruction`)
+  - [x] Create Category Data Module in `frontend/src/data/grammar/diminutives.js`:
+    - [x] Export `DIMINUTIVES_SECTION` (`diminutives-palatalization`, "Diminutives & Noun Palatalization", 5 Rules, Minimize2 icon, lime theme)
+    - [x] Export `DIMINUTIVES_MATRIX` (8 sound shift/augmentative entries: $m \to ny$, $mb \to nj$, $u \to wa$, $b \to j$, $l \to dl$, augmentative `-kazi`)
+    - [x] Export `DIMINUTIVES_CHECKPOINTS` (3 clinical challenges: symptom attenuation with *umkhuhlwana*, pediatric anatomy on *ithanjana*, and augmentative catastrophe with *ingozikazi*)
+    - [x] Export `DIMINUTIVES_RULES` (5 clinical rules: `dim-labial-palatalization`, `dim-alveolar-shifts`, `dim-clinical-attenuation`, `dim-pediatric-anatomy`, `dim-augmentative-kazi`)
+  - [x] Re-Export via Barrel in `frontend/src/data/grammarData.js`:
+    - [x] Re-export both sections, rules, matrices, and checkpoints
+    - [x] Add `{ id: 'ideophones' }` and `{ id: 'diminutives-palatalization' }` to `GRAMMAR_CATEGORIES` (now 18 sections, 90 rules total)
+    - [x] Update `ALL_CHECKPOINTS` to include all 54 clinical practice challenges
+  - [x] Create Table Renderers in `frontend/src/components/grammar/GrammarSectionTables.jsx`:
+    - [x] Export `IdeophonesTable` rendering 8 acute sensory ideophones
+    - [x] Export `DiminutivesTable` rendering 8 sound shift and augmentative classes
+  - [x] Update Theme Presets & Section Configuration:
+    - [x] Add `pink` and `lime` theme palettes in `GrammarPracticeDrawer.jsx` and `GrammarMatrixTable.jsx`
+    - [x] Register `ideophones` (Flame) and `diminutives-palatalization` (Minimize2) in `grammarSectionConfigs.js`
+  - [x] Update Directory View & Active Flag State:
+    - [x] Bind `Flame` and `Minimize2` in `GrammarDirectoryView.jsx` (dynamic badge shows `18 Sections • 90 Rules`)
+    - [x] Verify `ALL_CHECKPOINTS` in `GrammarReference.jsx` `refreshFlaggedState()` (file strictly maintained at 230 lines)
+  - [x] Run production verification:
+    - [x] `npm run build` in `frontend/` (0 compilation errors, clean bundle)
+    - [x] `backend/test_server.py` (all 6 tests passing)
+  - [x] Test end-to-end in mobile browser subagent:
+    - [x] Verified directory displays 18 section cards with `18 Sections • 90 Rules`
+    - [x] Verified Section 17 rules and `IdeophonesTable` matrix
+    - [x] Revealed Challenge #1 in Section 17 (*Kwathi dwe emehlweni ami ngokushesha, ngase ngiwa phansi.*) and flagged for drills
+    - [x] Verified Section 18 rules and `DiminutivesTable` matrix
+    - [x] Revealed Challenge #1 in Section 18 (*Nginomkhuhlwana nje nekhandana elincane, akukho okusabisayo.*) and flagged for drills
+    - [x] Confirmed presence of flagged items in Drills Gym review deck
+  - [x] Deploy to Firebase Hosting (`firebase deploy --only hosting`)

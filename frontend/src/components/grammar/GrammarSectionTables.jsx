@@ -15,7 +15,9 @@ import {
   IMPERATIVES_MATRIX,
   FORMATIVES_MATRIX,
   INTERROGATIVES_MATRIX,
-  NEGATION_MATRIX
+  NEGATION_MATRIX,
+  IDEOPHONES_MATRIX,
+  DIMINUTIVES_MATRIX
 } from '../../data/grammarData';
 
 
@@ -540,6 +542,64 @@ export function NegationTable() {
             <td className="py-2.5 px-3 font-mono text-[11px] text-purple-200 min-w-[190px]">{row.negativeExample}</td>
             <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.vowelShift}</td>
             <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.clinicalUtility}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function IdeophonesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-pink-400">Ideophone</th>
+          <th className="py-2.5 px-3 text-pink-300">Sensory Quality</th>
+          <th className="py-2.5 px-3 text-amber-300">Associated -thi Form</th>
+          <th className="py-2.5 px-3 text-slate-200">Clinical Scenario</th>
+          <th className="py-2.5 px-3 text-emerald-300">Bedside Example</th>
+          <th className="py-2.5 px-3">Diagnostic Significance</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {IDEOPHONES_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-pink-300 whitespace-nowrap">{row.ideophone}</td>
+            <td className="py-2.5 px-3 text-slate-300 whitespace-nowrap">{row.sensoryQuality}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.associatedVerbThi}</td>
+            <td className="py-2.5 px-3 text-slate-300 min-w-[180px]">{row.clinicalScenario}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-emerald-300 min-w-[220px]">{row.bedsideExample}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[180px]">{row.diagnosticSignificance}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export function DiminutivesTable() {
+  return (
+    <table className="w-full text-left border-collapse text-xs">
+      <thead>
+        <tr className="border-b border-slate-800 text-[11px] font-extrabold uppercase text-slate-400 tracking-wider">
+          <th className="py-2.5 px-3 text-lime-400">Base Noun</th>
+          <th className="py-2.5 px-3 text-slate-300">Class & Meaning</th>
+          <th className="py-2.5 px-3 text-lime-300">Diminutive Form</th>
+          <th className="py-2.5 px-3 text-amber-300">Sound Shift</th>
+          <th className="py-2.5 px-3 text-slate-200">Clinical Application</th>
+          <th className="py-2.5 px-3">Symptom Interpretation</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-slate-800/60 text-slate-300">
+        {DIMINUTIVES_MATRIX.map((row, idx) => (
+          <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+            <td className="py-2.5 px-3 font-bold text-slate-200 whitespace-nowrap">{row.baseNoun}</td>
+            <td className="py-2.5 px-3 text-slate-400 whitespace-nowrap">{row.nounClassMeaning}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-lime-300 whitespace-nowrap">{row.diminutiveForm}</td>
+            <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300 whitespace-nowrap">{row.soundShift}</td>
+            <td className="py-2.5 px-3 text-slate-300 min-w-[190px]">{row.clinicalApplication}</td>
+            <td className="py-2.5 px-3 text-slate-400 text-[11px] min-w-[200px]">{row.patientSymptomInterpretation}</td>
           </tr>
         ))}
       </tbody>

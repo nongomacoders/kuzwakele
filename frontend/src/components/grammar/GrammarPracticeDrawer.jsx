@@ -181,6 +181,32 @@ const DRAWER_THEMES = {
     solutionLabel: 'text-purple-400',
     solutionText: 'text-purple-200',
     tokenChip: 'text-purple-300 bg-purple-950/80 border border-purple-900/60'
+  },
+  pink: {
+    container: 'bg-gradient-to-br from-pink-950/40 via-slate-900/90 to-slate-900 border border-pink-800/60',
+    headerBorder: 'border-pink-900/40',
+    iconBox: 'bg-pink-900/60 border border-pink-700/60 text-pink-300',
+    badge: 'bg-pink-950 text-pink-300 border border-pink-800/80',
+    toggleBtn: 'text-pink-300 hover:text-white bg-pink-950 border border-pink-800',
+    challengeBadge: 'text-pink-400 bg-pink-950/80 border border-pink-900/60',
+    revealBtn: 'bg-pink-950 text-pink-300 hover:bg-pink-900 border border-pink-800/80',
+    solutionCard: 'border-pink-900/50',
+    solutionLabel: 'text-pink-400',
+    solutionText: 'text-pink-200',
+    tokenChip: 'text-pink-300 bg-pink-950/80 border border-pink-900/60'
+  },
+  lime: {
+    container: 'bg-gradient-to-br from-lime-950/40 via-slate-900/90 to-slate-900 border border-lime-800/60',
+    headerBorder: 'border-lime-900/40',
+    iconBox: 'bg-lime-900/60 border border-lime-700/60 text-lime-300',
+    badge: 'bg-lime-950 text-lime-300 border border-lime-800/80',
+    toggleBtn: 'text-lime-300 hover:text-white bg-lime-950 border border-lime-800',
+    challengeBadge: 'text-lime-400 bg-lime-950/80 border border-lime-900/60',
+    revealBtn: 'bg-lime-950 text-lime-300 hover:bg-lime-900 border border-lime-800/80',
+    solutionCard: 'border-lime-900/50',
+    solutionLabel: 'text-lime-400',
+    solutionText: 'text-lime-200',
+    tokenChip: 'text-lime-300 bg-lime-950/80 border border-lime-900/60'
   }
 };
 

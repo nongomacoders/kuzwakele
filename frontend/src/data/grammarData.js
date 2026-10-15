@@ -20,6 +20,8 @@ import { IMPERATIVES_SECTION, IMPERATIVES_RULES, IMPERATIVES_MATRIX, IMPERATIVES
 import { FORMATIVES_SECTION, FORMATIVES_RULES, FORMATIVES_MATRIX, FORMATIVES_CHECKPOINTS } from './grammar/formatives.js';
 import { INTERROGATIVES_SECTION, INTERROGATIVES_RULES, INTERROGATIVES_MATRIX, INTERROGATIVES_CHECKPOINTS } from './grammar/interrogatives.js';
 import { NEGATION_SECTION, NEGATION_RULES, NEGATION_MATRIX, NEGATION_CHECKPOINTS } from './grammar/negation.js';
+import { IDEOPHONES_SECTION, IDEOPHONES_RULES, IDEOPHONES_MATRIX, IDEOPHONES_CHECKPOINTS } from './grammar/ideophones.js';
+import { DIMINUTIVES_SECTION, DIMINUTIVES_RULES, DIMINUTIVES_MATRIX, DIMINUTIVES_CHECKPOINTS } from './grammar/diminutives.js';
 
 // Directory Categories
 export const GRAMMAR_CATEGORIES = [
@@ -39,7 +41,9 @@ export const GRAMMAR_CATEGORIES = [
   { id: 'imperatives-prohibitions', label: 'Imperatives & Prohibitions' },
   { id: 'formatives', label: 'Formatives (na-, nga-, njenga-)' },
   { id: 'interrogatives', label: 'Interrogatives & Question Enclitics' },
-  { id: 'negation', label: 'The Complete Negation Systems' }
+  { id: 'negation', label: 'The Complete Negation Systems' },
+  { id: 'ideophones', label: 'Ideophones & Defective -thi' },
+  { id: 'diminutives-palatalization', label: 'Diminutives & Palatalization' }
 ];
 
 // Assembled Sections
@@ -59,7 +63,9 @@ export const GRAMMAR_SECTIONS = [
   IMPERATIVES_SECTION,
   FORMATIVES_SECTION,
   INTERROGATIVES_SECTION,
-  NEGATION_SECTION
+  NEGATION_SECTION,
+  IDEOPHONES_SECTION,
+  DIMINUTIVES_SECTION
 ];
 
 // Assembled Rules
@@ -79,7 +85,9 @@ export const GRAMMAR_RULES = [
   ...IMPERATIVES_RULES,
   ...FORMATIVES_RULES,
   ...INTERROGATIVES_RULES,
-  ...NEGATION_RULES
+  ...NEGATION_RULES,
+  ...IDEOPHONES_RULES,
+  ...DIMINUTIVES_RULES
 ];
 
 // Named Reference Tables & Matrices (100% Backward Compatible Re-exports)
@@ -99,7 +107,9 @@ export {
   IMPERATIVES_MATRIX,
   FORMATIVES_MATRIX,
   INTERROGATIVES_MATRIX,
-  NEGATION_MATRIX
+  NEGATION_MATRIX,
+  IDEOPHONES_MATRIX,
+  DIMINUTIVES_MATRIX
 };
 
 // Named Practice Checkpoints (100% Backward Compatible Re-exports)
@@ -119,7 +129,9 @@ export {
   IMPERATIVES_CHECKPOINTS,
   FORMATIVES_CHECKPOINTS,
   INTERROGATIVES_CHECKPOINTS,
-  NEGATION_CHECKPOINTS
+  NEGATION_CHECKPOINTS,
+  IDEOPHONES_CHECKPOINTS,
+  DIMINUTIVES_CHECKPOINTS
 };
 
 export const ALL_CHECKPOINTS = [
@@ -138,7 +150,9 @@ export const ALL_CHECKPOINTS = [
   ...IMPERATIVES_CHECKPOINTS,
   ...FORMATIVES_CHECKPOINTS,
   ...INTERROGATIVES_CHECKPOINTS,
-  ...NEGATION_CHECKPOINTS
+  ...NEGATION_CHECKPOINTS,
+  ...IDEOPHONES_CHECKPOINTS,
+  ...DIMINUTIVES_CHECKPOINTS
 ];
 
 
