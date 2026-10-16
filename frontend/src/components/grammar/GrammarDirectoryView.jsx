@@ -27,9 +27,11 @@ import {
   Sun,
   CalendarClock,
   FileText,
-  HeartHandshake
+  HeartHandshake,
+  X
 } from 'lucide-react';
 import { CATEGORY_THEMES, DEFAULT_CATEGORY_THEME } from './grammarSectionConfigs';
+import GrammarSearchResultsView from './GrammarSearchResultsView';
 
 const getSectionIcon = (id) => {
   switch (id) {
@@ -66,7 +68,13 @@ export default function GrammarDirectoryView({
   totalRules = 0,
   searchQuery = '',
   onSearchChange,
-  onSelectCategory
+  onSelectCategory,
+  flaggedIds,
+  expandedBreakdowns,
+  copiedId,
+  onToggleDrill,
+  onToggleBreakdown,
+  onCopyText
 }) {
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -100,19 +108,44 @@ export default function GrammarDirectoryView({
 
         {/* Quick Search Bar */}
         <div className="relative">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
           <input
+            id="grammar-search-input"
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange?.(e.target.value)}
             placeholder="Search across all sections (e.g. 'stative', 'uma', 'khathele', 'ukuze', '-sa-')..."
             className="w-full bg-slate-950 border border-slate-800 focus:border-indigo-500 rounded-xl pl-10 pr-10 py-2.5 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none transition-all shadow-inner"
           />
+          {searchQuery && searchQuery.length > 0 && (
+            <button
+              type="button"
+              onClick={() => onSearchChange?.('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-white rounded-md hover:bg-slate-800 transition-colors"
+              title="Clear search"
+              aria-label="Clear search"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Section Cards Grid */}
-      <div className="grid gap-4 sm:grid-cols-2">
+      {/* Instant Search Results OR Section Cards Grid */}
+      {searchQuery.trim() !== '' ? (
+        <GrammarSearchResultsView
+          searchQuery={searchQuery}
+          onClearSearch={() => onSearchChange?.('')}
+          flaggedIds={flaggedIds}
+          expandedBreakdowns={expandedBreakdowns}
+          copiedId={copiedId}
+          onToggleDrill={onToggleDrill}
+          onToggleBreakdown={onToggleBreakdown}
+          onCopyText={onCopyText}
+          onSelectCategory={onSelectCategory}
+        />
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2">
         {sections.map((section) => {
           const theme = CATEGORY_THEMES[section.id] || DEFAULT_CATEGORY_THEME;
           const icon = getSectionIcon(section.id);
@@ -169,6 +202,7 @@ export default function GrammarDirectoryView({
           );
         })}
       </div>
+      )}
     </div>
   );
 }

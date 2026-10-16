@@ -241,19 +241,25 @@ export default function GrammarRuleCard({
                     {/* Breakdown Grid Tokens */}
                     {isExpanded && (
                       <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 animate-fadeIn">
-                        {ex.breakdown.map((item, idx) => (
-                          <div
-                            key={idx}
-                            className="bg-slate-900 border border-slate-800/80 rounded-lg p-2 space-y-1 text-xs"
-                          >
-                            <span className="font-mono font-bold text-[11px] text-indigo-300 bg-indigo-950/80 border border-indigo-900/60 px-1.5 py-0.5 rounded inline-block">
-                              {item.chunk}
-                            </span>
-                            <p className="text-[11px] text-slate-300 leading-snug">
-                              {item.gloss}
-                            </p>
+                        {Array.isArray(ex.breakdown) ? (
+                          ex.breakdown.map((item, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-slate-900 border border-slate-800/80 rounded-lg p-2 space-y-1 text-xs"
+                            >
+                              <span className="font-mono font-bold text-[11px] text-indigo-300 bg-indigo-950/80 border border-indigo-900/60 px-1.5 py-0.5 rounded inline-block">
+                                {item.chunk}
+                              </span>
+                              <p className="text-[11px] text-slate-300 leading-snug">
+                                {item.gloss}
+                              </p>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="col-span-full bg-slate-900 border border-slate-800/80 rounded-lg p-2.5 text-xs text-slate-300">
+                            {ex.breakdown}
                           </div>
-                        ))}
+                        )}
                       </div>
                     )}
                   </div>
