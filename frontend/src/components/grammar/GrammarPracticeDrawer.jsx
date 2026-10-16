@@ -3,8 +3,7 @@ import {
   Target,
   ChevronDown,
   ChevronUp,
-  Bookmark,
-  BookmarkCheck,
+  Dumbbell,
   Eye,
   EyeOff,
   Copy,
@@ -305,8 +304,8 @@ export default function GrammarPracticeDrawer({
                 key={chk.id}
                 className="bg-slate-950 border border-slate-800 hover:border-slate-700/80 rounded-xl p-4 space-y-3.5 shadow-md transition-all"
               >
-                {/* Challenge Header & Drill Bookmark */}
-                <div className="flex items-center justify-between gap-2 border-b border-slate-850 pb-2.5">
+                {/* Challenge Header & Action Controls */}
+                <div className="flex items-start justify-between gap-3 border-b border-slate-850 pb-2.5">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className={`font-mono text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md border ${resolvedTheme.challengeBadge}`}>
                       Challenge #{chk.challengeNumber}
@@ -316,28 +315,40 @@ export default function GrammarPracticeDrawer({
                     </span>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => onToggleDrill?.(chk)}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold transition-all border ${
-                      isFlagged
-                        ? 'bg-amber-600 text-white border-amber-500 shadow-md shadow-amber-950/50'
-                        : 'bg-slate-900 text-slate-300 hover:text-amber-300 hover:bg-slate-850 border-slate-700'
-                    }`}
-                    title={isFlagged ? 'Remove from Drills Gym' : 'Save to Drills Gym for spaced repetition'}
-                  >
-                    {isFlagged ? (
-                      <>
-                        <BookmarkCheck className="w-3.5 h-3.5 text-white" />
-                        <span>Flagged</span>
-                      </>
-                    ) : (
-                      <>
-                        <Bookmark className="w-3.5 h-3.5 text-slate-400" />
-                        <span>Flag for Drills</span>
-                      </>
-                    )}
-                  </button>
+                  {/* Action Controls: Eye (Reveal/Hide) & Dumbbell (Flag for Drills) */}
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => onToggleReveal?.(chk.id)}
+                      className={`p-2 rounded-lg border transition-colors ${
+                        isRevealed
+                          ? 'border-indigo-700/70 bg-indigo-950/80 text-indigo-300'
+                          : 'border-slate-700/70 bg-slate-800/80 text-slate-400 hover:text-slate-200 hover:border-slate-600'
+                      }`}
+                      title={isRevealed ? 'Hide Breakdown' : 'Reveal Breakdown'}
+                      aria-label={isRevealed ? 'Hide Breakdown' : 'Reveal Breakdown'}
+                    >
+                      {isRevealed ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => onToggleDrill?.(chk)}
+                      className={`p-2 rounded-lg border transition-colors ${
+                        isFlagged
+                          ? 'border-amber-600/80 bg-amber-950/80 text-amber-300 shadow-sm'
+                          : 'border-slate-700/70 bg-slate-800/80 text-slate-400 hover:text-amber-400 hover:border-amber-600/50'
+                      }`}
+                      title={isFlagged ? 'Remove from Drills Gym' : 'Flag for Drills Gym'}
+                      aria-label={isFlagged ? 'Remove from Drills Gym' : 'Flag for Drills Gym'}
+                    >
+                      <Dumbbell className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
 
                 {/* Target Prompt */}
@@ -348,27 +359,6 @@ export default function GrammarPracticeDrawer({
                   <p className="text-sm sm:text-base font-bold text-slate-100 mt-0.5">
                     "{chk.prompt}"
                   </p>
-                </div>
-
-                {/* Reveal Button */}
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => onToggleReveal?.(chk.id)}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${resolvedTheme.revealBtn}`}
-                  >
-                    {isRevealed ? (
-                      <>
-                        <EyeOff className="w-3.5 h-3.5" />
-                        <span>Hide Answer</span>
-                      </>
-                    ) : (
-                      <>
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>Reveal isiZulu & Concord Breakdown</span>
-                      </>
-                    )}
-                  </button>
                 </div>
 
                 {/* Revealed Answer & Morpheme Breakdown */}
